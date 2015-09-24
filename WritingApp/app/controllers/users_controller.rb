@@ -33,6 +33,7 @@ class UsersController < ApplicationController
   def profile
     return nil if !authenticate!
     @user = current_user
+    render layout: "profile_layout"
   end
 
   private

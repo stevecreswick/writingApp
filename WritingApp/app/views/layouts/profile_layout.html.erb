@@ -1,0 +1,24 @@
+<html>
+<head>
+  <title>Profile View</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+
+  <script type="text/template" id='post-template'>
+    <h3>
+      <%%= title %>
+    </h3>
+    <button type="button" class='remove'>
+      Remove
+    </button>
+  </script>
+
+
+</head>
+<body>
+  <h3>You are in the profile layout</h3>
+  <%= yield %>
+
+  <%= javascript_include_tag 'users', 'data-turbolinks-track' => true %>
+</body>
+</html>
