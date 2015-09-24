@@ -1,5 +1,9 @@
 class User < ActiveRecord::Base
+
+
   has_secure_password
+  has_many :posts
+
 
   before_create :generate_token
 

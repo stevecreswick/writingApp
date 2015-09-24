@@ -1,5 +1,7 @@
 <input type="hidden" id="api-token" value="<%= @user.token %>">
 
-<%= @user.username %>
+<h3>Profile of <%= @user.username %> </h3>
+
+
 
 <%= link_to 'Log Out', '/sessions', method: :delete  %>

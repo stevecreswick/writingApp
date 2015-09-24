@@ -6,7 +6,16 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'welcome#index'
 
+  namespace :api do
+    get '/posts' => 'posts#index'
+    get '/posts/:id' => 'posts#show'
+    post '/posts' => 'posts#create'
+    delete '/posts/:id' => 'posts#destroy'
+    get '/posts/:id/edit' => 'posts#edit'
+    put '/posts/:id' => 'posts#update'
 
+  # resources :posts, except: [:new, :edit]
+  end
 
 get '/users/register' => 'users#register', as: :register
 post '/users' => 'users#create'
