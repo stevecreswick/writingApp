@@ -1,0 +1,47 @@
+<br><br><br><br><br><br>
+<div class="row">
+</div>
+
+<div class="row">
+  <div class="individual-post">
+    <h3>Prompt: </h3>
+    <div class="post-message">
+        <%= @post.message %>
+    </div>
+    <div class="post-author">
+      <h5> by <%= @post_author.username %></h5>
+      <h5> <%= @post.created_at.strftime("%I:%M%p on %m/%d/%Y") %> </h5>
+    </div>
+    <div class="new-critique-form">
+      <form action="/api/critiques" method="post">
+        <input type="hidden" name="critique[user_id]" value="<%= @user.id %>">
+        <input type="textarea" name="critique[message]" placeholder="...enter critique">
+        <input type="hidden" name="critique[post_id]" value="<%= @post.id %>">
+        <input type="submit" value="Submit">
+      </form>
+    </div>
+  </div>
+
+</div>
+
+
+<h2>Critiques</h2>
+<% @critiques.each do |critique| %>
+<div class="row">
+  <div class="col-xs-6">
+    <div class="critique">
+      <p>
+        <%= critique.message %>
+      </p>
+      <h4>
+      <%= User.find(critique.user_id).username %>
+      </h4>
+      <h5>
+      <% if critique.created_at %>
+      <%= critique.created_at.strftime("%I:%M%p on %m/%d/%Y")   %>
+      <% end %>
+      </h5>
+    </div>
+  </div>
+</div>
+      <% end %>

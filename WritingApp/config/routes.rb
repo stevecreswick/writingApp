@@ -1,18 +1,34 @@
 Rails.application.routes.draw do
 
+  get 'writing_prompts/new'
+
+  get 'writing_prompts/index'
+
+  get 'writing_prompts/edit'
+
+  get 'writing_prompts/destroy'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
   root 'welcome#index'
 
+  get '/posts/:id' => 'welcome#show_post', as: :show_post
+
+
   namespace :api do
     get '/posts' => 'posts#index'
+    get '/posts/all' => 'posts#allposts'
     get '/posts/:id' => 'posts#show'
     post '/posts' => 'posts#create'
     delete '/posts/:id' => 'posts#destroy'
     get '/posts/:id/edit' => 'posts#edit'
     put '/posts/:id' => 'posts#update'
+
+    post '/critiques' => 'critiques#create'
+
+
 
   # resources :posts, except: [:new, :edit]
   end

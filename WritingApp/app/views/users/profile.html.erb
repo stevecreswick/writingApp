@@ -1,7 +1,64 @@
-<input type="hidden" id="api-token" value="<%= @user.token %>">
+<input type="hidden" id="api-token" value="<%= @user.token %>" name="token">
+
 
 <h3>Profile of <%= @user.username %> </h3>
+<button type="button" class="btn btn-warning"><%= link_to 'Log Out', '/sessions', method: :delete  %></button>
+
+<div class="row">
+  <div class="col-xs-6">
+    <div class="new-post-box">
+      <h3>New Post</h3>
+        <form id="create-post" action="/api/posts" method="post">
+          <!-- <div class="form-group">
+            <label>Title</label>
+            <br>
+            <input type="text" id="post-title" name="post[title]" placeholder="...title">
+          </div> -->
+          <div class="form-group">
+            <label>Post</label>
+            <br>
+            <textarea class="form-control" id="post-body" rows="10" name="post[message]" placeholder="...post"></textarea>
+          </div>
+
+            <input type="submit" value="Post" class="btn btn-danger submit-new-post">
+
+        </form>
+    </div>
+
+  </div>
+  <h3>Posts</h3>
+  <div class="col-xs-6" id="post-list">
+
+  </div>
+  </div>
+
+
+<section >
+</section>
 
 
 
-<%= link_to 'Log Out', '/sessions', method: :delete  %>
+
+
+<!--
+<form>
+  <div class="form-group">
+    <label for="exampleInputEmail1">Email address</label>
+    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Password</label>
+    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputFile">File input</label>
+    <input type="file" id="exampleInputFile">
+    <p class="help-block">Example block-level help text here.</p>
+  </div>
+  <div class="checkbox">
+    <label>
+      <input type="checkbox"> Check me out
+    </label>
+  </div>
+  <button type="submit" class="btn btn-default">Submit</button>
+</form> -->
