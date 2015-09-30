@@ -20,15 +20,15 @@ Rails.application.routes.draw do
   namespace :api do
     get '/posts' => 'posts#index'
     get '/posts/all' => 'posts#allposts'
+    delete '/posts/all/:id' => 'posts#destroy'
     get '/posts/:id' => 'posts#show'
     post '/posts' => 'posts#create'
     delete '/posts/:id' => 'posts#destroy'
     get '/posts/:id/edit' => 'posts#edit'
     put '/posts/:id' => 'posts#update'
 
-    post '/critiques' => 'critiques#create'
-
-
+    post '/posts/:post_id/critiques' => 'critiques#create'
+    get '/posts/:post_id/critiques' => 'critiques#index'
 
   # resources :posts, except: [:new, :edit]
   end

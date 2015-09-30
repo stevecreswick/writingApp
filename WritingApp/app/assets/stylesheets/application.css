@@ -82,7 +82,7 @@ form#create-post {
 
 .new-post-box {
   position: fixed;
-  right: 10%;
+  left: 10%;
   width: 37%;
 }
 
@@ -119,4 +119,8 @@ form#create-post {
 .post-author{
   float: right;
   bottom: 0;
+}
+.navbar-brand{
+  font-family: 'Permanent Marker', cursive;
+  color: white;
 }

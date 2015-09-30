@@ -13,18 +13,11 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-
       respond_to do |format|
-
       format.html { redirect_to log_in_path}
       format.json { render json: @user }
-
       end
-
-    else
-
     end
-
   end
 
   def login

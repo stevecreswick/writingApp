@@ -5,9 +5,8 @@
   <%= csrf_meta_tags %>
 
   <script type="text/template" id='post-template'>
-
     <h3 class="post-header">
-      <%= @user.username %>
+      Author: <%%= username %>
     </h3>
 
       <div class="post-box">
@@ -15,14 +14,19 @@
           <%%= message %>
         </p>
       </div>
-
       <button type="button" class='remove btn btn-info'>
         Remove
       </button>
-      <form action="/posts/<%%=id%>" method="get">
-        <input type="submit" value="Create Critique">
-      </form>
+      <button type="button" class='make-critique btn btn-info'>
+        Critique
+      </button>
   </script>
+
+  <script type="text/template" id="critique-template">
+    Critique: <%%= message %>
+  </script>
+
+
 
 
 </head>

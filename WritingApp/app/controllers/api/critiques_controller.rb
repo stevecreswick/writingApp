@@ -8,10 +8,18 @@ class Api::CritiquesController < ApplicationController
   respond_to :html, :json
 
   # before_action :current_api_user!
+  def index
+  @post = Post.find( params[:post_id] )
+    respond_to do |format|
+      format.json { render json: @post.critiques }
+      format.html { redirect_to '/posts/' + @post.id }
+    end
+  end
 
   def create
 
-    @critique = Critique.create(critique_params)
+    @post = Post.find( params[:post_id] )
+    @critique = @post.critiques.create(critique_params)
 
     respond_to do |format|
         format.json { render json: @critique }

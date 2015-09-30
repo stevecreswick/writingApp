@@ -3,7 +3,11 @@
 
 <h3>Profile of <%= @user.username %> </h3>
 <button type="button" class="btn btn-warning"><%= link_to 'Log Out', '/sessions', method: :delete  %></button>
+<br><br><br><br>
+<h3>Critiques</h3>
+<div id="critique-list">
 
+</div>
 <div class="row">
   <div class="col-xs-6">
     <div class="new-post-box">
