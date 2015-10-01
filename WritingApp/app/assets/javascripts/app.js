@@ -20,9 +20,11 @@ var CritiquesCollection = Backbone.Collection.extend({
 
 
 // Model
-var Post = Backbone.Model.extend({});
-
-
+var Post = Backbone.Model.extend({
+  initialize: function(){
+    // console.log(this.id);
+  }
+});
 
 
 // Collection
@@ -77,11 +79,11 @@ var PostView = Backbone.View.extend({
     this.model.critiques.fetch({async:false});
     console.log('creating critique for ' + this.model.get('id'));
     // APPENDS THE MESSAGE OF THE CRITIQUE TO THE DIV
-      for (var i = 0; i < this.model.critiques.models.length; i++) {
-        var critique = this.model.critiques.models[i]
-        console.log(critique);
-        $html.append(critique.get('message'));
-      }
+      // for (var i = 0; i < this.model.critiques.models.length; i++) {
+      //   var critique = this.model.critiques.models[i]
+      //   console.log(critique);
+      //   $html.append(critique.get('message'));
+      // }
   },
 
 
@@ -100,24 +102,14 @@ var PostView = Backbone.View.extend({
     var critiqueButton = $(this.el).find('.make-critique');
     critiqueButton.remove();
 
-    // console.log(this.model.get('id'));
 
     critiqueSpace.css({'height': '10em'})
     critiqueSpace.html( _.template( $('#critique-template').html()) );
 
     var postId = this.model.get('id');
-    // var idHolder = $('<input>').addClass('.post-id-holder').attr('value', modelId);
-    // append hidden input to the submit form
 
     this.getCritiques();
 
-    // idHolder.html(this.model.get('id'));
-    // console.log('id val ' + idHolder.val());
-    //
-    // console.log(critiqueSpace.find('#critique-post-id').first().val(modelId) );
-    // console.log(critiqueSpace.find('#critique-post-id').first().val() );
-
-    // critiqueSpace.append(idHolder);
     this.bindCritiqueSubmit(postId);
   },
   bindCritiqueSubmit: function(modelId){
@@ -130,9 +122,11 @@ var PostView = Backbone.View.extend({
 
       console.log('critiquing post ' + modelId);
       console.log('newMessage ' + newMessage);
+
+      console.log(  posts.get(modelId) );
+      posts.get(modelId).critiques.create({message: newMessage});
     });
   },
-
 
   checkMessage: function(){
     console.log(this.model.get('message'));
@@ -185,7 +179,10 @@ $( document ).ready(function() {
   $('form#create-post').on('submit', function(e){
     e.preventDefault();
     var newMessage = $(this).find("#post-body").val();
-    posts.create({message: newMessage, wait:true});
+    posts.create({message: newMessage},{wait:true});
+    var temporaryId = parseInt( posts.last().attributes.id ) + 1;
+    console.log(temporaryId);
+    // console.log(posts.last().get('id'));
   });
 
 

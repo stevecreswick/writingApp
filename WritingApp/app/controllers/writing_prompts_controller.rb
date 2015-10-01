@@ -14,5 +14,5 @@ class WritingPromptsController < ApplicationController
 
   def destroy
   end
-  
+
 end
