@@ -6,24 +6,34 @@
 
   <script type="text/template" id='post-template'>
     <h3 class="post-header">
-      Author: <%%= username %>
     </h3>
+    <button type="button" class='remove btn btn-info'>
+      Remove
+    </button>
 
       <div class="post-box">
         <p>
-          <%%= message %>
+          Post:  <%%= message %>
         </p>
       </div>
-      <button type="button" class='remove btn btn-info'>
-        Remove
-      </button>
+      <div class="critique-space">
+
+      </div>
+
       <button type="button" class='make-critique btn btn-info'>
         Critique
       </button>
   </script>
 
   <script type="text/template" id="critique-template">
-    Critique: <%%= message %>
+    <div class="new-critique-form">
+      <form id="create-critique">
+        <input type="hidden" name="critique[user_id]" value="<%= @user.id %>">
+        <textarea class= "form-control" id="critique-message" rows="10" name="critique[message]" placeholder="...enter critique"></textarea>
+        <input type="hidden" name="critique[post_id]" id="critique-post-id">
+        <input type="submit" value="Submit" class="btn btn-danger">
+      </form>
+    </div>
   </script>
 
 

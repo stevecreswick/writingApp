@@ -68,7 +68,7 @@ form#create-post {
 .post-box {
   padding: 1em;
   margin-bottom: 1em;
-  height: 20em;
+  height: 10em;
   overflow: auto;
 }
 
@@ -123,4 +123,16 @@ form#create-post {
 .navbar-brand{
   font-family: 'Permanent Marker', cursive;
   color: white;
+}
+
+.post-id-holder{
+  display: none;
+}
+
+.new-critique-form{
+  height:7em;
+}
+
+h3.post-header{
+  height: 1em;
 }

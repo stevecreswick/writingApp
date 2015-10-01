@@ -17,7 +17,7 @@ class Api::CritiquesController < ApplicationController
   end
 
   def create
-
+    binding.pry
     @post = Post.find( params[:post_id] )
     @critique = @post.critiques.create(critique_params)
 

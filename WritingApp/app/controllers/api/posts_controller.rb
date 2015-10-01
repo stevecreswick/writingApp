@@ -9,7 +9,14 @@ respond_to :html, :json
 
   def index
     current_api_user!
-    render json: @current_user.posts
+    # aRposts = @current_user.posts
+    aRposts = Post.all
+    posts = aRposts.map do |aRpost|
+      data = aRpost.as_json
+      data['username'] = aRpost.user.username
+      data
+    end
+    render json: posts
   end
 
   def allposts
@@ -32,21 +39,39 @@ respond_to :html, :json
 
   def create
     # current_api_user!
-    @post = current_user.posts.create(post_params)
-
+    puts '*********** Creating Post ******************'
+    post = current_user.posts.create(post_params)
+    puts post.message
+    puts '*************Add Username***************'
+    data = post.as_json
+    data['username'] = post.user.username
     respond_to do |format|
-        format.json { render json: @post }
-        format.html { redirect_to '/users/profile' }
+        format.json { render json: data }
+        format.html { redirect_to '/' }
       end
   end
 
-  def update
-  end
+  def edit
+
+      @post = current_user.posts.find( params[:id] )
+
+    end
+
+    def update
+
+      post = current_user.posts.find( params[:id] )
+      posts.update( params[ post_params ] )
+      respond_to do |format|
+
+        format.json { render json: post }
+        format.html { redirect_to '/' }
+
+      end
+    end
 
   def destroy
 
     current_api_user!
-    binding.pry
     @deleted_post = Post.find(params[:id])
 
     if (@deleted_post.user_id = current_user.id)
@@ -63,8 +88,7 @@ respond_to :html, :json
 
   end
 
-  def edit
-  end
+
 
   private
 
