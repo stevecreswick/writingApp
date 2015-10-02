@@ -16,8 +16,17 @@
 //= require backbone
 //= require backbone-relational
 //= require turbolinks
-//= require_tree .
-//= require app
 //= require bootstrap.min
+
+//= require critiques/model/critique
+//= require critiques/views/critiqueView
+//= require critiques/collection/critiqueCollection
+//= require critiques/views/critiqueListView
+//= require posts/model/post
+//= require posts/views/postView
+//= require posts/collection/postCollection
+//= require posts/views/postListView
+
+//= require app
 
 console.log('users manifest');
