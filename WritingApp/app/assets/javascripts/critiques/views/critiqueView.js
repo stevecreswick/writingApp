@@ -6,6 +6,7 @@ app.CritiqueView = Backbone.View.extend({
   tagName: 'div',
   className: 'critique-view',
   template: _.template( $('#critique-template').html() ),
+
   initialize: function(){
     this.listenTo( this.model, 'change', this.render );
   },
@@ -15,7 +16,15 @@ app.CritiqueView = Backbone.View.extend({
     var $html = $( html );
     this.$el.append( $html );
   },
+
+// Critique Events
   events:{
-    // Add a DELETE EVENT
+    'click button.remove-critique': 'removeCritique',
+  },
+
+  removeCritique: function(){
+    console.log('remove critique clicked');
+    this.model.destroy();
+    this.$el.remove();
   }
 });

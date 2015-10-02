@@ -109,7 +109,7 @@ form#create-post {
   border-radius: 5px;
   border: 1px solid grey;
   margin-bottom: 1em;
-  height: 50em;
+  height: 25em;
   overflow: auto;
 }
 
@@ -126,7 +126,7 @@ form#create-post {
     overflow: auto;
   }
 
-  .remove {
+  .remove-post {
     margin-left: 75%;
   }
 
@@ -138,6 +138,20 @@ form#create-post {
 
   #critique-list-view{
     height: 10em;
+  }
+
+  .critique-view{
+    height: 3em;
+    background: ghostwhite;
+    margin-top: 0.3em;
+  }
+
+  .critique-form-container{
+    height: 10em;
+  }
+
+  .remove-critique{
+    margin-left: 75%;
   }
 
 /* Post List View */

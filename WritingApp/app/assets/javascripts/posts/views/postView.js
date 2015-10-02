@@ -6,98 +6,97 @@ app.PostView = Backbone.View.extend({
   tagName: 'div',
   className: 'post',
   template: _.template( $('#post-template').html() ),
-  initialize: function(){
-    this.listenTo( this.model, 'change', this.renderWithUserName );
-    var urlModel = "/api/posts/" + this.model.get('id') + "/critiques"
-    this.innerCollection = new app.CritiquesCollection();
-    this.innerCollection.url = urlModel;
-    this.innerCollection.fetch();
-  },
+  normalHeight: '25em',
+  openHeight: '40em',
 
-  render: function(){
-    this.$el.empty();
-    var html = this.template( this.model.toJSON() );
-    var $html = $( html );
-
-    this.innerListView = new app.CritiqueListView({
-      collection: this.innerCollection
-    });
-    this.$el.append( $html );
-    this.$el.append(this.innerListView.$el);
-  },
-
-  events:{
-    'click button.remove': 'removePost',
-    'click button.make-critique': 'makeCritique',
-    'click button.close-critique': 'closeCritique'
-  },
-
-    getUserName: function(){
-      var username = this.model.get('username');
-      return username;
+    initialize: function(){
+      this.listenTo( this.model, 'change', this.renderWithUserName );
+      var urlModel = "/api/posts/" + this.model.get('id') + "/critiques"
+      this.innerCollection = new app.CritiquesCollection();
+      this.innerCollection.url = urlModel;
+      this.innerCollection.fetch();
     },
+
+    render: function(){
+      this.$el.empty();
+      var html = this.template( this.model.toJSON() );
+      var $html = $( html );
+      this.$el.append( $html );
+    },
+
+// Post Events
+  events:{
+    'click button.remove-post': 'removePost',
+    'click button.make-critique': 'renderCritiqueForm',
+    'click button.close-critique': 'closeCritiqueForm',
+    'click button.render-critiques': 'renderCritiques'
+  },
+
+    // Remove Post
+    removePost: function(){
+      this.model.destroy();
+      this.$el.remove();
+    },
+
+    // Append UserName to Post Div
     renderWithUserName: function(){
       this.$el.empty();
       this.render();
       var header = $(this.el).find("h3");
-      var username = this.getUserName();
-      // username undefined when the post is first created
+      var username = this.model.get('username');
       this.$("h3.post-header").html(username);
     },
 
+    // Manipulate Post CSS
+    resizePostDiv: function(height){
+      this.$el.css({'height': height});
+    },
+    closeCritiqueForm: function(){
+      this.$el.empty();
+      this.renderWithUserName();
+      this.resizePostDiv( this.normalHeight );
+    },
 
   // Critique Controller
-
-    getCritiques: function(){
-      this.model.critiques = new CritiquesCollection();
+    fetchCritiques: function(){
+      this.model.critiques = new app.CritiquesCollection();
       this.model.critiques.url = "/api/posts/" + this.model.get('id') + "/critiques";
       this.model.critiques.fetch({async:false});
       },
-    showCritiques: function(){
-
+    renderCritiques: function(){
+      this.resizePostDiv( this.openHeight );
+      this.fetchCritiques();
+      this.innerListView = new app.CritiqueListView({
+        collection: this.innerCollection
+      });
+      this.$el.append(this.innerListView.$el);
     },
-    closeCritique: function(){
+    renderCritiqueForm: function(){
       this.$el.empty();
-      this.$el.css({'height': '30em'});
+      this.resizePostDiv( this.openHeight );
       this.renderWithUserName();
+      var critiqueButton = $(this.el).find('.make-critique');
+      critiqueButton.remove();
+      this.renderCritiqueFormContainer();
+      var postId = parseInt( this.model.get('id') );
+      this.fetchCritiques();
+      this.bindCritiqueForm(postId);
     },
+    renderCritiqueFormContainer: function(){
+      var formContainer = $('<div>').addClass('critique-form-container');
 
+      formContainer.html( _.template( $('#critique-form-template').html()) );
 
-  removePost: function(){
-    this.model.destroy();
-    this.$el.remove();
-  },
+      this.$el.append( formContainer );
+    },
+    bindCritiqueForm: function(modelId){
+      $('form#create-critique').on('submit', function(e){
+        e.preventDefault();
 
-  makeCritique: function(){
-    console.log('click');
-    // var html = this.template( this.model.toJSON() );
-    this.$el.empty();
-    this.$el.css({'height': '40em'});
-    this.renderWithUserName();
-    var critiqueSpace = $(this.el).find(".critique-space");
-    var critiqueButton = $(this.el).find('.make-critique');
-    critiqueButton.remove();
-    critiqueSpace.css({'height': '10em'})
-    critiqueSpace.html( _.template( $('#critique-form-template').html()) );
-    var postId = parseInt( this.model.get('id') );
-    console.log('passing into bind critique ' + postId);
-    this.getCritiques();
-    this.bindCritiqueSubmit(postId);
-  },
-  bindCritiqueSubmit: function(modelId){
-    $('form#create-critique').on('submit', function(e){
-      e.preventDefault();
-      console.log(modelId);
+        var newMessage = $(this).find("#critique-message").val();
 
-      // PASSES THROUGH MODEL ID AND MESSAGE!!!!
-      var newMessage = $(this).find("#critique-message").val();
-      app.posts.get(modelId).critiques.create({message: newMessage});
-
-    });
-  },
-
-  checkMessage: function(){
-    console.log(this.model.get('message'));
-  }
+        app.posts.get(modelId).critiques.create({message: newMessage});
+      });
+    }
 
 });

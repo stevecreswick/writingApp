@@ -9,7 +9,7 @@
     <!-- Header -->
     <h3 class="post-header">
     </h3>
-    <button type="button" class='remove btn btn-info'>
+    <button type="button" class='remove-post btn btn-info'>
       Remove
     </button>
 
@@ -22,19 +22,21 @@
 
     <!-- Critique Form -->
     <button type="button" class='make-critique btn btn-info'>
-      Critique
+      Make Critique
     </button>
-      <div class="critique-space">
-
-      </div>
+    <button type="button" class='render-critiques btn btn-success'>
+      Show Critiques
+    </button>
 
     <!-- Critique List View -->
-
   </script>
 
   <script type="text/template" id="critique-template">
     <div class="critique-message">
-      <%%= message %>
+        <%%= message %>
+      <button type="button" class='remove-critique btn btn-danger'>
+        X
+      </button>
     </div>
   </script>
 

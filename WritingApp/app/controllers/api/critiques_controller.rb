@@ -36,7 +36,17 @@ class Api::CritiquesController < ApplicationController
   end
 
   def destroy
+    post = Post.find( params[:post_id] )
+    deleted_critique = post.critiques.find(params[:id])
     binding.pry
+    deleted_critique.destroy
+    
+    respond_to do |format|
+
+      format.json { render json: post.critiques }
+      format.html { redirect_to '/users/main' }
+    end
+
   end
 
 

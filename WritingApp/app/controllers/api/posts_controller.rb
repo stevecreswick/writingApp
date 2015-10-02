@@ -84,7 +84,7 @@ respond_to :html, :json
      respond_to do |format|
 
        format.json { render json: current_user.posts }
-       format.html { redirect_to '/users/profile' }
+       format.html { redirect_to '/users/main' }
      end
 
   end

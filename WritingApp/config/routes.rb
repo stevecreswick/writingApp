@@ -31,6 +31,7 @@ Rails.application.routes.draw do
     # Critique API
     get '/posts/:post_id/critiques' => 'critiques#index'
     post '/posts/:post_id/critiques' => 'critiques#create'
+    delete '/posts/:post_id/critiques/:id' => 'critiques#destroy'
   end
 
 # User Routes
