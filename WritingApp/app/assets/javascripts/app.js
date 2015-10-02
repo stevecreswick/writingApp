@@ -19,57 +19,68 @@ var CritiquesCollection = Backbone.Collection.extend({
 
 var CritiqueView = Backbone.View.extend({
   tagName: 'div',
-  className: 'critique',
-  template: _.template( $('#post-template').html() ),
+  className: 'critique-view',
+  template: _.template( $('#critique-template').html() ),
   initialize: function(){
-    this.listenTo( this.model, 'change', this.renderWithUserName );
-      // console.log('initial id ' + this.model.id);
+    this.listenTo( this.model, 'change', this.render );
   },
-
   render: function(){
     this.$el.empty();
-
     var html = this.template( this.model.toJSON() );
     var $html = $( html );
-    // console.log(this.model.get('id') + " " + this.getUserName());
     this.$el.append( $html );
   },
   events:{
-    'click button.remove': 'removePost',
-    'click button.make-critique': 'makeCritique',
-    'click button.close-critique': 'closeCritique'
+    // Add a DELETE EVENT
   }
-
-
 });
 
+var CritiqueListView = Backbone.View.extend({
+  initialize: function() {
+    this.listenTo(this.collection, 'add', this.render);
+  },
+  render: function(){
+    this.$el.empty();
+      var critiques = this.collection.models;
+      var view;
+        for (var i = 0; i < critiques.length; i++) {
+          view = new CritiqueView({model: critiques[i]});
+          view.render();
+          this.$el.append( view.$el );
+        }
+    }
+});
 
-// Model
+// Posts
 var Post = Backbone.Model.extend({});
 
-// Collection
 var PostCollection = Backbone.Collection.extend({
   model: Post,
   url: '/api/posts'
 });
 
-// Views
+
 var PostView = Backbone.View.extend({
   tagName: 'div',
   className: 'post',
   template: _.template( $('#post-template').html() ),
   initialize: function(){
     this.listenTo( this.model, 'change', this.renderWithUserName );
-      // console.log('initial id ' + this.model.id);
+    var urlModel = "/api/posts/" + this.model.get('id') + "/critiques"
+    this.innerCollection = new CritiquesCollection();
+    this.innerCollection.url = urlModel;
+    this.innerCollection.fetch();
   },
-
   render: function(){
     this.$el.empty();
-
     var html = this.template( this.model.toJSON() );
     var $html = $( html );
-    // console.log(this.model.get('id') + " " + this.getUserName());
+
+    this.innerListView = new CritiqueListView({
+      collection: this.innerCollection
+    });
     this.$el.append( $html );
+    this.$el.append(this.innerListView.$el);
   },
   events:{
     'click button.remove': 'removePost',
@@ -85,22 +96,20 @@ var PostView = Backbone.View.extend({
     this.render();
     var header = $(this.el).find("h3");
     var username = this.getUserName();
-    console.log('render name id ' + this.model.id);
     // username undefined when the post is first created
     this.$("h3.post-header").html(username);
   },
+
+
+  // Critique Controller
 
   getCritiques: function(){
     this.model.critiques = new CritiquesCollection();
     this.model.critiques.url = "/api/posts/" + this.model.get('id') + "/critiques";
     this.model.critiques.fetch({async:false});
-    console.log('creating critique for ' + this.model.get('id'));
-    // APPENDS THE MESSAGE OF THE CRITIQUE TO THE DIV
-      for (var i = 0; i < this.model.critiques.models.length; i++) {
-        var critique = this.model.critiques.models[i]
-        console.log(critique);
-        this.$(".post-box").append(critique.get('message'));
-      }
+    },
+  showCritiques: function(){
+
   },
   closeCritique: function(){
     this.$el.empty();
@@ -123,32 +132,20 @@ var PostView = Backbone.View.extend({
     var critiqueSpace = $(this.el).find(".critique-space");
     var critiqueButton = $(this.el).find('.make-critique');
     critiqueButton.remove();
-
-
     critiqueSpace.css({'height': '10em'})
-    critiqueSpace.html( _.template( $('#critique-template').html()) );
-
+    critiqueSpace.html( _.template( $('#critique-form-template').html()) );
     var postId = parseInt( this.model.get('id') );
     console.log('passing into bind critique ' + postId);
-    console.log(this.postId);
-
     this.getCritiques();
     this.bindCritiqueSubmit(postId);
   },
   bindCritiqueSubmit: function(modelId){
-
     $('form#create-critique').on('submit', function(e){
       e.preventDefault();
       console.log(modelId);
+
       // PASSES THROUGH MODEL ID AND MESSAGE!!!!
-
       var newMessage = $(this).find("#critique-message").val();
-
-      console.log('critiquing post ' + modelId);
-      console.log('newMessage ' + newMessage);
-      console.log(posts.get(modelId));
-
-      //Creates a New Critique for the post
       posts.get(modelId).critiques.create({message: newMessage});
 
     });
@@ -158,10 +155,7 @@ var PostView = Backbone.View.extend({
     console.log(this.model.get('message'));
   }
 
-
-
 });
-
 
 var PostListView = Backbone.View.extend({
   initialize: function(){
@@ -179,48 +173,8 @@ var PostListView = Backbone.View.extend({
           view.renderWithUserName();
           this.$el.append( view.$el );
         }
-
     }
 });
-
-// var IndividualPostListView = Backbone.View.extend({
-//   initialize: function(){
-//     this.listenTo(this.collection, 'add', this.render);
-//   },
-//   render: function(){
-//
-//     this.$el.empty();
-//     var id = parseInt( this.$el.attr('data') );
-//
-//     if (id) {
-//       console.log('id found');
-//       var post = this.collection.find(function(model) {
-//         return model.get('id') === id;
-//       });
-//       var view;
-//
-//       view = new PostView({model: post});
-//       view.renderWithUserName();
-//       this.$el.append( view.$el );
-//     } else {
-//       console.log('id not found');
-//     }
-
-
-    // console.log(id);
-    // console.log(post);
-    // var posts = this.collection.models;
-    // var view;
-    //   for (var i = 0; i < posts.length; i++) {
-    //     view = new PostView({model: posts[i]});
-    //
-    //     //Appends the Username to each Div
-    //     view.renderWithUserName();
-    //     this.$el.append( view.$el );
-    //   }
-//   }
-// });
-
 
 
 
@@ -234,91 +188,15 @@ var postPainter = new PostListView({
 
 posts.fetch();
 
-// var individualPostPainter = new IndividualPostListView({
-//   collection: posts,
-//   el: $('#individual-post-list')
-// });
-
-// This will sort by ID
-// postPainter.collection.sortBy('id')
-
-// This will find by the ID
- // posts.find(function(model) {return model.get('id') === 125})
-
-
-// var individualPostPainter = new PostView({model: testPost
-//
-// });
-
-
 
 //On Load
 
 $( document ).ready(function() {
 
-
-
   $('form#create-post').on('submit', function(e){
     e.preventDefault();
     var newMessage = $(this).find("#post-body").val();
     posts.create({message: newMessage},{wait:true});
-    // var temporaryId = parseInt( posts.last().attributes.id ) + 1;
-    // console.log(temporaryId);
-    // console.log(posts.last().get('id'));
   });
 
-
-// var testPost = new Post({
-//   model:,
-//   url: '#'
-// });
-
-// testPost.fetch();
-//
-// console.log(testPost.attributes);
-
-
 });
-
-// When I define username and id in the template, it breaks the app.  It also does not refresh when I add a new post
-
-
-
-// All Posts - For Landing Page
-//
-// var AllPostCollection = Backbone.Collection.extend({
-//   model: Post,
-//   url: '/api/posts/all'
-// });
-//
-//
-// var AllPostListView = Backbone.View.extend({
-//   initialize: function(){
-//     this.listenTo(this.collection, 'add', this.render);
-//   },
-//   render: function(){
-//     this.$el.empty();
-//     var posts = this.collection.models;
-//     var view;
-//     for (var i = 0; i < posts.length; i++) {
-//       view = new PostView({model: posts[i]});
-//       view.render();
-//       this.$el.append( view.$el );
-//     }
-//   }
-// });
-
-
-
-// var allPostsPainter = new PostListView({
-//   collection: posts,
-//   el: $('#all-post-list')
-// });
-
-
-
-
-// var critiquePainter = new Critique({
-//   collection: posts,
-//   el: $('#critique-list')
-// });
