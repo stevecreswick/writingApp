@@ -1,6 +1,5 @@
 class Api::CritiquesController < ApplicationController
 
-
   include SessionsHelper
   include UsersHelper
   include Api::PostsHelper
@@ -11,10 +10,6 @@ class Api::CritiquesController < ApplicationController
   def index
   post = Post.find( params[:post_id] )
   render json: post.critiques
-    # respond_to do |format|
-    #   format.json { render json: @post.critiques }
-    #   # format.html { redirect_to '/posts/' + @post.id.to_s }
-    # end
   end
 
   def create
@@ -40,8 +35,9 @@ class Api::CritiquesController < ApplicationController
     end
   end
 
-
-
+  def destroy
+    binding.pry
+  end
 
 
   def critique_params

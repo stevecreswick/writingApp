@@ -12,37 +12,36 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'welcome#index'
+  root 'welcome#index', as: :index
 
-  get '/posts/:id' => 'welcome#show_post', as: :show_post
+  # Landing Page for Logged Out Users
+  get '/welcome' => 'welcome#welcome', as: :welcome
 
-
+# API Routes
   namespace :api do
-    get '/posts' => 'posts#index'
 
+    # Post API
+    get '/posts' => 'posts#index'
     get '/posts/:id' => 'posts#show'
     post '/posts' => 'posts#create'
     delete '/posts/:id' => 'posts#destroy'
     get '/posts/:id/edit' => 'posts#edit'
     put '/posts/:id' => 'posts#update'
 
-    post '/posts/:post_id/critiques' => 'critiques#create'
+    # Critique API
     get '/posts/:post_id/critiques' => 'critiques#index'
-
-    # Delete these eventually
-    get '/posts/all' => 'posts#allposts'
-    delete '/posts/all/:id' => 'posts#destroy'
-
-  # resources :posts, except: [:new, :edit]
+    post '/posts/:post_id/critiques' => 'critiques#create'
   end
 
+# User Routes
 get '/users/register' => 'users#register', as: :register
 post '/users' => 'users#create'
 get '/users/login' => 'users#login', as: :log_in
 get '/users/profile' => 'users#profile', as: :profile
+get '/users/main' => 'users#main', as: :main
 get '/users/:user_id/posts/:post_id' => 'users#show_post'
 
-
+# Session Routes
 post '/sessions' => 'sessions#create'
 delete '/sessions' => 'sessions#destroy'
 

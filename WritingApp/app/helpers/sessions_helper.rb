@@ -2,9 +2,10 @@ module SessionsHelper
 
   def authenticate!
     if current_user
+      redirect_to main_path
       return true
     else
-      redirect_to log_in_path
+      redirect_to welcome_path
       return false
     end
   end

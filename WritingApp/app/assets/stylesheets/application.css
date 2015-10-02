@@ -14,6 +14,9 @@
  *= require_self
  *= require bootstrap.min
  */
+ body {
+    padding-top: 7em;
+  }
 
 .post-title {
   color: red;

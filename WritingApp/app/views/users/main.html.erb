@@ -1,0 +1,30 @@
+<input type="hidden" id="api-token" value="<%= @user.token %>" name="token">
+
+  <div class="row">
+    <h3>Post Landing Page</h3>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-6">
+      <div class="new-post-box">
+        <h3>New Post</h3>
+          <form id="create-post">
+            <div class="form-group">
+              <br>
+              <textarea class="form-control" id="post-body" rows="10" name="post[message]" placeholder="...post"></textarea>
+            </div>
+
+              <input type="submit" value="Post" class="btn btn-danger submit-new-post">
+
+          </form>
+      </div>
+      <div id="critique-list-view">
+
+      </div>
+
+    </div>
+
+    <div class="col-xs-6 col-xs-offset-6" id="post-list">
+
+    </div>
+    </div>

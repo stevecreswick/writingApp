@@ -3,15 +3,9 @@ class UsersController < ApplicationController
     include UsersHelper
     include SessionsHelper
 
-
-  def register
-    @user = User.new
-  end
-
   def create
-
+    
     @user = User.new(user_params)
-
     if @user.save
       respond_to do |format|
       format.html { redirect_to log_in_path}
@@ -20,7 +14,10 @@ class UsersController < ApplicationController
     end
   end
 
-  def login
+  def main
+    # return nil if !authenticate!
+    @user = current_user
+    render layout: "profile_layout"
   end
 
   def profile
@@ -34,6 +31,14 @@ class UsersController < ApplicationController
     @post = @user.posts.find( params[:post_id] )
     render layout: "profile_layout"
 
+  end
+
+
+  def login
+  end
+
+  def register
+    @user = User.new
   end
 
   private
