@@ -8,7 +8,7 @@ respond_to :html, :json
 
 
   def index
-    current_api_user!
+    # current_api_user!
     # aRposts = @current_user.posts
     aRposts = Post.all
     posts = aRposts.map do |aRpost|
@@ -31,9 +31,10 @@ respond_to :html, :json
 
 
   def show
-    current_api_user!
-    @post = current_user.posts.find( params[:id] )
-    redirect_to '/users/post/:id'
+    # current_api_user!
+    post = Post.find( params[:id] )
+    render json: post
+    # redirect_to '/users/post/:id'
   end
 
 

@@ -129,10 +129,11 @@ form#create-post {
   display: none;
 }
 
-.new-critique-form{
-  height:7em;
-}
-
 h3.post-header{
   height: 1em;
+}
+
+/* Form for creating a new critique */
+.new-critique-form{
+  height:7em;
 }

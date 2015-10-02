@@ -19,8 +19,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     get '/posts' => 'posts#index'
-    get '/posts/all' => 'posts#allposts'
-    delete '/posts/all/:id' => 'posts#destroy'
+
     get '/posts/:id' => 'posts#show'
     post '/posts' => 'posts#create'
     delete '/posts/:id' => 'posts#destroy'
@@ -30,6 +29,10 @@ Rails.application.routes.draw do
     post '/posts/:post_id/critiques' => 'critiques#create'
     get '/posts/:post_id/critiques' => 'critiques#index'
 
+    # Delete these eventually
+    get '/posts/all' => 'posts#allposts'
+    delete '/posts/all/:id' => 'posts#destroy'
+
   # resources :posts, except: [:new, :edit]
   end
 
@@ -37,7 +40,7 @@ get '/users/register' => 'users#register', as: :register
 post '/users' => 'users#create'
 get '/users/login' => 'users#login', as: :log_in
 get '/users/profile' => 'users#profile', as: :profile
-
+get '/users/:user_id/posts/:post_id' => 'users#show_post'
 
 
 post '/sessions' => 'sessions#create'

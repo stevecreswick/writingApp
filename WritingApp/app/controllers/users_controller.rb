@@ -29,6 +29,13 @@ class UsersController < ApplicationController
     render layout: "profile_layout"
   end
 
+  def show_post
+    @user = User.find( params[:user_id])
+    @post = @user.posts.find( params[:post_id] )
+    render layout: "profile_layout"
+
+  end
+
   private
 
   def user_params

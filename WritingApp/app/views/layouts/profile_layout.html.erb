@@ -4,25 +4,34 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 
+    <!-- Post Template -->
   <script type="text/template" id='post-template'>
+    <!-- Header -->
     <h3 class="post-header">
     </h3>
     <button type="button" class='remove btn btn-info'>
       Remove
     </button>
 
+    <!-- Main Post -->
       <div class="post-box">
         <p>
           Post:  <%%= message %>
         </p>
       </div>
+
+    <!-- Critique Form -->
+    <button type="button" class='make-critique btn btn-info'>
+      Critique
+    </button>
       <div class="critique-space">
 
       </div>
 
-      <button type="button" class='make-critique btn btn-info'>
-        Critique
-      </button>
+    <!-- Critique List View -->
+    <div id="critique-list-view">
+
+    </div>
   </script>
 
   <script type="text/template" id="critique-template">
@@ -33,6 +42,19 @@
         <input type="hidden" name="critique[post_id]" id="critique-post-id">
         <input type="submit" value="Submit" class="btn btn-danger">
       </form>
+      <button class="close-critique btn btn-danger">close</button>
+    </div>
+  </script>
+
+  <script type="text/template" id="critique-form-template">
+    <div class="new-critique-form">
+      <form id="create-critique">
+        <input type="hidden" name="critique[user_id]" value="<%= @user.id %>">
+        <textarea class= "form-control" id="critique-message" rows="10" name="critique[message]" placeholder="...enter critique"></textarea>
+        <input type="hidden" name="critique[post_id]" id="critique-post-id">
+        <input type="submit" value="Submit" class="btn btn-danger">
+      </form>
+      <button class="close-critique btn btn-danger">close</button>
     </div>
   </script>
 
