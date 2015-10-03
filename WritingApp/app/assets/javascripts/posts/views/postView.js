@@ -11,10 +11,10 @@ app.PostView = Backbone.View.extend({
 
     initialize: function(){
       this.listenTo( this.model, 'change', this.renderWithUserName );
-      var urlModel = "/api/posts/" + this.model.get('id') + "/critiques"
-      this.innerCollection = new app.CritiquesCollection();
-      this.innerCollection.url = urlModel;
-      this.innerCollection.fetch();
+      // var urlModel = "/api/posts/" + this.model.get('id') + "/critiques"
+      // this.innerCollection = new app.CritiquesCollection();
+      // this.innerCollection.url = urlModel;
+      // this.innerCollection.fetch();
     },
 
     render: function(){
@@ -59,13 +59,25 @@ app.PostView = Backbone.View.extend({
 
   // Critique Controller
     fetchCritiques: function(){
-      this.model.critiques = new app.CritiquesCollection();
-      this.model.critiques.url = "/api/posts/" + this.model.get('id') + "/critiques";
-      this.model.critiques.fetch({async:false});
+      this.innerCollection = new app.CritiquesCollection();
+      var urlModel = "/api/posts/" + this.model.get('id') + "/critiques"
+      this.innerCollection.url = urlModel;
+      this.model.critiques = this.innerCollection;
+
+      this.innerCollection.fetch();
+
+      // Model based render
+      // this.model.critiques = new app.CritiquesCollection();
+      // this.model.critiques.url = "/api/posts/" + this.model.get('id') + "/critiques";
+      // console.log(this.model.critiques.url);
+      // this.model.critiques.fetch();
       },
     renderCritiques: function(){
       this.resizePostDiv( this.openHeight );
       this.fetchCritiques();
+      // Fetch critiques not working?
+
+      console.log(this.innerCollection);
       this.innerListView = new app.CritiqueListView({
         collection: this.innerCollection
       });

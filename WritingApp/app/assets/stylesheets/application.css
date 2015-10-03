@@ -38,6 +38,10 @@
   height: 25em;
 }
 
+.prompt-text{
+  color: red;
+}
+
 form#create-post {
   background-color: floralwhite;
   padding: 3em;

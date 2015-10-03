@@ -35,4 +35,11 @@ $( document ).ready(function() {
     app.posts.create({message: newMessage},{wait:true});
   });
 
+  $('button.render-prompt').on('click', function(e){
+    e.preventDefault();
+    console.log('prompt render');
+    app.writingPrompts.fetch();
+  });
+
+
 });
