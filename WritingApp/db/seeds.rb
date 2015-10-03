@@ -5,3 +5,12 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+json_nouns = JSON.parse ( File.read('db/seeds/nouns.json') )
+nouns = json_nouns['nouns']
+nouns.each do |noun|
+  WritingPrompt.create({
+      prompt: noun,
+      prompt_type: 'One Word'
+      })
+end

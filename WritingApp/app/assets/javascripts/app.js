@@ -20,6 +20,11 @@ app.postPainter = new app.PostListView({
 
 app.posts.fetch();
 
+app.writingPrompts = new app.WritingPromptCollection();
+app.promptPainter = new app.WritingPromptListView({
+  collection: app.writingPrompts,
+  el: $('#prompt-container')
+});
 
 $( document ).ready(function() {
 

@@ -1,12 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'writing_prompts/new'
-
-  get 'writing_prompts/index'
-
-  get 'writing_prompts/edit'
-
-  get 'writing_prompts/destroy'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -32,6 +25,9 @@ Rails.application.routes.draw do
     get '/posts/:post_id/critiques' => 'critiques#index'
     post '/posts/:post_id/critiques' => 'critiques#create'
     delete '/posts/:post_id/critiques/:id' => 'critiques#destroy'
+
+    get '/writing_prompts' => 'writing_prompts#index'
+
   end
 
 # User Routes

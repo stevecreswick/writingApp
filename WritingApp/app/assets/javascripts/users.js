@@ -18,6 +18,10 @@
 //= require turbolinks
 //= require bootstrap.min
 
+//= require writingPrompts/model/writingPrompt
+//= require writingPrompts/views/writingPromptView
+//= require writingPrompts/collection/writingPromptCollection
+//= require writingPrompts/views/writingPromptListView
 //= require critiques/model/critique
 //= require critiques/views/critiqueView
 //= require critiques/collection/critiqueCollection
@@ -26,6 +30,7 @@
 //= require posts/views/postView
 //= require posts/collection/postCollection
 //= require posts/views/postListView
+
 
 //= require app
 
