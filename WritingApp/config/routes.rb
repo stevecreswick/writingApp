@@ -31,10 +31,13 @@ Rails.application.routes.draw do
 
     # Friendships API
     get'/friendships' => 'friendships#index'
-    
+    get'/friendships/pending' => 'friendships#pending'
+
+
   end
 
 # User Routes
+get '/users' => 'users#index'
 get '/users/register' => 'users#register', as: :register
 post '/users' => 'users#create'
 get '/users/login' => 'users#login', as: :log_in

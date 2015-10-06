@@ -1,9 +1,9 @@
 var app = app || {};
 
-app.FriendView = Backbone.View.extend({
+app.UserView = Backbone.View.extend({
   tagName: 'div',
-  className: 'friend-view',
-  template: _.template( $('#friend-view-template').html() ),
+  className: 'user-view',
+  template: _.template( $('#user-view-template').html() ),
   initialize: function(){
 
   },

@@ -5,12 +5,28 @@ class Api::FriendshipsController < ApplicationController
 
     def index
       current_user
-      render json: current_user.friendships
+
+      ar_friendships = current_user.friendships.where(status: 'accepted')
+      friendships = ar_friendships.map do |ar_friend|
+        friend = User.find( ar_friend.friend_id )
+        data = ar_friend.as_json
+        data['friend_name'] = friend.username
+        data
+      end
+
+      render json: friendships
     end
 
     def pending
-      current_user
-      render json: current_user.pending_friendships
+      ar_pending = current_user.pending_friends
+      pending_friendships = ar_pending .map do |ar_pending|
+        friend = User.find( ar_pending.friend_id )
+        data = ar_pending.as_json
+        data['friend_name'] = friend.username
+        data
+      end
+
+      render json: pending_friendships
     end
 
     # def request

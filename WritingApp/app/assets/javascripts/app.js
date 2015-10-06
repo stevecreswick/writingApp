@@ -24,7 +24,25 @@ app.promptFormPainter = new app.promptFormView({
   el: $('#left-pane')
 });
 
+app.friends = new app.FriendCollection();
+app.pendingFriends = new app.PendingFriendCollection();
 
+app.friendPainter = new app.FriendListView({
+  collection: app.friends,
+  el: $('#left-pane')
+});
+
+app.pendingFriendPainter = new app.FriendListView({
+  collection: app.pendingFriends,
+  el: $('#left-pane')
+});
+
+app.users = new app.UserCollection();
+
+app.userPainter = new app.UserListView({
+  collection: app.users,
+  el: $('#left-pane')
+});
 
 $( document ).ready(function() {
 

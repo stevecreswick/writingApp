@@ -36,6 +36,18 @@
 //= require collections/postCollection
 //= require views/postListView
 
+//= require models/friend
+//= require views/friendView
+//= require collections/friendCollection
+//= require collections/pendingFriendCollection
+//= require views/friendListView
+
+//= require models/user
+//= require views/userView
+//= require collections/userCollection
+//= require views/userListView
+
+
 //= require views/promptFormView
 
 //= require timer
