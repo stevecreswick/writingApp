@@ -1,4 +1,3 @@
-console.log('post view');
 
 var app = app || {};
 
@@ -59,6 +58,7 @@ app.PostView = Backbone.View.extend({
 
   // Critique Controller
     fetchCritiques: function(){
+
       this.innerCollection = new app.CritiquesCollection();
       var urlModel = "/api/posts/" + this.model.get('id') + "/critiques"
       this.innerCollection.url = urlModel;

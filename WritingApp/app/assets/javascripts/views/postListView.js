@@ -1,4 +1,3 @@
-console.log('post list');
 
 var app = app || {};
 

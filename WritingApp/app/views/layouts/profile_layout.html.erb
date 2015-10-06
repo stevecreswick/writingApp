@@ -51,16 +51,69 @@
       </div>
     </script>
 
-    <!-- Prompt -->
+
+
+    <!-- Render Prompt Form -->
+    <script type="text/template" id="prompt-form-template">
+      <div class="new-post-box">
+
+        <!-- <div id="stopwatch">0:0:0</div>
+            <div id="controls">
+              <button id="start">Start</button>
+              <but  ton id="stop">Stop</button>
+              <button id="reset">Reset</button>
+            </div> -->
+
+        <div id="prompt-container">
+        </div>
+            <label for="choose-type">Choose Type</label>
+            <select class="form-control input-lg" id="choose-type">
+                <option>One Word</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+            </select>
+            <form class="" action="index.html" method="post">
+              Word Count: <p id="word-count"></p>
+                <input id="post-word-count" type="hidden" name=post[word_count] value="50"/>
+                <div id="slider-word-count"></div>
+            </form>
+
+        <button class="render-prompt btn btn-primary btn-lg btn-block">Render Prompt</button>
+        <button class="btn btn-danger start">Start</button>
+
+      </div>
+
+    </script>
+
+    <!-- Show the Prompt -->
     <script type="text/template" id="writing-prompt-template">
-      <div class="writing-prompt">
         <h4>
           Use the word: <span class="prompt-text">
             <%%= prompt %>
           </span>
         </h4>
+    </script>
+
+
+    <script type="text/template" id="create-post-template">
+      <div class="new-post-box">
+      <h3>New Post</h3>
+        Character Count: <p class="character-count"></p>
+        <h5 id="post-box-prompt"></h5>
+        <h4 id="post-box-word-count"> </h4>
+        <form id="create-post">
+          <div class="form-group">
+            <br>
+            <textarea class="form-control" id="post-body" rows="10" name="post[message]" placeholder="...post"></textarea>
+          </div>
+            <input type="submit" value="Post" class="btn btn-danger submit-new-post">
+        </form>
       </div>
     </script>
+
+
 
 
 </head>

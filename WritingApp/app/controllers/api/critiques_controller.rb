@@ -40,7 +40,7 @@ class Api::CritiquesController < ApplicationController
     deleted_critique = post.critiques.find(params[:id])
     binding.pry
     deleted_critique.destroy
-    
+
     respond_to do |format|
 
       format.json { render json: post.critiques }

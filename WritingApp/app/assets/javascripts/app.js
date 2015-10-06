@@ -1,4 +1,3 @@
-console.log('...app.js loaded')
 
 var app = app || {};
 
@@ -20,11 +19,12 @@ app.postPainter = new app.PostListView({
 
 app.posts.fetch();
 
-app.writingPrompts = new app.WritingPromptCollection();
-app.promptPainter = new app.WritingPromptListView({
-  collection: app.writingPrompts,
-  el: $('#prompt-container')
+
+app.promptFormPainter = new app.promptFormView({
+  el: $('#left-pane')
 });
+
+
 
 $( document ).ready(function() {
 
@@ -35,11 +35,15 @@ $( document ).ready(function() {
     app.posts.create({message: newMessage},{wait:true});
   });
 
-  $('button.render-prompt').on('click', function(e){
-    e.preventDefault();
-    console.log('prompt render');
-    app.writingPrompts.fetch();
-  });
 
+$stopwatch.html(hours + ':' + minutes + ':' + seconds);
+
+bindStart();
+bindStop();
+bindReset();
+
+
+  app.promptFormPainter.render();
+  app.promptFormPainter.bindSlider();
 
 });

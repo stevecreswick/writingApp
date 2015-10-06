@@ -3,8 +3,12 @@ class UsersController < ApplicationController
     include UsersHelper
     include SessionsHelper
 
+  # def index
+  #   User.all
+  # end
+
   def create
-    
+
     @user = User.new(user_params)
     if @user.save
       respond_to do |format|
@@ -21,7 +25,7 @@ class UsersController < ApplicationController
   end
 
   def profile
-    return nil if !authenticate!
+    # return nil if !authenticate!
     @user = current_user
     render layout: "profile_layout"
   end
@@ -40,6 +44,19 @@ class UsersController < ApplicationController
   def register
     @user = User.new
   end
+
+  def friends
+    @user = current_user
+    @allusers = User.all
+    @friendships = Friendship.all
+
+    @newfriendship = Friendship.new
+    binding.pry
+  end
+
+
+
+
 
   private
 

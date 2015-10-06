@@ -26,8 +26,12 @@ Rails.application.routes.draw do
     post '/posts/:post_id/critiques' => 'critiques#create'
     delete '/posts/:post_id/critiques/:id' => 'critiques#destroy'
 
+    # Writing Prompt API
     get '/writing_prompts' => 'writing_prompts#index'
 
+    # Friendships API
+    get'/friendships' => 'friendships#index'
+    
   end
 
 # User Routes
@@ -37,6 +41,11 @@ get '/users/login' => 'users#login', as: :log_in
 get '/users/profile' => 'users#profile', as: :profile
 get '/users/main' => 'users#main', as: :main
 get '/users/:user_id/posts/:post_id' => 'users#show_post'
+get '/users/friends' => 'users#friends'
+post '/users/request' => 'users#request'
+
+
+
 
 # Session Routes
 post '/sessions' => 'sessions#create'

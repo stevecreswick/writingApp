@@ -17,21 +17,28 @@
 //= require backbone-relational
 //= require turbolinks
 //= require bootstrap.min
-
-//= require writingPrompts/model/writingPrompt
-//= require writingPrompts/views/writingPromptView
-//= require writingPrompts/collection/writingPromptCollection
-//= require writingPrompts/views/writingPromptListView
-//= require critiques/model/critique
-//= require critiques/views/critiqueView
-//= require critiques/collection/critiqueCollection
-//= require critiques/views/critiqueListView
-//= require posts/model/post
-//= require posts/views/postView
-//= require posts/collection/postCollection
-//= require posts/views/postListView
+//= require bootstrap-slider
+//= require jquery-ui.min
 
 
+//= require models/writingPrompt
+//= require views/writingPromptView
+//= require collections/writingPromptCollection
+//= require views/writingPromptListView
+
+//= require models/critique
+//= require views/critiqueView
+//= require collections/critiqueCollection
+//= require views/critiqueListView
+
+//= require models/post
+//= require views/postView
+//= require collections/postCollection
+//= require views/postListView
+
+//= require views/promptFormView
+
+//= require timer
 //= require app
 
 console.log('users manifest');
