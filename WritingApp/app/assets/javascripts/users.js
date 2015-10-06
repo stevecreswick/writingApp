@@ -47,8 +47,9 @@
 //= require collections/userCollection
 //= require views/userListView
 
-
 //= require views/promptFormView
+//= require views/pageView
+
 
 //= require timer
 //= require app

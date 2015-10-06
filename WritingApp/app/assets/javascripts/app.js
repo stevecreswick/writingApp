@@ -11,37 +11,35 @@ var app = app || {};
   });
 
 
-app.posts = new app.PostCollection();
-app.postPainter = new app.PostListView({
-  collection: app.posts,
-  el: $('#post-list')
-});
-
-app.posts.fetch();
+// Create Form
 
 
-app.promptFormPainter = new app.promptFormView({
-  el: $('#left-pane')
-});
+// Can create a button that goes to Friends World
 
+// Create Friends
 app.friends = new app.FriendCollection();
-app.pendingFriends = new app.PendingFriendCollection();
-
 app.friendPainter = new app.FriendListView({
   collection: app.friends,
   el: $('#left-pane')
 });
 
+// Create Pending Friends
+app.pendingFriends = new app.PendingFriendCollection();
 app.pendingFriendPainter = new app.FriendListView({
   collection: app.pendingFriends,
   el: $('#left-pane')
 });
 
+// Create Users
 app.users = new app.UserCollection();
-
 app.userPainter = new app.UserListView({
   collection: app.users,
   el: $('#left-pane')
+});
+
+// Responsible for clearing and rendering page
+app.pagePainter = new app.PageView({
+  el: $('#main-page')
 });
 
 $( document ).ready(function() {
@@ -54,14 +52,13 @@ $( document ).ready(function() {
   });
 
 
-$stopwatch.html(hours + ':' + minutes + ':' + seconds);
-
-bindStart();
-bindStop();
-bindReset();
-
-
-  app.promptFormPainter.render();
-  app.promptFormPainter.bindSlider();
+// $stopwatch.html(hours + ':' + minutes + ':' + seconds);
+//
+// bindStart();
+// bindStop();
+// bindReset();
+  app.pagePainter.render();
+  app.pagePainter.renderPosts();
+  app.pagePainter.renderPromptForm();
 
 });

@@ -125,7 +125,7 @@ form#create-post {
   padding-bottom: 1em;
   border-radius: 5px;
   border: 1px solid grey;
-  margin-bottom: 1em;
+  margin-top: 1em;
   height: 25em;
   overflow: auto;
 }
@@ -178,8 +178,14 @@ form#create-post {
 
 #left-pane{
   height: 100%;
+  background-color: cornflowerblue;
 }
 
+#right-pane{
+  height:100%;
+  background-color: rebeccapurple;
+  /*position: fixed;*/
+}
 
 
 #stopwatch {

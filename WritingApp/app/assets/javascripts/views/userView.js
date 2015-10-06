@@ -12,6 +12,14 @@ app.UserView = Backbone.View.extend({
     var html = this.template( this.model.toJSON() );
     var $html = $( html );
     this.$el.append( $html );
+  },
+  events:{
+    'click button.add-friend': 'addFriend'
+  },
+  addFriend: function(){
+    console.log('add friend clicked');
+    // Add friend logic
+
   }
 
 });
