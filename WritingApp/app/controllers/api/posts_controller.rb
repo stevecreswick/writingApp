@@ -19,17 +19,6 @@ respond_to :html, :json
     render json: posts
   end
 
-  def allposts
-    arPosts = Post.all
-    posts = arPosts.map do |arPost|
-      data = arPost.as_json
-      data['username'] = arPost.user.username
-      data
-    end
-    render json: posts
-  end
-
-
   def show
     # current_api_user!
     post = Post.find( params[:id] )

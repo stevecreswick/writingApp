@@ -17,7 +17,8 @@ app.PageView = Backbone.View.extend({
     this.$el.empty();
   },
   events:{
-    'click button.show-friends': 'showFriends'
+    'click li.show-friends': 'showFriends',
+    'click li.add-friends': 'addFriends'
   },
   showFriends: function(){
     console.log('show friends clicked');
@@ -29,6 +30,15 @@ app.PageView = Backbone.View.extend({
     });
 
     app.friends.fetch();
+  },
+  addFriends: function(){
+    app.users = new app.UserCollection();
+    app.userPainter = new app.UserListView({
+      collection: app.users,
+      el: $('#left-pane')
+    });
+
+    app.users.fetch();
   },
   renderPosts: function(){
     app.posts = new app.PostCollection();

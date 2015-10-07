@@ -30,14 +30,15 @@ Rails.application.routes.draw do
     get '/writing_prompts' => 'writing_prompts#index'
 
     # Friendships API
-    get'/friendships' => 'friendships#index'
+    get'/friendships' => 'friendships#index', as: :friends
     get'/friendships/pending' => 'friendships#pending'
-
+    post'/friendships' => 'friendships#create', as: :new_friend
+    delete'/friendships' => 'friendships#destroy', as: :remove_friend
 
   end
 
 # User Routes
-get '/users' => 'users#index'
+get '/users' => 'users#index', as: :users
 get '/users/register' => 'users#register', as: :register
 post '/users' => 'users#create'
 get '/users/login' => 'users#login', as: :log_in

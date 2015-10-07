@@ -1,3 +1,3 @@
 var app = app || {};
 
-app.Friend = Backbone.Model.extend({});
+app.Friendship = Backbone.Model.extend({});

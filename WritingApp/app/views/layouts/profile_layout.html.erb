@@ -119,6 +119,10 @@
 
     <script type="text/template" id="user-view-template">
       <h3><%%= username %></h3>
+      <form class="" action="index.html" method="post">
+        <input type="hidden" name="friendship[friend_id]" value="<%%= id %>" class="friend-id-holder">
+        <input type="hidden" name="friendship[user_id]" value="<%= @user.id %>" class="user-id-holder">
+      </form>
       <button type="button" class="btn btn-danger add-friend">Add Friend</button>
     </script>
 
@@ -145,14 +149,12 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav navbar-right">
-            <li id="friends-navbar"><button type="button" class="btn btn-danger show-friends">Show Friends</button>
-</li>
             <li><a href="#"><%= @user.username %></a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li><a href="#">Action</a></li>
-                <li><a href="#">Another action</a></li>
+                <li class="add-friends"><a href="/users">Add Friends</a></li>
+                <li class="show-friends"><a href="/api/friendships">Show Friends</a></li>
                 <li><a href="#">Something else here</a></li>
                 <li role="separator" class="divider"></li>
                   <li><%= link_to 'Log Out', '/sessions', method: :delete  %></li>

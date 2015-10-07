@@ -5,7 +5,6 @@ app.FriendView = Backbone.View.extend({
   className: 'friend-view',
   template: _.template( $('#friend-view-template').html() ),
   initialize: function(){
-
   },
   render: function(){
     this.$el.empty();

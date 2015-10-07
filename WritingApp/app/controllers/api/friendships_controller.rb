@@ -2,19 +2,21 @@ class Api::FriendshipsController < ApplicationController
 
     include UsersHelper
     include SessionsHelper
+    include Api::FriendshipsHelper
+
+    # def index
+    #   ar_friendships = current_user.friendships.where(status: 'accepted')
+    #   friendships = ar_friendships.map do |ar_friend|
+    #     friend = User.find( ar_friend.friend_id )
+    #     data = ar_friend.as_json
+    #     data['friend_name'] = friend.username
+    #     data
+    #   end
+    #   render json: friendships
+    # end
 
     def index
-      current_user
-
-      ar_friendships = current_user.friendships.where(status: 'accepted')
-      friendships = ar_friendships.map do |ar_friend|
-        friend = User.find( ar_friend.friend_id )
-        data = ar_friend.as_json
-        data['friend_name'] = friend.username
-        data
-      end
-
-      render json: friendships
+    @user = current_user
     end
 
     def pending
@@ -29,19 +31,41 @@ class Api::FriendshipsController < ApplicationController
       render json: pending_friendships
     end
 
-    # def request
-    #   @requesting = User.find(params[:friend_id])
-    #   Friendship.request(current_user)
-    #   redirect_to '/'
-    # end
+    def requested
+      ar_requested = current_user.friendships.where(status: 'requested')
+      requested_friendships = ar_requested.map do |ar_requested|
+        friend = User.find( ar_requested.friend_id )
+        data = ar_requested.as_json
+        data['friend_name'] = friend.username
+        data
+      end
+
+      render json: requested_friendships
+    end
 
     def accept
     end
 
+
     def create
+      @friendship = current_user.friendships.build(:friend_id => params[:friend_id])
+      if @friendship.save
+        flash[:notice] = "Added friend."
+        redirect_to api_friends_path
+      else
+        flash[:notice] = "Unable to add friend."
+        redirect_to api_friends_path
+      end
     end
 
     def destroy
+        @friendship = current_user.friendships.find(params[:id])
+        deleted_friend = User.find(params[:friend_id])
+        deleted_friendship = @deleted_friend.inverse_friends.where({id: current_user.id})
+        binding.pry
+        @friendship.destroy
+        flash[:notice] = "Removed friendship."
+        redirect_to api_friends_path
     end
 
     private

@@ -30,12 +30,6 @@ app.pendingFriendPainter = new app.FriendListView({
   el: $('#left-pane')
 });
 
-// Create Users
-app.users = new app.UserCollection();
-app.userPainter = new app.UserListView({
-  collection: app.users,
-  el: $('#left-pane')
-});
 
 // Responsible for clearing and rendering page
 app.pagePainter = new app.PageView({

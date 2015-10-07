@@ -1,0 +1,15 @@
+<h3>Users PAGE</h3>
+
+
+
+<% for user in @users %>
+  <div class="user">
+    <p>
+      <strong><%= user.username %></strong>
+      <%= link_to "Add Friend", api_new_friend_path(:friend_id => user), :method => :post %>
+      <div class="clear"></div>
+    </p>
+  </div>
+<% end %>
+
+<a href="/users/main">Main Page</a>

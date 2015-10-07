@@ -4,8 +4,8 @@ class UsersController < ApplicationController
     include SessionsHelper
 
   def index
-    users = User.all
-    render json: users
+    @users = User.all
+    # render json: users
   end
 
   def create
@@ -52,7 +52,6 @@ class UsersController < ApplicationController
     @friendships = Friendship.all
 
     @newfriendship = Friendship.new
-    binding.pry
   end
 
 

@@ -31,7 +31,6 @@ app.promptFormView = Backbone.View.extend({
       writingPrompts.fetch();
     },
     renderWritingForm: function(){
-      $('body').keyup(this.goBack);
       var newPrompt = this.createPrompt();
       console.log(newPrompt);
       this.$el.empty();
@@ -49,9 +48,6 @@ app.promptFormView = Backbone.View.extend({
         wordCount: $('#post-word-count').val()
       }
       return newPrompt;
-    },
-    goBack: function(e){
-      console.log (e.type, e.keyCode);
     },
     checkCharacterCount: function(){
       this.characters = $('textarea#post-body').val().length;

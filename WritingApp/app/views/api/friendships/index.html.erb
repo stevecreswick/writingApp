@@ -1,0 +1,22 @@
+<p>Username: <%= @user.username %></p>
+<p><%= link_to "Find Friends", users_path %></p>
+
+<h2>Your Friends</h2>
+<ul>
+  <% for friendship in @user.friendships %>
+  <li>
+    <%=  friendship.friend.username %>
+    (<%= link_to "remove", api_remove_friend_path(:id => friendship, :friend_id => friendship.friend_id), :method => :delete %>)
+  </li>
+  <% end %>
+</ul>
+
+
+<h2>Users Who Have Befriended You</h2>
+<ul>
+  <% for user in @user.inverse_friends %>
+  <li><%=  user.username %></li>
+  <% end %>
+</ul>
+
+<a href="/users/main">Main Page</a>

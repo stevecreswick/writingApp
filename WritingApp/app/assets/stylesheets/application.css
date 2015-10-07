@@ -126,6 +126,7 @@ form#create-post {
   border-radius: 5px;
   border: 1px solid grey;
   margin-top: 1em;
+  margin-right: 5%;
   height: 25em;
   overflow: auto;
 }
@@ -184,6 +185,7 @@ form#create-post {
 #right-pane{
   height:100%;
   background-color: rebeccapurple;
+  padding-top: 4em;
   /*position: fixed;*/
 }
 
