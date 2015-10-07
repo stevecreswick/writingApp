@@ -8,6 +8,11 @@ class UsersController < ApplicationController
     # render json: users
   end
 
+  def add_friends
+    users = User.all
+    render json: users
+  end
+
   def create
 
     @user = User.new(user_params)
@@ -47,11 +52,15 @@ class UsersController < ApplicationController
   end
 
   def friends
-    @user = current_user
-    @allusers = User.all
-    @friendships = Friendship.all
+    render json: current_user.friends
+    # @user = current_user
+    # @allusers = User.all
+    # @friendships = Friendship.all
+    # @newfriendship = Friendship.new
+  end
 
-    @newfriendship = Friendship.new
+  def followers
+  render json: current_user.inverse_friends
   end
 
 

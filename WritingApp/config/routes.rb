@@ -32,7 +32,7 @@ Rails.application.routes.draw do
     # Friendships API
     get'/friendships' => 'friendships#index', as: :friends
     get'/friendships/pending' => 'friendships#pending'
-    post'/friendships' => 'friendships#create', as: :new_friend
+    post'/friendships/:friend_id' => 'friendships#create', as: :new_friend
     delete'/friendships' => 'friendships#destroy', as: :remove_friend
 
   end
@@ -46,6 +46,8 @@ get '/users/profile' => 'users#profile', as: :profile
 get '/users/main' => 'users#main', as: :main
 get '/users/:user_id/posts/:post_id' => 'users#show_post'
 get '/users/friends' => 'users#friends'
+get '/users/add_friend' => 'users#add_friends'
+get '/users/followers' => 'users#followers'
 post '/users/request' => 'users#request'
 
 
