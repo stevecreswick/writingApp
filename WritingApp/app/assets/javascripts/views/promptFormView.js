@@ -32,7 +32,6 @@ app.promptFormView = Backbone.View.extend({
     },
     renderWritingForm: function(){
       var newPrompt = this.createPrompt();
-      console.log(newPrompt);
       this.$el.empty();
       var template = _.template( $('#create-post-template').html() );
       var html = template();
@@ -40,12 +39,21 @@ app.promptFormView = Backbone.View.extend({
       this.$el.append( $html );
       this.$("h5#post-box-prompt").html(newPrompt.prompt);
       this.$("h4#post-box-word-count").html(newPrompt.wordCount);
-
+      this.bindWritingFormSubmit(newPrompt.prompt, newPrompt.wordCount, newPrompt.type);
+    },
+    bindWritingFormSubmit: function(prompt, wordCount, type){
+      console.log(prompt + " " + wordCount + " " + type);
+      $('form#create-post').on('submit', function(e){
+        e.preventDefault();
+        var newMessage = $(this).find("#post-body").val();
+        app.posts.create({message: newMessage, prompt: prompt, word_count: wordCount, prompt_type: type},{wait:true});
+      });
     },
     createPrompt: function(){
       var newPrompt = {
         prompt:  $('.prompt-text').text(),
-        wordCount: $('#post-word-count').val()
+        wordCount: $('#post-word-count').val(),
+        type: $('#choose-type').val()
       }
       return newPrompt;
     },

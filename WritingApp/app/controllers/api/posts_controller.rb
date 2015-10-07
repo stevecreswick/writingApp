@@ -83,7 +83,7 @@ respond_to :html, :json
   private
 
   def post_params
-    params.require(:post).permit(:message)
+    params.require(:post).permit(:message, :prompt, :prompt_type, :word_count)
   end
 
 

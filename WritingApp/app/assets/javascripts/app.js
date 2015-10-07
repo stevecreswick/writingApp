@@ -39,11 +39,6 @@ app.pagePainter = new app.PageView({
 $( document ).ready(function() {
 
   // Create Post
-  $('form#create-post').on('submit', function(e){
-    e.preventDefault();
-    var newMessage = $(this).find("#post-body").val();
-    app.posts.create({message: newMessage},{wait:true});
-  });
 
 
 // $stopwatch.html(hours + ':' + minutes + ':' + seconds);
