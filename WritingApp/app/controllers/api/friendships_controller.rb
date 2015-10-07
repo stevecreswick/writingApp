@@ -48,23 +48,24 @@ class Api::FriendshipsController < ApplicationController
 
 
     def create
-      @friendship = current_user.friendships.build(:friend_id => params[:friend_id])
-      if @friendship.save
-        flash[:notice] = "Added friend."
-        redirect_to api_friends_path
+
+      already_friends = current_user.friendships.exists?(:friend_id => params[:friend_id]);
+
+      if !already_friends  && (params[:friend_id].to_i != current_user.id)
+        @friendship = current_user.friendships.build(:friend_id => params[:friend_id])
+        if @friendship.save
+          redirect_to api_friends_path
+        else
+          redirect_to api_friends_path
+        end
       else
-        flash[:notice] = "Unable to add friend."
         redirect_to api_friends_path
       end
     end
 
     def destroy
         @friendship = current_user.friendships.find(params[:id])
-        deleted_friend = User.find(params[:friend_id])
-        deleted_friendship = @deleted_friend.inverse_friends.where({id: current_user.id})
-        binding.pry
         @friendship.destroy
-        flash[:notice] = "Removed friendship."
         redirect_to api_friends_path
     end
 
