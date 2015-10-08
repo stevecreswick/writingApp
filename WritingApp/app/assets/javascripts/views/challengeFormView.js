@@ -6,6 +6,7 @@ app.ChallengeFormView = Backbone.View.extend({
   template: _.template( $('#challenge-form-template').html() ),
   initialize: function(){
     this.bindSlider();
+    console.log(this.model);
   },
   render: function(){
     this.$el.empty();
@@ -17,6 +18,18 @@ app.ChallengeFormView = Backbone.View.extend({
   },
   events:{
     'click button.render-challenge': 'getChallenge'
+  },
+  createChallenge: function(prompt, wordCount){
+    console.log('creating challenge');
+    console.log(prompt);
+    console.log(wordCount);
+    var friendship = this.model.get('id');
+    challenges = new app.ChallengeCollection();
+    challenges.url = '/api/friendships/' + friendship + '/challenges';
+    challenges.fetch()
+    console.log(challenges);
+    console.log(friendship);
+    challenges.create({prompt: prompt, word_count: wordCount});
   },
   getChallenge: function(){
       console.log('prompt render');
@@ -32,13 +45,18 @@ app.ChallengeFormView = Backbone.View.extend({
 
     },
     bindSubmit: function(){
+        var scope = this;
+
         $('form#create-challenge').on('submit', function(e){
           e.preventDefault();
           var newChallenge = $('.prompt-text').html();
           var wordCount = $('#challenge-word-count').val();
+          // var friendship = this.model.get()
           console.log(newChallenge);
           console.log(wordCount);
-
+          // console.log(app.token);
+          scope.createChallenge(newChallenge, wordCount);
+          // app.challenges.url = '/friendships/:id/challenges'
           // app.posts.create({message: newMessage, prompt: prompt, word_count: wordCount, prompt_type: type},{wait:true});
         });
     },

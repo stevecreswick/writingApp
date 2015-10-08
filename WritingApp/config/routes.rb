@@ -35,12 +35,13 @@ Rails.application.routes.draw do
     get'/friendships' => 'friendships#index', as: :friends
     get'/friendships/pending' => 'friendships#pending'
     post'/friendships/:friend_id' => 'friendships#create', as: :new_friend
-    delete'/friendships/:friend_id' => 'friendships#destroy', as: :remove_friend
+    delete'/friendships/:id' => 'friendships#destroy', as: :remove_friend
 
     get '/friendships/:id/challenges' => 'challenges#index'
     get '/friendships/:id/challenges/:challenge_id' => 'challenges#show'
     post '/friendships/:id/challenges' => 'challenges#create'
     delete '/friendships/:id/challenges/:challenge_id' => 'challenges#destroy'
+    put '/friendships/:id/challenges/:challenge_id' => 'challenges#update'
 
   end
 

@@ -37,6 +37,9 @@ app.pagePainter = new app.PageView({
 });
 
 
+app.challenges = new app.ChallengeCollection();
+
+
 
 $( document ).ready(function() {
 
@@ -48,12 +51,13 @@ $( document ).ready(function() {
 // bindStart();
 // bindStop();
 // bindReset();
+
+
   app.pagePainter.render();
   app.pagePainter.renderPosts();
   app.pagePainter.renderPromptForm();
 
-  app.challengePainter = new app.ChallengeFormView({
-    el: $('#left-pane')
-  });
+
+
 
 });

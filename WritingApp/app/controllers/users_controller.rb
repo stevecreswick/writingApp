@@ -52,16 +52,16 @@ class UsersController < ApplicationController
   end
 
   def friends
-    # friends_list = current_user.friends
-    # friends_list_with_names = friends_list.map do |friendship|
-    #   friend = User.find( friendship.friend_id )
-    #   data = friendship.as_json
-    #   data['friend_name'] = friend.username
-    #   data
-    # end
-    # render json: friends_list_with_names
+    friendships = current_user.friendships
+    friends = friendships.map do |friendship|
+      friend = User.find( friendship.friend_id )
+      data = friendship.as_json
+      data['friend_name'] = friend.username
+      data
+    end
+    render json: friends
 
-    render json: current_user.friends
+    # render json: current_user.friendships
     # @user = current_user
     # @allusers = User.all
     # @friendships = Friendship.all

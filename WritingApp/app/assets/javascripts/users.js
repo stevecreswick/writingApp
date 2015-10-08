@@ -51,10 +51,15 @@
 //= require collections/followerCollection
 //= require views/followerListView
 
+//= require models/challenge
+//= require views/challengeView
+//= require collections/challengeCollection
+//= require views/challengeListView
+
 //= require views/promptFormView
 //= require views/challengeFormView
+//= require views/acceptChallengeFormView
 //= require views/pageView
-
 
 //= require timer
 //= require app

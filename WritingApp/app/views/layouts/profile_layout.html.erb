@@ -1,6 +1,6 @@
 <html>
 <head>
-  <title>Profile View</title>
+  <title>Write Away</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 
@@ -12,7 +12,6 @@
     <button type="button" class='remove-post btn btn-info'>
       Remove
     </button>
-
       <div class="post-box">
         <p>
           Prompt Type: <%%= prompt_type %>
@@ -26,9 +25,7 @@
         <p>
           Post:  <%%= message %>
         </p>
-
       </div>
-
     <button type="button" class='make-critique btn btn-info'>
       Make Critique
     </button>
@@ -124,8 +121,13 @@
     </script>
 
     <script type="text/template" id="friend-view-template">
-      <h3><%%= username %></h3>
+      <h3><%%= friend_name %></h3>
       <button type="button" class="btn btn-danger remove-friend">Remove Friend</button>
+      <button type="button" class="btn btn-info make-challenge">Issue Challenge</button>
+      <button type="button" class="btn btn-info show-challenges">Show Challenges</button>
+      <div id="challenge-list">
+
+      </div>
     </script>
 
     <script type="text/template" id="follower-view-template">
@@ -223,12 +225,12 @@
             <option>4</option>
             <option>5</option>
         </select>
+        <button class="render-challenge btn btn-primary btn-lg btn-block">Render Challenge</button>
         <form id="create-challenge">
           Word Count: <p id="word-count"></p>
             <input id="challenge-word-count" type="hidden" name=challenge[word_count] value="50"/>
             <div id="slider-challenge-word-count"></div>
 
-    <button class="render-challenge btn btn-primary btn-lg btn-block">Render Challenge</button>
     <!-- <button class="btn btn-danger send-challenge">Send Challenge</button> -->
     <input type="submit" value="Send Challenge" class="btn btn-danger send-challenge">
         </form>
@@ -241,9 +243,40 @@
       <div class="challenge-message">
           <%%= prompt %>
           <%%= word_count %>
+          <button type="button" class='accept-challenge btn btn-info'>Accept</button>
         <button type="button" class='remove-challenge btn btn-danger'>
           X
         </button>
+
+      </div>
+    </script>
+
+    <script type="text/template" id="accept-challenge-form-template">
+      <div class="new-post-box">
+
+        <!-- <div id="stopwatch">0:0:0</div>
+            <div id="controls">
+              <button id="start">Start</button>
+              <but  ton id="stop">Stop</button>
+              <button id="reset">Reset</button>
+            </div> -->
+        <div id="challenge-type"></div>
+        <div id="challenge-container"></div>
+        <div id="challenge-word-count"></div>
+
+            <form id="challenge-accept-form">
+
+              <div class="form-group">
+                <br>
+                <textarea class="form-control" id="challenge-body" rows="10" name="post[message]" placeholder="...post"></textarea>
+              </div>
+        <!-- <button class="btn btn-danger send-challenge">Send Challenge</button> -->
+        <!-- <input type="submit" value="Submit" class="btn btn-danger submit-challenge"> -->
+            <input type="submit" class='submit-challenge btn btn-danger' value="Submit"></button>
+
+            </form>
+
+
       </div>
     </script>
 

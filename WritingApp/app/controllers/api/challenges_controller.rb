@@ -23,6 +23,18 @@ class Api::ChallengesController < ApplicationController
       end
   end
 
+  def update
+    friendship = Friendship.find( params[:id] )
+    challenge = friendship.challenges.find(params[:challenge_id])
+    challenge.update(challenge_params)
+
+    respond_to do |format|
+        format.json { render json: challenge }
+        format.html { redirect_to '/api/friendhsip/' + challenge.friendship_id.to_s }
+      end
+
+  end
+
 
   def destroy
       friendship = Friendship.find(params[:id])
