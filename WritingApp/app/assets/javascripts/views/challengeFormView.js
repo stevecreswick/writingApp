@@ -1,6 +1,6 @@
 var app = app || {};
 
-app.challengeFormView = Backbone.View.extend({
+app.ChallengeFormView = Backbone.View.extend({
   tagName: 'div',
   className: 'challenge-form',
   template: _.template( $('#challenge-form-template').html() ),
@@ -12,6 +12,8 @@ app.challengeFormView = Backbone.View.extend({
     var html = this.template();
     var $html = $( html );
     this.$el.append( $html );
+    this.bindSlider();
+    this.bindSubmit();
   },
   events:{
     'click button.render-challenge': 'getChallenge'
@@ -27,18 +29,19 @@ app.challengeFormView = Backbone.View.extend({
       });
 
       writingPrompts.fetch();
-    },
-    createChallenge: function(){
-      var newPrompt = {
-        prompt:  $('.prompt-text').text(),
-        wordCount: $('#post-word-count').val(),
-        type: $('#choose-type').val()
-      }
-      return newPrompt;
-    },
-    sendChallenge: function(){
 
-    }
+    },
+    bindSubmit: function(){
+        $('form#create-challenge').on('submit', function(e){
+          e.preventDefault();
+          var newChallenge = $('.prompt-text').html();
+          var wordCount = $('#challenge-word-count').val();
+          console.log(newChallenge);
+          console.log(wordCount);
+
+          // app.posts.create({message: newMessage, prompt: prompt, word_count: wordCount, prompt_type: type},{wait:true});
+        });
+    },
     // checkCharacterCount: function(){
     //   this.characters = $('textarea#post-body').val().length;
     //   $('.character-count').html( this.characters );

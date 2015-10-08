@@ -36,6 +36,8 @@ app.pagePainter = new app.PageView({
   el: $('#main-page')
 });
 
+
+
 $( document ).ready(function() {
 
   // Create Post
@@ -49,5 +51,9 @@ $( document ).ready(function() {
   app.pagePainter.render();
   app.pagePainter.renderPosts();
   app.pagePainter.renderPromptForm();
+
+  app.challengePainter = new app.ChallengeFormView({
+    el: $('#left-pane')
+  });
 
 });

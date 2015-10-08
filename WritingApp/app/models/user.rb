@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   # Following
   has_many :friendships
   has_many :friends, :through => :friendships
-  has_many :challenges, through: => :friendships
+  has_many :challenges, through: :friendships
 
   # Followers
   has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id"
@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
 
   # Pending Friendships
   # has_many :pending_friends, -> { where(friendships: { status: "pending"}) }, through: :friendships, source: :friend
-  
+
   before_create :generate_token
 
 

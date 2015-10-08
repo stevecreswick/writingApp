@@ -52,6 +52,7 @@
 //= require views/followerListView
 
 //= require views/promptFormView
+//= require views/challengeFormView
 //= require views/pageView
 
 
