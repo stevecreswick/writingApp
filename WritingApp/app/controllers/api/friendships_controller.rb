@@ -64,8 +64,9 @@ class Api::FriendshipsController < ApplicationController
     end
 
     def destroy
-        @friendship = current_user.friendships.find(params[:id])
+        @friendship = current_user.friendships.where({friend_id: params[:friend_id]}).first
         @friendship.destroy
+        # Friendship.destroy(id: @friendship.id)
         redirect_to api_friends_path
     end
 

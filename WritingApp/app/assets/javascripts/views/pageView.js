@@ -18,7 +18,9 @@ app.PageView = Backbone.View.extend({
   },
   events:{
     'click li.show-friends': 'showFriends',
-    'click li.add-friends': 'addFriends'
+    'click li.add-friends': 'addFriends',
+    'click li.show-followers': 'showFollowers',
+    'click li.render-friends': 'renderFriendsPage'
   },
   showFriends: function(){
     console.log('show friends clicked');
@@ -29,16 +31,25 @@ app.PageView = Backbone.View.extend({
       el: $('#left-pane')
     });
 
-    app.friends.fetch();
+    app.friends.fetch({wait:true});
   },
   addFriends: function(){
     app.users = new app.UserCollection();
     app.userPainter = new app.UserListView({
       collection: app.users,
-      el: $('#left-pane')
+      el: $('#right-pane')
     });
 
     app.users.fetch();
+  },
+  showFollowers: function(){
+    app.followers = new app.FollowerCollection();
+    app.followerPainter = new app.FollowerListView({
+      collection: app.followers,
+      el: $('#followers-list')
+    });
+
+    app.followers.fetch();
   },
   renderPosts: function(){
     app.posts = new app.PostCollection();
@@ -57,6 +68,12 @@ app.PageView = Backbone.View.extend({
     app.promptFormPainter.render();
     app.promptFormPainter.bindSlider();
 
+  },
+  renderFriendsPage: function(){
+    this.$('#left-pane').empty();
+    this.showFriends();
+    this.showFollowers();
+    this.addFriends();
   }
 
 });

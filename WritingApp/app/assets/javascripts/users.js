@@ -47,6 +47,10 @@
 //= require collections/userCollection
 //= require views/userListView
 
+//= require views/followerView
+//= require collections/followerCollection
+//= require views/followerListView
+
 //= require views/promptFormView
 //= require views/pageView
 

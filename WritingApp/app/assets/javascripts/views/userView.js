@@ -18,16 +18,15 @@ app.UserView = Backbone.View.extend({
   },
   addFriend: function(){
     console.log('add friend clicked');
-
     var friendID = this.$el.find('.friend-id-holder').val();
     var userID = this.model.get('id');
-
     this.addedFriend = new app.FriendCollection();
     var urlModel = "/api/friendships/" + this.model.get('id');
     console.log(urlModel);
+    this.addedFriend.fetch();
     this.addedFriend.url = urlModel;
-
-    this.addedFriend.create({friend_id: this.model.get('id')})
+    this.addedFriend.create({friend_id: this.model.get('id')});
+    app.friends.fetch();
   }
 
 });

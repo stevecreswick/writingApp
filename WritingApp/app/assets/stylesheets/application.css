@@ -179,12 +179,10 @@ form#create-post {
 
 #left-pane{
   height: 100%;
-  background-color: cornflowerblue;
 }
 
 #right-pane{
   height:100%;
-  background-color: rebeccapurple;
   padding-top: 4em;
   /*position: fixed;*/
 }
@@ -232,4 +230,8 @@ button {
 button:hover, #stop:hover, #reset:hover {
   cursor: pointer;
   border-bottom: 2px solid black;
+}
+
+.render-friends:hover{
+  cursor:pointer; 
 }

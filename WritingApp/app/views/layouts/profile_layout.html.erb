@@ -124,8 +124,15 @@
     </script>
 
     <script type="text/template" id="friend-view-template">
-      <h3><%%= friend_name %></h3>
+      <h3><%%= username %></h3>
+      <button type="button" class="btn btn-danger remove-friend">Remove Friend</button>
     </script>
+
+    <script type="text/template" id="follower-view-template">
+      <h3><%%= username %></h3>
+    </script>
+
+
 
     <script type="text/template" id="user-view-template">
       <h3><%%= username %></h3>
@@ -163,9 +170,9 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li class="add-friends"><a href="#">Add Friends</a></li>
-                <li class="show-friends"><a href="/api/friendships">Show Friends</a></li>
-                <li><a href="#">Something else here</a></li>
+                <li class="add-friends"><a href="">Add Friends</a></li>
+                <li class="show-friends"><a>Show Friends</a></li>
+                <li class="render-friends"><a>Friends Page</a></li>
                 <li role="separator" class="divider"></li>
                   <li><%= link_to 'Log Out', '/sessions', method: :delete  %></li>
               </ul>
@@ -174,6 +181,7 @@
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
     </nav>
+    <div class="container-fluid" id="main-display">
 
     <div class="row">
       <div class="col-xs-6">
@@ -192,9 +200,50 @@
           </div>
         </div>
     </div>
+  </div>
     </script>
 
+<script type="text/template" id="challenge-form-template">
+  <div class="new-post-box">
 
+    <!-- <div id="stopwatch">0:0:0</div>
+        <div id="controls">
+          <button id="start">Start</button>
+          <but  ton id="stop">Stop</button>
+          <button id="reset">Reset</button>
+        </div> -->
+
+    <div id="challenge-container">
+    </div>
+        <label for="choose-type">Choose Type</label>
+        <select class="form-control input-lg" id="choose-type">
+            <option>One Word</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+        </select>
+        <form>
+          Word Count: <p id="word-count"></p>
+            <input id="challenge-word-count" type="hidden" name=challenge[word_count] value="50"/>
+            <div id="slider-challenge-word-count"></div>
+        </form>
+
+    <button class="render-challenge btn btn-primary btn-lg btn-block">Render Challenge</button>
+    <button class="btn btn-danger send-challenge">Send Challenge</button>
+
+  </div>
+</script>
+
+    <script type="text/template" id="critique-template">
+      <div class="challenge-message">
+          <%%= prompt %>
+          <%%= word_count %>
+        <button type="button" class='remove-critique btn btn-danger'>
+          X
+        </button>
+      </div>
+    </script>
 
 </head>
 <body id="main-page">

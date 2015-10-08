@@ -52,12 +52,22 @@ class UsersController < ApplicationController
   end
 
   def friends
+    # friends_list = current_user.friends
+    # friends_list_with_names = friends_list.map do |friendship|
+    #   friend = User.find( friendship.friend_id )
+    #   data = friendship.as_json
+    #   data['friend_name'] = friend.username
+    #   data
+    # end
+    # render json: friends_list_with_names
+
     render json: current_user.friends
     # @user = current_user
     # @allusers = User.all
     # @friendships = Friendship.all
     # @newfriendship = Friendship.new
   end
+
 
   def followers
   render json: current_user.inverse_friends
