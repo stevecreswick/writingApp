@@ -15,8 +15,7 @@ app.promptFormView = Backbone.View.extend({
   },
   events:{
     'click button.render-prompt': 'getPrompt',
-    'click button.start': 'renderWritingForm',
-    'keyup': 'checkCharacterCount'
+    'click button.start': 'renderWritingForm'
   },
   getPrompt: function(){
       console.log('prompt render');
@@ -39,10 +38,17 @@ app.promptFormView = Backbone.View.extend({
       this.$el.append( $html );
       this.$("h5#post-box-prompt").html(newPrompt.prompt);
       this.$("h4#post-box-word-count").html(newPrompt.wordCount);
+
+      //
+      // var editor = new Quill('#editor');
+      // editor.addModule('toolbar', { container: '#toolbar' });
+
+      this.renderEditor();
       this.bindWritingFormSubmit(newPrompt.prompt, newPrompt.wordCount, newPrompt.type);
     },
     bindWritingFormSubmit: function(prompt, wordCount, type){
       console.log(prompt + " " + wordCount + " " + type);
+      this.checkCharacterCount();
       $('form#create-post').on('submit', function(e){
         e.preventDefault();
         var newMessage = $(this).find("#post-body").val();
@@ -58,8 +64,10 @@ app.promptFormView = Backbone.View.extend({
       return newPrompt;
     },
     checkCharacterCount: function(){
-      this.characters = $('textarea#post-body').val().length;
-      $('.character-count').html( this.characters );
+      $('textarea#post-body').on('keyup', function(){
+        this.characters = $('.post-body').val().length;
+        $('.character-count').html( this.characters );
+      });
     },
     bindSlider: function(){
       $( "#slider-word-count" ).slider({
@@ -74,6 +82,16 @@ app.promptFormView = Backbone.View.extend({
       });
     },
     stopWatch: function(){
+
+    },
+    renderEditor: function(){
+      var fullEditor = new Quill('#full-editor', {
+        modules: {
+            'toolbar': { container: '#full-toolbar' },
+            'link-tooltip': true
+        },
+        theme: 'snow'
+      });
 
     }
 });

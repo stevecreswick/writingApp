@@ -53,6 +53,7 @@ $( document ).ready(function() {
 // bindReset();
 
 
+
   app.pagePainter.render();
   app.pagePainter.renderPosts();
   app.pagePainter.renderPromptForm();

@@ -19,6 +19,8 @@
 //= require bootstrap.min
 //= require bootstrap-slider
 //= require jquery-ui.min
+//= require quill.min
+
 
 
 //= require models/writingPrompt
@@ -54,7 +56,13 @@
 //= require models/challenge
 //= require views/challengeView
 //= require collections/challengeCollection
+//= require collections/receivedChallengeCollection
 //= require views/challengeListView
+//= require views/completedChallengeView
+//= require views/completedChallengeListView
+//= require views/receivedChallengeView
+//= require views/receivedChallengeListView
+
 
 //= require views/promptFormView
 //= require views/challengeFormView

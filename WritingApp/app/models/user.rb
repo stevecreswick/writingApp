@@ -15,7 +15,6 @@ class User < ActiveRecord::Base
   # Followers
   has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id"
   has_many :inverse_friends, :through => :inverse_friendships, :source => :user
-
   # Pending Friendships
   # has_many :pending_friends, -> { where(friendships: { status: "pending"}) }, through: :friendships, source: :friend
 

@@ -17,6 +17,7 @@ app.AcceptChallengeFormView = Backbone.View.extend({
     this.bindSubmit();
   },
   events:{
+    'keyup': 'checkChallengeCharacterCount'
   },
   bindSubmit: function(){
       var scope = this;
@@ -27,9 +28,16 @@ app.AcceptChallengeFormView = Backbone.View.extend({
         console.log(scope.model);
         var newMessage = $(this).find("#challenge-body").val();
         console.log(newMessage);
-        scope.model.set({'message': newMessage});
+        scope.model.set({'message': newMessage, 'status': 'Accepted'});
         scope.model.save();
 
+        app.pagePainter.renderPosts();
+        app.pagePainter.renderPromptForm();
       });
+  },
+  checkChallengeCharacterCount: function(){
+    this.characters = $('textarea#challenge-body').val().length;
+    console.log(this.characters);
+    $('#current-challenge-word-count').html( this.characters );
   },
 });

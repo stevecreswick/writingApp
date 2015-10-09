@@ -15,6 +15,9 @@
  *= require bootstrap.min
  *= require bootstrap-slider
  *= require jquery-ui.min
+ *= require quill.base
+ *= require quill.advanced
+ *= require quill.snow
 
  */
  body {
@@ -45,12 +48,9 @@
   color: red;
 }
 
-form#create-post {
-  }
 
-.submit-new-post {
-  float: right;
-}
+
+
 
 .new-post-box {
   background-color: floralwhite;
@@ -59,7 +59,6 @@ form#create-post {
   left: 10%;
   width: 37%;
   /*height: 35em;*/
-  height: 65%;
   border: grey 1px solid;
   z-index: 1;
   border-radius: 5px;
@@ -110,9 +109,11 @@ form#create-post {
   color: white;
 }
 
-.navbar-brand{
+.home-page{
   font-family: 'Permanent Marker', cursive;
   color: white;
+  list-style: none;
+  font-size: 3.5em;
 }
 
 
@@ -233,5 +234,26 @@ button:hover, #stop:hover, #reset:hover {
 }
 
 .render-friends:hover{
-  cursor:pointer; 
+  cursor:pointer;
+}
+
+
+form#create-post {
+  height: 10em;
+
+  }
+
+#full-toolbar{
+  background-color: rgb(220,220,220);
+}
+
+.submit-new-post {
+  float: right;
+  margin-top: 1.5em;
+}
+
+.post-body{
+  overflow: auto;
+  background-color: white;
+  border: 1px solid black;
 }

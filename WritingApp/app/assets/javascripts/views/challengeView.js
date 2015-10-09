@@ -14,25 +14,15 @@ app.ChallengeView = Backbone.View.extend({
     var $html = $( html );
     this.$el.append( $html );
   },
-
-// Critique Events
   events:{
-    'click button.remove-challenge': 'removeChallenge',
-    'click button.accept-challenge': 'acceptChallenge'
+    'click button.remove-challenge': 'removeChallenge'
   },
-
   removeChallenge: function(){
     console.log('remove challenge clicked');
     this.model.destroy();
     this.$el.remove();
   },
-  acceptChallenge: function(){
-    console.log('accept challenge clicked');
-    app.acceptChallengePainter = new app.AcceptChallengeFormView({
-      el: $('#left-pane'),
-      model: this.model
-    });
-    console.log(this.model.get('prompt'));
-    app.acceptChallengePainter.render();
-  }
+
+// Critique Events
+
 });

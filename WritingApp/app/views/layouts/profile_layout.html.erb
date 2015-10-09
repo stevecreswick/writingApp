@@ -3,7 +3,9 @@
   <title>Write Away</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
-
+  <link href='https://fonts.googleapis.com/css?family=Permanent+Marker' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="//cdn.quilljs.com/0.19.10/quill.snow.css" />
+  <script src="//cdn.quilljs.com/0.19.10/quill.min.js"></script>
     <!-- Post Template -->
   <script type="text/template" id='post-template'>
     <h3 class="post-header">
@@ -112,12 +114,109 @@
         <h4 id="post-box-word-count"> </h4>
         <form id="create-post">
           <div class="form-group">
-            <br>
-            <textarea class="form-control" id="post-body" rows="10" name="post[message]" placeholder="...post"></textarea>
+            <!-- Create the toolbar container -->
+            <div id="full-toolbar">
+              <!-- Add font size dropdown -->
+              <select class="ql-size">
+                <option value="10px">Small</option>
+                <option value="13px" selected>Normal</option>
+                <option value="18px">Large</option>
+                <option value="32px">Huge</option>
+              </select>
+              <!-- Add a bold button -->
+              <span class="ql-format-group">
+                <span title="Bold" class="ql-format-button ql-bold"></span>
+                <span class="ql-format-separator"></span>
+                <span title="Italic" class="ql-format-button ql-italic"></span>
+                <span class="ql-format-separator"></span>
+                <span title="Underline" class="ql-format-button ql-underline"></span>
+              <select title="Text Color" class="ql-color">
+                <option value="rgb(0, 0, 0)" selected></option>
+                <option value="rgb(230, 0, 0)"></option>
+                <option value="rgb(255, 153, 0)"></option>
+                <option value="rgb(255, 255, 0)"></option>
+                <option value="rgb(0, 138, 0)"></option>
+                <option value="rgb(0, 102, 204)"></option>
+                <option value="rgb(153, 51, 255)"></option>
+                <option value="rgb(255, 255, 255)"></option>
+                <option value="rgb(250, 204, 204)"></option>
+                <option value="rgb(255, 235, 204)"></option>
+                <option value="rgb(255, 255, 204)"></option>
+                <option value="rgb(204, 232, 204)"></option>
+                <option value="rgb(204, 224, 245)"></option>
+                <option value="rgb(235, 214, 255)"></option>
+                <option value="rgb(187, 187, 187)"></option>
+                <option value="rgb(240, 102, 102)"></option>
+                <option value="rgb(255, 194, 102)"></option>
+                <option value="rgb(255, 255, 102)"></option>
+                <option value="rgb(102, 185, 102)"></option>
+                <option value="rgb(102, 163, 224)"></option>
+                <option value="rgb(194, 133, 255)"></option>
+                <option value="rgb(136, 136, 136)"></option>
+                <option value="rgb(161, 0, 0)"></option>
+                <option value="rgb(178, 107, 0)"></option>
+                <option value="rgb(178, 178, 0)"></option>
+                <option value="rgb(0, 97, 0)"></option>
+                <option value="rgb(0, 71, 178)"></option>
+                <option value="rgb(107, 36, 178)"></option>
+                <option value="rgb(68, 68, 68)"></option>
+                <option value="rgb(92, 0, 0)"></option>
+                <option value="rgb(102, 61, 0)"></option>
+                <option value="rgb(102, 102, 0)"></option>
+                <option value="rgb(0, 55, 0)"></option>
+                <option value="rgb(0, 41, 102)"></option>
+                <option value="rgb(61, 20, 102)"></option>
+              </select><span class="ql-format-separator"></span>
+              <select title="Background Color" class="ql-background">
+                <option value="rgb(0, 0, 0)"></option>
+                <option value="rgb(230, 0, 0)"></option>
+                <option value="rgb(255, 153, 0)"></option>
+                <option value="rgb(255, 255, 0)"></option>
+                <option value="rgb(0, 138, 0)"></option>
+                <option value="rgb(0, 102, 204)"></option>
+                <option value="rgb(153, 51, 255)"></option>
+                <option value="rgb(255, 255, 255)" selected></option>
+                <option value="rgb(250, 204, 204)"></option>
+                <option value="rgb(255, 235, 204)"></option>
+                <option value="rgb(255, 255, 204)"></option>
+                <option value="rgb(204, 232, 204)"></option>
+                <option value="rgb(204, 224, 245)"></option>
+                <option value="rgb(235, 214, 255)"></option>
+                <option value="rgb(187, 187, 187)"></option>
+                <option value="rgb(240, 102, 102)"></option>
+                <option value="rgb(255, 194, 102)"></option>
+                <option value="rgb(255, 255, 102)"></option>
+                <option value="rgb(102, 185, 102)"></option>
+                <option value="rgb(102, 163, 224)"></option>
+                <option value="rgb(194, 133, 255)"></option>
+                <option value="rgb(136, 136, 136)"></option>
+                <option value="rgb(161, 0, 0)"></option>
+                <option value="rgb(178, 107, 0)"></option>
+                <option value="rgb(178, 178, 0)"></option>
+                <option value="rgb(0, 97, 0)"></option>
+                <option value="rgb(0, 71, 178)"></option>
+                <option value="rgb(107, 36, 178)"></option>
+                <option value="rgb(68, 68, 68)"></option>
+                <option value="rgb(92, 0, 0)"></option>
+                <option value="rgb(102, 61, 0)"></option>
+                <option value="rgb(102, 102, 0)"></option>
+                <option value="rgb(0, 55, 0)"></option>
+                <option value="rgb(0, 41, 102)"></option>
+                <option value="rgb(61, 20, 102)"></option>
+              </select><span class="ql-format-separator"></span>
+            </div>
+
+            <!-- Create the editor container -->
+            <div id="full-editor" class="post-body">
+            </div>
+            <!-- <textarea class="form-control" id="post-body" rows="10" name="post[message]" placeholder="...post"></textarea> -->
           </div>
-            <input type="submit" value="Post" class="btn btn-danger submit-new-post">
+          <input type="submit" value="Post" class="btn btn-danger submit-new-post">
+
         </form>
+
       </div>
+
     </script>
 
     <script type="text/template" id="friend-view-template">
@@ -162,13 +261,13 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/">Write Away</a>
+          <li class="home-page">Write Away</li>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#"><%= @user.username %></a></li>
+            <li id="username"><%= @user.username %></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
               <ul class="dropdown-menu">
@@ -243,11 +342,28 @@
       <div class="challenge-message">
           <%%= prompt %>
           <%%= word_count %>
-          <button type="button" class='accept-challenge btn btn-info'>Accept</button>
-        <button type="button" class='remove-challenge btn btn-danger'>
-          X
-        </button>
+          <%%= status %>
+        <button type="button" class='remove-challenge btn btn-danger'>Cancel</button>
 
+      </div>
+    </script>
+
+    <script type="text/template" id="received-challenge-template">
+      <div class="challenge-message">
+          <%%= prompt %>
+          <%%= word_count %>
+          <button type="button" class='accept-challenge btn btn-info'>Accept</button>
+        <button type="button" class='remove-challenge btn btn-danger'>Deny </button>
+
+      </div>
+    </script>
+
+    <script type="text/template" id="completed-challenge-template">
+      <div class="challenge-message">
+          <%%= prompt %> <br>
+          <%%= word_count %><br>
+          <%%= status %><br>
+          <%%= message %><br>
       </div>
     </script>
 
@@ -263,6 +379,9 @@
         <div id="challenge-type"></div>
         <div id="challenge-container"></div>
         <div id="challenge-word-count"></div>
+        <div id="current-challenge-word-count">
+
+        </div>
 
             <form id="challenge-accept-form">
 
@@ -322,7 +441,7 @@
     <%= yield %>
 
   </div>
-
   <%= javascript_include_tag 'users', 'data-turbolinks-track' => true %>
+
 </body>
 </html>

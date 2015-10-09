@@ -20,11 +20,12 @@ app.PageView = Backbone.View.extend({
     'click li.show-friends': 'showFriends',
     'click li.add-friends': 'addFriends',
     'click li.show-followers': 'showFollowers',
-    'click li.render-friends': 'renderFriendsPage'
+    'click li.render-friends': 'renderFriendsPage',
+    'click li.home-page': 'renderMain'
   },
   showFriends: function(){
     console.log('show friends clicked');
-    // $('#left-pane').empty();
+
     app.friends = new app.FriendCollection();
     app.friendPainter = new app.FriendListView({
       collection: app.friends,
@@ -67,13 +68,28 @@ app.PageView = Backbone.View.extend({
 
     app.promptFormPainter.render();
     app.promptFormPainter.bindSlider();
-
   },
   renderFriendsPage: function(){
     this.$('#left-pane').empty();
     this.showFriends();
     this.showFollowers();
-    this.addFriends();
+    this.renderReceivedChallenges();
+    // this.addFriends();
+  },
+  renderReceivedChallenges: function(){
+    var receivedChallenges = new app.ReceivedChallengeCollection();
+    console.log(receivedChallenges);
+    var receivedChallengesPainter = new app.ChallengeListView({
+      collection: receivedChallenges,
+      el: $('#right-pane')
+    });
+
+    receivedChallenges.fetch();
+  },
+  renderMain: function(){
+    this.render();
+    this.renderPromptForm();
+    this.renderPosts();
   }
 
 });
