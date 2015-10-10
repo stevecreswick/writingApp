@@ -43,6 +43,7 @@ Rails.application.routes.draw do
     put '/friendships/:id/challenges/:challenge_id' => 'challenges#update'
 
     get '/challenges/received' => 'challenges#received'
+    put '/friendships/:id/challenges/:challenge_id' => 'challenges#update'
 
 
   end

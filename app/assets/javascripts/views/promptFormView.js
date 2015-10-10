@@ -27,32 +27,49 @@ app.promptFormView = Backbone.View.extend({
         el: $('#prompt-container')
       });
 
-      writingPrompts.fetch();
+      writingPrompts.fetch({async:false});
     },
     renderWritingForm: function(){
+      console.log('rendering');
       var newPrompt = this.createPrompt();
+      console.log(newPrompt);
       this.$el.empty();
       var template = _.template( $('#create-post-template').html() );
       var html = template();
       var $html = $( html );
       this.$el.append( $html );
+      this.$("h5#post-box-prompt").html();
+      this.$("h4#post-box-word-count").html();
       this.$("h5#post-box-prompt").html(newPrompt.prompt);
       this.$("h4#post-box-word-count").html(newPrompt.wordCount);
 
-      //
-      // var editor = new Quill('#editor');
-      // editor.addModule('toolbar', { container: '#toolbar' });
-
       this.renderEditor();
       this.bindWritingFormSubmit(newPrompt.prompt, newPrompt.wordCount, newPrompt.type);
+      this.checkCharacterCount();
+
     },
     bindWritingFormSubmit: function(prompt, wordCount, type){
-      console.log(prompt + " " + wordCount + " " + type);
-      this.checkCharacterCount();
+      var scope = this;
       $('form#create-post').on('submit', function(e){
         e.preventDefault();
-        var newMessage = $(this).find("#post-body").val();
-        app.posts.create({message: newMessage, prompt: prompt, word_count: wordCount, prompt_type: type},{wait:true});
+
+        var newMessage = scope.$('#post-editor').first().eq(0).html();
+        var message = scope.$('#post-editor').find('.ql-editor').text();
+        var messageLength = message.length;
+
+        console.log('word count ' + messageLength);
+
+        console.log(newMessage);
+        // If the message is equal to or longer than the chosen word count -> Submit The post
+        if (messageLength >= wordCount) {
+          console.log('longer than word count');
+          app.posts.create({message: newMessage, prompt: prompt, word_count: wordCount, prompt_type: type},{wait:true});
+        } else {
+          console.log('not longer than wc');
+        }
+
+        // Still need to re render page or clear form
+        // app.pagePainter.renderPromptForm();
       });
     },
     createPrompt: function(){
@@ -61,12 +78,16 @@ app.promptFormView = Backbone.View.extend({
         wordCount: $('#post-word-count').val(),
         type: $('#choose-type').val()
       }
+      console.log('creating prompt');
       return newPrompt;
     },
     checkCharacterCount: function(){
-      $('textarea#post-body').on('keyup', function(){
-        this.characters = $('.post-body').val().length;
-        $('.character-count').html( this.characters );
+      this.characters = 0;
+      $('#post-editor').on('keyup', function(){
+        this.characters = $('#post-editor').find('.ql-editor').text();
+        console.log( this.characters.length );
+        // this.characters = $('#post-editor').text().length;
+        $('.character-count').html( this.characters.length );
       });
     },
     bindSlider: function(){
@@ -85,13 +106,13 @@ app.promptFormView = Backbone.View.extend({
 
     },
     renderEditor: function(){
-      var fullEditor = new Quill('#full-editor', {
+      var fullEditor = new Quill('#post-editor', {
         modules: {
             'toolbar': { container: '#full-toolbar' },
             'link-tooltip': true
         },
         theme: 'snow'
       });
-
     }
+
 });

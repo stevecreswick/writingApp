@@ -92,7 +92,10 @@ app.PostView = Backbone.View.extend({
       this.renderCritiqueFormContainer();
       var postId = parseInt( this.model.get('id') );
       this.fetchCritiques();
+
+      this.renderEditor();
       this.bindCritiqueForm(postId);
+
     },
     renderCritiqueFormContainer: function(){
       var formContainer = $('<div>').addClass('critique-form-container');
@@ -102,12 +105,22 @@ app.PostView = Backbone.View.extend({
       this.$el.append( formContainer );
     },
     bindCritiqueForm: function(modelId){
+      var scope= this;
       $('form#create-critique').on('submit', function(e){
         e.preventDefault();
 
-        var newMessage = $(this).find("#critique-message").val();
+        var newMessage = scope.$('#critique-editor').first().eq(0).html();
 
         app.posts.get(modelId).critiques.create({message: newMessage});
+      });
+    },
+    renderEditor: function(){
+      var fullEditor = new Quill('#critique-editor', {
+        modules: {
+            'toolbar': { container: '#full-toolbar' },
+            'link-tooltip': true
+        },
+        theme: 'snow'
       });
     }
 

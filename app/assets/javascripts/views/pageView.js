@@ -38,16 +38,17 @@ app.PageView = Backbone.View.extend({
     app.users = new app.UserCollection();
     app.userPainter = new app.UserListView({
       collection: app.users,
-      el: $('#right-pane')
+      el: $('#left-pane')
     });
 
     app.users.fetch();
+    this.showFollowers();
   },
   showFollowers: function(){
     app.followers = new app.FollowerCollection();
     app.followerPainter = new app.FollowerListView({
       collection: app.followers,
-      el: $('#followers-list')
+      el: $('#right-pane')
     });
 
     app.followers.fetch();
@@ -65,7 +66,7 @@ app.PageView = Backbone.View.extend({
     app.promptFormPainter = new app.promptFormView({
       el: $('#left-pane')
     });
-
+    this.$('#left-pane').empty();
     app.promptFormPainter.render();
     app.promptFormPainter.bindSlider();
   },
@@ -79,7 +80,7 @@ app.PageView = Backbone.View.extend({
   renderReceivedChallenges: function(){
     var receivedChallenges = new app.ReceivedChallengeCollection();
     console.log(receivedChallenges);
-    var receivedChallengesPainter = new app.ChallengeListView({
+    var receivedChallengesPainter = new app.ReceivedChallengeListView({
       collection: receivedChallenges,
       el: $('#right-pane')
     });

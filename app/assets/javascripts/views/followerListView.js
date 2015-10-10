@@ -12,7 +12,7 @@ app.FollowerListView = Backbone.View.extend({
       var followers = this.collection.models;
       var view;
         for (var i = 0; i < followers.length; i++) {
-          view = new app.FollowerView({model: followers[i]});
+          view = new app.UserView({model: followers[i]});
           view.render();
           this.$el.append( view.$el );
         }

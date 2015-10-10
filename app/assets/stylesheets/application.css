@@ -257,3 +257,13 @@ form#create-post {
   background-color: white;
   border: 1px solid black;
 }
+
+form#challenge-accept-form {
+  height: 10em;
+  }
+
+.challenge-body{
+  overflow: auto;
+  background-color: white;
+  border: 1px solid black;
+}

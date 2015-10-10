@@ -23,7 +23,6 @@ app.ReceivedChallengeView = Backbone.View.extend({
     this.$el.remove();
   },
   acceptChallenge: function(){
-    console.log('accept challenge clicked');
     app.acceptChallengePainter = new app.AcceptChallengeFormView({
       el: $('#left-pane'),
       model: this.model
@@ -31,4 +30,5 @@ app.ReceivedChallengeView = Backbone.View.extend({
     console.log(this.model.get('prompt'));
     app.acceptChallengePainter.render();
   }
+
 });
