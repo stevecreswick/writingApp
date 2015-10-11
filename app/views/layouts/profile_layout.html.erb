@@ -12,25 +12,17 @@
 
     <!-- Post Template -->
   <script type="text/template" id='post-template'>
-    <div class="post-header">
-        <!-- username rendered here -->
+    <div class="post-prompt-type">
+      <strong><%%= prompt_type %></strong>  <button type="button" class='remove-post btn btn-danger'>X</button>
+      <%%= prompt %> | <%%= word_count %> characters
     </div>
-    <button type="button" class='remove-post btn btn-info'>
-      Remove
-    </button>
       <div class="post-box">
-        <p>
-          Prompt Type: <%%= prompt_type %>
-        </p>
-        <p>
-          Prompt: <%%= prompt %>
-        </p>
-        <p>
-          Word Count: <%%= word_count %>
-        </p>
         <p class="posted-message">
-          Post:  <%%= message %>
+          <%%= message %>
         </p>
+      </div>
+      <div class="post-author">
+          <!-- username rendered here -->
       </div>
     <button type="button" class='make-critique btn btn-info'>
       Make Critique
@@ -38,6 +30,7 @@
     <button type="button" class='render-critiques btn btn-success'>
       Show Critiques
     </button>
+
   </script>
 
 
@@ -156,7 +149,7 @@
     <!-- Render Prompt Form -->
     <script type="text/template" id="prompt-form-template">
       <div class="new-post-box">
-        <h1 class='post-header'>Write Now...</h1>
+        <h1 class='post-header'>Write</h1>
 
         <!-- <div id="stopwatch">0:0:0</div>
             <div id="controls">
@@ -169,7 +162,7 @@
           Render a Prompt to start!
         </div>
             <form>
-              <label for="choose-type">Choose Type</label>
+              <label for="choose-type">Choose Prompt Type</label>
               <select class="form-control input-lg" id="choose-type">
                   <option>One Word</option>
                   <option>2</option>
@@ -178,10 +171,12 @@
                   <option>5</option>
               </select>
                 <input id="post-word-count" type="hidden" name=post[word_count] value="25"/>
-                <div id="slider-word-count"></div>
                 <div id="slider-word-count-display">
-                  <label>Write <span id="word-count">25</span> words</label>
+                  <label>Write <span id="word-count">25</span> characters</label>
                 </div>
+                <div id="slider-word-count">
+                </div>
+
             </form>
             <div class="post-button-container">
               <button class="render-prompt btn btn-primary btn-lg btn-block">Render Prompt</button>
@@ -328,12 +323,13 @@
 
 
     <script type="text/template" id="user-view-template">
-      <h3><%%= username %></h3>
-      <form class="" action="index.html" method="post">
+      <h3 class="user-name-header"><%%= username %></h3>
+      <form>
+        <button type="button" class="btn btn-danger add-friend">Add Friend</button>
         <input type="hidden" name="friendship[friend_id]" value="<%%= id %>" class="friend-id-holder">
         <input type="hidden" name="friendship[user_id]" value="<%= @user.id %>" class="user-id-holder">
       </form>
-      <button type="button" class="btn btn-danger add-friend">Add Friend</button>
+
     </script>
 
     <script type="text/template" id="friend-button-template">
@@ -385,8 +381,11 @@
 
       </div>
         <div class="col-xs-6 ">
+          <div class="post-list-controller">
+          </div>
           <div id="right-pane">
             <div id="post-list">
+
 
             </div>
           </div>
@@ -444,8 +443,9 @@
 
     <script type="text/template" id="received-challenge-template">
       <div class="challenge-message">
-          <%%= prompt %>
-          <%%= word_count %>
+          <%%= prompt_type %>
+          <br>
+          <%%= prompt %>|<%%= word_count %>
           <button type="button" class='accept-challenge btn btn-info'>Accept</button>
         <button type="button" class='remove-challenge btn btn-danger'>Deny </button>
 
@@ -453,10 +453,11 @@
     </script>
 
     <script type="text/template" id="completed-challenge-template">
-      <div class="challenge-message">
-          <%%= prompt %> <br>
-          <%%= word_count %><br>
-          <%%= status %><br>
+      <div class="post-prompt-type">
+        <strong><%%= prompt_type %></strong>
+        <%%= prompt %> | <%%= word_count %> characters
+      </div>
+      <div class="completed-challenge-message">
           <%%= message %><br>
       </div>
     </script>

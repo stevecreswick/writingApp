@@ -57,9 +57,9 @@
   position: fixed;
   /*border: grey 1px solid;*/
   z-index: 1;
-  border-radius: 5px;
   margin-top: 3em;
-  height: 30em;
+  margin-left: 2%;
+  height: 100%;
   width: 45%;
   background-color: white;
   font-family: 'Oswald', sans-serif;
@@ -69,10 +69,27 @@
 
 }
 
+.post-author{
+  font-family: 'Poiret One', cursive;
+  color: black;
+  margin-bottom: 1em;
+  width: 50%;
+  display: inline-block;
+  /*float: right;
+  position: absolute;
+  bottom: 0;
+  right:0;
+  width: 50%;*/
+}
+
+
 .post-header{
   font-family: 'Poiret One', cursive;
   color: black;
   margin-bottom: 1em;
+  display: inline-block;
+  text-align: center;
+  width: 100%;
 }
 
 #prompt-container{
@@ -93,6 +110,8 @@ button.render-prompt{
 
 #slider-word-count-display{
   text-align: center;
+  margin-top: 1em;
+  margin-bottom: -1em;
 }
 
 button.start{
@@ -147,6 +166,12 @@ form{
 .post-author{
   float: right;
   bottom: 0;
+  text-align: right;
+  font-size: 1.3em;
+}
+
+.post-prompt-type {
+
 }
 
 .post-id-holder{
@@ -167,7 +192,7 @@ form{
   /*font-family: 'Permanent Marker', cursive;*/
   color: black;
   list-style: none;
-  font-size: 5em;
+  font-size: 4.5em;
   text-decoration: bold;
 }
 
@@ -178,10 +203,10 @@ form{
   padding-left: 2em;
   padding-right: 2em;
   padding-top: 1em;
-  padding-bottom: 1em;
   border-radius: 5px;
   border: 1px solid grey;
   margin-top: 1em;
+  margin-bottom: 1em;
   margin-right: 5%;
   height: 25em;
   overflow: auto;
@@ -199,8 +224,9 @@ form{
 
   .post-box {
     padding: 1em;
-    margin-bottom: 1em;
-    height: 10em;
+    margin-top: 1em;
+    margin-bottom: 2em;
+    height: 14em;
     overflow: auto;
   }
 
@@ -244,6 +270,7 @@ form{
 
 #right-pane{
   height:100%;
+  width: 100%;
   padding-top: 4em;
   /*position: fixed;*/
 }
@@ -333,5 +360,76 @@ form#challenge-accept-form {
 }
 
 .container-fluid {
+  background: url('binding_dark.png');
+  overflow: auto;
+}
 
+/*Followers List View*/
+.user-name-header{
+  display: inline-block;
+}
+
+div.user-view{
+  border: 1px grey solid;
+  margin-bottom: 1em;
+  padding: 1em;
+  background: white;
+}
+.add-friend{
+  display: inline-block;
+  float: right;
+  margin-right: 10%;
+  margin-top: -2em;
+}
+
+div.friend-view{
+  border: 1px grey solid;
+  background: white;
+  margin-bottom: 1em;
+  padding: 1em;
+}
+
+.completed-challenge-view {
+  background-color: white;
+  padding-left: 2em;
+  padding-right: 2em;
+  padding-top: 1em;
+  border-radius: 5px;
+  border: 1px solid grey;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  margin-right: 5%;
+  height: 10em;
+}
+
+.completed-challenge-message{
+  margin-top: 2em;
+  height: 5em;
+  overflow: auto;
+}
+
+.challenge-message{
+  margin-top: 1em;
+  overflow: auto;
+}
+
+.received-challenge{
+  border: 1px grey solid;
+  background: white;
+  margin-bottom: 1em;
+  margin-top: 1em;
+  padding: 1em;
+  margin-right: 5%;
+}
+
+.accept-challenge{
+  margin-left: 45%;
+}
+
+.right-pane-header{
+  margin-top: 0.7em;
+  margin-bottom: 1em;
+  text-align: center;
+  color: gold;
+  font-family: 'Poiret One', cursive;
 }

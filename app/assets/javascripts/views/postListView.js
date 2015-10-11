@@ -7,7 +7,8 @@ app.PostListView = Backbone.View.extend({
   },
   render: function(){
     this.$el.empty();
-
+    var $challengesHeader = $('<h1>').addClass('right-pane-header').text('Read');
+    this.$el.append($challengesHeader);
       var posts = this.collection.models;
       var view;
         for (var i = 0; i < posts.length; i++) {

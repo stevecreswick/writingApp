@@ -41,9 +41,9 @@ app.PostView = Backbone.View.extend({
     renderWithUserName: function(){
       this.$el.empty();
       this.render();
-      var header = $(this.el).find("h3");
+      var header = $(this.el).find("div.post-author");
       var username = this.model.get('username');
-      this.$("h3.post-header").html(username);
+      this.$("div.post-author").html("Author: " + username);
     },
 
     // Manipulate Post CSS

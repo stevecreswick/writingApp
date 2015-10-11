@@ -2,7 +2,7 @@ var app = app || {};
 
 app.CompletedChallengeView = Backbone.View.extend({
   tagName: 'div',
-  className: 'challenge-view',
+  className: 'completed-challenge-view',
   template: _.template( $('#completed-challenge-template').html() ),
 
   initialize: function(){

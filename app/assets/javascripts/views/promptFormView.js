@@ -108,8 +108,10 @@ app.promptFormView = Backbone.View.extend({
            slide: function( event, ui ) {
                 $( "#word-count" ).html( ui.value );
                 $("#post-word-count").val(ui.value);
-           }
+           },
+
       });
+      
     },
     stopWatch: function(){
 
