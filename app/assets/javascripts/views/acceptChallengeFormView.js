@@ -12,8 +12,10 @@ app.AcceptChallengeFormView = Backbone.View.extend({
     var html = this.template();
     var $html = $( html );
     this.$el.append( $html );
-    var wordCount = this.model.get('prompt');
-    var prompt = this.model.get('word_count');
+    var wordCount = this.model.get('word_count');
+    var prompt = this.model.get('prompt');
+    var promptType = this.model.get('prompt_type');
+    console.log(promptType);
     this.$('#challenge-container').html(prompt);
     this.$('#challenge-word-count').html(wordCount)
     console.log('word count in render ' + wordCount);
@@ -35,18 +37,19 @@ app.AcceptChallengeFormView = Backbone.View.extend({
         var messageLength = message.length;
 
         console.log('message length ' + messageLength);
-
+        console.log('word count '+ wordCount);
         if (messageLength >= wordCount) {
           console.log('longer than word count');
-          app.posts.create({message: newMessage, prompt: prompt, word_count: wordCount, prompt_type: type},{wait:true});
+          scope.model.set({'message': newMessage, 'status': 'Accepted'});
+          scope.model.save();
         } else {
           console.log('not longer than wc');
+          scope.$('#challenge-error').text('not long enough');
+
         }
 
 
 
-        scope.model.set({'message': newMessage, 'status': 'Accepted'});
-        scope.model.save();
 
         // app.pagePainter.renderPosts();
         // app.pagePainter.renderPromptForm();

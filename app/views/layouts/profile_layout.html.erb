@@ -4,13 +4,17 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
   <link href='https://fonts.googleapis.com/css?family=Permanent+Marker' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Damion' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="//cdn.quilljs.com/0.19.10/quill.snow.css" />
   <script src="//cdn.quilljs.com/0.19.10/quill.min.js"></script>
+
     <!-- Post Template -->
   <script type="text/template" id='post-template'>
-    <h3 class="post-header">
+    <div class="post-header">
         <!-- username rendered here -->
-    </h3>
+    </div>
     <button type="button" class='remove-post btn btn-info'>
       Remove
     </button>
@@ -152,6 +156,7 @@
     <!-- Render Prompt Form -->
     <script type="text/template" id="prompt-form-template">
       <div class="new-post-box">
+        <h1 class='post-header'>Write Now...</h1>
 
         <!-- <div id="stopwatch">0:0:0</div>
             <div id="controls">
@@ -161,23 +166,28 @@
             </div> -->
 
         <div id="prompt-container">
+          Render a Prompt to start!
         </div>
-            <label for="choose-type">Choose Type</label>
-            <select class="form-control input-lg" id="choose-type">
-                <option>One Word</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-            </select>
-            <form class="" action="index.html" method="post">
-              Word Count: <p id="word-count"></p>
-                <input id="post-word-count" type="hidden" name=post[word_count] value="50"/>
+            <form>
+              <label for="choose-type">Choose Type</label>
+              <select class="form-control input-lg" id="choose-type">
+                  <option>One Word</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+              </select>
+                <input id="post-word-count" type="hidden" name=post[word_count] value="25"/>
                 <div id="slider-word-count"></div>
+                <div id="slider-word-count-display">
+                  <label>Write <span id="word-count">25</span> words</label>
+                </div>
             </form>
+            <div class="post-button-container">
+              <button class="render-prompt btn btn-primary btn-lg btn-block">Render Prompt</button>
+            </div>
 
-        <button class="render-prompt btn btn-primary btn-lg btn-block">Render Prompt</button>
-        <button class="btn btn-danger start">Start</button>
+
 
       </div>
 
@@ -186,7 +196,8 @@
     <!-- Show the Prompt -->
     <script type="text/template" id="writing-prompt-template">
         <h4>
-          Use the word: <span class="prompt-text">
+          Use the word... <br>
+          <span class="prompt-text">
             <%%= prompt %>
           </span>
         </h4>
@@ -199,6 +210,7 @@
         Character Count: <p class="character-count"></p>
         <h5 id="post-box-prompt"></h5>
         <h4 id="post-box-word-count"> </h4>
+        <p id="post-error"></p>
         <form id="create-post">
           <div class="form-group">
             <!-- Create the toolbar container -->
@@ -347,9 +359,9 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav navbar-right">
-            <li id="username"><%= @user.username %></li>
+            <li id="username"></li>
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= @user.username %> <span class="caret"></span></a>
               <ul class="dropdown-menu">
                 <li class="add-friends"><a>Add Friends</a></li>
                 <li class="render-friends"><a>Challenges</a></li>
@@ -399,16 +411,16 @@
     </div>
         <label for="choose-type">Choose Type</label>
         <select class="form-control input-lg" id="choose-type">
-            <option>One Word</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
+            <option data-id="1">One Word</option>
+            <option data-id="2">What If</option>
+            <option data-id="3">3</option>
+            <option data-id="4">4</option>
+            <option data-id="5">5</option>
         </select>
         <button class="render-challenge btn btn-primary btn-lg btn-block">Render Challenge</button>
         <form id="create-challenge">
           Word Count: <p id="word-count"></p>
-            <input id="challenge-word-count" type="hidden" name=challenge[word_count] value="50"/>
+            <input id="challenge-word-count" type="hidden" name=challenge[word_count] value="25"/>
             <div id="slider-challenge-word-count"></div>
 
     <!-- <button class="btn btn-danger send-challenge">Send Challenge</button> -->
@@ -424,6 +436,7 @@
           <%%= prompt %>
           <%%= word_count %>
           <%%= status %>
+          <%%= message %>
         <button type="button" class='remove-challenge btn btn-danger'>Cancel</button>
 
       </div>
@@ -460,9 +473,9 @@
         <div id="challenge-type"></div>
         <div id="challenge-container"></div>
         <div id="challenge-word-count"></div>
-        <div id="current-challenge-word-count">
+        <div id="current-challenge-word-count">        </div>
 
-        </div>
+        <p id="challenge-error"></p>
 
 
             <form id="challenge-accept-form">

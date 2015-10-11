@@ -53,16 +53,68 @@
 
 
 .new-post-box {
-  background-color: floralwhite;
   padding: 3em;
   position: fixed;
-  left: 10%;
-  width: 37%;
-  /*height: 35em;*/
-  border: grey 1px solid;
+  /*border: grey 1px solid;*/
   z-index: 1;
   border-radius: 5px;
-  margin-top: 5em;
+  margin-top: 3em;
+  height: 30em;
+  width: 45%;
+  background-color: white;
+  font-family: 'Oswald', sans-serif;
+}
+
+.post-button-container{
+
+}
+
+.post-header{
+  font-family: 'Poiret One', cursive;
+  color: black;
+  margin-bottom: 1em;
+}
+
+#prompt-container{
+  background-color: white;
+  border: 1px grey solid;
+  color: black;
+  text-align: center;
+  padding: 1.3em;
+  font-size: 1.1em;
+  margin-bottom: 1em;
+}
+
+button.render-prompt{
+  margin-top: 1em;
+  margin-bottom: 2em;
+  display: inline-block;
+}
+
+#slider-word-count-display{
+  text-align: center;
+}
+
+button.start{
+  margin-top: 3em;
+  margin-bottom: 2em;
+  margin-left: 2em;
+  width: 40%;
+  display: inline-block;
+}
+
+label{
+  color:black;
+}
+
+form{
+  color:black;
+
+}
+
+#slider-word-count{
+  margin-top: 2em;
+  margin-bottom: 1em;
 }
 
 #post-list{
@@ -103,23 +155,26 @@
 
 /* Navbar */
 #header {
-  background-color: black;
+  background: white;
   padding: 2% 0 2% 2%;
   vertical-align: bottom;
-  color: white;
+  color: black;
 }
 
 .home-page{
-  font-family: 'Permanent Marker', cursive;
-  color: white;
+  font-family: 'Damion', cursive;
+
+  /*font-family: 'Permanent Marker', cursive;*/
+  color: black;
   list-style: none;
-  font-size: 3.5em;
+  font-size: 5em;
+  text-decoration: bold;
 }
 
 
 /* Post */
 .post {
-  background-color: floralwhite;
+  background-color: white;
   padding-left: 2em;
   padding-right: 2em;
   padding-top: 1em;
@@ -133,6 +188,10 @@
 }
 
   /* Post Components */
+  #post-error {
+    color: red;
+  }
+
   .post-header {
     height: 1em;
     margin-top: -0.1em;
@@ -180,6 +239,7 @@
 
 #left-pane{
   height: 100%;
+  width: 100%;
 }
 
 #right-pane{
@@ -266,4 +326,12 @@ form#challenge-accept-form {
   overflow: auto;
   background-color: white;
   border: 1px solid black;
+}
+
+#challenge-error {
+  color: red;
+}
+
+.container-fluid {
+
 }

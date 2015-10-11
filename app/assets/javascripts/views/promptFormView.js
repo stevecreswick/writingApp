@@ -4,6 +4,7 @@ app.promptFormView = Backbone.View.extend({
   tagName: 'div',
   className: 'prompt-form',
   template: _.template( $('#prompt-form-template').html() ),
+  wordCount: 0,
   initialize: function(){
     this.bindSlider();
   },
@@ -28,6 +29,13 @@ app.promptFormView = Backbone.View.extend({
       });
 
       writingPrompts.fetch({async:false});
+      this.$(".render-prompt").css({'width': '40%'}).html("Try Another");
+      this.$('.start').remove();
+
+      var button = $('<button>').addClass('btn btn-primary btn-lg btn-block btn-success start').html('Start');
+
+      this.$('.post-button-container').append(button)
+      // this.$el.append(button);
     },
     renderWritingForm: function(){
       console.log('rendering');
@@ -65,6 +73,7 @@ app.promptFormView = Backbone.View.extend({
           console.log('longer than word count');
           app.posts.create({message: newMessage, prompt: prompt, word_count: wordCount, prompt_type: type},{wait:true});
         } else {
+          scope.$('#post-error').text('not long enough')
           console.log('not longer than wc');
         }
 
@@ -93,9 +102,9 @@ app.promptFormView = Backbone.View.extend({
     bindSlider: function(){
       $( "#slider-word-count" ).slider({
            range: "min",
-           min: 50,
+           min: 25,
            max: 500,
-           step: 50,
+           step: 25,
            slide: function( event, ui ) {
                 $( "#word-count" ).html( ui.value );
                 $("#post-word-count").val(ui.value);
