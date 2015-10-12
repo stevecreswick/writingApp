@@ -20,15 +20,28 @@ app.promptFormView = Backbone.View.extend({
   },
   getPrompt: function(){
       console.log('prompt render');
-
+      var promptType = $('#choose-type').val();
       var writingPrompts = new app.WritingPromptCollection();
-
       var promptPainter = new app.WritingPromptListView({
         collection: writingPrompts,
         el: $('#prompt-container')
       });
 
+      if (promptType === 'One Word'){
+        writingPrompts.url = "/api/writing_prompts/one_word"
+      } else if (promptType === 'What If'){
+        writingPrompts.url = "/api/writing_prompts/what_if"
+      } else if (promptType === 'First Sentence'){
+        writingPrompts.url = "/api/writing_prompts/first_sentence"
+      } else {
+        console.log('no url for this type : ' + promptType);
+      }
+
+
+
       writingPrompts.fetch({async:false});
+
+      // Resize Prompt Button and Add Start
       this.$(".render-prompt").css({'width': '40%'}).html("Try Another");
       this.$('.start').remove();
 
@@ -46,17 +59,18 @@ app.promptFormView = Backbone.View.extend({
       var html = template();
       var $html = $( html );
       this.$el.append( $html );
-      this.$("h5#post-box-prompt").html();
+      this.$("h4#post-genre").html("Genre: " + newPrompt.genre);
       this.$("h4#post-box-word-count").html();
       this.$("h5#post-box-prompt").html(newPrompt.prompt);
+      this.$("h5#post-box-type").html("Type: " + newPrompt.type);
       this.$("h4#post-box-word-count").html(newPrompt.wordCount);
 
       this.renderEditor();
-      this.bindWritingFormSubmit(newPrompt.prompt, newPrompt.wordCount, newPrompt.type);
+      this.bindWritingFormSubmit(newPrompt);
       this.checkCharacterCount();
 
     },
-    bindWritingFormSubmit: function(prompt, wordCount, type){
+    bindWritingFormSubmit: function(newPrompt){
       var scope = this;
       $('form#create-post').on('submit', function(e){
         e.preventDefault();
@@ -69,9 +83,9 @@ app.promptFormView = Backbone.View.extend({
 
         console.log(newMessage);
         // If the message is equal to or longer than the chosen word count -> Submit The post
-        if (messageLength >= wordCount) {
+        if (messageLength >= newPrompt.wordCount) {
           console.log('longer than word count');
-          app.posts.create({message: newMessage, prompt: prompt, word_count: wordCount, prompt_type: type},{wait:true});
+          app.posts.create({message: newMessage, prompt: newPrompt.prompt, word_count: newPrompt.wordCount, prompt_type: newPrompt.type, model_url: newPrompt.url, genre: newPrompt.genre},{wait:true});
         } else {
           scope.$('#post-error').text('not long enough')
           console.log('not longer than wc');
@@ -85,8 +99,25 @@ app.promptFormView = Backbone.View.extend({
       var newPrompt = {
         prompt:  $('.prompt-text').text(),
         wordCount: $('#post-word-count').val(),
-        type: $('#choose-type').val()
+        type: $('#choose-type').val(),
+        genre: $('#choose-genre').val()
+
       }
+
+      if (newPrompt.type === 'One Word'){
+        console.log('one word');
+        newPrompt.url = 'one_word'
+      } else if (newPrompt.type === 'What If'){
+        console.log('what if');
+        newPrompt.url = 'what_if'
+      } else if (newPrompt.type === 'First Sentence'){
+        console.log('first');
+        newPrompt.url = 'first_sentence'
+      } else {
+        console.log('no url for this type : ' + newPrompt.type);
+      }
+
+      console.log(newPrompt.genre);
       console.log('creating prompt');
       return newPrompt;
     },
@@ -111,7 +142,7 @@ app.promptFormView = Backbone.View.extend({
            },
 
       });
-      
+
     },
     stopWatch: function(){
 

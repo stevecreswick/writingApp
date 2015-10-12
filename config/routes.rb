@@ -30,6 +30,10 @@ Rails.application.routes.draw do
 
     # Writing Prompt API
     get '/writing_prompts' => 'writing_prompts#index'
+    get '/writing_prompts/one_word' => 'writing_prompts#one_word'
+    get '/writing_prompts/what_if' => 'writing_prompts#what_if'
+    get '/writing_prompts/first_sentence' => 'writing_prompts#first_sentence'
+
 
     # Friendships API
     get'/friendships' => 'friendships#index', as: :friends

@@ -30,9 +30,6 @@
   width: 50%;
 }
 
-#prompt-container{
-  height: 6em;
-}
 
 .new-post {
   height: 10em;
@@ -93,13 +90,15 @@
 }
 
 #prompt-container{
-  background-color: white;
   border: 1px grey solid;
   color: black;
   text-align: center;
   padding: 1.3em;
   font-size: 1.1em;
   margin-bottom: 1em;
+  height: 9em;
+  background-color: ghostwhite;
+  overflow: auto;
 }
 
 button.render-prompt{
@@ -181,9 +180,10 @@ form{
 /* Navbar */
 #header {
   background: white;
-  padding: 2% 0 2% 2%;
+  padding: 2% 5% 2% 2%;
   vertical-align: bottom;
   color: black;
+  overflow: visible;
 }
 
 .home-page{
@@ -226,7 +226,7 @@ form{
     padding: 1em;
     margin-top: 1em;
     margin-bottom: 2em;
-    height: 14em;
+    height: 9em;
     overflow: auto;
   }
 
@@ -432,4 +432,28 @@ div.friend-view{
   text-align: center;
   color: gold;
   font-family: 'Poiret One', cursive;
+}
+
+.profile-picture{
+  height: 3em;
+  margin-right: 1em;
+  display: inline-block;
+}
+
+.navbar-username{
+  margin-right: 15%;
+  width: 100%;
+  font-family: 'Poiret One', cursive;
+  font-size: 1.5em;
+}
+
+ul.dropdown-menu{
+  z-index: 10;
+}
+
+.create-post-header{
+  width: 100%;
+  text-align: center;
+  font-family: 'Poiret One', cursive;
+
 }

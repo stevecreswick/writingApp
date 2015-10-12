@@ -13,8 +13,10 @@
     <!-- Post Template -->
   <script type="text/template" id='post-template'>
     <div class="post-prompt-type">
-      <strong><%%= prompt_type %></strong>  <button type="button" class='remove-post btn btn-danger'>X</button>
+      <h5> <%%= genre %> </h5>
+      <strong><%%= prompt_type %></strong>  <button type="button" class='remove-post btn btn-danger'>X</button><br>
       <%%= prompt %> | <%%= word_count %> characters
+      <br>
     </div>
       <div class="post-box">
         <p class="posted-message">
@@ -159,16 +161,25 @@
             </div> -->
 
         <div id="prompt-container">
-          Render a Prompt to start!
+          Render a Writing Prompt to start!
         </div>
             <form>
               <label for="choose-type">Choose Prompt Type</label>
               <select class="form-control input-lg" id="choose-type">
                   <option>One Word</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                  <option>5</option>
+                  <option>What If</option>
+                  <option>First Sentence</option>
+              </select>
+              <label for="choose-type">Choose Genre</label>
+              <select class="form-control input-lg" id="choose-genre">
+                  <option>Fiction</option>
+                  <option>Fantasy</option>
+                  <option>Horror</option>
+                  <option>Thriller</option>
+                  <option>Crime</option>
+                  <option>Romance</option>
+                  <option>Science Fiction</option>
+                  <option>Non-Fiction</option>
               </select>
                 <input id="post-word-count" type="hidden" name=post[word_count] value="25"/>
                 <div id="slider-word-count-display">
@@ -190,22 +201,16 @@
 
     <!-- Show the Prompt -->
     <script type="text/template" id="writing-prompt-template">
-        <h4>
-          Use the word... <br>
-          <span class="prompt-text">
+        <h4 class="prompt-text">
             <%%= prompt %>
-          </span>
         </h4>
     </script>
 
 
     <script type="text/template" id="create-post-template">
       <div class="new-post-box">
-      <h3>New Post</h3>
-        Character Count: <p class="character-count"></p>
-        <h5 id="post-box-prompt"></h5>
-        <h4 id="post-box-word-count"> </h4>
-        <p id="post-error"></p>
+      <h1 class="create-post-header">Write</h3>
+
         <form id="create-post">
           <div class="form-group">
             <!-- Create the toolbar container -->
@@ -301,6 +306,13 @@
           <input type="submit" value="Post" class="btn btn-danger submit-new-post">
 
         </form>
+        <br><br>
+        <h4 id="post-genre"></h4>
+        <h5 id="post-box-type"></h5>
+        <h5 id="post-box-prompt"></h5>
+        <p class="character-count"></p>
+        <h4 id="post-box-word-count"></h4>
+        <p id="post-error"></p>
 
       </div>
 
@@ -323,7 +335,7 @@
 
 
     <script type="text/template" id="user-view-template">
-      <h3 class="user-name-header"><%%= username %></h3>
+      <h3 class="user-name-header"><img src="<%%= image_url %>" class="img-circle profile-picture"</><%%= username %></h3>
       <form>
         <button type="button" class="btn btn-danger add-friend">Add Friend</button>
         <input type="hidden" name="friendship[friend_id]" value="<%%= id %>" class="friend-id-holder">
@@ -357,7 +369,9 @@
           <ul class="nav navbar-nav navbar-right">
             <li id="username"></li>
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= @user.username %> <span class="caret"></span></a>
+              <a href="#" class="dropdown-toggle navbar-username" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                <img src="<%= @user.image_url %>" class="img-circle profile-picture"</>
+                <%= @user.username %> <span class="caret"></span></a>
               <ul class="dropdown-menu">
                 <li class="add-friends"><a>Add Friends</a></li>
                 <li class="render-friends"><a>Challenges</a></li>
