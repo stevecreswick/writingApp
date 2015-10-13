@@ -14,9 +14,21 @@ respond_to :html, :json
     posts = aRposts.map do |aRpost|
       data = aRpost.as_json
       data['username'] = aRpost.user.username
+      data['image_url'] = aRpost.user.image_url
       data
     end
     render json: posts
+  end
+
+  def genre
+  active_record_posts = Post.where({genre: params[:genre]})
+  posts = active_record_posts.map do |aRpost|
+    data = aRpost.as_json
+    data['username'] = aRpost.user.username
+    data['image_url'] = aRpost.user.image_url
+    data
+  end
+  render json: posts
   end
 
   def show

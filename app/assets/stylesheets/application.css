@@ -56,7 +56,7 @@
   z-index: 1;
   margin-top: 3em;
   margin-left: 2%;
-  height: 100%;
+  height: 80%;
   width: 45%;
   background-color: white;
   font-family: 'Oswald', sans-serif;
@@ -429,6 +429,7 @@ div.friend-view{
 .right-pane-header{
   margin-top: 0.7em;
   margin-bottom: 1em;
+  margin-right: 5%;
   text-align: center;
   color: gold;
   font-family: 'Poiret One', cursive;
@@ -456,4 +457,94 @@ ul.dropdown-menu{
   text-align: center;
   font-family: 'Poiret One', cursive;
 
+}
+
+.genre-links{
+  color: gold;
+  /*margin-right:5%;*/
+  text-align: center;
+  font-size: 1.1em;
+  width:100%;
+  margin-left: -2%;
+  background: rgba(0,0,0,0.7);
+}
+
+a.all-sort{
+  color: gold;
+}
+
+a.sort{
+  color: white;
+}
+
+a.sort:hover{
+  cursor: pointer;
+  color: floralwhite;
+}
+
+.all-posts{
+  background: url('binding_dark.png');
+}
+.sci-fi{
+  background-image: url('stardust.png')
+}
+
+.fiction{
+  background-color: orange;
+}
+
+.fantasy{
+  background-color: cornflowerblue;
+}
+
+.horror{
+  background-color: darkred;
+}
+
+.thriller{
+  background-color: silver;
+}
+
+.crime{
+  background-color: grey;
+}
+
+.romance{
+  background-color: pink;
+}
+
+.non-fiction{
+  background-color: brown;
+}
+
+.welcome-header{
+  font-family: 'Damion', cursive;
+  color: black;
+  font-size: 12em;
+  margin-top: -0.5em;
+}
+
+.welcome-sub-header{
+  font-family: 'Poiret One', cursive;
+  color: black;
+  margin-left: 5%;
+  margin-top: -0.7em;
+}
+
+.welcome-info{
+  margin-top: 8em;
+  text-align: center;
+}
+
+.login-row{
+  background: black;
+  text-align: center;
+  margin-top: 1em;
+}
+
+.login-header{
+  color: white;
+}
+
+#welcome-body{
 }

@@ -1,19 +1,67 @@
-<h3>Welcome Tray</h3>
+<h1 class="welcome-header">Write Away</h3>
+  <h3 class="welcome-sub-header">A social network for aspiring writers</h3>
 
-
-<h3>Log In</h3>
-<form class="" action="/sessions" method="post">
-  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-  <input type="text" name="username" placeholder="...enter username">
-  <input type="text" name="password" placeholder="...enter password">
-  <input type="submit">
-</form>
-
-<h3>Register for an Account</h3>
-
-<form class="" action="/users" method="post">
-  <input type="text" name="user[username]" placeholder="...enter username">
-  <input type="text" name="user[password]" placeholder="...enter password">
-  <input type="text" name="user[image_url]" placeholder="...enter image url">
-  <input type="submit">
-</form>
+<div class="row welcome-info">
+  <div class="col-xs-4">
+    <h4>
+      Find Inspiration
+    </h4>
+      <br>
+      <p>
+        Generate writing prompts to practice writing new ideas.
+      </p>
+    </h4>
+  </div>
+  <div class="col-xs-4">
+    <h4>
+      Get Feedback
+    </h4>
+    <br>
+    <p>
+      Receive writing advice from other users.
+    </p>
+  </div>
+  <div class="col-xs-4">
+    <h4>
+      Make Friends
+    </h4>
+    <br>
+    <p>
+      Issue writing challenges to your friends.
+    </p>
+  </div>
+</div>
+<div class="row login-row">
+  <div class="col-xs-6">
+    <h3 class="login-header">Register for an Account</h3>
+    <form class="" action="/users" method="post">
+      <div class="form-group">
+        <input type="text" name="user[username]" placeholder="...enter username">
+      </div>
+      <div class="form-group">
+        <input type="text" name="user[password]" placeholder="...enter password">
+      </div>
+      <div class="form-group">
+        <input type="text" name="user[image_url]" placeholder="...enter image url">
+      </div>
+      <div class="form-group">
+        <input type="submit">
+      </div>
+    </form>
+  </div>
+  <div class="col-xs-6">
+    <h3 class="login-header">Log In</h3>
+    <form class="" action="/sessions" method="post">
+      <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+      <div class="form-group">
+        <input type="text" name="username" placeholder="...enter username">
+      </div>
+      <div class="form-group">
+        <input type="text" name="password" placeholder="...enter password">
+      </div>
+      <div class="form-group">
+        <input type="submit">
+      </div>
+    </form>
+  </div>
+</div>

@@ -17,6 +17,7 @@ Rails.application.routes.draw do
 
     # Post API
     get '/posts' => 'posts#index'
+    get '/posts/sorted/:genre' => 'posts#genre'
     get '/posts/:id' => 'posts#show'
     post '/posts' => 'posts#create'
     delete '/posts/:id' => 'posts#destroy'
