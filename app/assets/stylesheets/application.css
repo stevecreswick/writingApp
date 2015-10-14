@@ -20,6 +20,10 @@
  *= require quill.snow
 
  */
+
+ *{
+   box-sizing: border-box;
+ }
  body {
     padding-top: 7em;
   }
@@ -50,14 +54,14 @@
 
 
 .new-post-box {
-  padding: 3em;
-  position: fixed;
+  padding: 2em;
+  position: relative;
   /*border: grey 1px solid;*/
   z-index: 1;
-  margin-top: 3em;
+  margin-top: 5em;
   margin-left: 2%;
   height: 80%;
-  width: 45%;
+  width: 75%;
   background-color: white;
   font-family: 'Oswald', sans-serif;
 }
@@ -96,7 +100,7 @@
   padding: 1.3em;
   font-size: 1.1em;
   margin-bottom: 1em;
-  height: 9em;
+  height: 6em;
   background-color: ghostwhite;
   overflow: auto;
 }

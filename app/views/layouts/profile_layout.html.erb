@@ -178,23 +178,30 @@
           Render a Writing Prompt to start!
         </div>
             <form>
-              <label for="choose-type">Choose Prompt Type</label>
-              <select class="form-control input-lg" id="choose-type">
-                  <option>One Word</option>
-                  <option>What If</option>
-                  <option>First Sentence</option>
-              </select>
-              <label for="choose-type">Choose Genre</label>
-              <select class="form-control input-lg" id="choose-genre">
-                  <option>Fiction</option>
-                  <option>Fantasy</option>
-                  <option>Horror</option>
-                  <option>Thriller</option>
-                  <option>Crime</option>
-                  <option>Romance</option>
-                  <option>Science-Fiction</option>
-                  <option>Non-Fiction</option>
-              </select>
+              <div class="row">
+                <div class="col-xs-6">
+                  <label for="choose-type">Choose Prompt Type</label>
+                  <select class="form-control input-lg" id="choose-type">
+                      <option>One Word</option>
+                      <option>What If</option>
+                      <option>First Sentence</option>
+                  </select>
+                </div>
+                <div class="col-xs-6">
+                  <label for="choose-type">Choose Genre</label>
+                  <select class="form-control input-lg" id="choose-genre">
+                      <option>Fiction</option>
+                      <option>Fantasy</option>
+                      <option>Horror</option>
+                      <option>Thriller</option>
+                      <option>Crime</option>
+                      <option>Romance</option>
+                      <option>Science-Fiction</option>
+                      <option>Non-Fiction</option>
+                  </select>
+                </div>
+              </div>
+
                 <input id="post-word-count" type="hidden" name=post[word_count] value="25"/>
                 <div id="slider-word-count-display">
                   <label>Write <span id="word-count">25</span> characters</label>
@@ -204,7 +211,7 @@
 
             </form>
             <div class="post-button-container">
-              <button class="render-prompt btn btn-primary btn-lg btn-block">Render Prompt</button>
+              <button class="render-prompt btn btn-primary btn-lg btn-block">Generate Prompt</button>
             </div>
 
 
