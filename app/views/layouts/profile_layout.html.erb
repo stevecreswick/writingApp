@@ -286,28 +286,51 @@
       <!-- Post  -->
     <script type="text/template" id='post-template'>
       <div class="post-prompt-type">
-        <div class="row">
-          <div class="col-xs-2">
-            <h5> <%%= genre %> </h5>
+        <!-- <div class="row">
+          <div class="col-xs-5">
+
           </div>
-          <div class="col-xs-8"></div>
-          <div class="col-xs-2">
+        </div> -->
+        <div class="row">
+          <div class="col-xs-3">
+            <h5> <%%= genre %> </h5>
+            <h5> <%%= created_at %></h5>
+          </div>
+          <div class="col-xs-9">
             <div class="post-author">
                 <!-- username rendered here -->
             </div>
           </div>
 
         </div>
-        <strong><%%= created_at %></strong>
-        <strong><%%= prompt_type %></strong>  <button type="button" class='remove-post btn btn-danger'>X</button><br>
-        <%%= prompt %> | <%%= word_count %> characters
-        <br>
-      </div>
-        <div class="post-box">
-          <p class="posted-message">
-            <%%= message %>
-          </p>
+        <div class="row">
+          <div class="col-xs-12">
+            <strong><%%= prompt_type %></strong>
+          </div>
         </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <%%= prompt %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+             <%%= word_count %> characters
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="post-box">
+              <p class="posted-message">
+                <%%= message %>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <button type="button" class='remove-post btn btn-danger'>X</button>
+      </div>
 
       <button type="button" class='make-critique btn btn-info'>
         Make Critique

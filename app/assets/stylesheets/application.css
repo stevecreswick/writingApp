@@ -250,6 +250,7 @@ ul.dropdown-menu{
     margin-bottom: 2em;
     height: 9em;
     overflow: auto;
+    text-align: left;
   }
 
   .remove-post {
