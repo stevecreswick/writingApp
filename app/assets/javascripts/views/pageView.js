@@ -57,16 +57,16 @@ app.PageView = Backbone.View.extend({
     app.posts = new app.PostCollection();
     app.postPainter = new app.PostListView({
       collection: app.posts,
-      el: $('#right-pane')
+      el: $('#post-list')
     });
 
     app.posts.fetch();
   },
   renderPromptForm: function(){
     app.promptFormPainter = new app.promptFormView({
-      el: $('#left-pane')
+      el: $('#new-post-box')
     });
-    this.$('#left-pane').empty();
+    this.$('#new-post-box').empty();
     app.promptFormPainter.render();
     app.promptFormPainter.bindSlider();
   },

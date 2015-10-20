@@ -15,6 +15,7 @@ respond_to :html, :json
       data = aRpost.as_json
       data['username'] = aRpost.user.username
       data['image_url'] = aRpost.user.image_url
+      data['created_at'] = Date.strptime(aRpost.user.created_at.to_s)
       data
     end
     render json: posts

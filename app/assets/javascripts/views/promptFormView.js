@@ -18,7 +18,8 @@ app.promptFormView = Backbone.View.extend({
     'click button.render-prompt': 'getPrompt',
     'click button.start': 'renderWritingForm'
   },
-  getPrompt: function(){
+  getPrompt: function(e){
+      e.preventDefault(e);
       console.log('prompt render');
       var promptType = $('#choose-type').val();
       var writingPrompts = new app.WritingPromptCollection();
@@ -27,11 +28,11 @@ app.promptFormView = Backbone.View.extend({
         el: $('#prompt-container')
       });
 
-      if (promptType === 'One Word'){
+      if (promptType === 'Use One Word'){
         writingPrompts.url = "/api/writing_prompts/one_word"
-      } else if (promptType === 'What If'){
+      } else if (promptType === 'Answer What If'){
         writingPrompts.url = "/api/writing_prompts/what_if"
-      } else if (promptType === 'First Sentence'){
+      } else if (promptType === 'Classic First Sentence'){
         writingPrompts.url = "/api/writing_prompts/first_sentence"
       } else {
         console.log('no url for this type : ' + promptType);
@@ -42,27 +43,34 @@ app.promptFormView = Backbone.View.extend({
       writingPrompts.fetch({async:false});
 
       // Resize Prompt Button and Add Start
-      this.$(".render-prompt").css({'width': '40%'}).html("Try Another");
+      this.$(".render-prompt").css({'width': '50%'}).html("New Prompt");
       this.$('.start').remove();
 
-      var button = $('<button>').addClass('btn btn-primary btn-lg btn-block btn-success start').html('Start');
+      var button = $('<button>').addClass('btn btn-primary btn-success start').html('Start');
 
       this.$('.post-button-container').append(button)
       // this.$el.append(button);
     },
-    renderWritingForm: function(){
-      console.log('rendering');
+    renderWritingForm: function(e){
+      e.preventDefault();
       var newPrompt = this.createPrompt();
-      console.log(newPrompt);
+      this.$el.css({'height': '75%'})
       this.$el.empty();
       var template = _.template( $('#create-post-template').html() );
       var html = template();
       var $html = $( html );
       this.$el.append( $html );
-      this.$("h4#post-genre").html("Genre: " + newPrompt.genre);
+
+      if (newPrompt.type === "Use One Word"){
+            this.$("h5#post-box-type").html("Write at least " + newPrompt.wordCount + " characters using the word " + "<span style='color:red; font-size: 1.4em'>" + newPrompt.prompt + "</span>");
+      } else if (newPrompt.type === "Answer What If"){
+
+      } else if (newPrompt.type === "Classic First Sentence"){
+
+      }
+      this.$("h4#post-genre").html("New " + newPrompt.genre);
       this.$("h4#post-box-word-count").html();
-      this.$("h5#post-box-prompt").html(newPrompt.prompt);
-      this.$("h5#post-box-type").html("Type: " + newPrompt.type);
+
       this.$("h4#post-box-word-count").html(newPrompt.wordCount);
 
       this.renderEditor();
@@ -74,7 +82,6 @@ app.promptFormView = Backbone.View.extend({
       var scope = this;
       $('form#create-post').on('submit', function(e){
         e.preventDefault();
-
         var newMessage = scope.$('#post-editor').first().eq(0).html();
         var message = scope.$('#post-editor').find('.ql-editor').text();
         var messageLength = message.length;
@@ -86,6 +93,9 @@ app.promptFormView = Backbone.View.extend({
         if (messageLength >= newPrompt.wordCount) {
           console.log('longer than word count');
           app.posts.create({message: newMessage, prompt: newPrompt.prompt, word_count: newPrompt.wordCount, prompt_type: newPrompt.type, model_url: newPrompt.url, genre: newPrompt.genre},{wait:true});
+
+          scope.render();
+          scope.$el.css({'height': 'auto'})
         } else {
           scope.$('#post-error').text('not long enough')
           console.log('not longer than wc');
@@ -94,6 +104,7 @@ app.promptFormView = Backbone.View.extend({
         // Still need to re render page or clear form
         // app.pagePainter.renderPromptForm();
       });
+
     },
     createPrompt: function(){
       var newPrompt = {
@@ -150,8 +161,8 @@ app.promptFormView = Backbone.View.extend({
     renderEditor: function(){
       var fullEditor = new Quill('#post-editor', {
         modules: {
-            'toolbar': { container: '#full-toolbar' },
-            'link-tooltip': true
+            'toolbar': { container: '#post-toolbar' },
+            'link-tooltip': true,
         },
         theme: 'snow'
       });
