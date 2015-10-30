@@ -26,6 +26,9 @@ app.PostView = Backbone.View.extend({
       var currentUser = $('#current_user').val()
       var $deleteButton = $("<button>").addClass("remove-post btn btn-danger").html("X");
       var $makeCritique = $("<button>").addClass("make-critique btn btn-info").html("Make Critique");
+      var $showCritique = $("<button>").addClass("render-critiques btn btn-info").html("Show Critique");
+
+      this.$el.find(".show-critiques-box").append( $showCritique );
 
       // Add delete button for current user
       if (currentUser === poster) {
@@ -40,6 +43,7 @@ app.PostView = Backbone.View.extend({
 // Post Events
   events:{
     'click button.remove-post': 'removePost',
+    'click button.delete-post': 'deletePost',
     'click button.make-critique': 'renderCritiqueForm',
     'click button.close-critique': 'closeCritiqueForm',
     'click button.render-critiques': 'renderCritiques'
@@ -47,10 +51,16 @@ app.PostView = Backbone.View.extend({
 
     // Remove Post
     removePost: function(){
+      var confirmModal = this.$el.find('#deletePost');
+      confirmModal.modal('toggle');
+    },
+    deletePost: function(){
+      var confirmModal = this.$el.find('#deletePost');
+      confirmModal.modal('toggle');
       this.model.destroy();
       this.$el.remove();
     },
-
+    
     // Append UserName to Post Div
     renderWithUserName: function(){
       this.$el.empty();

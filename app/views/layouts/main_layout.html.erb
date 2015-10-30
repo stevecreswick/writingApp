@@ -356,10 +356,8 @@
 
         <div class="row">
           <div class="col-xs-2">
-            <div class="show-critique-box">
-              <button type="button" class='render-critiques btn btn-success'>
-                Show Critiques
-              </button>
+            <div class="show-critiques-box">
+
             </div>
           </div>
           <div class="col-xs-3 col-xs-offset-7">
@@ -368,6 +366,26 @@
             </div>
           </div>
         </div>
+
+          <!-- Confirm Post Delete Modal -->
+          <div class="modal" id="deletePost" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title" id="myModalLabel">Confirm Delete</h4>
+                </div>
+                <div class="modal-body">
+                  Do you wish to delete this post? <br>
+                  <%%= message %>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                  <button type="button" class="btn btn-primary delete-post">Yes</button>
+                </div>
+              </div>
+            </div>
+          </div>
 
       </div>
 
@@ -400,7 +418,7 @@
 
 
 
-          <!-- Confirm Delete Modal -->
+          <!-- Confirm Critique Delete Modal -->
           <div class="modal" id="deleteCritique" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
               <div class="modal-content">

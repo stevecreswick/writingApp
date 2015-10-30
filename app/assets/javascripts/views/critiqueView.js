@@ -46,20 +46,12 @@ app.CritiqueView = Backbone.View.extend({
     var confirmModal = this.$el.find('#deleteCritique');
     confirmModal.modal('toggle');
 
-    // .on('shown.bs.modal', function () {
-    //   $('#myInput').focus()
-    // });
-    // this.model.destroy();
-    // this.$el.remove();
   },
 
   deleteCritique: function(){
     console.log('delete critique clicked');
     var confirmModal = this.$el.find('#deleteCritique');
-    var backdrop = this.$el.find('.modal-backdrop');
-
     confirmModal.modal('toggle');
-    backdrop.remove();
     this.model.destroy();
     this.$el.remove();
   },
