@@ -31,7 +31,8 @@ class Api::CritiquesController < ApplicationController
   def update
     @post = Post.find( params[:post_id] )
     critique = @post.critiques.find( params[:id] )
-    critique.update( params[ critique_params ] )
+    critique.update({message: params[:message] });
+    
     respond_to do |format|
 
       format.json { render json: critique }

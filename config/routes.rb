@@ -29,6 +29,7 @@ Rails.application.routes.draw do
     get '/posts/:post_id/critiques' => 'critiques#index'
     post '/posts/:post_id/critiques' => 'critiques#create'
     delete '/posts/:post_id/critiques/:id' => 'critiques#destroy'
+    put '/posts/:post_id/critiques/:id' => 'critiques#update'
 
     # Writing Prompt API
     get '/writing_prompts' => 'writing_prompts#index'

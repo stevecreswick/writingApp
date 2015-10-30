@@ -3,6 +3,10 @@
   <title>Write Away</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
   <link href='https://fonts.googleapis.com/css?family=Permanent+Marker' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
@@ -15,6 +19,8 @@
     <script type="text/template" id="main-page-template">
 
       <input type="hidden" id="current_user" value="<%= @user.username %>">
+      <input type="hidden" id="current_id" value="<%= @user.id %>">
+
       <!-- Nav Bar -->
       <nav class="navbar navbar-default  navbar-fixed-top">
       <div class="container-fluid"  id="header">
@@ -53,13 +59,14 @@
     <div class="row">
 
       <!-- Left Side -->
-      <div class="col-xs-3">
+      <div class="col-sm-2 col-md-3 col-lg-3 hidden-xs">
         <div id="left-pane">
+
         </div>
       </div>
 
       <!-- Center -->
-      <div class="col-xs-6 ">
+      <div class="col-xs-12 col-sm-8 col-md-6 col-lg-6">
         <div id="center-pane">
           <div id="new-post-box"></div>
           <div class="post-list-controller"></div>
@@ -68,7 +75,7 @@
       </div>
 
       <!-- Right Pane -->
-      <div class="col-xs-3 ">
+      <div class="col-sm-2 col-md-3 col-lg-3 hidden-xs">
           <div id="right-pane"></div>
       </div>
 
@@ -154,6 +161,8 @@
             <%%= prompt %>
         </h4>
     </script>
+
+
 
 
     <script type="text/template" id="create-post-template">
@@ -345,9 +354,26 @@
         <script type="text/template" id="critique-template">
           <div class="critique-message">
               <%%= message %>
-            <button type="button" class='remove-critique btn btn-danger'>
-              X
-            </button>
+
+          </div>
+
+          <!-- Confirm Delete Modal -->
+          <div class="modal" id="deleteCritique" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title" id="myModalLabel">Confirm Delete</h4>
+                </div>
+                <div class="modal-body">
+                  Do you wish to delete your critique?
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                  <button type="button" class="btn btn-primary delete-critique">Yes</button>
+                </div>
+              </div>
+            </div>
           </div>
         </script>
 
@@ -678,40 +704,7 @@
 
 <body id="main-page">
   <div class="container-fluid" >
-<!--
-    <nav class="navbar navbar-default  navbar-fixed-top">
-    <div class="container-fluid"  id="header">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="/">Write Away</a>
-      </div>
 
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
-
-        <ul class="nav navbar-nav navbar-right">
-          <li id="friends-navbar"></li>
-          <li><a href="#"><%= @user.username %></a></li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li><a href="#">Action</a></li>
-              <li><a href="#">Another action</a></li>
-              <li><a href="#">Something else here</a></li>
-              <li role="separator" class="divider"></li>
-                <li><%= link_to 'Log Out', '/sessions', method: :delete  %></li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
--->
     <%= yield %>
 
   </div>
