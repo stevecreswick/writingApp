@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   # Landing Page for Logged Out Users
   get '/welcome' => 'welcome#welcome', as: :welcome
 
+
 # API Routes
   namespace :api do
 
@@ -58,8 +59,14 @@ get '/users' => 'users#index', as: :users
 get '/users/register' => 'users#register', as: :register
 post '/users' => 'users#create'
 get '/users/login' => 'users#login', as: :log_in
-get '/users/profile' => 'users#profile', as: :profile
+get '/users/profile/:id' => 'users#profile', as: :profile
 get '/users/main' => 'users#main', as: :main
+get '/users/edit' => 'users#edit', as: :edit
+put '/users/:id' => 'users#update'
+get '/users/:id' => 'users#show'
+
+
+
 get '/users/:user_id/posts/:post_id' => 'users#show_post'
 get '/users/friends' => 'users#friends'
 get '/users/add_friend' => 'users#add_friends'

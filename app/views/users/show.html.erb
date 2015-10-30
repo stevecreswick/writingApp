@@ -1,3 +1,29 @@
-<% title "My Profile" %>
 <p>Username: <%=h @user.username %></p>
 <p><%= link_to "Find Friends", users_path %></p>
+
+
+<h3>Showing <%= @user.username %> </h3>
+
+
+<div class="row">
+  <div class="col-xs-6">
+    <%= @user.from %>
+  </div>
+  <div class="col-xs-6">
+    Book: <%= @user.favorite_book %> <br>
+    Author: <%= @user.favorite_author %> <br>
+    Genre: <%= @user.favorite_genre %>
+  </div>
+</div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <%= @user.writing_goal %>
+      </div>
+    </div>
+
+  <div class="row edit-row">
+    <div class="col-xs-12">
+      <%= @user.about %>
+      </div>
+  </div>

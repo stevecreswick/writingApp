@@ -23,6 +23,11 @@ class Api::CritiquesController < ApplicationController
       end
   end
 
+  def edit
+    @post = Post.find( params[:post_id] )
+    critique = @post.critiques.find( params[:id] )
+  end
+
   def update
     @post = Post.find( params[:post_id] )
     critique = @post.critiques.find( params[:id] )
@@ -38,7 +43,6 @@ class Api::CritiquesController < ApplicationController
   def destroy
     post = Post.find( params[:post_id] )
     deleted_critique = post.critiques.find(params[:id])
-    binding.pry
     deleted_critique.destroy
 
     respond_to do |format|

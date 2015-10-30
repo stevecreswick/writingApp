@@ -21,8 +21,6 @@
 //= require jquery-ui.min
 //= require quill.min
 
-
-
 //= require models/writingPrompt
 //= require views/writingPromptView
 //= require collections/writingPromptCollection

@@ -82,7 +82,7 @@ app.promptFormView = Backbone.View.extend({
       var scope = this;
       $('form#create-post').on('submit', function(e){
         e.preventDefault();
-        var newMessage = scope.$('#post-editor').first().eq(0).html();
+        var newMessage = scope.$('#post-editor').first().eq(0).children().eq(0).children().eq(0).html();
         var message = scope.$('#post-editor').find('.ql-editor').text();
         var messageLength = message.length;
 

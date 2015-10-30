@@ -13,12 +13,36 @@ class UsersController < ApplicationController
     render json: users
   end
 
+  def show
+    @user = User.find(params[:id])
+  end
+
   def create
 
     @user = User.new(user_params)
+
     if @user.save
       respond_to do |format|
       format.html { redirect_to log_in_path}
+      format.json { render json: @user }
+      end
+    else
+      respond_to do |format|
+      format.html { redirect_to welcome_path}
+      end
+    end
+  end
+
+  def edit
+    @user = current_user
+  end
+
+  def update
+    @user = User.find(params[:id])
+    @user.update(user_params)
+    if @user.save
+      respond_to do |format|
+      format.html { redirect_to main_path}
       format.json { render json: @user }
       end
     end
@@ -27,19 +51,19 @@ class UsersController < ApplicationController
   def main
     # return nil if !authenticate!
     @user = current_user
-    render layout: "profile_layout"
+    render layout: "main_layout"
   end
 
   def profile
     # return nil if !authenticate!
-    @user = current_user
+    @user = User.find(params[:id])
     render layout: "profile_layout"
   end
 
   def show_post
     @user = User.find( params[:user_id])
     @post = @user.posts.find( params[:post_id] )
-    render layout: "profile_layout"
+    # render layout: "profile_layout"
 
   end
 
@@ -80,7 +104,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:username, :password, :image_url)
+    params.require(:user).permit(:username, :password, :image_url, :from, :favorite_book, :favorite_author, :favorite_genre, :currently_reading, :about, :writing_goal)
   end
 
 end

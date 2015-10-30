@@ -10,7 +10,7 @@ respond_to :html, :json
   def index
     # current_api_user!
     # aRposts = @current_user.posts
-    aRposts = Post.all
+    aRposts = Post.order(created_at: :desc)
     posts = aRposts.map do |aRpost|
       data = aRpost.as_json
       data['username'] = aRpost.user.username

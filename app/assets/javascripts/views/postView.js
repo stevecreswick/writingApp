@@ -109,7 +109,8 @@ app.PostView = Backbone.View.extend({
       $('form#create-critique').on('submit', function(e){
         e.preventDefault();
 
-        var newMessage = scope.$('#critique-editor').first().eq(0).html();
+        // Grab Message from div created by Quill Editor
+        var newMessage = scope.$('#critique-editor').first().eq(0).children().eq(0).children().eq(0).html();
 
         app.posts.get(modelId).critiques.create({message: newMessage});
       });
