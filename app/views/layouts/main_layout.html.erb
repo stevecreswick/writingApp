@@ -135,7 +135,7 @@
                   <input id="post-word-count" type="hidden" name=post[word_count] value="25"/>
                   <div id="slider-word-count"></div>
                   <div id="slider-word-count-display">
-                    <label>Write at least <span id="word-count">25</span> characters</label>
+                    <label>Write at least <span id="word-count">25</span> words</label>
                   </div>
                 </div>
                 <div class="col-xs-6">
@@ -170,9 +170,24 @@
       <!-- <h1 class="create-post-header">Write</h3> -->
 
         <form id="create-post">
-          <h4 id="post-genre"></h4>
-          <h5 id="post-box-type"></h5>
-          <p class="character-count"></p>
+          <div class="row">
+            <div class="col-xs-12">
+              <h4 id="post-genre"></h4>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12">
+              <h5 id="post-box-type"></h5>
+            </div>
+
+          </div>
+          <div class="row">
+            <div class="col-xs-4">
+              <p class="character-count"></p>
+            </div>
+          </div>
+
+
 
           <div class="form-group">
             <!-- Create the toolbar container -->
@@ -325,7 +340,7 @@
         </div>
         <div class="row">
           <div class="col-xs-12">
-             <%%= word_count %> characters
+             <%%= word_count %> words
           </div>
         </div>
 
@@ -338,24 +353,52 @@
             </div>
           </div>
         </div>
+
+        <div class="row">
+          <div class="col-xs-2">
+            <div class="show-critique-box">
+              <button type="button" class='render-critiques btn btn-success'>
+                Show Critiques
+              </button>
+            </div>
+          </div>
+          <div class="col-xs-3 col-xs-offset-7">
+            <div class="remove-post-box">
+
+            </div>
+          </div>
+        </div>
+
       </div>
 
-      <button type="button" class='make-critique btn btn-info'>
-        Make Critique
-      </button>
-      <button type="button" class='render-critiques btn btn-success'>
-        Show Critiques
-      </button>
+
 
     </script>
 
 
       <!-- Critique -->
         <script type="text/template" id="critique-template">
-          <div class="critique-message">
-              <%%= message %>
-
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="critique-message">
+                  <%%= message %>
+              </div>
+            </div>
           </div>
+          <div class="row">
+            <div class="col-xs-6">
+              <div class="edit-critique-box">
+
+              </div>
+            </div>
+            <div class="col-xs-6">
+              <div class="remove-critique-box">
+
+              </div>
+            </div>
+          </div>
+
+
 
           <!-- Confirm Delete Modal -->
           <div class="modal" id="deleteCritique" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -573,7 +616,7 @@
     <script type="text/template" id="completed-challenge-template">
       <div class="post-prompt-type">
         <strong><%%= prompt_type %></strong>
-        <%%= prompt %> | <%%= word_count %> characters
+        <%%= prompt %> | <%%= word_count %> words
       </div>
       <div class="completed-challenge-message">
           <%%= message %><br>

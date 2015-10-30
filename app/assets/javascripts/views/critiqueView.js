@@ -26,8 +26,8 @@ app.CritiqueView = Backbone.View.extend({
       // Bind Confirm Modal
 
 
-      this.$el.append( $editButton );
-      this.$el.append( $deleteButton );
+      this.$el.find('.edit-critique-box').append( $editButton );
+      this.$el.find('.remove-critique-box').append( $deleteButton );
     } else {
       console.log('not written by this user');
     }

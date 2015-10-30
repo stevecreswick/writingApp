@@ -21,6 +21,10 @@ class UsersController < ApplicationController
 
     @user = User.new(user_params)
 
+    if @user.image_url == ""
+      @user.image_url = "http://i.imgur.com/yvuo0U2.png"
+    end
+
     if @user.save
       respond_to do |format|
       format.html { redirect_to log_in_path}

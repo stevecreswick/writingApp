@@ -64,13 +64,13 @@ get '/users/profile/:id' => 'users#profile', as: :profile
 get '/users/main' => 'users#main', as: :main
 get '/users/edit' => 'users#edit', as: :edit
 put '/users/:id' => 'users#update'
-get '/users/:id' => 'users#show'
+get '/users/show/:id' => 'users#show'
 
 
 
 get '/users/:user_id/posts/:post_id' => 'users#show_post'
 get '/users/friends' => 'users#friends'
-get '/users/add_friend' => 'users#add_friends'
+get '/users/add_friends' => 'users#add_friends'
 get '/users/followers' => 'users#followers'
 post '/users/request' => 'users#request'
 

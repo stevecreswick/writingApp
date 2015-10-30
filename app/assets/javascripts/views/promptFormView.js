@@ -84,10 +84,10 @@ app.promptFormView = Backbone.View.extend({
         e.preventDefault();
         var newMessage = scope.$('#post-editor').first().eq(0).children().eq(0).children().eq(0).html();
         var message = scope.$('#post-editor').find('.ql-editor').text();
-        var messageLength = message.length;
+        var messageLength = message.match(/\S+/g).length;
 
         console.log('word count ' + messageLength);
-
+        
         console.log(newMessage);
         // If the message is equal to or longer than the chosen word count -> Submit The post
         if (messageLength >= newPrompt.wordCount) {
@@ -133,12 +133,13 @@ app.promptFormView = Backbone.View.extend({
       return newPrompt;
     },
     checkCharacterCount: function(){
-      this.characters = 0;
+      this.wordCount = 0;
       $('#post-editor').on('keyup', function(){
-        this.characters = $('#post-editor').find('.ql-editor').text();
-        console.log( this.characters.length );
+        var text = $('#post-editor').find('.ql-editor').text();
+        this.wordCount = text.match(/\S+/g).length;
+        // console.log( this.characters.length );
         // this.characters = $('#post-editor').text().length;
-        $('.character-count').html( this.characters.length );
+        $('.character-count').html( this.wordCount );
       });
     },
     bindSlider: function(){

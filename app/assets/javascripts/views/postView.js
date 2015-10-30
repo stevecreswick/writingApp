@@ -21,6 +21,20 @@ app.PostView = Backbone.View.extend({
       var html = this.template( this.model.toJSON() );
       var $html = $( html );
       this.$el.append( $html );
+
+      var poster = this.model.get('username');
+      var currentUser = $('#current_user').val()
+      var $deleteButton = $("<button>").addClass("remove-post btn btn-danger").html("X");
+      var $makeCritique = $("<button>").addClass("make-critique btn btn-info").html("Make Critique");
+
+      // Add delete button for current user
+      if (currentUser === poster) {
+        this.$el.find(".remove-post-box").append( $deleteButton );
+        // view.$el.append( $deleteButton );
+      } else {
+        this.$el.find(".remove-post-box").append( $makeCritique );
+      }
+
     },
 
 // Post Events
@@ -113,6 +127,10 @@ app.PostView = Backbone.View.extend({
         var newMessage = scope.$('#critique-editor').first().eq(0).children().eq(0).children().eq(0).html();
 
         app.posts.get(modelId).critiques.create({message: newMessage});
+
+        scope.renderWithUserName();
+        scope.renderCritiques();
+        // this.renderCritiques();
       });
     },
     renderEditor: function(){

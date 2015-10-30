@@ -3,5 +3,5 @@ var app = app || {};
 
 app.UserCollection = Backbone.Collection.extend({
   model: app.User,
-  url: '/users/add_friend'
+  url: '/users/add_friends'
 });

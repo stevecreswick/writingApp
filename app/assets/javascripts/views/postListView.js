@@ -18,18 +18,6 @@ app.PostListView = Backbone.View.extend({
           //Appends the Username to each Div
           view.renderWithUserName();
 
-          // validate if the post belongs to the current user
-          var poster = posts[i].get('username');
-          var currentUser = $('#current_user').val()
-          var $deleteButton = $("<button>").addClass("remove-post btn btn-danger").html("X");
-
-          // Add delete button for current user
-          if (currentUser === poster) {
-            view.$el.append( $deleteButton );
-          } else {
-            console.log("current user did not post this");
-          }
-
           // Append the View to the Post List
           this.$el.append( view.$el );
         }

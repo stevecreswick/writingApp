@@ -268,7 +268,7 @@ ul.dropdown-menu{
   }
 
   .critique-view{
-    height: 3em;
+    /*height: 3em;*/
     background: ghostwhite;
     margin-top: 0.3em;
   }
