@@ -2,9 +2,277 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>Write Away</title>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href='https://fonts.googleapis.com/css?family=Permanent+Marker' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Damion' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="//cdn.quilljs.com/0.19.10/quill.snow.css" />
+    <script src="//cdn.quilljs.com/0.19.10/quill.min.js"></script>
+
+
+
+    <!-- Post List Menu -->
+      <script type="text/template" id="post-list-menu">
+        <!-- <h1 class="post-list-header">Read</h1> -->
+        <div class="genre-links">
+          <a class="all-sort sort"> All</a> |
+          <a class="fiction-sort sort"> Fiction</a> |
+          <a class="fantasy-sort sort"> Fantasy</a> |
+          <a class="horror-sort sort"> Horror</a> |
+          <a class="thriller-sort sort"> Thriller</a> |
+          <a class="crime-sort sort"> Crime</a> |
+          <a class="romance-sort sort"> Romance</a> |
+          <a class="sci-fi-sort sort"> SciFi</a> |
+          <a class="non-fiction-sort sort">Non-Fiction</a>
+        </div>
+      </script>
+
+
+    <!-- Post  -->
+  <script type="text/template" id='post-template'>
+    <div class="post-prompt-type">
+
+
+
+
+      <div class="row">
+        <div class="col-xs-3">
+          <h5> <%%= genre %> </h5>
+          <h5> <%%= created_at %></h5>
+        </div>
+        <div class="col-xs-9">
+          <a href="/users/profile/<%%= user_id %>" class="post-author">
+              <!-- username rendered here -->
+          </a>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <h5>Title: <%%= title %> </h5>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <strong><%%= prompt_type %></strong>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <%%= prompt %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+           <%%= word_count %> words
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="post-box">
+            <p class="posted-message">
+              <%%= message %>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-2">
+          <div class="show-critiques-box">
+
+          </div>
+        </div>
+        <div class="col-xs-3 col-xs-offset-7">
+          <div class="remove-post-box">
+
+          </div>
+        </div>
+      </div>
+
+        <!-- Confirm Post Delete Modal -->
+        <div class="modal" id="deletePost" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Confirm Delete</h4>
+              </div>
+              <div class="modal-body">
+                Do you wish to delete this post? <br>
+                <%%= message %>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                <button type="button" class="btn btn-primary delete-post">Yes</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+    </div>
+
+  </script>
+
+  <!-- Critique -->
+    <script type="text/template" id="critique-template">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="critique-message">
+              <%%= message %>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-6">
+          <div class="edit-critique-box">
+
+          </div>
+        </div>
+        <div class="col-xs-6">
+          <div class="remove-critique-box">
+
+          </div>
+        </div>
+      </div>
+
+
+
+      <!-- Confirm Critique Delete Modal -->
+      <div class="modal" id="deleteCritique" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">Confirm Delete</h4>
+            </div>
+            <div class="modal-body">
+              Do you wish to delete your critique?
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+              <button type="button" class="btn btn-primary delete-critique">Yes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </script>
+
+  <!-- Critique Form -->
+    <script type="text/template" id="critique-form-template">
+      <div class="new-critique-form">
+        <form id="create-critique">
+          <input type="hidden" name="critique[user_id]" value="<%= @user.id %>">
+          <div id="full-toolbar">
+            <!-- Add a bold button -->
+            <span class="ql-format-group">
+              <span title="Bold" class="ql-format-button ql-bold"></span>
+              <span class="ql-format-separator"></span>
+              <span title="Italic" class="ql-format-button ql-italic"></span>
+              <span class="ql-format-separator"></span>
+              <span title="Underline" class="ql-format-button ql-underline"></span>
+            <select title="Text Color" class="ql-color">
+              <option value="rgb(0, 0, 0)" selected></option>
+              <option value="rgb(230, 0, 0)"></option>
+              <option value="rgb(255, 153, 0)"></option>
+              <option value="rgb(255, 255, 0)"></option>
+              <option value="rgb(0, 138, 0)"></option>
+              <option value="rgb(0, 102, 204)"></option>
+              <option value="rgb(153, 51, 255)"></option>
+              <option value="rgb(255, 255, 255)"></option>
+              <option value="rgb(250, 204, 204)"></option>
+              <option value="rgb(255, 235, 204)"></option>
+              <option value="rgb(255, 255, 204)"></option>
+              <option value="rgb(204, 232, 204)"></option>
+              <option value="rgb(204, 224, 245)"></option>
+              <option value="rgb(235, 214, 255)"></option>
+              <option value="rgb(187, 187, 187)"></option>
+              <option value="rgb(240, 102, 102)"></option>
+              <option value="rgb(255, 194, 102)"></option>
+              <option value="rgb(255, 255, 102)"></option>
+              <option value="rgb(102, 185, 102)"></option>
+              <option value="rgb(102, 163, 224)"></option>
+              <option value="rgb(194, 133, 255)"></option>
+              <option value="rgb(136, 136, 136)"></option>
+              <option value="rgb(161, 0, 0)"></option>
+              <option value="rgb(178, 107, 0)"></option>
+              <option value="rgb(178, 178, 0)"></option>
+              <option value="rgb(0, 97, 0)"></option>
+              <option value="rgb(0, 71, 178)"></option>
+              <option value="rgb(107, 36, 178)"></option>
+              <option value="rgb(68, 68, 68)"></option>
+              <option value="rgb(92, 0, 0)"></option>
+              <option value="rgb(102, 61, 0)"></option>
+              <option value="rgb(102, 102, 0)"></option>
+              <option value="rgb(0, 55, 0)"></option>
+              <option value="rgb(0, 41, 102)"></option>
+              <option value="rgb(61, 20, 102)"></option>
+            </select><span class="ql-format-separator"></span>
+            <select title="Background Color" class="ql-background">
+              <option value="rgb(0, 0, 0)"></option>
+              <option value="rgb(230, 0, 0)"></option>
+              <option value="rgb(255, 153, 0)"></option>
+              <option value="rgb(255, 255, 0)"></option>
+              <option value="rgb(0, 138, 0)"></option>
+              <option value="rgb(0, 102, 204)"></option>
+              <option value="rgb(153, 51, 255)"></option>
+              <option value="rgb(255, 255, 255)" selected></option>
+              <option value="rgb(250, 204, 204)"></option>
+              <option value="rgb(255, 235, 204)"></option>
+              <option value="rgb(255, 255, 204)"></option>
+              <option value="rgb(204, 232, 204)"></option>
+              <option value="rgb(204, 224, 245)"></option>
+              <option value="rgb(235, 214, 255)"></option>
+              <option value="rgb(187, 187, 187)"></option>
+              <option value="rgb(240, 102, 102)"></option>
+              <option value="rgb(255, 194, 102)"></option>
+              <option value="rgb(255, 255, 102)"></option>
+              <option value="rgb(102, 185, 102)"></option>
+              <option value="rgb(102, 163, 224)"></option>
+              <option value="rgb(194, 133, 255)"></option>
+              <option value="rgb(136, 136, 136)"></option>
+              <option value="rgb(161, 0, 0)"></option>
+              <option value="rgb(178, 107, 0)"></option>
+              <option value="rgb(178, 178, 0)"></option>
+              <option value="rgb(0, 97, 0)"></option>
+              <option value="rgb(0, 71, 178)"></option>
+              <option value="rgb(107, 36, 178)"></option>
+              <option value="rgb(68, 68, 68)"></option>
+              <option value="rgb(92, 0, 0)"></option>
+              <option value="rgb(102, 61, 0)"></option>
+              <option value="rgb(102, 102, 0)"></option>
+              <option value="rgb(0, 55, 0)"></option>
+              <option value="rgb(0, 41, 102)"></option>
+              <option value="rgb(61, 20, 102)"></option>
+            </select><span class="ql-format-separator"></span>
+          </div>
+
+          <!-- Create the editor container -->
+          <div id="critique-editor" class="post-body">
+          </div>
+          <!-- <textarea class= "form-control" id="critique-message" rows="10" name="critique[message]" placeholder="...enter critique"></textarea> -->
+          <input type="hidden" name="critique[post_id]" id="critique-post-id">
+          <input type="submit" value="Submit" class="btn btn-danger">
+        </form>
+        <button class="close-critique btn btn-danger">close</button>
+      </div>
+    </script>
+
   </head>
   <body>
-    <%= yield %>
+
+        <%= yield %>
+
+
+
+    <%= javascript_include_tag 'profile', 'data-turbolinks-track' => true %>
   </body>
 </html>

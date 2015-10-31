@@ -24,9 +24,20 @@
  *{
    box-sizing: border-box;
  }
- body {
-    padding-top: 5em;
+
+ html, body {
+    height: 100%;
+    margin: 0px;
   }
+
+  .container-fluid {
+    /*background: url('binding_dark.png');*/
+    overflow: auto;
+    /*padding-top: 5em;*/
+    height: 100%;
+  }
+
+
 
 .post-title {
   color: red;
@@ -55,7 +66,7 @@
   position: relative;
   /*border: grey 1px solid;*/
   z-index: 1;
-  margin-top: 1em;
+  margin-top: 6em;
   width: 100%;
   background-color: white;
   font-family: 'Oswald', sans-serif;
@@ -294,7 +305,7 @@ ul.dropdown-menu{
 #right-pane{
   height:100%;
   width: 100%;
-  padding-top: 4em;
+  /*padding-top: 4em;*/
   /*position: fixed;*/
 }
 
@@ -389,10 +400,6 @@ form#challenge-accept-form {
   color: red;
 }
 
-.container-fluid {
-  background: url('binding_dark.png');
-  overflow: auto;
-}
 
 /*Followers List View*/
 .user-name-header{
@@ -564,3 +571,24 @@ a.sort:hover{
 #post-box-type{
   /*margin-bottom: 10%;*/
 }
+
+/* Profile Page */
+#user-profile{
+  background: white;
+  margin-top: 2em;
+
+}
+
+.profile-posts-header{
+  color: white;
+}
+
+.profile-header{
+  margin-top: 5em;
+  display: inline-block;
+  width: 100%;
+}
+
+ .profile-header-button-container{
+   margin-top: 4em;
+ }

@@ -75,38 +75,48 @@ app.promptFormView = Backbone.View.extend({
 
       this.renderEditor();
       this.bindWritingFormSubmit(newPrompt);
-      this.checkCharacterCount();
+      this.checkWordCount();
 
     },
     bindWritingFormSubmit: function(newPrompt){
       var scope = this;
       $('form#create-post').on('submit', function(e){
         e.preventDefault();
+
         var newMessage = scope.$('#post-editor').first().eq(0).children().eq(0).children().eq(0).html();
+        var newTitle = scope.$('#post-title').val();
+
+        // Find Word Count
         var message = scope.$('#post-editor').find('.ql-editor').text();
         var messageLength = message.match(/\S+/g).length;
 
-        console.log('word count ' + messageLength);
-        
-        console.log(newMessage);
         // If the message is equal to or longer than the chosen word count -> Submit The post
         if (messageLength >= newPrompt.wordCount) {
-          console.log('longer than word count');
-          app.posts.create({message: newMessage, prompt: newPrompt.prompt, word_count: newPrompt.wordCount, prompt_type: newPrompt.type, model_url: newPrompt.url, genre: newPrompt.genre},{wait:true});
+
+          app.posts.create({
+            title: newTitle,
+            message: newMessage,
+            word_count: messageLength,
+            prompt: newPrompt.prompt,
+            prompt_word_count: newPrompt.wordCount,
+            prompt_type: newPrompt.type,
+            model_url: newPrompt.url,
+            genre: newPrompt.genre},
+            {wait:true});
 
           scope.render();
           scope.$el.css({'height': 'auto'})
         } else {
-          scope.$('#post-error').text('not long enough')
-          console.log('not longer than wc');
+
+          scope.$('#post-error').text('Not Long Enough')
+
         }
 
-        // Still need to re render page or clear form
-        // app.pagePainter.renderPromptForm();
       });
 
     },
     createPrompt: function(){
+
       var newPrompt = {
         prompt:  $('.prompt-text').text(),
         wordCount: $('#post-word-count').val(),
@@ -128,11 +138,10 @@ app.promptFormView = Backbone.View.extend({
         console.log('no url for this type : ' + newPrompt.type);
       }
 
-      console.log(newPrompt.genre);
-      console.log('creating prompt');
       return newPrompt;
     },
-    checkCharacterCount: function(){
+
+    checkWordCount: function(){
       this.wordCount = 0;
       $('#post-editor').on('keyup', function(){
         var text = $('#post-editor').find('.ql-editor').text();
@@ -142,6 +151,7 @@ app.promptFormView = Backbone.View.extend({
         $('.character-count').html( this.wordCount );
       });
     },
+    
     bindSlider: function(){
       $( "#slider-word-count" ).slider({
            range: "min",

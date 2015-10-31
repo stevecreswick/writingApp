@@ -164,7 +164,6 @@
 
 
 
-
     <script type="text/template" id="create-post-template">
       <div class="new-post-box">
       <!-- <h1 class="create-post-header">Write</h3> -->
@@ -187,7 +186,11 @@
             </div>
           </div>
 
-
+          <!-- Post Title -->
+          <div class="form-group">
+            <label for="post-title">Title</label>
+            <input type="text" id="post-title" class="form-control">
+          </div>
 
           <div class="form-group">
             <!-- Create the toolbar container -->
@@ -311,23 +314,28 @@
       <!-- Post  -->
     <script type="text/template" id='post-template'>
       <div class="post-prompt-type">
-        <!-- <div class="row">
-          <div class="col-xs-5">
 
-          </div>
-        </div> -->
+
+
+
         <div class="row">
           <div class="col-xs-3">
             <h5> <%%= genre %> </h5>
             <h5> <%%= created_at %></h5>
           </div>
           <div class="col-xs-9">
-            <div class="post-author">
+            <a href="/users/profile/<%%= user_id %>" class="post-author">
                 <!-- username rendered here -->
-            </div>
+            </a>
           </div>
-
         </div>
+
+        <div class="row">
+          <div class="col-xs-12">
+            <h5>Title: <%%= title %> </h5>
+          </div>
+        </div>
+
         <div class="row">
           <div class="col-xs-12">
             <strong><%%= prompt_type %></strong>
@@ -769,7 +777,7 @@
     <%= yield %>
 
   </div>
-  <%= javascript_include_tag 'users', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'main', 'data-turbolinks-track' => true %>
 
 </body>
 </html>

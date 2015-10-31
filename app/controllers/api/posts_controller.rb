@@ -34,8 +34,16 @@ respond_to :html, :json
 
   def show
     # current_api_user!
-    post = Post.find( params[:id] )
-    render json: post
+    aRposts = Post.where(user_id: params[:id] )
+    posts = aRposts.map do |aRpost|
+      data = aRpost.as_json
+      data['username'] = aRpost.user.username
+      data['image_url'] = aRpost.user.image_url
+      data['created_at'] = Date.strptime(aRpost.user.created_at.to_s)
+      data
+    end
+
+    render json: posts
     # redirect_to '/users/post/:id'
   end
 
@@ -45,7 +53,6 @@ respond_to :html, :json
     puts '*********** Creating Post ******************'
     post = current_user.posts.create(post_params)
     puts post.message
-    puts '*************Add Username***************'
     data = post.as_json
     data['username'] = post.user.username
     respond_to do |format|
@@ -96,7 +103,7 @@ respond_to :html, :json
   private
 
   def post_params
-    params.require(:post).permit(:message, :prompt, :prompt_type, :word_count, :model_url, :genre)
+    params.require(:post).permit(:title, :message, :prompt, :prompt_word_count, :prompt_type, :word_count, :model_url, :genre)
   end
 
 

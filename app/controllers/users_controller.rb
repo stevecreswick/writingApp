@@ -14,7 +14,8 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
+    user = User.find(params[:id])
+    render json: user
   end
 
   def create
@@ -39,6 +40,7 @@ class UsersController < ApplicationController
 
   def edit
     @user = current_user
+    render layout: "profile_layout"
   end
 
   def update
@@ -61,6 +63,7 @@ class UsersController < ApplicationController
   def profile
     # return nil if !authenticate!
     @user = User.find(params[:id])
+    @current_user = current_user
     render layout: "profile_layout"
   end
 

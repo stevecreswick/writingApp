@@ -61,10 +61,10 @@ get '/users/register' => 'users#register', as: :register
 post '/users' => 'users#create'
 get '/users/login' => 'users#login', as: :log_in
 get '/users/profile/:id' => 'users#profile', as: :profile
+get '/users/show/:id' => 'users#show', as: :show
 get '/users/main' => 'users#main', as: :main
 get '/users/edit' => 'users#edit', as: :edit
 put '/users/:id' => 'users#update'
-get '/users/show/:id' => 'users#show'
 
 
 
