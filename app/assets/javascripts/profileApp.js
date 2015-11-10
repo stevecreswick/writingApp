@@ -16,7 +16,7 @@ var app = app || {};
 $( document ).ready(function() {
 
   var currentId = $('#profile_id').val();
-  var urlModel = "/users/show/" + currentId;
+  var urlModel = "/api/users/" + currentId + "/posts";
 
   app.profileUser = new app.User();
 

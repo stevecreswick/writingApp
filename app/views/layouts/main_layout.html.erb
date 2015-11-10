@@ -59,25 +59,36 @@
     <div class="row">
 
       <!-- Left Side -->
-      <div class="col-sm-2 col-md-3 col-lg-3 hidden-xs">
+      <div class="col-sm-1 col-md-1 col-lg-1 hidden-xs">
         <div id="left-pane">
-
+          <br><br><br><br><br><br><br><br><br><br>
         </div>
       </div>
 
       <!-- Center -->
-      <div class="col-xs-12 col-sm-8 col-md-6 col-lg-6">
+      <div class="col-xs-12 col-sm-11 col-md-11 col-lg-11">
         <div id="center-pane">
-          <div id="new-post-box"></div>
-          <div class="post-list-controller"></div>
-          <div id="post-list"></div>
+            <!-- <div class="left-side-main">
+              <a class="read-nav btn btn-primary">Read</a>
+            </div>
+            <div class="line-seperator">
+
+            </div>
+            <div class="right-side-main">
+              <a class="write-nav btn btn-primary">Write</a>
+            </div> -->
+          </div>
+
+          <!-- <div id="new-post-box"></div> -->
+          <!-- <div class="post-list-controller"></div> -->
+          <!-- <div id="post-list"></div> -->
         </div>
       </div>
 
       <!-- Right Pane -->
-      <div class="col-sm-2 col-md-3 col-lg-3 hidden-xs">
+      <!-- <div class="col-sm-2 col-md-3 col-lg-3 hidden-xs">
           <div id="right-pane"></div>
-      </div>
+      </div> -->
 
     </div>
 
@@ -314,31 +325,53 @@
       <!-- Post  -->
     <script type="text/template" id='post-template'>
       <div class="post-prompt-type">
-
-
-
-
         <div class="row">
           <div class="col-xs-3">
-            <h5> <%%= genre %> </h5>
-            <h5> <%%= created_at %></h5>
+            <br>
+            <br>
+              <strong class="prompt-label"> <%%= created_at %></strong>
           </div>
-          <div class="col-xs-9">
+          <div class="col-xs-6">
+            <div class="row">
+              <div class="col-xs-12">
+                <h3 class="prompt-label"><%%= title %> </h3>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-12">
+                 <%%= word_count %> words
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-3">
+            <br>
+            <strong class="prompt-label"> <%%= genre %> </strong>
+            <br>
+            <strong class="prompt-label"><%%= prompt_type %></strong>
+            <br>
+            <strong class="prompt-label"><%%= prompt_word_count %> word min.</strong>
+            <br>
+            <strong class="prompt-label"><%%= prompt %></strong>
+          </div>
+        </div>
+
+        <!-- Font Size Controls -->
+        <!-- <div class="row">
+          <div class="col-xs-12">
+            <li class="increase-font">Font ^</li>
+            <li class="decrease-font">Font v</li>
+          </div>
+        </div> -->
+
+        <div class="row">
+          <div class="col-xs-4">
+
+            <!-- <strong><%%= prompt_type %></strong> -->
+          </div>
+          <div class="col-xs-4">
             <a href="/users/profile/<%%= user_id %>" class="post-author">
                 <!-- username rendered here -->
             </a>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-xs-12">
-            <h5>Title: <%%= title %> </h5>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-xs-12">
-            <strong><%%= prompt_type %></strong>
           </div>
         </div>
         <div class="row">
@@ -346,11 +379,7 @@
             <%%= prompt %>
           </div>
         </div>
-        <div class="row">
-          <div class="col-xs-12">
-             <%%= word_count %> words
-          </div>
-        </div>
+
 
         <div class="row">
           <div class="col-xs-12">
@@ -368,11 +397,15 @@
 
             </div>
           </div>
-          <div class="col-xs-3 col-xs-offset-7">
+          <div class="col-xs-6 col-xs-offset-4">
             <div class="remove-post-box">
 
             </div>
           </div>
+        </div>
+
+        <div class="critiques-list">
+
         </div>
 
           <!-- Confirm Post Delete Modal -->
@@ -384,7 +417,12 @@
                   <h4 class="modal-title" id="myModalLabel">Confirm Delete</h4>
                 </div>
                 <div class="modal-body">
-                  Do you wish to delete this post? <br>
+                  Do you wish to delete this post?
+                  <br>
+                  <br>
+                  <%%= title %>
+                  <br>
+                  <br>
                   <%%= message %>
                 </div>
                 <div class="modal-footer">
@@ -405,20 +443,33 @@
       <!-- Critique -->
         <script type="text/template" id="critique-template">
           <div class="row">
+
+          </div>
+
+          <div class="row">
+            <div class="col-xs-2 col-xs-offset-10">
+              <div class="remove-critique-box">
+
+              </div>
+            </div>
+          </div>
+          <div class="row">
             <div class="col-xs-12">
               <div class="critique-message">
                   <%%= message %>
               </div>
             </div>
           </div>
+          <br>
           <div class="row">
-            <div class="col-xs-6">
-              <div class="edit-critique-box">
-
-              </div>
+            <div class="col-xs-1 text-right">
+              <img src="<%%= image_url %>" class="critique-profile-picture img-circle"></img>
             </div>
-            <div class="col-xs-6">
-              <div class="remove-critique-box">
+            <div class="col-xs-4 text-left">
+              <%%= username %>
+            </div>
+            <div class="col-xs-1 col-xs-offset-7">
+              <div class="edit-critique-box">
 
               </div>
             </div>

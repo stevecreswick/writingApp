@@ -9,7 +9,17 @@ class Api::CritiquesController < ApplicationController
   # before_action :current_api_user!
   def index
   post = Post.find( params[:post_id] )
-  render json: post.critiques
+  ar_critiques = post.critiques
+
+  critiques = ar_critiques.map do |ar_critique|
+    data = ar_critique.as_json
+    author = User.find( ar_critique.user_id )
+    data['username'] = author.username
+    data['image_url'] = author.image_url
+    data
+  end
+
+  render json: critiques
   end
 
   def create
@@ -32,7 +42,7 @@ class Api::CritiquesController < ApplicationController
     @post = Post.find( params[:post_id] )
     critique = @post.critiques.find( params[:id] )
     critique.update({message: params[:message] });
-    
+
     respond_to do |format|
 
       format.json { render json: critique }

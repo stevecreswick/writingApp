@@ -47,7 +47,7 @@ app.ProfileView = Backbone.View.extend({
   // },
   renderPosts: function(){
     var currentId = $('#profile_id').val();
-    var urlModel = "/api/posts/" + currentId;
+    var urlModel = "/api/users/" + currentId + "/posts";
 
     app.posts = new app.PostCollection();
     app.postPainter = new app.PostListView({

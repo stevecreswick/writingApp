@@ -56,7 +56,7 @@ $( document ).ready(function() {
 
   app.pagePainter.render();
   app.pagePainter.renderPosts();
-  app.pagePainter.renderPromptForm();
+  // app.pagePainter.renderPromptForm();
 
 
 

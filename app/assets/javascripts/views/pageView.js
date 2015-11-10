@@ -17,6 +17,8 @@ app.PageView = Backbone.View.extend({
     this.$el.empty();
   },
   events:{
+    'click a.write-nav': 'renderPromptForm',
+    'click a.read-nav': 'renderPosts',
     'click li.show-friends': 'showFriends',
     'click li.add-friends': 'addFriends',
     'click li.show-followers': 'showFollowers',
@@ -53,11 +55,19 @@ app.PageView = Backbone.View.extend({
 
     app.followers.fetch();
   },
+  renderSideNav: function(){
+    var $left = $('#left-pane').eq(0);
+    $left.empty();
+    var $line = $('<br>')
+    var $write = $('<a>').addClass('write-nav').html('Write');
+    var $read = $('<a>').addClass('read-nav').html('Read');
+    $left.append($write, $line, $read);
+  },
   renderPosts: function(){
     app.posts = new app.PostCollection();
     app.postPainter = new app.PostListView({
       collection: app.posts,
-      el: $('#post-list')
+      el: $('#center-pane')
     });
 
     app.posts.comparator = function(post) {
@@ -67,14 +77,18 @@ app.PageView = Backbone.View.extend({
     app.posts.comparator = this.reverseSortBy(app.posts.comparator);
 
     app.posts.fetch();
+
+    this.renderSideNav();
   },
   renderPromptForm: function(){
     app.promptFormPainter = new app.promptFormView({
-      el: $('#new-post-box')
+      el: $('#center-pane')
     });
-    this.$('#new-post-box').empty();
+    this.$('#center-pane').empty();
     app.promptFormPainter.render();
     app.promptFormPainter.bindSlider();
+
+    this.renderSideNav();
   },
   renderFriendsPage: function(){
     this.$('#left-pane').empty();

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151031145308) do
+ActiveRecord::Schema.define(version: 20151110180333) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(version: 20151031145308) do
     t.string   "model_url"
     t.string   "genre"
     t.integer  "prompt_word_count"
+    t.integer  "votes"
   end
 
   create_table "users", force: :cascade do |t|
@@ -75,6 +76,8 @@ ActiveRecord::Schema.define(version: 20151031145308) do
     t.string   "currently_reading"
     t.string   "about"
     t.string   "writing_goal"
+    t.integer  "writer_score"
+    t.integer  "reviewer_score"
   end
 
   create_table "writing_prompts", force: :cascade do |t|

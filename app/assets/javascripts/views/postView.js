@@ -24,16 +24,15 @@ app.PostView = Backbone.View.extend({
 
       var poster = this.model.get('username');
       var currentUser = $('#current_user').val()
-      var $deleteButton = $("<button>").addClass("remove-post btn btn-danger").html("X");
+      var $deleteButton = $("<p>").addClass("remove-post").html("delete this post");
       var $makeCritique = $("<button>").addClass("make-critique btn btn-info").html("Make Critique");
-      var $showCritique = $("<button>").addClass("render-critiques btn btn-info").html("Show Critique");
+      var $showCritique = $("<p>").addClass("render-critiques").html("Show Critiques");
 
       this.$el.find(".show-critiques-box").append( $showCritique );
 
-      // Add delete button for current user
+      // Add delete button for current user critique for other
       if (currentUser === poster) {
         this.$el.find(".remove-post-box").append( $deleteButton );
-        // view.$el.append( $deleteButton );
       } else {
         this.$el.find(".remove-post-box").append( $makeCritique );
       }
@@ -42,11 +41,15 @@ app.PostView = Backbone.View.extend({
 
 // Post Events
   events:{
-    'click button.remove-post': 'removePost',
+    'click p.remove-post': 'removePost',
     'click button.delete-post': 'deletePost',
     'click button.make-critique': 'renderCritiqueForm',
     'click button.close-critique': 'closeCritiqueForm',
-    'click button.render-critiques': 'renderCritiques'
+    'click p.render-critiques': 'renderCritiques',
+
+    // Add font size for readability later
+    // 'click li.increase-font': 'increaseFont',
+    // 'click li.decrease-font': 'decreaseFont'
   },
 
     // Remove Post
@@ -67,7 +70,10 @@ app.PostView = Backbone.View.extend({
       this.render();
       var header = $(this.el).find("div.post-author");
       var username = this.model.get('username');
-      this.$("a.post-author").html("by " + username);
+      var profilePic = this.model.get('image_url');
+      var $profilePic = $('<img>').attr("src", profilePic).addClass('profile-picture img-circle');
+      this.$("a.post-author").append($profilePic);
+      this.$("a.post-author").append(username);
     },
 
     // Manipulate Post CSS
@@ -97,19 +103,18 @@ app.PostView = Backbone.View.extend({
       // this.model.critiques.fetch();
       },
     renderCritiques: function(){
-      this.resizePostDiv( this.openHeight );
+      // this.resizePostDiv( this.openHeight );
       this.fetchCritiques();
-      // Fetch critiques not working?
-
-      console.log(this.innerCollection);
       this.innerListView = new app.CritiqueListView({
         collection: this.innerCollection
       });
-      this.$el.append(this.innerListView.$el);
+      var critiqueList = this.$el.find('.critiques-list');
+      critiqueList.css({'height': '20em'})
+      console.log(critiqueList);
+      critiqueList.append(this.innerListView.$el);
     },
     renderCritiqueForm: function(){
       this.$el.empty();
-      this.resizePostDiv( this.openHeight );
       this.renderWithUserName();
       var critiqueButton = $(this.el).find('.make-critique');
       critiqueButton.remove();

@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     get '/posts' => 'posts#index'
     get '/posts/sorted/:genre' => 'posts#genre'
     get '/posts/:id' => 'posts#show'
+    get '/users/:user_id/posts' => 'posts#user_posts'
     post '/posts' => 'posts#create'
     delete '/posts/:id' => 'posts#destroy'
     get '/posts/:id/edit' => 'posts#edit'

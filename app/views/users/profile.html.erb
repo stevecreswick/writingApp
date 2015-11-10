@@ -62,8 +62,7 @@
     <div class="row">
 
       <!-- Left -->
-      <div class="col-xs-12 col-sm-8 col-md-6 col-lg-6">
-        <div id="left-pane">
+      <div class="col-xs-12">
             <div id="user-profile">
 
             <% if @user.id = @current_user.id %>
@@ -122,11 +121,11 @@
       </div>
 
       <!-- Right Pane -->
-      <div class="col-xs-12 col-sm-8 col-md-6 col-lg-6">
-          <div id="right-pane">
+      <div class="row">
+        <div class="col-xs-12">
             <h3 class="profile-posts-header"><%= @user.username %>'s Posts</h3>
             <div id="post-list"></div>
-          </div>
+        </div>
       </div>
 
     </div>

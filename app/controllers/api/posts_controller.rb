@@ -32,9 +32,9 @@ respond_to :html, :json
   render json: posts
   end
 
-  def show
+  def user_posts
     # current_api_user!
-    aRposts = Post.where(user_id: params[:id] )
+    aRposts = Post.where(user_id: params[:user_id] )
     posts = aRposts.map do |aRpost|
       data = aRpost.as_json
       data['username'] = aRpost.user.username
@@ -103,7 +103,7 @@ respond_to :html, :json
   private
 
   def post_params
-    params.require(:post).permit(:title, :message, :prompt, :prompt_word_count, :prompt_type, :word_count, :model_url, :genre)
+    params.require(:post).permit(:title, :message, :prompt, :prompt_word_count, :prompt_type, :word_count, :model_url, :genre, :votes)
   end
 
 

@@ -18,10 +18,18 @@ app.CritiqueView = Backbone.View.extend({
     var authorId = this.model.get('user_id');
     var currentId = parseInt( $('#current_id').val() );
 
+    // Find Author of Post and Render onto Div
+    var urlModel = '/users/show/' + this.model.get('user_id');
+    console.log(urlModel);
+    var critiqueAuthor = new app.User({});
+    critiqueAuthor.fetch({url: urlModel});
+    console.log(critiqueAuthor);
+    var name = critiqueAuthor.get('username');
+    console.log(name);
 
     if ( authorId === currentId ){
       var $editButton = $("<span>").addClass("edit-critique").html("Edit");
-      var $deleteButton = $("<button>").addClass("remove-critique btn btn-danger").html("X");
+      var $deleteButton = $("<a>").addClass("remove-critique").html("X");
 
       // Bind Confirm Modal
 
@@ -36,7 +44,7 @@ app.CritiqueView = Backbone.View.extend({
 
 // Critique Events
   events:{
-    'click button.remove-critique': 'removeCritique',
+    'click a.remove-critique': 'removeCritique',
     'click button.delete-critique': 'deleteCritique',
     'click span.edit-critique': 'editCritique'
   },

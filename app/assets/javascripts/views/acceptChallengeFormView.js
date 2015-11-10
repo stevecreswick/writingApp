@@ -48,9 +48,6 @@ app.AcceptChallengeFormView = Backbone.View.extend({
 
         }
 
-
-
-
         // app.pagePainter.renderPosts();
         // app.pagePainter.renderPromptForm();
       });
