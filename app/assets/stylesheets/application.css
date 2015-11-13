@@ -15,6 +15,7 @@
  *= require bootstrap.min
  *= require bootstrap-slider
  *= require jquery-ui.min
+ *= require jquery.rating
  *= require quill.base
  *= require quill.advanced
  *= require quill.snow
@@ -668,4 +669,22 @@ a.sort:hover{
 
 .show-post{
   margin-top: 6em;
+}
+
+
+/* Star Rating for Post */
+.rating {
+  unicode-bidi: bidi-override;
+  direction: rtl;
+  font-size: 2em;
+}
+.rating > span {
+  display: inline-block;
+  position: relative;
+  width: 1.1em;
+}
+.rating > span:hover:before,
+.rating > span:hover ~ span:before {
+   content: "\2605";
+   position: absolute;
 }

@@ -25,6 +25,8 @@ Rails.application.routes.draw do
     delete '/posts/:id' => 'posts#destroy'
     get '/posts/:id/edit' => 'posts#edit'
     put '/posts/:id' => 'posts#update'
+    post '/posts/:id/ratings' => 'ratings#create'
+
 
     # Critique API
     get '/posts/:post_id/critiques' => 'critiques#index'

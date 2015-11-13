@@ -12,13 +12,16 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui.min
+
 //= require underscore
 //= require backbone
 //= require backbone-relational
 //= require turbolinks
 //= require bootstrap.min
 //= require bootstrap-slider
-//= require jquery-ui.min
+//= require jquery.rating.pack.js
+
 //= require quill.min
 
 //= require models/writingPrompt
@@ -61,6 +64,8 @@
 //= require views/receivedChallengeView
 //= require views/receivedChallengeListView
 
+//= require models/rating
+
 
 //= require views/promptFormView
 //= require views/challengeFormView
@@ -72,4 +77,4 @@
 //= require_self
 
 
-console.log('users manifest');
+console.log('main manifest');

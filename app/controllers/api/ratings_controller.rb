@@ -1,31 +1,32 @@
 class Api::RatingsController < ApplicationController
 
+  include SessionsHelper
+  include UsersHelper
 
-  before_filter :authenticate_user!
+  respond_to :html, :json
+
 
     def create
-            @post = Post.find(params[:post_id])
-            if current_user.id == @post.id
-                redirect_to photo_path(@post), :alert => "You cannot rate for your own post"
+            @post = Post.find(params[:id])
+            if current_user.id == @post.user_id
+                redirect_to main_path, :alert => "You cannot rate for your own post"
             else
-                @rating = Rating.new(params[:rating])
+                @rating = Rating.new(rating_params)
                 @rating.post_id = @post.id
                 @rating.user_id = current_user.id
                 if @rating.save
-                    respond_to do |format|
-                        format.html { redirect_to post(@post), :notice => "Your rating has been saved" }
-                    end
+                        render json: @post
                 end
             end
         end
 
         def update
-            @post = Photo.find_by_id(params[:post])
+            @post = Post.find(params[:id])
             if current_user.id == @post.id
                 redirect_to post(@post), :alert => "You cannot rate for your own post"
             else
                 @rating = current_user.ratings.post(@post.id)
-                if @rating.update_attributes(params[:rating])
+                if @rating.update_attributes(rating_params)
                     respond_to do |format|
                         format.html { redirect_to post(@post), :notice => "Your rating has been updated" }
                     end
@@ -33,5 +34,11 @@ class Api::RatingsController < ApplicationController
             end
         end
 
+
+        private
+
+        def rating_params
+          params.require(:rating).permit(:user_id, :post_id, :value)
+        end
 
 end

@@ -51,6 +51,8 @@ app.PostView = Backbone.View.extend({
     'click span.close-critiques': 'renderWithUserName',
     'click span.render-critiques': 'renderCritiques',
 
+    'click span.rating-button': 'saveRating'
+
     // Add font size for readability later
     // 'click li.increase-font': 'increaseFont',
     // 'click li.decrease-font': 'decreaseFont'
@@ -105,6 +107,26 @@ app.PostView = Backbone.View.extend({
 
     },
 
+  // Rating
+  saveRating: function(ev){
+    console.log('saving');
+    var rating = $(ev.currentTarget).data('rating');
+    var currentVotes = this.model.get('votes');
+    var currentUser = $('#current_id').val();
+    // var score = currentVotes + rating;
+    var urlModel = '/api/posts/' + this.model.get('id') + '/ratings';
+    console.log(urlModel);
+    var newRating = new app.Rating({url: urlModel});
+
+    newRating.url = urlModel;
+    newRating.set('value', rating);
+
+    newRating.save();
+
+    // this.model.set('votes', newRating);
+    // this.model.save({url: urlModel});
+
+  },
   // Critique Controller
     fetchCritiques: function(){
 

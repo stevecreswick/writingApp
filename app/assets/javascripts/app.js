@@ -42,6 +42,8 @@ var do_on_load = function() {
   app.pagePainter.render();
   app.pagePainter.renderPosts();
 
+  $('.star').rating({ callback: function(value, link){ alert(value); } });
+
 
 }
 $(document).ready(do_on_load)
