@@ -22,8 +22,8 @@ app.PageView = Backbone.View.extend({
     'click li.show-friends': 'showFriends',
     'click li.add-friends': 'addFriends',
     'click li.show-followers': 'showFollowers',
-    'click li.render-friends': 'renderFriendsPage',
-    'click li.home-page': 'renderMain'
+    'click li.render-friends': 'renderFriendsPage'
+    // 'click li.home-page': 'renderMain'
   },
   showFriends: function(){
     console.log('show friends clicked');

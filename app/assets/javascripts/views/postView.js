@@ -25,7 +25,7 @@ app.PostView = Backbone.View.extend({
       var poster = this.model.get('username');
       var currentUser = $('#current_user').val()
       var $deleteButton = $("<p>").addClass("remove-post").html("delete this post");
-      var $makeCritique = $("<button>").addClass("make-critique btn btn-info").html("Make Critique");
+      var $makeCritique = $("<button>").addClass("make-critique btn btn-info").html("Review");
       var $showCritique = $("<p>").addClass("render-critiques").html("Show Critiques");
 
       this.$el.find(".show-critiques-box").append( $showCritique );
@@ -34,8 +34,10 @@ app.PostView = Backbone.View.extend({
       if (currentUser === poster) {
         this.$el.find(".remove-post-box").append( $deleteButton );
       } else {
-        this.$el.find(".remove-post-box").append( $makeCritique );
+        // this.$el.find(".remove-post-box").append( $makeCritique );
+
       }
+
 
     },
 
@@ -44,7 +46,9 @@ app.PostView = Backbone.View.extend({
     'click p.remove-post': 'removePost',
     'click button.delete-post': 'deletePost',
     'click button.make-critique': 'renderCritiqueForm',
-    'click button.close-critique': 'closeCritiqueForm',
+    'click button.save-critique': 'createCritique',
+
+    // 'click a.close-critique': 'closeCritiqueForm',
     'click p.render-critiques': 'renderCritiques',
 
     // Add font size for readability later
@@ -70,10 +74,15 @@ app.PostView = Backbone.View.extend({
       this.render();
       var header = $(this.el).find("div.post-author");
       var username = this.model.get('username');
+      var createdAt = this.model.get('created_at');
+
       var profilePic = this.model.get('image_url');
       var $profilePic = $('<img>').attr("src", profilePic).addClass('profile-picture img-circle');
       this.$("a.post-author").append($profilePic);
       this.$("a.post-author").append(username);
+      // this.renderCritiqueFormContainer();
+      // this.renderEditor();
+
     },
 
     // Manipulate Post CSS
@@ -84,6 +93,15 @@ app.PostView = Backbone.View.extend({
       this.$el.empty();
       this.renderWithUserName();
       this.resizePostDiv( this.normalHeight );
+    },
+    createCritique: function(){
+      console.log('clicked');
+
+      var newMessage = this.$el.find('textarea#critique-editor').val();
+      console.log(newMessage);
+      this.fetchCritiques();
+      app.posts.get(this.model.get('id')).critiques.create({message: newMessage});
+
     },
 
   // Critique Controller
@@ -109,29 +127,29 @@ app.PostView = Backbone.View.extend({
         collection: this.innerCollection
       });
       var critiqueList = this.$el.find('.critiques-list');
-      critiqueList.css({'height': '20em'})
+      critiqueList.css({'height': '40em', 'overflow': 'auto'})
       console.log(critiqueList);
       critiqueList.append(this.innerListView.$el);
     },
     renderCritiqueForm: function(){
       this.$el.empty();
       this.renderWithUserName();
+      // this.$el.find('.post-box').css({'height': "15em", "overflow": "auto"});
       var critiqueButton = $(this.el).find('.make-critique');
       critiqueButton.remove();
       this.renderCritiqueFormContainer();
       var postId = parseInt( this.model.get('id') );
       this.fetchCritiques();
-
       this.renderEditor();
       this.bindCritiqueForm(postId);
-
+      this.renderCritiques();
     },
     renderCritiqueFormContainer: function(){
       var formContainer = $('<div>').addClass('critique-form-container');
 
       formContainer.html( _.template( $('#critique-form-template').html()) );
 
-      this.$el.append( formContainer );
+      this.$el.find('.make-critique-box').append( formContainer );
     },
     bindCritiqueForm: function(modelId){
       var scope= this;
@@ -149,9 +167,17 @@ app.PostView = Backbone.View.extend({
       });
     },
     renderEditor: function(){
-      var fullEditor = new Quill('#critique-editor', {
+      // var toolbarClass = '#full-toolbar' + this.model.get('id');
+      // var editorClass = '#critique-editor' + this.model.get('id');
+
+      var toolbarPost = this.$el.find('#full-toolbar').eq(0);
+      var editorPost = this.$el.find('critique-editor').eq(0);
+      console.log(editorPost);
+      console.log(toolbarPost);
+
+      var fullEditor = new Quill(editorPost, {
         modules: {
-            'toolbar': { container: '#full-toolbar' },
+            'toolbar': { container: toolbarPost },
             'link-tooltip': true
         },
         theme: 'snow'

@@ -69,5 +69,7 @@
 
 //= require timer
 //= require app
+//= require_self
+
 
 console.log('users manifest');

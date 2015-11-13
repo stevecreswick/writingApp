@@ -68,9 +68,10 @@ class UsersController < ApplicationController
   end
 
   def show_post
+    @current_user = current_user
     @user = User.find( params[:user_id])
     @post = @user.posts.find( params[:post_id] )
-    # render layout: "profile_layout"
+    render layout: "post_layout"
 
   end
 

@@ -19,7 +19,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <li class="home-page">Write Away</li>
+      <div class="home-page" data-no-turbolink><a href="/" >Write Away</a></div>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -60,6 +60,7 @@
     </div>
 
     <div class="row">
+      <%= link_to "Back", main_path %>
 
       <!-- Left -->
       <div class="col-xs-12">
@@ -123,7 +124,6 @@
       <!-- Right Pane -->
       <div class="row">
         <div class="col-xs-12">
-            <h3 class="profile-posts-header"><%= @user.username %>'s Posts</h3>
             <div id="post-list"></div>
         </div>
       </div>

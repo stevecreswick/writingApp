@@ -13,7 +13,7 @@ var app = app || {};
 
 
 
-$( document ).ready(function() {
+  var do_on_load = function() {
 
   var currentId = $('#profile_id').val();
   var urlModel = "/api/users/" + currentId + "/posts";
@@ -32,4 +32,6 @@ $( document ).ready(function() {
 
 
 
-});
+}
+$(document).ready(do_on_load)
+$(window).bind('page:change', do_on_load)

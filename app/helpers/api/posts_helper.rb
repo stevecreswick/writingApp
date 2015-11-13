@@ -8,4 +8,12 @@ module Api::PostsHelper
     end
   end
 
+  def rating_ballot
+    if @rating = current_user.ratings.find_by_post_id(params[:id])
+        @rating
+    else
+        current_user.ratings.new
+    end
+end
+
 end

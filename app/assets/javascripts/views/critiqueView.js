@@ -19,13 +19,13 @@ app.CritiqueView = Backbone.View.extend({
     var currentId = parseInt( $('#current_id').val() );
 
     // Find Author of Post and Render onto Div
-    var urlModel = '/users/show/' + this.model.get('user_id');
-    console.log(urlModel);
-    var critiqueAuthor = new app.User({});
-    critiqueAuthor.fetch({url: urlModel});
-    console.log(critiqueAuthor);
-    var name = critiqueAuthor.get('username');
-    console.log(name);
+    // var urlModel = '/users/show/' + this.model.get('user_id');
+    // console.log(urlModel);
+    // var critiqueAuthor = new app.User({});
+    // critiqueAuthor.fetch({url: urlModel});
+    // console.log(critiqueAuthor);
+    // var name = critiqueAuthor.get('username');
+    // console.log(name);
 
     if ( authorId === currentId ){
       var $editButton = $("<span>").addClass("edit-critique").html("Edit");
@@ -46,7 +46,8 @@ app.CritiqueView = Backbone.View.extend({
   events:{
     'click a.remove-critique': 'removeCritique',
     'click button.delete-critique': 'deleteCritique',
-    'click span.edit-critique': 'editCritique'
+    'click span.edit-critique': 'editCritique',
+    'click a.close-critique': 'render'
   },
 
   removeCritique: function(){
@@ -60,8 +61,15 @@ app.CritiqueView = Backbone.View.extend({
     console.log('delete critique clicked');
     var confirmModal = this.$el.find('#deleteCritique');
     confirmModal.modal('toggle');
-    this.model.destroy();
+    console.log(this.model);
+    var urlModel = "/api/posts/" + this.model.get('post_id') + "/critiques/" + this.model.get('id');
+    this.model.destroy({url: urlModel});
     this.$el.remove();
+  },
+
+  closeCritiqueForm: function(){
+    this.$el.empty();
+    this.render();
   },
 
   editCritique: function(){
@@ -72,16 +80,15 @@ app.CritiqueView = Backbone.View.extend({
     this.$el.empty();
     this.renderCritiqueFormContainer();
     this.renderEditor();
-
     var message = this.model.get("message");
     $('#critique-editor').first().eq(0).children().eq(0).children().eq(0).html( message );
 
     var postId = parseInt( this.model.get('post_id') );
+    console.log('is this workin?');
     this.bindCritiqueForm(postId);
   },
   renderCritiqueFormContainer: function(){
     var formContainer = $('<div>').addClass('critique-form-container');
-
     formContainer.html( _.template( $('#critique-form-template').html()) );
 
     this.$el.append( formContainer );
@@ -90,7 +97,6 @@ app.CritiqueView = Backbone.View.extend({
     var scope= this;
     $('form#create-critique').on('submit', function(e){
       e.preventDefault();
-
       // Grab Message from div created by Quill Editor
       var newMessage = scope.$('#critique-editor').first().eq(0).children().eq(0).html();
       var urlModel = "/api/posts/" + postId + "/critiques/" + scope.model.get("id");

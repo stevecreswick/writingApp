@@ -11,37 +11,10 @@ var app = app || {};
   });
 
 
-// Create Form
-
-
-// Can create a button that goes to Friends World
-
-// Create Friends
-app.friends = new app.FriendCollection();
-app.friendPainter = new app.FriendListView({
-  collection: app.friends,
-  el: $('#left-pane')
-});
-
-// Create Pending Friends
-app.pendingFriends = new app.PendingFriendCollection();
-app.pendingFriendPainter = new app.FriendListView({
-  collection: app.pendingFriends,
-  el: $('#left-pane')
-});
-
-
-// Responsible for clearing and rendering page
-app.pagePainter = new app.PageView({
-  el: $('#main-page')
-});
-
-
-app.challenges = new app.ChallengeCollection();
 
 
 
-$( document ).ready(function() {
+// $( document ).ready(function() {
 
   // Create Post
 
@@ -54,11 +27,22 @@ $( document ).ready(function() {
 
 
 
-  app.pagePainter.render();
-  app.pagePainter.renderPosts();
   // app.pagePainter.renderPromptForm();
 
+// });
 
 
+var do_on_load = function() {
 
-});
+  // Responsible for clearing and rendering page
+  app.pagePainter = new app.PageView({
+    el: $('#main-page')
+  });
+
+  app.pagePainter.render();
+  app.pagePainter.renderPosts();
+
+
+}
+$(document).ready(do_on_load)
+$(window).bind('page:change', do_on_load)

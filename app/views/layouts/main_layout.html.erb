@@ -32,7 +32,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <li class="home-page">Write Away</li>
+          <li class="home-page"><a href="/">Write Away</a></li>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -324,6 +324,18 @@
 
       <!-- Post  -->
     <script type="text/template" id='post-template'>
+      <div class="row">
+        <div class="col-xs-2">
+          <!-- <div class="show-critiques-box">
+
+          </div> -->
+        </div>
+        <div class="col-xs-6 col-xs-offset-4">
+          <div class="remove-post-box">
+
+          </div>
+        </div>
+      </div>
       <div class="post-prompt-type">
         <div class="row">
           <div class="col-xs-3">
@@ -334,7 +346,7 @@
           <div class="col-xs-6">
             <div class="row">
               <div class="col-xs-12">
-                <h3 class="prompt-label"><%%= title %> </h3>
+                <h3 class="prompt-label"><div data-no-turbolink><a href="/users/<%%= user_id %>/posts/<%%= id %>"><%%= title %></a></div></h3>
               </div>
             </div>
             <div class="row">
@@ -369,9 +381,11 @@
             <!-- <strong><%%= prompt_type %></strong> -->
           </div>
           <div class="col-xs-4">
+            <div data-no-turbolink>
             <a href="/users/profile/<%%= user_id %>" class="post-author">
                 <!-- username rendered here -->
             </a>
+          </div>
           </div>
         </div>
         <div class="row">
@@ -391,6 +405,54 @@
           </div>
         </div>
 
+
+
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="make-critique-box">
+
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-12">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="new-critique-form">
+              <h5 class="text-left">Give Feedback</h5>
+            </div>
+          </div>
+        </div>
+
+
+    <div class="row">
+      <div class="col-xs-12">
+        <textarea id="critique-editor" class="post-body">
+        </textarea>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-1 col-xs-offset-9">
+      </div>
+      <div class="col-xs-1">
+        <button value="Save" class="save-critique btn btn-info">Save</button>
+      </div>
+    </div>
+          <!-- <textarea class= "form-control" id="critique-message" rows="10" name="critique[message]" placeholder="...enter critique"></textarea> -->
+          <input type="hidden" name="critique[post_id]" id="critique-post-id">
+        </form>
+      </div>
+
         <div class="row">
           <div class="col-xs-2">
             <div class="show-critiques-box">
@@ -398,15 +460,19 @@
             </div>
           </div>
           <div class="col-xs-6 col-xs-offset-4">
-            <div class="remove-post-box">
+
+          </div>
+        </div>
+
+
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="critiques-list">
 
             </div>
           </div>
         </div>
 
-        <div class="critiques-list">
-
-        </div>
 
           <!-- Confirm Post Delete Modal -->
           <div class="modal" id="deletePost" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -441,160 +507,185 @@
 
 
       <!-- Critique -->
-        <script type="text/template" id="critique-template">
-          <div class="row">
+      <script type="text/template" id="critique-template">
 
-          </div>
+            <div class="row">
 
-          <div class="row">
-            <div class="col-xs-2 col-xs-offset-10">
-              <div class="remove-critique-box">
+            </div>
 
+            <div class="row">
+              <div class="col-xs-1 col-xs-offset-10">
+                <div class="edit-critique-box">
+
+                </div>
+              </div>
+              <div class="col-xs-1">
+                <div class="remove-critique-box">
+
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-12">
+                <div class="critique-message">
+                    <%%= message %>
+                </div>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-xs-1">
+
+              </div>
+              <div class="col-xs-1 col-xs-offset-9 text-right">
+                <img src="<%%= image_url %>" class="critique-profile-picture img-circle"></img>
+              </div>
+              <div class="col-xs-1 text-left">
+                <%%= username %>
+              </div>
+
+            </div>
+
+
+
+            <!-- Confirm Critique Delete Modal -->
+            <div class="modal" id="deleteCritique" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Confirm Delete</h4>
+                  </div>
+                  <div class="modal-body">
+                    Do you wish to delete your critique?
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                    <button type="button" class="btn btn-primary delete-critique">Yes</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </script>
+
+        <!-- Critique Form -->
+          <script type="text/template" id="critique-form-template">
+
+            <div class="row">
+              <div class="col-xs-12">
+                <div class="new-critique-form">
+                  <h5 class="text-left">Edit Critique</h5>
+                  <form id="create-critique">
+                    <input type="hidden" name="critique[user_id]" value="<%= @user.id %>">
+                    <div id="full-toolbar">
+                      <!-- Add a bold button -->
+                      <span class="ql-format-group">
+                        <span title="Bold" class="ql-format-button ql-bold"></span>
+                        <span class="ql-format-separator"></span>
+                        <span title="Italic" class="ql-format-button ql-italic"></span>
+                        <span class="ql-format-separator"></span>
+                        <span title="Underline" class="ql-format-button ql-underline"></span>
+                      <select title="Text Color" class="ql-color">
+                        <option value="rgb(0, 0, 0)" selected></option>
+                        <option value="rgb(230, 0, 0)"></option>
+                        <option value="rgb(255, 153, 0)"></option>
+                        <option value="rgb(255, 255, 0)"></option>
+                        <option value="rgb(0, 138, 0)"></option>
+                        <option value="rgb(0, 102, 204)"></option>
+                        <option value="rgb(153, 51, 255)"></option>
+                        <option value="rgb(255, 255, 255)"></option>
+                        <option value="rgb(250, 204, 204)"></option>
+                        <option value="rgb(255, 235, 204)"></option>
+                        <option value="rgb(255, 255, 204)"></option>
+                        <option value="rgb(204, 232, 204)"></option>
+                        <option value="rgb(204, 224, 245)"></option>
+                        <option value="rgb(235, 214, 255)"></option>
+                        <option value="rgb(187, 187, 187)"></option>
+                        <option value="rgb(240, 102, 102)"></option>
+                        <option value="rgb(255, 194, 102)"></option>
+                        <option value="rgb(255, 255, 102)"></option>
+                        <option value="rgb(102, 185, 102)"></option>
+                        <option value="rgb(102, 163, 224)"></option>
+                        <option value="rgb(194, 133, 255)"></option>
+                        <option value="rgb(136, 136, 136)"></option>
+                        <option value="rgb(161, 0, 0)"></option>
+                        <option value="rgb(178, 107, 0)"></option>
+                        <option value="rgb(178, 178, 0)"></option>
+                        <option value="rgb(0, 97, 0)"></option>
+                        <option value="rgb(0, 71, 178)"></option>
+                        <option value="rgb(107, 36, 178)"></option>
+                        <option value="rgb(68, 68, 68)"></option>
+                        <option value="rgb(92, 0, 0)"></option>
+                        <option value="rgb(102, 61, 0)"></option>
+                        <option value="rgb(102, 102, 0)"></option>
+                        <option value="rgb(0, 55, 0)"></option>
+                        <option value="rgb(0, 41, 102)"></option>
+                        <option value="rgb(61, 20, 102)"></option>
+                      </select><span class="ql-format-separator"></span>
+                      <select title="Background Color" class="ql-background">
+                        <option value="rgb(0, 0, 0)"></option>
+                        <option value="rgb(230, 0, 0)"></option>
+                        <option value="rgb(255, 153, 0)"></option>
+                        <option value="rgb(255, 255, 0)"></option>
+                        <option value="rgb(0, 138, 0)"></option>
+                        <option value="rgb(0, 102, 204)"></option>
+                        <option value="rgb(153, 51, 255)"></option>
+                        <option value="rgb(255, 255, 255)" selected></option>
+                        <option value="rgb(250, 204, 204)"></option>
+                        <option value="rgb(255, 235, 204)"></option>
+                        <option value="rgb(255, 255, 204)"></option>
+                        <option value="rgb(204, 232, 204)"></option>
+                        <option value="rgb(204, 224, 245)"></option>
+                        <option value="rgb(235, 214, 255)"></option>
+                        <option value="rgb(187, 187, 187)"></option>
+                        <option value="rgb(240, 102, 102)"></option>
+                        <option value="rgb(255, 194, 102)"></option>
+                        <option value="rgb(255, 255, 102)"></option>
+                        <option value="rgb(102, 185, 102)"></option>
+                        <option value="rgb(102, 163, 224)"></option>
+                        <option value="rgb(194, 133, 255)"></option>
+                        <option value="rgb(136, 136, 136)"></option>
+                        <option value="rgb(161, 0, 0)"></option>
+                        <option value="rgb(178, 107, 0)"></option>
+                        <option value="rgb(178, 178, 0)"></option>
+                        <option value="rgb(0, 97, 0)"></option>
+                        <option value="rgb(0, 71, 178)"></option>
+                        <option value="rgb(107, 36, 178)"></option>
+                        <option value="rgb(68, 68, 68)"></option>
+                        <option value="rgb(92, 0, 0)"></option>
+                        <option value="rgb(102, 61, 0)"></option>
+                        <option value="rgb(102, 102, 0)"></option>
+                        <option value="rgb(0, 55, 0)"></option>
+                        <option value="rgb(0, 41, 102)"></option>
+                        <option value="rgb(61, 20, 102)"></option>
+                      </select><span class="ql-format-separator"></span>
+                    </div>
               </div>
             </div>
           </div>
           <div class="row">
             <div class="col-xs-12">
-              <div class="critique-message">
-                  <%%= message %>
-              </div>
-            </div>
-          </div>
-          <br>
-          <div class="row">
-            <div class="col-xs-1 text-right">
-              <img src="<%%= image_url %>" class="critique-profile-picture img-circle"></img>
-            </div>
-            <div class="col-xs-4 text-left">
-              <%%= username %>
-            </div>
-            <div class="col-xs-1 col-xs-offset-7">
-              <div class="edit-critique-box">
-
-              </div>
-            </div>
-          </div>
-
-
-
-          <!-- Confirm Critique Delete Modal -->
-          <div class="modal" id="deleteCritique" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                  <h4 class="modal-title" id="myModalLabel">Confirm Delete</h4>
-                </div>
-                <div class="modal-body">
-                  Do you wish to delete your critique?
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-                  <button type="button" class="btn btn-primary delete-critique">Yes</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </script>
-
-      <!-- Critique Form -->
-        <script type="text/template" id="critique-form-template">
-          <div class="new-critique-form">
-            <form id="create-critique">
-              <input type="hidden" name="critique[user_id]" value="<%= @user.id %>">
-              <div id="full-toolbar">
-                <!-- Add a bold button -->
-                <span class="ql-format-group">
-                  <span title="Bold" class="ql-format-button ql-bold"></span>
-                  <span class="ql-format-separator"></span>
-                  <span title="Italic" class="ql-format-button ql-italic"></span>
-                  <span class="ql-format-separator"></span>
-                  <span title="Underline" class="ql-format-button ql-underline"></span>
-                <select title="Text Color" class="ql-color">
-                  <option value="rgb(0, 0, 0)" selected></option>
-                  <option value="rgb(230, 0, 0)"></option>
-                  <option value="rgb(255, 153, 0)"></option>
-                  <option value="rgb(255, 255, 0)"></option>
-                  <option value="rgb(0, 138, 0)"></option>
-                  <option value="rgb(0, 102, 204)"></option>
-                  <option value="rgb(153, 51, 255)"></option>
-                  <option value="rgb(255, 255, 255)"></option>
-                  <option value="rgb(250, 204, 204)"></option>
-                  <option value="rgb(255, 235, 204)"></option>
-                  <option value="rgb(255, 255, 204)"></option>
-                  <option value="rgb(204, 232, 204)"></option>
-                  <option value="rgb(204, 224, 245)"></option>
-                  <option value="rgb(235, 214, 255)"></option>
-                  <option value="rgb(187, 187, 187)"></option>
-                  <option value="rgb(240, 102, 102)"></option>
-                  <option value="rgb(255, 194, 102)"></option>
-                  <option value="rgb(255, 255, 102)"></option>
-                  <option value="rgb(102, 185, 102)"></option>
-                  <option value="rgb(102, 163, 224)"></option>
-                  <option value="rgb(194, 133, 255)"></option>
-                  <option value="rgb(136, 136, 136)"></option>
-                  <option value="rgb(161, 0, 0)"></option>
-                  <option value="rgb(178, 107, 0)"></option>
-                  <option value="rgb(178, 178, 0)"></option>
-                  <option value="rgb(0, 97, 0)"></option>
-                  <option value="rgb(0, 71, 178)"></option>
-                  <option value="rgb(107, 36, 178)"></option>
-                  <option value="rgb(68, 68, 68)"></option>
-                  <option value="rgb(92, 0, 0)"></option>
-                  <option value="rgb(102, 61, 0)"></option>
-                  <option value="rgb(102, 102, 0)"></option>
-                  <option value="rgb(0, 55, 0)"></option>
-                  <option value="rgb(0, 41, 102)"></option>
-                  <option value="rgb(61, 20, 102)"></option>
-                </select><span class="ql-format-separator"></span>
-                <select title="Background Color" class="ql-background">
-                  <option value="rgb(0, 0, 0)"></option>
-                  <option value="rgb(230, 0, 0)"></option>
-                  <option value="rgb(255, 153, 0)"></option>
-                  <option value="rgb(255, 255, 0)"></option>
-                  <option value="rgb(0, 138, 0)"></option>
-                  <option value="rgb(0, 102, 204)"></option>
-                  <option value="rgb(153, 51, 255)"></option>
-                  <option value="rgb(255, 255, 255)" selected></option>
-                  <option value="rgb(250, 204, 204)"></option>
-                  <option value="rgb(255, 235, 204)"></option>
-                  <option value="rgb(255, 255, 204)"></option>
-                  <option value="rgb(204, 232, 204)"></option>
-                  <option value="rgb(204, 224, 245)"></option>
-                  <option value="rgb(235, 214, 255)"></option>
-                  <option value="rgb(187, 187, 187)"></option>
-                  <option value="rgb(240, 102, 102)"></option>
-                  <option value="rgb(255, 194, 102)"></option>
-                  <option value="rgb(255, 255, 102)"></option>
-                  <option value="rgb(102, 185, 102)"></option>
-                  <option value="rgb(102, 163, 224)"></option>
-                  <option value="rgb(194, 133, 255)"></option>
-                  <option value="rgb(136, 136, 136)"></option>
-                  <option value="rgb(161, 0, 0)"></option>
-                  <option value="rgb(178, 107, 0)"></option>
-                  <option value="rgb(178, 178, 0)"></option>
-                  <option value="rgb(0, 97, 0)"></option>
-                  <option value="rgb(0, 71, 178)"></option>
-                  <option value="rgb(107, 36, 178)"></option>
-                  <option value="rgb(68, 68, 68)"></option>
-                  <option value="rgb(92, 0, 0)"></option>
-                  <option value="rgb(102, 61, 0)"></option>
-                  <option value="rgb(102, 102, 0)"></option>
-                  <option value="rgb(0, 55, 0)"></option>
-                  <option value="rgb(0, 41, 102)"></option>
-                  <option value="rgb(61, 20, 102)"></option>
-                </select><span class="ql-format-separator"></span>
-              </div>
-
               <!-- Create the editor container -->
               <div id="critique-editor" class="post-body">
               </div>
-              <!-- <textarea class= "form-control" id="critique-message" rows="10" name="critique[message]" placeholder="...enter critique"></textarea> -->
-              <input type="hidden" name="critique[post_id]" id="critique-post-id">
-              <input type="submit" value="Submit" class="btn btn-danger">
-            </form>
-            <button class="close-critique btn btn-danger">close</button>
+            </div>
           </div>
+          <div class="row">
+            <div class="col-xs-12">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-1 col-xs-offset-10">
+              <a class="close-critique">cancel</button>
+            </div>
+            <div class="col-xs-1">
+              <input type="submit" value="Save" class="btn btn-info">
+            </div>
+          </div>
+                <!-- <textarea class= "form-control" id="critique-message" rows="10" name="critique[message]" placeholder="...enter critique"></textarea> -->
+                <input type="hidden" name="critique[post_id]" id="critique-post-id">
+              </form>
+            </div>
         </script>
 
     <!-- Render Prompt Form -->

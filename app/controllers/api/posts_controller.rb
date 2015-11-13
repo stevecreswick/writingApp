@@ -21,6 +21,17 @@ respond_to :html, :json
     render json: posts
   end
 
+  def show
+    # current_api_user!
+    # aRposts = @current_user.posts
+    aRpost = Post.find(params[:id])
+      data = aRpost.as_json
+      data['username'] = aRpost.user.username
+      data['image_url'] = aRpost.user.image_url
+      data['created_at'] = Date.strptime(aRpost.created_at.to_s)
+    render json: data
+  end
+
   def genre
   active_record_posts = Post.where({genre: params[:genre]})
   posts = active_record_posts.map do |aRpost|
@@ -46,7 +57,6 @@ respond_to :html, :json
     render json: posts
     # redirect_to '/users/post/:id'
   end
-
 
   def create
     # current_api_user!

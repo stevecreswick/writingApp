@@ -20,6 +20,10 @@ class User < ActiveRecord::Base
   # Pending Friendships
   # has_many :pending_friends, -> { where(friendships: { status: "pending"}) }, through: :friendships, source: :friend
 
+  # Ratings and Rated Posts
+  has_many :ratings
+  has_many :rated_posts, :through => :ratings, :source => :posts
+
   before_create :generate_token
 
 

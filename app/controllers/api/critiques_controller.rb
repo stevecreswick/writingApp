@@ -26,6 +26,7 @@ class Api::CritiquesController < ApplicationController
     post = Post.find( params[:post_id] )
     critique = post.critiques.create(critique_params)
     critique.update( user_id: current_user.id )
+    critique.update( votes: 0 )
 
     respond_to do |format|
         format.json { render json: critique }
