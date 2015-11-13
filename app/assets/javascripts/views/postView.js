@@ -26,7 +26,7 @@ app.PostView = Backbone.View.extend({
       var currentUser = $('#current_user').val()
       var $deleteButton = $("<p>").addClass("remove-post").html("delete this post");
       var $makeCritique = $("<button>").addClass("make-critique btn btn-info").html("Review");
-      var $showCritique = $("<p>").addClass("render-critiques").html("Show Critiques");
+      var $showCritique = $("<span>").addClass("render-critiques").html("Show Critiques");
 
       this.$el.find(".show-critiques-box").append( $showCritique );
 
@@ -48,8 +48,8 @@ app.PostView = Backbone.View.extend({
     'click button.make-critique': 'renderCritiqueForm',
     'click button.save-critique': 'createCritique',
 
-    // 'click a.close-critique': 'closeCritiqueForm',
-    'click p.render-critiques': 'renderCritiques',
+    'click span.close-critiques': 'renderWithUserName',
+    'click span.render-critiques': 'renderCritiques',
 
     // Add font size for readability later
     // 'click li.increase-font': 'increaseFont',
@@ -73,6 +73,7 @@ app.PostView = Backbone.View.extend({
       this.$el.empty();
       this.render();
       var header = $(this.el).find("div.post-author");
+
       var username = this.model.get('username');
       var createdAt = this.model.get('created_at');
 
@@ -129,6 +130,10 @@ app.PostView = Backbone.View.extend({
       var critiqueList = this.$el.find('.critiques-list');
       critiqueList.css({'height': '40em', 'overflow': 'auto'})
       console.log(critiqueList);
+
+      var button = $(this.el).find("span.render-critiques");
+      button.removeClass('render-critiques').addClass('close-critiques').html('Hide');
+
       critiqueList.append(this.innerListView.$el);
     },
     renderCritiqueForm: function(){

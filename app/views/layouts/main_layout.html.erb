@@ -336,6 +336,7 @@
           </div>
         </div>
       </div>
+
       <div class="post-prompt-type">
         <div class="row">
           <div class="col-xs-3">
@@ -366,7 +367,7 @@
             <strong class="prompt-label"><%%= prompt %></strong>
           </div>
         </div>
-
+      </div>
         <!-- Font Size Controls -->
         <!-- <div class="row">
           <div class="col-xs-12">
@@ -388,6 +389,7 @@
           </div>
           </div>
         </div>
+
         <div class="row">
           <div class="col-xs-12">
             <%%= prompt %>
@@ -420,6 +422,7 @@
           </div>
         </div>
 
+<!-- Critique Form -->
         <div class="row">
           <div class="col-xs-12">
             <div class="new-critique-form">
@@ -431,8 +434,7 @@
 
     <div class="row">
       <div class="col-xs-12">
-        <textarea id="critique-editor" class="post-body">
-        </textarea>
+        <textarea id="critique-editor" class="post-body"></textarea>
       </div>
     </div>
 
@@ -446,12 +448,15 @@
       </div>
       <div class="col-xs-1">
         <button value="Save" class="save-critique btn btn-info">Save</button>
+        <input type="hidden" name="critique[post_id]" id="critique-post-id">
+
+      </form>
+
       </div>
     </div>
+  </div>
+
           <!-- <textarea class= "form-control" id="critique-message" rows="10" name="critique[message]" placeholder="...enter critique"></textarea> -->
-          <input type="hidden" name="critique[post_id]" id="critique-post-id">
-        </form>
-      </div>
 
         <div class="row">
           <div class="col-xs-2">
@@ -571,14 +576,13 @@
         <!-- Critique Form -->
           <script type="text/template" id="critique-form-template">
 
-            <div class="row">
+            <!-- <div class="row">
               <div class="col-xs-12">
                 <div class="new-critique-form">
                   <h5 class="text-left">Edit Critique</h5>
                   <form id="create-critique">
                     <input type="hidden" name="critique[user_id]" value="<%= @user.id %>">
                     <div id="full-toolbar">
-                      <!-- Add a bold button -->
                       <span class="ql-format-group">
                         <span title="Bold" class="ql-format-button ql-bold"></span>
                         <span class="ql-format-separator"></span>
@@ -662,11 +666,11 @@
                     </div>
               </div>
             </div>
-          </div>
+          </div> -->
           <div class="row">
             <div class="col-xs-12">
               <!-- Create the editor container -->
-              <div id="critique-editor" class="post-body">
+              <textarea id="edit-critique" class="post-body"></textarea>
               </div>
             </div>
           </div>
@@ -679,7 +683,7 @@
               <a class="close-critique">cancel</button>
             </div>
             <div class="col-xs-1">
-              <input type="submit" value="Save" class="btn btn-info">
+              <span class="save-edited-critique btn btn-info">Save</span>
             </div>
           </div>
                 <!-- <textarea class= "form-control" id="critique-message" rows="10" name="critique[message]" placeholder="...enter critique"></textarea> -->

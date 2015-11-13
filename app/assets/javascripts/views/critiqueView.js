@@ -47,6 +47,7 @@ app.CritiqueView = Backbone.View.extend({
     'click a.remove-critique': 'removeCritique',
     'click button.delete-critique': 'deleteCritique',
     'click span.edit-critique': 'editCritique',
+    'click span.save-edited-critique': 'saveCritique',
     'click a.close-critique': 'render'
   },
 
@@ -74,18 +75,23 @@ app.CritiqueView = Backbone.View.extend({
 
   editCritique: function(){
     console.log('edit critique clicked');
-    this.renderCritiqueForm();
+    this.renderEdit();
   },
-  renderCritiqueForm: function(){
+  renderEdit: function(){
     this.$el.empty();
-    this.renderCritiqueFormContainer();
-    this.renderEditor();
-    var message = this.model.get("message");
-    $('#critique-editor').first().eq(0).children().eq(0).children().eq(0).html( message );
-
-    var postId = parseInt( this.model.get('post_id') );
+    var formContainer = $('<div>').addClass('critique-form-container');
+    this.$el.html( _.template( $('#critique-form-template').html()) );
     console.log('is this workin?');
-    this.bindCritiqueForm(postId);
+    var message = this.model.get("message");
+    $('#edit-critique').val( message );
+  },
+  saveCritique: function(){
+    var postId = parseInt( this.model.get('post_id') );
+    var newMessage = $('#edit-critique').val();
+    var urlModel = '/posts/' + postId + '/critiques/' + this.model.get('id');
+    console.log(newMessage);
+    this.model.set('message', newMessage)
+    this.model.save({url: urlModel});
   },
   renderCritiqueFormContainer: function(){
     var formContainer = $('<div>').addClass('critique-form-container');
