@@ -22,7 +22,8 @@ class User < ActiveRecord::Base
 
   # Ratings and Rated Posts
   has_many :ratings
-  has_many :rated_posts, :through => :ratings, :source => :posts
+  has_many :rated_posts, :through => :ratings, :source => :post
+  # has_many :posts, through: :ratings, as: :rated_posts
 
   before_create :generate_token
 

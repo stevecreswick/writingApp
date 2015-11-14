@@ -425,15 +425,24 @@
 
         <div class="row">
           <div class="col-xs-12">
-            <div class="rating">
-             <span data-rating="1" class="rating1 rating-button">☆</span>
-             <span data-rating="2" class="rating2 rating-button">☆</span>
-             <span data-rating="3" class="rating3 rating-button">☆</span>
-             <span data-rating="4" class="rating4 rating-button">☆</span>
-             <span data-rating="5" class="rating5 rating-button">☆</span>
-             </div>
+            <div class="rating text-center">
+              <div class="rating-button" data-post="<%%= id %>" id="star5" value="5" /><label for="star5" class="rating-button" id="label-star5" data-post="<%%= id %>"
+                title="Shakespeare" data-value="5">5 stars</label>
+              <div class="rating-button" data-post="<%%= id %>" id="star4" value="4" /><label for="star4" class="rating-button" id="label-star4" data-post="<%%= id %>"
+                title="Wordsmith" data-value="4">4 stars</label>
+              <div class="rating-button" data-post="<%%= id %>" id="star3" value="3" /><label for="star3" class="rating-button" id="label-star3" data-post="<%%= id %>"
+                title="Scribe" data-value="3">3 stars</label>
+              <div class="rating-button" data-post="<%%= id %>" id="star2" value="2" /><label for="star2" class="rating-button" id="label-star2" data-post="<%%= id %>"
+                title="Novice" data-value="2">2 stars</label>
+              <div class="rating-button" data-post="<%%= id %>" id="star1" value="1" /><label for="star1" class="rating-button" id="label-star1" data-post="<%%= id %>"
+                title="Beginner" data-value="1">1 star</label>
+              <div type="hidden" id="post-id" value="<%%= id %>"></input>
+            </div>
           </div>
         </div>
+
+
+
 
 <!-- Critique Form -->
         <div class="row">

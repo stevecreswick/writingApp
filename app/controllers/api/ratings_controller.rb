@@ -8,8 +8,13 @@ class Api::RatingsController < ApplicationController
 
     def create
             @post = Post.find(params[:id])
+
             if current_user.id == @post.user_id
                 redirect_to main_path, :alert => "You cannot rate for your own post"
+            elsif ( Rating.where({user_id: current_user.id, post_id: @post.id}).exists?)
+                # puts @post.ratings.where(user_id: current_user.id)
+                puts '**************** Already Rated ******************'
+                render json: @post
             else
                 @rating = Rating.new(rating_params)
                 @rating.post_id = @post.id
@@ -19,7 +24,6 @@ class Api::RatingsController < ApplicationController
                 end
             end
         end
-
         def update
             @post = Post.find(params[:id])
             if current_user.id == @post.id
@@ -32,6 +36,18 @@ class Api::RatingsController < ApplicationController
                     end
                 end
             end
+        end
+
+        def user_rating
+          @post = Post.find(params[:id])
+
+          if current_user.id == @post.user_id
+            render json: @post
+          else
+            @rating = @post.ratings.where({user_id: current_user.id});
+            render json: @rating[0]
+          end
+
         end
 
 

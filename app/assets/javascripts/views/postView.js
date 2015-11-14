@@ -30,6 +30,8 @@ app.PostView = Backbone.View.extend({
 
       this.$el.find(".show-critiques-box").append( $showCritique );
 
+      this.colorRating();
+
       // Add delete button for current user critique for other
       if (currentUser === poster) {
         this.$el.find(".remove-post-box").append( $deleteButton );
@@ -51,7 +53,7 @@ app.PostView = Backbone.View.extend({
     'click span.close-critiques': 'renderWithUserName',
     'click span.render-critiques': 'renderCritiques',
 
-    'click span.rating-button': 'saveRating'
+    'click label.rating-button': 'saveRating'
 
     // Add font size for readability later
     // 'click li.increase-font': 'increaseFont',
@@ -98,33 +100,56 @@ app.PostView = Backbone.View.extend({
       this.resizePostDiv( this.normalHeight );
     },
     createCritique: function(){
-      console.log('clicked');
-
       var newMessage = this.$el.find('textarea#critique-editor').val();
       console.log(newMessage);
       this.fetchCritiques();
       app.posts.get(this.model.get('id')).critiques.create({message: newMessage});
-
     },
 
   // Rating
-  saveRating: function(ev){
-    console.log('saving');
-    var rating = $(ev.currentTarget).data('rating');
-    var currentVotes = this.model.get('votes');
-    var currentUser = $('#current_id').val();
-    // var score = currentVotes + rating;
-    var urlModel = '/api/posts/' + this.model.get('id') + '/ratings';
-    console.log(urlModel);
-    var newRating = new app.Rating({url: urlModel});
+  saveRating: function(e){
 
+    $(e.currentTarget).eq(0).addClass('rated-star');
+    var rating = $(e.currentTarget).eq(0).data('value');
+
+    this.colorStars(rating);
+
+    var post = $(e.currentTarget).eq(0);
+    var postId = post.data('post');
+    var currentUser = $('#current_id').val();
+
+    var urlModel = '/api/posts/' + postId + '/ratings';
+
+    var newRating = new app.Rating({url: urlModel});
     newRating.url = urlModel;
     newRating.set('value', rating);
 
     newRating.save();
 
-    // this.model.set('votes', newRating);
-    // this.model.save({url: urlModel});
+  },
+
+  colorStars: function(rating){
+    for (var i = 1; i <= rating; i++) {
+      var divId = "#label-star" + i;
+      var addStar = this.$el.find(divId).eq(0);
+      addStar.addClass('rated-star')
+    }
+  },
+
+  colorRating: function(){
+    var urlModel = '/api/posts/' + this.model.get('id') + '/ratings';
+    var rating = new app.Rating();
+
+    console.log(urlModel);
+    rating.url = urlModel;
+    rating.fetch({async:false});
+
+
+    if (rating.get('id')){
+      var score = rating.get('value');
+      console.log(score);
+      this.colorStars(score);
+    }
 
   },
   // Critique Controller

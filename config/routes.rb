@@ -26,6 +26,7 @@ Rails.application.routes.draw do
     get '/posts/:id/edit' => 'posts#edit'
     put '/posts/:id' => 'posts#update'
     post '/posts/:id/ratings' => 'ratings#create'
+    get '/posts/:id/ratings' => 'ratings#user_rating'
 
 
     # Critique API

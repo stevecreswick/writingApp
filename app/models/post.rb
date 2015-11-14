@@ -4,7 +4,8 @@ class Post < ActiveRecord::Base
   has_many :critiques
 
   has_many :ratings
-  has_many :raters, :through => :ratings, :source => :users
+  # has_many :raters, :through => :ratings, :foreign_key => :user_id
+
 
   def average_rating
     @value = 0
