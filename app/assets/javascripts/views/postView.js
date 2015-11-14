@@ -144,10 +144,8 @@ app.PostView = Backbone.View.extend({
     rating.url = urlModel;
     rating.fetch({async:false});
 
-
     if (rating.get('id')){
       var score = rating.get('value');
-      console.log(score);
       this.colorStars(score);
     }
 
