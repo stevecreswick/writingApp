@@ -489,22 +489,27 @@ div.friend-view{
 
 .genre-links{
   margin-top: 1em;
+  padding-left: -2em;
+
   color: gold;
   text-align: center;
   font-size: 1.1em;
   width:100%;
   background: rgba(0,0,0,0.7);
+  line-height: 200%
 }
 
 a.all-sort{
   color: gold;
 }
 
-a.sort{
+li.sort{
   color: white;
+  text-decoration: none;
+  list-style: none;
 }
 
-a.sort:hover{
+li.sort:hover{
   cursor: pointer;
   color: floralwhite;
 }
