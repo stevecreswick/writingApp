@@ -22,8 +22,17 @@ app.PageView = Backbone.View.extend({
     'click li.show-friends': 'showFriends',
     'click li.add-friends': 'addFriends',
     'click li.show-followers': 'showFollowers',
-    'click li.render-friends': 'renderFriendsPage'
+    'click li.render-friends': 'renderFriendsPage',
+    'click li.render-friends': 'renderFriendsPage',
+    'click li.sort': 'updateList',
     // 'click li.home-page': 'renderMain'
+  },
+
+  currentGenre: 'all',
+
+  updateList: function(e){
+    this.currentGenre = $(e.currentTarget).eq(0).data('url');
+    this.renderPosts( this.currentGenre );
   },
   showFriends: function(){
     console.log('show friends clicked');
@@ -56,26 +65,49 @@ app.PageView = Backbone.View.extend({
     app.followers.fetch();
   },
   renderSideNav: function(){
+
     var $left = $('#left-pane').eq(0);
     $left.empty();
-    var $line = $('<br>')
+
+    // Add Nav Items
     var $write = $('<a>').addClass('write-nav').html('Write');
+    var $line = $('<br>')
     var $read = $('<a>').addClass('read-nav').html('Read');
     $left.append($write, $line, $read);
+
+    // Add Genre Links
+    this.renderGenreLinks( $left );
   },
-  renderPosts: function(){
+  renderGenreLinks: function(node){
+    var $postListHeader = _.template( $('#post-list-menu').html() )
+    node.append($postListHeader);
+  },
+  renderPosts: function(genre){
+
     app.posts = new app.PostCollection();
     app.postPainter = new app.PostListView({
       collection: app.posts,
       el: $('#center-pane')
     });
 
+    console.log(genre);
+
+    if ( genre === 'all' ){
+      var urlModel = "/api/posts";
+      app.posts.url = urlModel;
+    } else {
+      var urlModel = "/api/posts/sorted/" + genre;
+      console.log(urlModel);
+      app.posts.url = urlModel;
+    }
+
+    // Sort by created at
     app.posts.comparator = function(post) {
       return post.get("created_at");
     };
 
     app.posts.comparator = this.reverseSortBy(app.posts.comparator);
-
+    console.log(app.posts.url);
     app.posts.fetch();
 
     this.renderSideNav();
@@ -110,7 +142,7 @@ app.PageView = Backbone.View.extend({
   renderMain: function(){
     this.render();
     this.renderPromptForm();
-    this.renderPosts();
+    this.renderPosts( this.currentGenre );
   },
   reverseSortBy: function(sortByFunction) {
   return function(left, right) {

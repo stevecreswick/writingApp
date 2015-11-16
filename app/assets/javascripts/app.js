@@ -40,7 +40,7 @@ var do_on_load = function() {
   });
 
   app.pagePainter.render();
-  app.pagePainter.renderPosts();
+  app.pagePainter.renderPosts( app.pagePainter.currentGenre );
 
   $('.star').rating({ callback: function(value, link){ alert(value); } });
 

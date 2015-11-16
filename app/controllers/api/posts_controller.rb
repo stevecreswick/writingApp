@@ -30,6 +30,8 @@ respond_to :html, :json
       data['username'] = aRpost.user.username
       data['image_url'] = aRpost.user.image_url
       data['created_at'] = Date.strptime(aRpost.created_at.to_s)
+      data['avg_rating'] = aRpost.average_rating
+
     render json: data
   end
 
@@ -39,6 +41,7 @@ respond_to :html, :json
     data = aRpost.as_json
     data['username'] = aRpost.user.username
     data['image_url'] = aRpost.user.image_url
+    data['avg_rating'] = aRpost.average_rating
     data
   end
   render json: posts
