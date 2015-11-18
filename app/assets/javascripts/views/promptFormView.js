@@ -10,6 +10,7 @@ app.promptFormView = Backbone.View.extend({
   },
   render: function(){
     this.$el.empty();
+
     var html = this.template();
     var $html = $( html );
     this.$el.append( $html );
@@ -18,9 +19,14 @@ app.promptFormView = Backbone.View.extend({
     'click button.render-prompt': 'getPrompt',
     'click button.start': 'renderWritingForm'
   },
+  updateView: function(){
+    console.log('update view called');
+    this.remove();
+    this.render();
+  },
+  minWords: null,
   getPrompt: function(e){
-      e.preventDefault(e);
-      console.log('prompt render');
+      e.preventDefault();
       var promptType = $('#choose-type').val();
       var writingPrompts = new app.WritingPromptCollection();
       var promptPainter = new app.WritingPromptListView({
@@ -38,9 +44,13 @@ app.promptFormView = Backbone.View.extend({
         console.log('no url for this type : ' + promptType);
       }
 
+      writingPrompts.fetch({url: writingPrompts.url, async:false});
 
-
-      writingPrompts.fetch({async:false});
+      // Record Prompt
+      this.prompt = writingPrompts.models[0].get('prompt');
+      console.log( this.prompt );
+      this.type = writingPrompts.models[0].get('prompt_type');
+      console.log( this.type );
 
       // Resize Prompt Button and Add Start
       this.$(".render-prompt").css({'width': '50%'}).html("New Prompt");
@@ -52,9 +62,27 @@ app.promptFormView = Backbone.View.extend({
       // this.$el.append(button);
     },
     renderWritingForm: function(e){
-      e.preventDefault();
+      var newPost = this.$el.find('.new-post-box');
+      console.log(newPost);
+      newPost.css({"display": "none", "z-index": "-2"});
       var newPrompt = this.createPrompt();
-      this.$el.css({'height': '75%'})
+      console.log(this.prompt);
+      console.log(this.type);
+
+      //
+      // console.log(this.minWords);
+      // if (this.minWords){
+      //   console.log('already have word count');
+      // } else if (this.minWords === null) {
+      //   this.minWords = $('#post-word-count').val();
+      //   console.log(this.minWords);
+      // } else {
+      //   console.log('else');
+      // }
+
+      e.preventDefault();
+      console.log(newPrompt);
+
       this.$el.empty();
       var template = _.template( $('#create-post-template').html() );
       var html = template();
@@ -75,7 +103,7 @@ app.promptFormView = Backbone.View.extend({
 
       this.renderEditor();
       this.bindWritingFormSubmit(newPrompt);
-      this.checkWordCount();
+      this.checkWordCount(newPrompt);
 
     },
     bindWritingFormSubmit: function(newPrompt){
@@ -104,7 +132,8 @@ app.promptFormView = Backbone.View.extend({
             genre: newPrompt.genre},
             {wait:true});
 
-          scope.render();
+          app.pagePainter.renderMain();
+          // scope.render();
           scope.$el.css({'height': 'auto'})
         } else {
 
@@ -116,14 +145,22 @@ app.promptFormView = Backbone.View.extend({
 
     },
     createPrompt: function(){
+      // this.prompt = this.prompt || $('.prompt-text').text();
+      // this.wordCount = this.wordCount || $('#post-word-count').val();
+      // this.type = this.type || $('#choose-type').val();
+      // this.genre = this.genre || $('#choose-genre').val();
+      //
+      console.log(this.prompt);
+      // console.log(this.wordCount);
+      // console.log(this.type);
+      // console.log(this.genre);
 
-      var newPrompt = {
-        prompt:  $('.prompt-text').text(),
+      var newPrompt = newPrompt || {
+        prompt:  this.$el.find('.prompt-text').text(),
         wordCount: $('#post-word-count').val(),
         type: $('#choose-type').val(),
         genre: $('#choose-genre').val()
-
-      }
+      };
 
       if (newPrompt.type === 'One Word'){
         console.log('one word');
@@ -141,17 +178,36 @@ app.promptFormView = Backbone.View.extend({
       return newPrompt;
     },
 
-    checkWordCount: function(){
+    checkWordCount: function(newPrompt){
       this.wordCount = 0;
+      var scope = this;
       $('#post-editor').on('keyup', function(){
-        var text = $('#post-editor').find('.ql-editor').text();
+        var text = scope.$el.find('#post-editor').find('.ql-editor').text();
         this.wordCount = text.match(/\S+/g).length;
-        // console.log( this.characters.length );
-        // this.characters = $('#post-editor').text().length;
         $('.character-count').html( this.wordCount );
+
+        var progressBar = scope.$el.find('#word-count-progress');
+
+        var changeWidth = (this.wordCount / newPrompt.wordCount ) * 100;
+        var newWidth = changeWidth + "%";
+
+        if (changeWidth <= 100) {
+          progressBar.css({"width": newWidth});
+        }
+
       });
+
+
     },
-    
+
+    updateProgress: function(wordCount){
+      console.log('you');
+      var progressBar = scope.$el.find('#word-count-progress');
+      console.log(progressBar);
+
+
+
+    },
     bindSlider: function(){
       $( "#slider-word-count" ).slider({
            range: "min",
@@ -170,6 +226,8 @@ app.promptFormView = Backbone.View.extend({
 
     },
     renderEditor: function(){
+      console.log('rendering');
+
       var fullEditor = new Quill('#post-editor', {
         modules: {
             'toolbar': { container: '#post-toolbar' },

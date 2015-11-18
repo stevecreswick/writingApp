@@ -176,7 +176,6 @@
 
 
     <script type="text/template" id="create-post-template">
-      <div class="new-post-box">
       <!-- <h1 class="create-post-header">Write</h3> -->
 
         <form id="create-post">
@@ -206,7 +205,6 @@
           <div class="form-group">
             <!-- Create the toolbar container -->
             <div id="post-toolbar">
-              <!-- Add a bold button -->
               <span class="ql-format-group">
                 <span title="Bold" class="ql-format-button ql-bold"></span>
                 <span class="ql-format-separator"></span>
@@ -298,10 +296,30 @@
 
         </form>
         <br><br>
-        <h4 id="post-box-word-count"></h4>
-        <p id="post-error"></p>
+        <div class="row">
+          <div class="col-xs-6">
+            <p id="post-error"></p>
+          </div>
 
-      </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-1">
+
+          </div>
+          <div class="col-xs-10">
+            <div id="word-count-progress">
+              <div class="progress-one"></div>
+              <div class="progress-two"></div>
+              <div class="progress-three"></div>
+            </div>
+          </div>
+          <div class="col-xs-1">
+            <h4 id="post-box-word-count"></h4>
+          </div>
+        </div>
+
+
 
     </script>
 
@@ -370,13 +388,7 @@
           </div>
         </div>
       </div>
-        <!-- Font Size Controls -->
-        <!-- <div class="row">
-          <div class="col-xs-12">
-            <li class="increase-font">Font ^</li>
-            <li class="decrease-font">Font v</li>
-          </div>
-        </div> -->
+
 
         <div class="row">
           <div class="col-xs-4">
@@ -392,11 +404,7 @@
           </div>
         </div>
 
-        <div class="row">
-          <div class="col-xs-12">
-            <%%= prompt %>
-          </div>
-        </div>
+
 
 
         <div class="row">

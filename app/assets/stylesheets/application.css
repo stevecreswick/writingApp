@@ -671,29 +671,47 @@ li.sort:hover{
 }
 
 
-
 .show-post{
   margin-top: 6em;
 }
 
+#word-count-progress{
+  width: 0%;
+  border: 1px solid black;
+  height: 1em;
+  background-color: green;
+}
 
-/* Star Rating for Post */
-/*.rating {
-  unicode-bidi: bidi-override;
-  direction: rtl;
-  font-size: 2em;
-}
-.rating > span {
+/*.progress-one{
+  width: 25%;
+  height: 1em;
   display: inline-block;
-  position: relative;
-  width: 1.1em;
+  background: red;
 }
-.rating > span:hover:before,
-.rating > span:hover ~ span:before {
-   content: "\2605";
-   position: absolute;
+
+.progress-two{
+  width: 25%;
+  height: 1em;
+  background: yellow;
+  display: inline-block;
+}
+
+.progress-three{
+  width: 25%;
+  height: 1em;
+  background: green;
+  display: inline-block;
+}
+
+.progress-four{
+  width: 25%;
+  height: 1em;
+  background: green;
+  display: inline-block;
 }*/
 
+
+/* Rating Stars */
 .rating {
     /*float:left;*/
     display: inline-block;

@@ -12,12 +12,16 @@ app.PageView = Backbone.View.extend({
     var html = this.template();
     var $html = $( html );
     this.$el.append( $html );
+
+    this.renderSideNav();
   },
   empty: function(){
     this.$el.empty();
   },
   events:{
     'click a.write-nav': 'renderPromptForm',
+    'click button.cancel-post': 'renderMain',
+
 
     'click a.read-nav': 'renderPosts',
     'click li.sort': 'updateList',
@@ -33,18 +37,22 @@ app.PageView = Backbone.View.extend({
   currentGenre: 'all',
 
   renderSideNav: function(){
-
     var $left = $('#left-pane').eq(0);
+    var $sideNav = $(".sidebar-nav");
+
+    $sideNav.remove();
     $left.empty();
+
+    var $nav = $('<div>').addClass('sidebar-nav');
 
     // Add Nav Items
     var $write = $('<a>').addClass('write-nav').html('Write');
     var $line = $('<br>')
-    var $read = $('<a>').addClass('read-nav').html('Read');
-    $left.append($write, $line, $read);
-
+    $nav.append($write);
+    $left.append($nav);
     // Add Genre Links
-    this.renderGenreLinks( $left );
+    this.renderGenreLinks( $nav );
+
   },
   renderGenreLinks: function(node){
     var $postListHeader = _.template( $('#post-list-menu').html() )
@@ -82,12 +90,10 @@ app.PageView = Backbone.View.extend({
 
     app.posts.comparator = this.reverseSortBy(app.posts.comparator);
     console.log(app.posts.url);
-    app.posts.fetch({url: app.posts.url});
+    app.posts.fetch({url: app.posts.url, async:true});
     app.postPainter.render();
-    this.renderSideNav();
+    // this.renderSideNav();
   },
-
-
 
   showFriends: function(){
     console.log('show friends clicked');
@@ -120,14 +126,23 @@ app.PageView = Backbone.View.extend({
     app.followers.fetch();
   },
   renderPromptForm: function(){
+    this.$('.sidebar-nav').remove();
+
+    this.$('#center-pane').empty();
+    console.log(this.$('#center-pane'));
+
     app.promptFormPainter = new app.promptFormView({
       el: $('#center-pane')
     });
-    this.$('#center-pane').empty();
-    app.promptFormPainter.render();
-    app.promptFormPainter.bindSlider();
 
-    this.renderSideNav();
+    var $back = $('<button>').html('Back').addClass('cancel-post')
+    this.$('#left-pane').append($back)
+
+    // console.log(app.promptFormPainter);
+
+    app.promptFormPainter.render();
+    // app.promptFormPainter.bindSlider();
+
   },
   renderFriendsPage: function(){
     this.$('#left-pane').empty();
@@ -148,7 +163,6 @@ app.PageView = Backbone.View.extend({
   },
   renderMain: function(){
     this.render();
-    this.renderPromptForm();
     this.renderPosts( this.currentGenre );
   },
   reverseSortBy: function(sortByFunction) {

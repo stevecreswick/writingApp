@@ -8,6 +8,7 @@ app.PostView = Backbone.View.extend({
   normalHeight: '25em',
   openHeight: '40em',
 
+
     initialize: function(){
       this.listenTo( this.model, 'change', this.renderWithUserName );
       // var urlModel = "/api/posts/" + this.model.get('id') + "/critiques"

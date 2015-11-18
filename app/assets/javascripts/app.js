@@ -39,12 +39,12 @@ var do_on_load = function() {
     el: $('#main-page')
   });
 
+
+
   app.pagePainter.render();
   app.pagePainter.renderPosts( app.pagePainter.currentGenre );
-
-  $('.star').rating({ callback: function(value, link){ alert(value); } });
+//
 
 
 }
 $(document).ready(do_on_load)
-$(window).bind('page:change', do_on_load)
