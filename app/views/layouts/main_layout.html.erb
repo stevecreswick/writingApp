@@ -32,7 +32,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <li class="home-page"><a href="/">Write Away</a></li>
+          <li class="home-page">Write Away</li>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -46,6 +46,7 @@
               <ul class="dropdown-menu">
                 <li class="add-friends"><a>Add Friends</a></li>
                 <li class="render-friends"><a>Challenges</a></li>
+                <li class="show-friends">Friends</li>
                 <li role="separator" class="divider"></li>
                   <li><%= link_to 'Log Out', '/sessions', method: :delete  %></li>
               </ul>
@@ -59,14 +60,14 @@
     <div class="row">
 
       <!-- Left Side -->
-      <div class="col-sm-1 col-md-1 col-lg-1 hidden-xs">
+      <div id="left-columns" class="col-sm-1 col-md-1 col-lg-1 hidden-xs">
         <div id="left-pane">
           <br><br><br><br><br><br><br><br><br><br>
         </div>
       </div>
 
       <!-- Center -->
-      <div class="col-xs-12 col-sm-11 col-md-11 col-lg-11">
+      <div id="center-columns"class="col-xs-12 col-sm-11 col-md-11 col-lg-11">
         <div id="center-pane">
             <!-- <div class="left-side-main">
               <a class="read-nav btn btn-primary">Read</a>
@@ -190,11 +191,7 @@
             </div>
 
           </div>
-          <div class="row">
-            <div class="col-xs-4">
-              <p class="character-count"></p>
-            </div>
-          </div>
+
 
           <!-- Post Title -->
           <div class="form-group">
@@ -305,8 +302,8 @@
 
         <div class="row">
           <div class="col-xs-1">
-
-          </div>
+                <p class="character-count"></p>
+            </div>
           <div class="col-xs-10">
             <div id="word-count-progress">
               <div class="progress-one"></div>
@@ -950,6 +947,8 @@
 
 
 <body id="main-page">
+
+
   <div class="container-fluid" >
 
     <%= yield %>

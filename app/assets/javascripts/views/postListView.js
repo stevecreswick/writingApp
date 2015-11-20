@@ -9,6 +9,8 @@ app.PostListView = Backbone.View.extend({
     this.$el.empty();
 
       var posts = this.collection.models;
+      var $container = $('<div>').addClass('post-list');
+
       var view;
         for (var i = 0; i < posts.length; i++) {
           view = new app.PostView({model: posts[i]});
@@ -17,7 +19,8 @@ app.PostListView = Backbone.View.extend({
           view.renderWithUserName();
 
           // Append the View to the Post List
-          this.$el.append( view.$el );
+          $container.append( view.$el  )
+          this.$el.append( $container );
         }
     }
 

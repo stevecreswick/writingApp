@@ -4,9 +4,16 @@ app.PageView = Backbone.View.extend({
   tagName: 'div',
   className: 'container-fluid',
   template: _.template( $('#main-page-template').html() ),
+  elevenCenter: "col-xs-12 col-sm-11 col-md-11 col-lg-11",
+  oneLeft: "col-sm-1 col-md-1 col-lg-1 hidden-xs",
+  sevenCenter: "col-xs-7 col-sm-8 col-md-7 col-lg-7",
+  fiveLeft: "col-xs-5 col-sm-4 col-md-5 col-lg-5",
+  centerWidth: 11,
   initialize: function(){
 
   },
+
+  // Page Rendering
   render: function(){
     this.$el.empty();
     var html = this.template();
@@ -15,26 +22,19 @@ app.PageView = Backbone.View.extend({
 
     this.renderSideNav();
   },
-  empty: function(){
-    this.$el.empty();
-  },
-  events:{
-    'click a.write-nav': 'renderPromptForm',
-    'click button.cancel-post': 'renderMain',
 
-
-    'click a.read-nav': 'renderPosts',
-    'click li.sort': 'updateList',
-
-    'click li.show-friends': 'showFriends',
-    'click li.add-friends': 'addFriends',
-    'click li.show-followers': 'showFollowers',
-    'click li.render-friends': 'renderFriendsPage',
-    'click li.render-friends': 'renderFriendsPage',
-    // 'click li.home-page': 'renderMain'
+  renderMain: function(){
+    this.render();
+    this.renderPosts( this.currentGenre );
   },
 
-  currentGenre: 'all',
+  friendsPage: function(){
+    this.$el.find('#center-pane .sidebar-nav').remove();
+    this.$el.find('.post-list').remove();
+
+    this.friendsNav();
+    this.showFollowing();
+  },
 
   renderSideNav: function(){
     var $left = $('#left-pane').eq(0);
@@ -44,26 +44,87 @@ app.PageView = Backbone.View.extend({
     $left.empty();
 
     var $nav = $('<div>').addClass('sidebar-nav');
-
     // Add Nav Items
     var $write = $('<a>').addClass('write-nav').html('Write');
     var $line = $('<br>')
     $nav.append($write);
     $left.append($nav);
+
     // Add Genre Links
     this.renderGenreLinks( $nav );
 
   },
-  renderGenreLinks: function(node){
-    var $postListHeader = _.template( $('#post-list-menu').html() )
-    node.append($postListHeader);
+
+  // Render Genres
+    renderGenreLinks: function(node){
+      var $postListHeader = _.template( $('#post-list-menu').html() )
+      node.append($postListHeader);
+    },
+
+// Page View Utilities
+  empty: function(){
+    this.$el.empty();
   },
 
+  toggleColumns() {
+    if ( this.centerWidth === 11 ){
+      var $left = this.$el.find('#left-columns');
+      var $center = this.$el.find('#center-columns');
+
+      $left.removeClass( this.oneLeft );
+      $center.removeClass( this.elevenCenter );
+
+      $left.addClass( this.fiveLeft );
+      $center.addClass( this.sevenCenter );
+
+
+    } else if ( this.centerWidth === 7 ){
+      var $left = this.$el.find('#left-columns');
+      var $center = this.$el.find('#center-columns');
+
+      $left.removeClass( this.fiveLeft );
+      $center.removeClass( this.sevenCenter );
+
+      $left.addClass( this.oneLeft );
+      $center.addClass( this.elevenCenter );
+
+    }
+  },
+
+  // Event Handling
+
+  events:{
+    'click a.write-nav': 'renderPromptForm',
+    'click button.cancel-post': 'renderMain',
+
+
+    'click a.read-nav': 'renderPosts',
+    'click li.sort': 'updateList',
+
+    'click li.show-friends': 'friendsPage',
+
+    'click span.show-users': 'showUsers',
+    'click span.show-following': 'showFollowing',
+    'click span.show-followers': 'showFollowers',
+
+    'click li.render-friends': 'renderFriendsPage',
+    'click li.render-friends': 'renderFriendsPage',
+    'click li.home-page': 'renderMain'
+  },
+
+
+// Rendering Posts
+
+// Current Post List
+  currentGenre: 'all',
+
+// Update Post List
   updateList: function(e){
     this.currentGenre = $(e.currentTarget).eq(0).data('url');
     this.renderPosts( this.currentGenre );
   },
 
+// Show Posts by 'all' or their genre
   renderPosts: function(genre){
 
     app.posts = new app.PostCollection();
@@ -72,14 +133,11 @@ app.PageView = Backbone.View.extend({
       el: $('#center-pane')
     });
 
-    console.log(genre);
-
     if ( genre === 'all' ){
       var urlModel = "/api/posts";
       app.posts.url = urlModel;
     } else {
       var urlModel = "/api/posts/sorted/" + genre;
-      console.log(urlModel);
       app.posts.url = urlModel;
     }
 
@@ -89,42 +147,71 @@ app.PageView = Backbone.View.extend({
     };
 
     app.posts.comparator = this.reverseSortBy(app.posts.comparator);
-    console.log(app.posts.url);
     app.posts.fetch({url: app.posts.url, async:true});
     app.postPainter.render();
-    // this.renderSideNav();
   },
 
-  showFriends: function(){
-    console.log('show friends clicked');
+
+// Rendering Friends
+
+  showFollowing: function(){
+
+    this.clearFriendsPage();
+
+    var $center = this.$el.find('#center-pane');
+    var $friendPage = $("<div>").attr('id', 'friend-page')
+
+    $center.append( $friendPage )
 
     app.friends = new app.FriendCollection();
     app.friendPainter = new app.FriendListView({
       collection: app.friends,
-      el: $('#left-pane')
+      el: $('#friend-page')
     });
 
     app.friends.fetch({wait:true});
-  },
-  addFriends: function(){
-    app.users = new app.UserCollection();
-    app.userPainter = new app.UserListView({
-      collection: app.users,
-      el: $('#left-pane')
-    });
 
-    app.users.fetch();
-    this.showFollowers();
   },
+
+  friendsNav: function(){
+    var $add = $('<span>').addClass("show-users").text('Add Friends');
+    var $following = $('<span>').addClass("show-following").text('Following | ');
+    var $followers = $('<span>').addClass("show-followers").text('Followers | ');
+
+    var header = $('<h5>');
+    header.append($following, $followers, $add);
+    this.$el.find('#center-pane').append( header );
+  },
+
   showFollowers: function(){
+    this.clearFriendsPage();
+
     app.followers = new app.FollowerCollection();
     app.followerPainter = new app.FollowerListView({
       collection: app.followers,
-      el: $('#right-pane')
+      el: $('#friend-page')
     });
 
-    app.followers.fetch();
+    app.followers.fetch({wait:true});
+
   },
+
+  showUsers: function(){
+    this.clearFriendsPage();
+
+    app.users = new app.UserCollection();
+    app.userPainter = new app.UserListView({
+      collection: app.users,
+      el: $('#friend-page')
+    });
+
+    app.users.fetch();
+  },
+
+  clearFriendsPage: function(){
+    this.$el.find('#friend-page').children().remove();
+  },
+
   renderPromptForm: function(){
     this.$('.sidebar-nav').remove();
 
@@ -144,13 +231,7 @@ app.PageView = Backbone.View.extend({
     // app.promptFormPainter.bindSlider();
 
   },
-  renderFriendsPage: function(){
-    this.$('#left-pane').empty();
-    this.showFriends();
-    this.showFollowers();
-    this.renderReceivedChallenges();
-    // this.addFriends();
-  },
+
   renderReceivedChallenges: function(){
     var receivedChallenges = new app.ReceivedChallengeCollection();
     console.log(receivedChallenges);
@@ -161,10 +242,7 @@ app.PageView = Backbone.View.extend({
 
     receivedChallenges.fetch();
   },
-  renderMain: function(){
-    this.render();
-    this.renderPosts( this.currentGenre );
-  },
+
   reverseSortBy: function(sortByFunction) {
   return function(left, right) {
     var l = sortByFunction(left);
