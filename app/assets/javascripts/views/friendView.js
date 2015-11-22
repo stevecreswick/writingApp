@@ -13,6 +13,11 @@ app.FriendView = Backbone.View.extend({
     this.$el.append( $html );
     // this.fetchChallenges();
   },
+
+  resize: function(){
+    this.$el.css({'height': '20em'})
+  },
+
   events: {
     'click button.remove-friend': 'removeFriend',
     'click button.make-challenge': 'makeChallenge',
@@ -29,6 +34,11 @@ app.FriendView = Backbone.View.extend({
 
   },
   makeChallenge: function(){
+    this.resize();
+    this.$el.find('#challenge-view').children().remove();
+
+    var $challenge = $('<div>').attr('id', 'challenge-view');
+    this.$el.append( $challenge )
     console.log('make challenge clicked');
     console.log('Friend ID : ' + this.model.get('id') );
     var friendId = this.model.get('id');
@@ -36,7 +46,7 @@ app.FriendView = Backbone.View.extend({
     console.log( friendship );
 
     app.challengePainter = new app.ChallengeFormView({
-      el: $('#left-pane'),
+      el: $('#challenge-view'),
       model: friendship
     });
     app.challengePainter.render();
@@ -51,6 +61,10 @@ app.FriendView = Backbone.View.extend({
     console.log(this.challenges);
     },
   showChallenges: function(){
+    this.$el.find('#challenge-view').remove();
+    var $challenge = $('<div>').attr('id', 'challenge-view');
+    this.$el.append( $challenge )
+
     this.fetchChallenges();
     // Fetch critiques not working?
 

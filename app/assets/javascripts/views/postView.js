@@ -81,9 +81,19 @@ app.PostView = Backbone.View.extend({
 
       var username = this.model.get('username');
       var createdAt = this.model.get('created_at');
+      var average = this.model.get('avg_rating');
+      var userId = this.model.get('user_id');
+      var id = this.model.get('id');
+      var href = "/users/" +  userId + "/posts/" + id;
+      var link = $('<a>').attr('href', href).text( this.model.get("title") );
 
       var profilePic = this.model.get('image_url');
       var $profilePic = $('<img>').attr("src", profilePic).addClass('profile-picture img-circle');
+
+      this.$("div#title-holder").append(link);
+      this.$("strong#created-at").append(createdAt);
+      this.$("span#average-rating").append(average);
+
       this.$("a.post-author").append($profilePic);
       this.$("a.post-author").append(username);
       // this.renderCritiqueFormContainer();
@@ -102,7 +112,6 @@ app.PostView = Backbone.View.extend({
     },
     createCritique: function(){
       var newMessage = this.$el.find('textarea#critique-editor').val();
-      console.log(newMessage);
       this.fetchCritiques();
       app.posts.get(this.model.get('id')).critiques.create({message: newMessage});
     },

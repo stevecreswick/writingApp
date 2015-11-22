@@ -5,6 +5,7 @@ app.promptFormView = Backbone.View.extend({
   className: 'prompt-form',
   template: _.template( $('#prompt-form-template').html() ),
   wordCount: 0,
+  newPrompt: {},
   initialize: function(){
     this.bindSlider();
   },
@@ -17,7 +18,8 @@ app.promptFormView = Backbone.View.extend({
   },
   events:{
     'click button.render-prompt': 'getPrompt',
-    'click button.start': 'renderWritingForm'
+    'click button.start': 'renderWritingForm',
+    'click span.submit-new-post': 'submitPost'
   },
   updateView: function(){
     console.log('update view called');
@@ -65,9 +67,7 @@ app.promptFormView = Backbone.View.extend({
       var newPost = this.$el.find('.new-post-box');
       console.log(newPost);
       newPost.css({"display": "none", "z-index": "-2"});
-      var newPrompt = this.createPrompt();
-      console.log(this.prompt);
-      console.log(this.type);
+      this.newPrompt = this.createPrompt();
 
       //
       // console.log(this.minWords);
@@ -80,68 +80,67 @@ app.promptFormView = Backbone.View.extend({
       //   console.log('else');
       // }
 
+      console.log(this.newPrompt);
       e.preventDefault();
-      console.log(newPrompt);
-
       this.$el.empty();
       var template = _.template( $('#create-post-template').html() );
       var html = template();
       var $html = $( html );
       this.$el.append( $html );
 
-      if (newPrompt.type === "Use One Word"){
-            this.$("h5#post-box-type").html("Write at least " + newPrompt.wordCount + " characters using the word " + "<span style='color:red; font-size: 1.4em'>" + newPrompt.prompt + "</span>");
-      } else if (newPrompt.type === "Answer What If"){
+      if (this.newPrompt.type === "Use One Word"){
+            this.$("h5#post-box-type").html("Write at least " + this.newPrompt.wordCount + " characters using the word " + "<span style='color:red; font-size: 1.4em'>" + this.newPrompt.prompt + "</span>");
+      } else if (this.newPrompt.type === "Answer What If"){
 
-      } else if (newPrompt.type === "Classic First Sentence"){
+      } else if (this.newPrompt.type === "Classic First Sentence"){
 
       }
-      this.$("h4#post-genre").html("New " + newPrompt.genre);
+      this.$("h4#post-genre").html("New " + this.newPrompt.genre);
       this.$("h4#post-box-word-count").html();
 
-      this.$("h4#post-box-word-count").html(newPrompt.wordCount);
+      this.$("h4#post-box-word-count").html(this.newPrompt.wordCount);
 
       this.renderEditor();
-      this.bindWritingFormSubmit(newPrompt);
-      this.checkWordCount(newPrompt);
+      this.checkWordCount(this.newPrompt);
 
     },
-    bindWritingFormSubmit: function(newPrompt){
-      var scope = this;
-      $('form#create-post').on('submit', function(e){
-        e.preventDefault();
-
-        var newMessage = scope.$('#post-editor').first().eq(0).children().eq(0).children().eq(0).html();
-        var newTitle = scope.$('#post-title').val();
+    submitPost: function(){
+        var newMessage = this.$('#post-editor').first().eq(0).children().eq(0).children().eq(0).html();
+        var newTitle = this.$('#post-title').val();
 
         // Find Word Count
-        var message = scope.$('#post-editor').find('.ql-editor').text();
+        var message = this.$('#post-editor').find('.ql-editor').text();
         var messageLength = message.match(/\S+/g).length;
+        console.log(messageLength);
+        console.log(this.newPrompt.wordCount);
 
         // If the message is equal to or longer than the chosen word count -> Submit The post
-        if (messageLength >= newPrompt.wordCount) {
+        if (messageLength >= this.newPrompt.wordCount) {
+
+          console.log('creating');
 
           app.posts.create({
             title: newTitle,
             message: newMessage,
             word_count: messageLength,
-            prompt: newPrompt.prompt,
-            prompt_word_count: newPrompt.wordCount,
-            prompt_type: newPrompt.type,
-            model_url: newPrompt.url,
-            genre: newPrompt.genre},
-            {wait:true});
+            prompt: this.newPrompt.prompt,
+            prompt_word_count: this.newPrompt.wordCount,
+            prompt_type: this.newPrompt.type,
+            model_url: this.newPrompt.url,
+            genre: this.newPrompt.genre},
+            {url: '/api/posts',
+            wait:true,
+            async: false});
 
           app.pagePainter.renderMain();
-          // scope.render();
-          scope.$el.css({'height': 'auto'})
-        } else {
+          // this.render();
+          this.$el.css({'height': 'auto'});
 
-          scope.$('#post-error').text('Not Long Enough')
+        } else {
+          console.log('not created');
+          this.$('#post-error').text('Not Long Enough');
 
         }
-
-      });
 
     },
     createPrompt: function(){

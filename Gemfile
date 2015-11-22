@@ -31,6 +31,8 @@ gem 'bootstrap-slider-rails'
 
 gem 'responders'
 
+gem 'will_paginate'
+
 group :production do
 
   gem 'rails_12factor'

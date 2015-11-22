@@ -6,6 +6,7 @@ class Post < ActiveRecord::Base
   has_many :ratings
   # has_many :raters, :through => :ratings, :foreign_key => :user_id
 
+  self.per_page = 5
 
   def average_rating
     @value = 0

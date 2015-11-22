@@ -22,6 +22,29 @@ respond_to :html, :json
     render json: posts
   end
 
+  def paginated
+
+    # Account for Page Starting at 0
+    page = params[:page].to_i + 1
+
+    if params[:genre] == "all"
+      @posts = Post.paginate :page => page
+    else
+      @posts = Post.where({genre: params[:genre]}).paginate :page => page
+    end
+
+        posts = @posts.map do |aRpost|
+          data = aRpost.as_json
+          data['username'] = aRpost.user.username
+          data['image_url'] = aRpost.user.image_url
+          data['created_at'] = Date.strptime(aRpost.user.created_at.to_s)
+          data['avg_rating'] = aRpost.average_rating
+          data
+        end
+
+          render json: posts
+  end
+
   def show
     # current_api_user!
     # aRposts = @current_user.posts

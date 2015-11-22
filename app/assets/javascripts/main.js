@@ -17,6 +17,7 @@
 //= require underscore
 //= require backbone
 //= require backbone-relational
+//= require backbone.pagedcollection
 //= require turbolinks
 //= require bootstrap.min
 //= require bootstrap-slider

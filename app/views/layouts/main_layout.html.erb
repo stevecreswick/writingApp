@@ -179,7 +179,7 @@
     <script type="text/template" id="create-post-template">
       <!-- <h1 class="create-post-header">Write</h3> -->
 
-        <form id="create-post">
+        <!-- <form id="create-post"> -->
           <div class="row">
             <div class="col-xs-12">
               <h4 id="post-genre"></h4>
@@ -289,9 +289,9 @@
             </div>
             <!-- <textarea class="form-control" id="post-body" rows="10" name="post[message]" placeholder="...post"></textarea> -->
           </div>
-          <input type="submit" value="Publish" class="btn btn-info submit-new-post">
+          <span class="btn btn-info submit-new-post">Publish</span>
 
-        </form>
+        <!-- </form> -->
         <br><br>
         <div class="row">
           <div class="col-xs-6">
@@ -356,15 +356,15 @@
         <div class="row">
           <div class="col-xs-3">
             <br>
-            <strong class="prompt-label"> <%%= created_at %></strong>
+            <strong class="prompt-label" id="created-at"> </strong>
             <br>
-            Average Rating: <%%= avg_rating %>
+            <span id="average-rating">  Average Rating:  </span>
             <br>
           </div>
           <div class="col-xs-6">
             <div class="row">
               <div class="col-xs-12">
-                <h3 class="prompt-label"><div data-no-turbolink><a href="/users/<%%= user_id %>/posts/<%%= id %>"><%%= title %></a></div></h3>
+                <h3 class="prompt-label"><div data-no-turbolink  id="title-holder"></div></h3>
               </div>
             </div>
             <div class="row">

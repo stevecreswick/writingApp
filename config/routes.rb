@@ -18,6 +18,8 @@ Rails.application.routes.draw do
 
     # Post API
     get '/posts' => 'posts#index'
+    get '/posts/paginated/:genre/:page' => 'posts#paginated'
+
     get '/posts/sorted/:genre' => 'posts#genre'
     get '/posts/:id' => 'posts#show'
     get '/users/:user_id/posts' => 'posts#user_posts'

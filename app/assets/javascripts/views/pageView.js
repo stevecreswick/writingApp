@@ -9,6 +9,10 @@ app.PageView = Backbone.View.extend({
   sevenCenter: "col-xs-7 col-sm-8 col-md-7 col-lg-7",
   fiveLeft: "col-xs-5 col-sm-4 col-md-5 col-lg-5",
   centerWidth: 11,
+
+  currentGenre: 'all',
+  currentPage: 0,
+
   initialize: function(){
 
   },
@@ -24,13 +28,14 @@ app.PageView = Backbone.View.extend({
   },
 
   renderMain: function(){
+    this.currentPage = 0;
     this.render();
-    this.renderPosts( this.currentGenre );
+    this.renderPosts( this.currentGenre, this.currentPage );
   },
 
   friendsPage: function(){
     this.$el.find('#center-pane .sidebar-nav').remove();
-    this.$el.find('.post-list').remove();
+    this.$el.find('#post-list').remove();
 
     this.friendsNav();
     this.showFollowing();
@@ -115,31 +120,52 @@ app.PageView = Backbone.View.extend({
 
 // Rendering Posts
 
-// Current Post List
-  currentGenre: 'all',
 
 // Update Post List
   updateList: function(e){
     this.currentGenre = $(e.currentTarget).eq(0).data('url');
-    this.renderPosts( this.currentGenre );
+    this.currentPage = 0;
+
+    this.renderPosts( this.currentGenre, this.currentPage );
+  },
+
+  createPostList: function(){
+    var $container = $('<div>').attr('id', 'post-list');
+    this.$el.find('#center-pane').append( $container );
+
   },
 
 // Show Posts by 'all' or their genre
-  renderPosts: function(genre){
+  renderPosts: function(options){
+    // this.emptyCenter();
+
+    this.createPostList();
 
     app.posts = new app.PostCollection();
+    app.posts.genre = this.currentGenre;
+    app.posts.page = this.currentPage;
+    console.log("************************");
+    console.log(app.posts.genre);
+    console.log(app.posts.page);
+
+
     app.postPainter = new app.PostListView({
       collection: app.posts,
-      el: $('#center-pane')
+      el: $('#post-list')
     });
 
-    if ( genre === 'all' ){
-      var urlModel = "/api/posts";
-      app.posts.url = urlModel;
-    } else {
-      var urlModel = "/api/posts/sorted/" + genre;
-      app.posts.url = urlModel;
-    }
+
+
+
+    // if ( genre === 'all' ){
+    //   var urlModel = "/api/posts/paginated/" + page;
+    //   app.posts.url = urlModel;
+    //   console.log(urlModel);
+    // } else {
+    //   var urlModel = "/api/posts/sorted/" + genre;
+    //   app.posts.url = urlModel;
+    // }
+
 
     // Sort by created at
     app.posts.comparator = function(post) {
@@ -147,8 +173,14 @@ app.PageView = Backbone.View.extend({
     };
 
     app.posts.comparator = this.reverseSortBy(app.posts.comparator);
-    app.posts.fetch({url: app.posts.url, async:true});
+    console.log(app.posts.url());
+    app.posts.fetch({url: app.posts.url(), async:false});
+
+
+
     app.postPainter.render();
+
+
   },
 
 
@@ -212,11 +244,17 @@ app.PageView = Backbone.View.extend({
     this.$el.find('#friend-page').children().remove();
   },
 
+  emptyCenter: function(){
+    this.$el.find('#center-pane').children().remove();
+  },
+
+
   renderPromptForm: function(){
     this.$('.sidebar-nav').remove();
 
-    this.$('#center-pane').empty();
-    console.log(this.$('#center-pane'));
+    // this.$('#center-pane').empty();
+    this.emptyCenter();
+    // console.log(this.$('#center-pane'));
 
     app.promptFormPainter = new app.promptFormView({
       el: $('#center-pane')
