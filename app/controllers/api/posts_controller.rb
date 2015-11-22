@@ -34,11 +34,27 @@ respond_to :html, :json
     end
 
         posts = @posts.map do |aRpost|
+
           data = aRpost.as_json
+
+          if aRpost.ratings.where({user_id: current_user}).exists?
+            puts "*************** rating exists *********************"
+            data['is_rated'] = true
+            data['rating'] = Rating.where({post_id: aRpost.id, user_id: current_user})[0].value
+            puts data['is_rated']
+            puts data['rating']
+            puts "*************** ID:" + aRpost.id.to_s  + "*********************"
+          else
+            puts "*************** rating *********************"
+            data['is_rated'] = false
+
+          end
+
           data['username'] = aRpost.user.username
           data['image_url'] = aRpost.user.image_url
           data['created_at'] = Date.strptime(aRpost.user.created_at.to_s)
           data['avg_rating'] = aRpost.average_rating
+          data['total_ratings'] = aRpost.average_rating
           data
         end
 
@@ -87,9 +103,7 @@ respond_to :html, :json
 
   def create
     # current_api_user!
-    puts '*********** Creating Post ******************'
     post = current_user.posts.create(post_params)
-    puts post.message
     data = post.as_json
     data['username'] = post.user.username
     respond_to do |format|

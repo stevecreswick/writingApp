@@ -83,15 +83,27 @@ app.PostView = Backbone.View.extend({
       var createdAt = this.model.get('created_at');
       var average = this.model.get('avg_rating');
       var userId = this.model.get('user_id');
+      var prompt = this.model.get('prompt');
+
       var id = this.model.get('id');
       var href = "/users/" +  userId + "/posts/" + id;
       var link = $('<a>').attr('href', href).text( this.model.get("title") );
+      var lineBreak = $('<br>');
+
       var wordCount = $('<span>').addClass("post-word-count").html( "    " + this.model.get('word_count') + "  words" );
 
       var profilePic = this.model.get('image_url');
       var $profilePic = $('<img>').attr("src", profilePic).addClass('post-profile-picture img-circle');
 
-      this.$("div#title-holder").append(link, wordCount);
+      var promptInstruction = this.getPromptInstruction({
+        "type": this.model.get('prompt_type'),
+        "wordCount": this.model.get('prompt_word_count'),
+        'prompt': this.model.get('prompt')
+      });
+
+      this.$("div.post-prompt-type").append(promptInstruction);
+
+      this.$("div#title-holder").append(link, lineBreak, wordCount);
       this.$("strong#created-at").append(createdAt);
       this.$("span#average-rating").append(average);
 
@@ -100,6 +112,12 @@ app.PostView = Backbone.View.extend({
       // this.renderCritiqueFormContainer();
       // this.renderEditor();
 
+    },
+
+    getPromptInstruction(options){
+      if (options.type === "Use One Word") {
+        return "Write " + options.wordCount + " words, using the word <strong>" + options.prompt + "</strong>";
+      }
     },
 
     // Manipulate Post CSS
@@ -148,16 +166,16 @@ app.PostView = Backbone.View.extend({
   },
 
   colorRating: function(){
-    var urlModel = '/api/posts/' + this.model.get('id') + '/ratings';
-    var rating = new app.Rating();
 
-    console.log(urlModel);
-    rating.url = urlModel;
-    rating.fetch({async:false});
+    if ( this.model.get('is_rated') ){
 
-    if (rating.get('id')){
-      var score = rating.get('value');
+      var score = this.model.get('rating');
       this.colorStars(score);
+
+    } else {
+
+      console.log( 'this post is not rated by this user - Post: ' + this.model.get('id' ));
+
     }
 
   },

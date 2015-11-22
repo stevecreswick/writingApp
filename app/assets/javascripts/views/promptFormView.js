@@ -116,8 +116,13 @@ app.promptFormView = Backbone.View.extend({
         console.log(messageLength);
         console.log(this.newPrompt.wordCount);
 
+        // Check to See if There is a Title
+        if (newTitle === ""){
+          console.log('not created');
+          this.$('#post-error').text('No Title');
+
         // If the message is equal to or longer than the chosen word count -> Submit The post
-        if (messageLength >= this.newPrompt.wordCount) {
+        } else if (messageLength >= this.newPrompt.wordCount) {
 
           console.log('creating');
 
@@ -139,22 +144,13 @@ app.promptFormView = Backbone.View.extend({
           this.$el.css({'height': 'auto'});
 
         } else {
-          console.log('not created');
           this.$('#post-error').text('Not Long Enough');
-
         }
 
     },
     createPrompt: function(){
-      // this.prompt = this.prompt || $('.prompt-text').text();
-      // this.wordCount = this.wordCount || $('#post-word-count').val();
-      // this.type = this.type || $('#choose-type').val();
-      // this.genre = this.genre || $('#choose-genre').val();
-      //
       console.log(this.prompt);
-      // console.log(this.wordCount);
-      // console.log(this.type);
-      // console.log(this.genre);
+
 
       var newPrompt = newPrompt || {
         prompt:  this.$el.find('.prompt-text').text(),

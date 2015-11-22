@@ -26,19 +26,25 @@ app.PostListView = Backbone.View.extend({
         }
 
         var $row = $('<div>').addClass("row");
-        var $col1 = $('<div>').addClass("col-xs-6 text-left previous");
-        var $col2 = $('<div>').addClass("col-xs-6 text-right");
+        var $col1 = $('<div>').addClass("col-xs-4 text-left previous");
+        var $colCenter = $('<div>').addClass("col-xs-4 text-center");
+        var $col2 = $('<div>').addClass("col-xs-4 text-right");
+
         var $more = $('<span>').addClass('view-more').text('Next');
         var $previous = $('<span>').addClass('view-previous').text('Previous');
 
 
+        // If it is not the first page,
+        // add the previous button and page number
         if (app.pagePainter.currentPage > 0) {
           $col1.empty();
           $col1.append( $previous );
+          $colCenter.html( "Page: " + (app.pagePainter.currentPage + 1) );
         }
+
         $col2.append( $more );
 
-        $row.append( $col1, $col2 );
+        $row.append( $col1, $colCenter, $col2 );
 
         this.$el.append( $row );
 

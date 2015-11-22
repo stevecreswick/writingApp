@@ -2,7 +2,7 @@ var app = app || {};
 
 app.PageView = Backbone.View.extend({
   tagName: 'div',
-  className: 'container-fluid',
+  className: 'main-display',
   template: _.template( $('#main-page-template').html() ),
   elevenCenter: "col-xs-12 col-sm-11 col-md-11 col-lg-11",
   oneLeft: "col-sm-1 col-md-1 col-lg-1 hidden-xs",
@@ -41,6 +41,27 @@ app.PageView = Backbone.View.extend({
     this.showFollowing();
   },
 
+  challengesPage: function(){
+    this.$el.find('#post-list').remove();
+    var $div = $('<div>').attr('id', "received-challenge-holder");
+    this.$el.find('#center-pane').append( $div );
+
+    this.renderReceivedChallenges();
+    this.renderReceivedChallenges();
+
+  },
+
+  // receivedChallenges: function(){
+  //   var challenges = app.ReceivedChallengeCollection();
+  //   var challengePainter = app.ReceivedChallengeListView({
+  //     el: '#challenge-list'
+  //   });
+  //
+  //   challenges.fetch();
+  //   console.log(challenges);
+  //
+  //
+  // },
   renderSideNav: function(){
     var $top = $('#top-pane').eq(0);
     var $sideNav = $(".sidebar-nav");
@@ -66,7 +87,7 @@ app.PageView = Backbone.View.extend({
     this.$el.empty();
   },
 
-  updateHeader(genre){
+  updateHeader: function(genre){
 
     switch (genre) {
       case "Romance":
@@ -91,7 +112,7 @@ app.PageView = Backbone.View.extend({
 
   },
 
-  toggleColumns() {
+  toggleColumns: function() {
     if ( this.centerWidth === 11 ){
       var $left = this.$el.find('#left-columns');
       var $center = this.$el.find('#center-columns');
@@ -131,6 +152,9 @@ app.PageView = Backbone.View.extend({
     'click span.show-users': 'showUsers',
     'click span.show-following': 'showFollowing',
     'click span.show-followers': 'showFollowers',
+
+    'click li.show-challenges': 'challengesPage',
+
 
     'click li.render-friends': 'renderFriendsPage',
     'click li.render-friends': 'renderFriendsPage',
@@ -294,11 +318,12 @@ app.PageView = Backbone.View.extend({
   },
 
   renderReceivedChallenges: function(){
+
     var receivedChallenges = new app.ReceivedChallengeCollection();
     console.log(receivedChallenges);
     var receivedChallengesPainter = new app.ReceivedChallengeListView({
       collection: receivedChallenges,
-      el: $('#right-pane')
+      el: $('#received-challenge-holder')
     });
 
     receivedChallenges.fetch();
