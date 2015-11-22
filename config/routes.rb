@@ -76,7 +76,7 @@ put '/users/:id' => 'users#update'
 
 get '/users/:user_id/posts/:post_id' => 'users#show_post'
 get '/users/friends' => 'users#friends'
-get '/users/add_friends' => 'users#add_friends'
+get '/users/add_friends/:page' => 'users#add_friends'
 get '/users/followers' => 'users#followers'
 post '/users/request' => 'users#request'
 

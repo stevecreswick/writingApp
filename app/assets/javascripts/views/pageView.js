@@ -42,33 +42,53 @@ app.PageView = Backbone.View.extend({
   },
 
   renderSideNav: function(){
-    var $left = $('#left-pane').eq(0);
+    var $top = $('#top-pane').eq(0);
     var $sideNav = $(".sidebar-nav");
 
     $sideNav.remove();
-    $left.empty();
+    $top.empty();
 
     var $nav = $('<div>').addClass('sidebar-nav');
-    // Add Nav Items
-    var $write = $('<a>').addClass('write-nav').html('Write');
-    var $line = $('<br>')
-    $nav.append($write);
-    $left.append($nav);
+    $top.append($nav);
 
-    // Add Genre Links
     this.renderGenreLinks( $nav );
 
   },
 
   // Render Genres
-    renderGenreLinks: function(node){
+    renderGenreLinks: function(){
       var $postListHeader = _.template( $('#post-list-menu').html() )
-      node.append($postListHeader);
+      this.$el.find('#top-pane').append($postListHeader);
     },
 
 // Page View Utilities
   empty: function(){
     this.$el.empty();
+  },
+
+  updateHeader(genre){
+
+    switch (genre) {
+      case "Romance":
+      this.$el.find('.home-page').css({'font-family': "'Lovers Quarrel', cursive", "font-size": "2.5em"});
+        break;
+        case "Horror":
+        this.$el.find('.home-page').css({'font-family': "'Loved by the King', cursive", "font-size": "2.5em", "color": "red"});
+        this.$el.find('.post#title-holder').css({'font-family': "'Loved by the King', cursive", "font-size": "2.5em"});
+
+          break;
+          case "Science-Fiction":
+          this.$el.find('.home-page').css({'font-family': "'Krona One', sans-serif", "font-size": "2.5em", "color": "red"});
+
+            break;
+
+
+
+          // font-family: ;
+      default:
+
+    }
+
   },
 
   toggleColumns() {
@@ -99,12 +119,12 @@ app.PageView = Backbone.View.extend({
   // Event Handling
 
   events:{
-    'click a.write-nav': 'renderPromptForm',
-    'click button.cancel-post': 'renderMain',
+    'click div.write-nav': 'renderPromptForm',
+    'click div.cancel-post': 'renderMain',
 
 
     'click a.read-nav': 'renderPosts',
-    'click li.sort': 'updateList',
+    'click div.sort': 'updateList',
 
     'click li.show-friends': 'friendsPage',
 
@@ -123,9 +143,11 @@ app.PageView = Backbone.View.extend({
 
 // Update Post List
   updateList: function(e){
+    // this.$el.find('#center-pane').children().remove();
+
     this.currentGenre = $(e.currentTarget).eq(0).data('url');
     this.currentPage = 0;
-
+    this.updateHeader( this.currentGenre );
     this.renderPosts( this.currentGenre, this.currentPage );
   },
 
@@ -237,7 +259,7 @@ app.PageView = Backbone.View.extend({
       el: $('#friend-page')
     });
 
-    app.users.fetch();
+    app.users.fetch({url: '/users/add_friends/' + this.currentPage  });
   },
 
   clearFriendsPage: function(){
@@ -250,7 +272,7 @@ app.PageView = Backbone.View.extend({
 
 
   renderPromptForm: function(){
-    this.$('.sidebar-nav').remove();
+    this.$('#top-pane').children().remove();
 
     // this.$('#center-pane').empty();
     this.emptyCenter();
@@ -260,13 +282,14 @@ app.PageView = Backbone.View.extend({
       el: $('#center-pane')
     });
 
-    var $back = $('<button>').html('Back').addClass('cancel-post')
-    this.$('#left-pane').append($back)
+
 
     // console.log(app.promptFormPainter);
 
     app.promptFormPainter.render();
     // app.promptFormPainter.bindSlider();
+    var $back = $('<div>').html('X').addClass('cancel-post wa-button')
+    this.$el.find('.prompt-back-holder').append($back)
 
   },
 

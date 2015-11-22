@@ -15,7 +15,7 @@ app.CritiqueListView = Backbone.View.extend({
           view.render();
 
           this.$el.append( view.$el );
- 
+
         }
     }
 });

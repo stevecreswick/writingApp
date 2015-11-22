@@ -25,7 +25,7 @@ app.PostView = Backbone.View.extend({
 
       var poster = this.model.get('username');
       var currentUser = $('#current_user').val()
-      var $deleteButton = $("<p>").addClass("remove-post").html("delete this post");
+      var $deleteButton = $("<span>").addClass("remove-post").html("delete");
       var $makeCritique = $("<button>").addClass("make-critique btn btn-info").html("Review");
       var $showCritique = $("<span>").addClass("render-critiques").html("Show Critiques");
 
@@ -46,7 +46,7 @@ app.PostView = Backbone.View.extend({
 
 // Post Events
   events:{
-    'click p.remove-post': 'removePost',
+    'click span.remove-post': 'removePost',
     'click button.delete-post': 'deletePost',
     'click button.make-critique': 'renderCritiqueForm',
     'click button.save-critique': 'createCritique',
@@ -86,15 +86,16 @@ app.PostView = Backbone.View.extend({
       var id = this.model.get('id');
       var href = "/users/" +  userId + "/posts/" + id;
       var link = $('<a>').attr('href', href).text( this.model.get("title") );
+      var wordCount = $('<span>').addClass("post-word-count").html( "    " + this.model.get('word_count') + "  words" );
 
       var profilePic = this.model.get('image_url');
-      var $profilePic = $('<img>').attr("src", profilePic).addClass('profile-picture img-circle');
+      var $profilePic = $('<img>').attr("src", profilePic).addClass('post-profile-picture img-circle');
 
-      this.$("div#title-holder").append(link);
+      this.$("div#title-holder").append(link, wordCount);
       this.$("strong#created-at").append(createdAt);
       this.$("span#average-rating").append(average);
 
-      this.$("a.post-author").append($profilePic);
+      this.$el.find('.post-pic-box').append($profilePic);
       this.$("a.post-author").append(username);
       // this.renderCritiqueFormContainer();
       // this.renderEditor();

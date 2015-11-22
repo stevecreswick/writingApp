@@ -19,8 +19,10 @@ app.promptFormView = Backbone.View.extend({
   events:{
     'click button.render-prompt': 'getPrompt',
     'click button.start': 'renderWritingForm',
-    'click span.submit-new-post': 'submitPost'
+    'click span.submit-new-post': 'submitPost',
   },
+
+
   updateView: function(){
     console.log('update view called');
     this.remove();

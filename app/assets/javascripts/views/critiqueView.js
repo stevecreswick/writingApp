@@ -18,21 +18,9 @@ app.CritiqueView = Backbone.View.extend({
     var authorId = this.model.get('user_id');
     var currentId = parseInt( $('#current_id').val() );
 
-    // Find Author of Post and Render onto Div
-    // var urlModel = '/users/show/' + this.model.get('user_id');
-    // console.log(urlModel);
-    // var critiqueAuthor = new app.User({});
-    // critiqueAuthor.fetch({url: urlModel});
-    // console.log(critiqueAuthor);
-    // var name = critiqueAuthor.get('username');
-    // console.log(name);
-
     if ( authorId === currentId ){
       var $editButton = $("<span>").addClass("edit-critique").html("Edit");
       var $deleteButton = $("<a>").addClass("remove-critique").html("X");
-
-      // Bind Confirm Modal
-
 
       this.$el.find('.edit-critique-box').append( $editButton );
       this.$el.find('.remove-critique-box').append( $deleteButton );
@@ -47,6 +35,10 @@ app.CritiqueView = Backbone.View.extend({
     'click a.remove-critique': 'removeCritique',
     'click button.delete-critique': 'deleteCritique',
     'click span.edit-critique': 'editCritique',
+
+    'click span.up-vote': 'upVote',
+    'click span.down-vote': 'downVote',
+
     'click span.save-edited-critique': 'saveCritique',
     'click a.close-critique': 'render'
   },
@@ -112,6 +104,29 @@ app.CritiqueView = Backbone.View.extend({
       scope.render();
     });
   },
+
+  upVote: function(){
+    var postId = parseInt( this.model.get('post_id') );
+    this.model.set('votes', this.model.get('votes') + 1);
+    var urlModel = '/posts/' + postId + '/critiques/' + this.model.get('id');
+    this.model.save({url: urlModel});
+  },
+
+  downVote: function(){
+    var postId = parseInt( this.model.get('post_id') );
+
+    if ( this.model.get('votes') > 0) {
+
+      this.model.set('votes', this.model.get('votes') - 1);
+
+    } else {
+
+    }
+
+    var urlModel = '/posts/' + postId + '/critiques/' + this.model.get('id');
+    this.model.save({url: urlModel});
+  },
+
   renderEditor: function(){
     var fullEditor = new Quill('#critique-editor', {
       modules: {

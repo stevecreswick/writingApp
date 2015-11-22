@@ -11,6 +11,16 @@
   <link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Damion' rel='stylesheet' type='text/css'>
+
+  <!-- Romance Font -->
+  <link href='https://fonts.googleapis.com/css?family=Lovers+Quarrel' rel='stylesheet' type='text/css'>
+
+  <!-- Horror Font -->
+  <link href='https://fonts.googleapis.com/css?family=Loved+by+the+King' rel='stylesheet' type='text/css'>
+
+<!-- Sci Fi -->
+  <link href='https://fonts.googleapis.com/css?family=Krona+One' rel='stylesheet' type='text/css'>
+
   <link rel="stylesheet" href="//cdn.quilljs.com/0.19.10/quill.snow.css" />
   <script src="//cdn.quilljs.com/0.19.10/quill.min.js"></script>
 
@@ -20,6 +30,8 @@
 
       <input type="hidden" id="current_user" value="<%= @user.username %>">
       <input type="hidden" id="current_id" value="<%= @user.id %>">
+
+
 
       <!-- Nav Bar -->
       <nav class="navbar navbar-default  navbar-fixed-top">
@@ -58,38 +70,33 @@
     <div class="container-fluid" id="main-display">
 
     <div class="row">
+      <div class="col-xs-12">
+        <div id="top-pane">
+
+        </div>
+      </div>
+
+    </div>
+    <div class="row">
 
       <!-- Left Side -->
-      <div id="left-columns" class="col-sm-1 col-md-1 col-lg-1 hidden-xs">
+      <!-- <div id="left-columns" class="col-sm-1 col-md-1 col-lg-1 hidden-xs">
         <div id="left-pane">
           <br><br><br><br><br><br><br><br><br><br>
         </div>
-      </div>
+      </div> -->
 
       <!-- Center -->
-      <div id="center-columns"class="col-xs-12 col-sm-11 col-md-11 col-lg-11">
+      <div id="center-columns"class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div id="center-pane">
-            <!-- <div class="left-side-main">
-              <a class="read-nav btn btn-primary">Read</a>
-            </div>
-            <div class="line-seperator">
 
-            </div>
-            <div class="right-side-main">
-              <a class="write-nav btn btn-primary">Write</a>
-            </div> -->
           </div>
 
-          <!-- <div id="new-post-box"></div> -->
-          <!-- <div class="post-list-controller"></div> -->
-          <!-- <div id="post-list"></div> -->
+
         </div>
       </div>
 
-      <!-- Right Pane -->
-      <!-- <div class="col-sm-2 col-md-3 col-lg-3 hidden-xs">
-          <div id="right-pane"></div>
-      </div> -->
+
 
     </div>
 
@@ -99,6 +106,15 @@
 
     <script type="text/template" id="prompt-form-template">
 
+      <div class="row">
+        <div class="col-xs-9">
+
+        </div>
+        <div class="col-xs-3 prompt-back-holder">
+
+        </div>
+
+      </div>
       <div class="new-post-box">
         <!-- <h1 class='post-header'>Write</h1> -->
 
@@ -323,63 +339,74 @@
   <!-- Post List Menu -->
     <script type="text/template" id="post-list-menu">
       <!-- <h1 class="post-list-header">Read</h1> -->
-      <ul class="genre-links">
-        <li class="sort" data-url="all"> All</li>
-        <li class="sort" data-url="Fiction"> Fiction</li>
-        <li class="sort" data-url="Fantasy"> Fantasy</li>
-        <li class="sort" data-url="Horror"> Horror</li>
-        <li class="sort" data-url="Thriller"> Thriller</li>
-        <li class="sort" data-url="Crime"> Crime</li>
-        <li class="sort" data-url="Romance"> Romance</li>
-        <li class="sort" data-url="Science-Fiction"> SciFi</li>
-        <li class="sort" data-url="Non-Fiction">Non-Fiction</li>
-      </ul>
+
+      <div class="row">
+        <div class="genre-links">
+        <div class="col-xs-1"><div class="write-nav">Write</div></div>
+
+        <div class="col-xs-1"><div class="sort" data-url="all"> All</div></div>
+        <div class="col-xs-1"><div class="sort" data-url="Fiction"> Fiction</div></div>
+        <div class="col-xs-1"><div class="sort" data-url="Fantasy"> Fantasy</div></div>
+        <div class="col-xs-1"><div class="sort" data-url="Horror"> Horror</div></div>
+
+        <div class="col-xs-1"><div class="sort" data-url="Thriller"> Thriller</div></div>
+        <div class="col-xs-1"><div class="sort" data-url="Thriller"> Thriller</div></div>
+        <div class="col-xs-1"><div class="sort" data-url="Crime"> Crime</div></div>
+        <div class="col-xs-1"><div class="sort" data-url="Romance"> Romance</div></div>
+
+        <div class="col-xs-1"><div class="sort" data-url="Science-Fiction"> SciFi</div></div>
+        <div class="col-xs-1"><div class="sort" data-url="Non-Fiction">Non-Fiction</div></div>
+        <div class="col-xs-1"></div>
+
+      </div>
+
+      </div>
     </script>
 
 
       <!-- Post  -->
     <script type="text/template" id='post-template'>
-      <div class="row">
-        <div class="col-xs-2">
-          <!-- <div class="show-critiques-box">
 
-          </div> -->
-        </div>
-        <div class="col-xs-6 col-xs-offset-4">
-          <div class="remove-post-box">
 
+        <div class="row">
+          <div class="col-xs-4 text-left">
+            <span id="average-rating">  Average Rating:  </span>
+            <br>
+            <strong class="prompt-label"> <%%= genre %> </strong>
+          </div>
+          <div class="col-xs-4 text-center">
+            <div data-no-turbolink  class="prompt-label" id="title-holder"></div>
+          </div>
+          <div class="col-xs-4">
+            <strong class="prompt-label"><%%= prompt_type %></strong>
+            <br>
+            <strong class="prompt-label"><%%= prompt_word_count %> word min.</strong>
           </div>
         </div>
-      </div>
 
       <div class="post-prompt-type">
         <div class="row">
           <div class="col-xs-3">
             <br>
-            <strong class="prompt-label" id="created-at"> </strong>
             <br>
-            <span id="average-rating">  Average Rating:  </span>
             <br>
           </div>
           <div class="col-xs-6">
             <div class="row">
               <div class="col-xs-12">
-                <h3 class="prompt-label"><div data-no-turbolink  id="title-holder"></div></h3>
+
+
               </div>
             </div>
             <div class="row">
               <div class="col-xs-12">
-                 <%%= word_count %> words
               </div>
             </div>
           </div>
           <div class="col-xs-3">
             <br>
-            <strong class="prompt-label"> <%%= genre %> </strong>
             <br>
-            <strong class="prompt-label"><%%= prompt_type %></strong>
             <br>
-            <strong class="prompt-label"><%%= prompt_word_count %> word min.</strong>
             <br>
             <strong class="prompt-label"><%%= prompt %></strong>
           </div>
@@ -393,11 +420,7 @@
             <!-- <strong><%%= prompt_type %></strong> -->
           </div>
           <div class="col-xs-4">
-            <div data-no-turbolink>
-            <a href="/users/profile/<%%= user_id %>" class="post-author">
-                <!-- username rendered here -->
-            </a>
-          </div>
+
           </div>
         </div>
 
@@ -411,6 +434,73 @@
                 <%%= message %>
               </p>
             </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="vertical-space"></div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-1">
+
+          </div>
+          <div class="col-xs-6">
+          </div>
+          <div class="col-xs-2">
+            <br>
+            <div data-no-turbolink>
+            <a href="/users/profile/<%%= user_id %>" class="post-author text-right">
+                <!-- username rendered here -->
+            </a>
+            <br>
+            <strong class="prompt-label" id="created-at"> </strong>
+          </div>
+
+          </div>
+          <div class="col-xs-2">
+            <div class="post-pic-box">
+
+            </div>
+
+          </div>
+
+          <div class="col-xs-1">
+
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="vertical-space"></div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-10">
+
+          </div>
+          <div class="col-xs-2">
+            <div class="remove-post-box">
+
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-3">
+
+          </div>
+          <div class="col-xs-6">
+            <div class="horizontal-line">
+
+
+            </div>
+          </div>
+          <div class="col-xs-3">
+
           </div>
         </div>
 
@@ -444,6 +534,7 @@
               <div class="rating-button" data-post="<%%= id %>" id="star1" value="1" /><label for="star1" class="rating-button" id="label-star1" data-post="<%%= id %>"
                 title="Beginner" data-value="1">1 star</label>
               <div type="hidden" id="post-id" value="<%%= id %>"></input>
+            </div></div></div></div></div></div>
             </div>
           </div>
         </div>
@@ -476,14 +567,13 @@
       <div class="col-xs-1 col-xs-offset-9">
       </div>
       <div class="col-xs-1">
-        <button value="Save" class="save-critique btn btn-info">Save</button>
+        <button value="Save" class="save-critique wa-horizontal-button">Save</button>
         <input type="hidden" name="critique[post_id]" id="critique-post-id">
 
       </form>
 
       </div>
     </div>
-  </div>
 
           <!-- <textarea class= "form-control" id="critique-message" rows="10" name="critique[message]" placeholder="...enter critique"></textarea> -->
 
@@ -506,6 +596,9 @@
             </div>
           </div>
         </div>
+
+      </div>
+
 
 
           <!-- Confirm Post Delete Modal -->
@@ -533,8 +626,6 @@
             </div>
           </div>
 
-      </div>
-
 
 
     </script>
@@ -559,26 +650,44 @@
                 </div>
               </div>
             </div>
+
             <div class="row">
-              <div class="col-xs-12">
+              <div class="col-xs-1">
+                <span class="up-vote vote">Up</span>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-xs-2">
+                <%%= votes %>
+              </div>
+              <div class="col-xs-10">
                 <div class="critique-message">
                     <%%= message %>
                 </div>
               </div>
             </div>
-            <br>
+
             <div class="row">
               <div class="col-xs-1">
-
+                <span class="down-vote vote">Down</span>
               </div>
-              <div class="col-xs-1 col-xs-offset-9 text-right">
+              <div class="col-xs-1 col-xs-offset-8 text-right">
                 <img src="<%%= image_url %>" class="critique-profile-picture img-circle"></img>
               </div>
               <div class="col-xs-1 text-left">
                 <%%= username %>
               </div>
-
             </div>
+
+            <!-- <br>
+            <div class="row">
+              <div class="col-xs-1">
+
+              </div>
+
+
+            </div> -->
 
 
 

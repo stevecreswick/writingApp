@@ -43,6 +43,7 @@ class Api::CritiquesController < ApplicationController
     @post = Post.find( params[:post_id] )
     critique = @post.critiques.find( params[:id] )
     critique.update({message: params[:message] });
+    critique.update({votes: params[:votes] });
 
     respond_to do |format|
 

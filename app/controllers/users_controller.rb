@@ -9,7 +9,9 @@ class UsersController < ApplicationController
   end
 
   def add_friends
-    users = User.all
+    page = params[:page].to_i + 1
+
+    users = User.paginate :page => page
     render json: users
   end
 
