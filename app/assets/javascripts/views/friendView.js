@@ -11,6 +11,11 @@ app.FriendView = Backbone.View.extend({
     var html = this.template( this.model.toJSON() );
     var $html = $( html );
     this.$el.append( $html );
+
+    var profilePic = this.model.get('image_url');
+    var $profilePic = $('<img>').attr("src", profilePic).addClass('user-profile-picture img-circle');
+    this.$el.find('.user-pic-box').append($profilePic);
+
     // this.fetchChallenges();
   },
 

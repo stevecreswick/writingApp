@@ -89,9 +89,12 @@ class UsersController < ApplicationController
     friendships = current_user.friendships
     friends = friendships.map do |friendship|
       friend = User.find( friendship.friend_id )
-      data = friendship.as_json
-      data['friend_name'] = friend.username
-      data
+      # data = friendship.as_json
+      # data['friend_name'] = friend.username
+      # data['friend_image'] = friend.image_url
+      # data['image'] = friend.image_url
+      # data
+      friend
     end
     render json: friends
 

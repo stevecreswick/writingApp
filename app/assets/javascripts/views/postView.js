@@ -25,7 +25,7 @@ app.PostView = Backbone.View.extend({
 
       var poster = this.model.get('username');
       var currentUser = $('#current_user').val()
-      var $deleteButton = $("<span>").addClass("remove-post").html("delete");
+      var $deleteButton = $("<span>").addClass("remove-post").html("<img style='width: 40%;' src='http://i.imgur.com/frbgemj.pngdelete'/><br><span class='prompt-label'>delete</span>");
       var $makeCritique = $("<button>").addClass("make-critique btn btn-info").html("Review");
       var $showCritique = $("<span>").addClass("render-critiques").html("Show Critiques");
 
@@ -69,6 +69,9 @@ app.PostView = Backbone.View.extend({
     deletePost: function(){
       var confirmModal = this.$el.find('#deletePost');
       confirmModal.modal('toggle');
+
+      this.model.url = "/api/posts/" + this.model.get('id');
+      console.log( this.model.url );
       this.model.destroy();
       this.$el.remove();
     },
@@ -116,7 +119,7 @@ app.PostView = Backbone.View.extend({
 
     getPromptInstruction(options){
       if (options.type === "Use One Word") {
-        return "Write " + options.wordCount + " words, using the word <strong>" + options.prompt + "</strong>";
+        return "Write at least " + options.wordCount + " words, using the word <strong>" + options.prompt + "</strong>";
       }
     },
 
@@ -131,8 +134,12 @@ app.PostView = Backbone.View.extend({
     },
     createCritique: function(){
       var newMessage = this.$el.find('textarea#critique-editor').val();
-      this.fetchCritiques();
-      app.posts.get(this.model.get('id')).critiques.create({message: newMessage});
+
+      if (newMessage.length > 0){
+        this.fetchCritiques();
+        app.posts.get(this.model.get('id')).critiques.create({message: newMessage});
+      }
+
     },
 
   // Rating

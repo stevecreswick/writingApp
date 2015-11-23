@@ -90,24 +90,27 @@ app.PageView = Backbone.View.extend({
   updateHeader: function(genre){
 
     switch (genre) {
+
       case "Romance":
-      this.$el.find('.home-page').css({'font-family': "'Lovers Quarrel', cursive", "font-size": "2.5em"});
-        break;
-        case "Horror":
-        this.$el.find('.home-page').css({'font-family': "'Loved by the King', cursive", "font-size": "2.5em", "color": "red"});
+        this.$el.find('.home-page').css({'font-family': "'Lovers Quarrel', cursive", "font-size": "2.5em"});
+      break;
+
+      case "Horror":
+        this.$el.find('.home-page').css({'font-family': "'Loved by the King', cursive", "font-size": "2.5em"});
         this.$el.find('.post#title-holder').css({'font-family': "'Loved by the King', cursive", "font-size": "2.5em"});
+      break;
 
-          break;
-          case "Science-Fiction":
-          this.$el.find('.home-page').css({'font-family': "'Krona One', sans-serif", "font-size": "2.5em", "color": "red"});
+      case "Science-Fiction":
+        this.$el.find('.home-page').css({'font-family': "'Krona One', sans-serif", "font-size": "2.5em", "color": "red"});
+      break;
 
-            break;
-
-
+      case "Historical-Fiction":
+        this.$el.find('.home-page').css({'font-family': "'Homemade Apple', cursive", "font-size": "3em"});
+      break;
 
           // font-family: ;
       default:
-
+      this.$el.find('.home-page').css({'font-family': "'Cutive Mono', sans-serif"});
     }
 
   },
@@ -147,7 +150,7 @@ app.PageView = Backbone.View.extend({
     'click a.read-nav': 'renderPosts',
     'click div.sort': 'updateList',
 
-    'click li.show-friends': 'friendsPage',
+    'click div.show-friends': 'friendsPage',
 
     'click span.show-users': 'showUsers',
     'click span.show-following': 'showFollowing',
@@ -158,7 +161,7 @@ app.PageView = Backbone.View.extend({
 
     'click li.render-friends': 'renderFriendsPage',
     'click li.render-friends': 'renderFriendsPage',
-    'click li.home-page': 'renderMain'
+    'click .home-page': 'renderMain'
   },
 
 
@@ -251,12 +254,14 @@ app.PageView = Backbone.View.extend({
 
   },
 
+
+
   friendsNav: function(){
     var $add = $('<span>').addClass("show-users").text('Add Friends');
     var $following = $('<span>').addClass("show-following").text('Following | ');
     var $followers = $('<span>').addClass("show-followers").text('Followers | ');
 
-    var header = $('<h5>');
+    var header = $('<div>').addClass('friends-nav');
     header.append($following, $followers, $add);
     this.$el.find('#center-pane').append( header );
   },

@@ -6,13 +6,11 @@ app.UserListView = Backbone.View.extend({
   },
   render: function(){
     this.$el.empty();
-    var $userHeader = $('<h1>').text('Add Friends');
-    this.$el.append($userHeader);
 
       var users = this.collection.models;
       var view;
         for (var i = 0; i < users.length; i++) {
-          view = new app.UserView({model: users[i]});
+          view = new app.FriendView({model: users[i]});
           view.render();
           this.$el.append( view.$el );
         }

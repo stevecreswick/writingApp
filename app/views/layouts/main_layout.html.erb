@@ -8,9 +8,18 @@
 
 
   <link href='https://fonts.googleapis.com/css?family=Permanent+Marker' rel='stylesheet' type='text/css'>
-  <link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Damion' rel='stylesheet' type='text/css'>
+
+
+  <!-- Default Header -->
+  <link href='https://fonts.googleapis.com/css?family=Cutive+Mono' rel='stylesheet' type='text/css'>
+
+  <!-- Title Font -->
+  <link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
+
+  <!-- Helper Text -->
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
 
   <!-- Post Font -->
   <link href='https://fonts.googleapis.com/css?family=Krona+One|Josefin+Sans:400,400italic,700italic,700' rel='stylesheet' type='text/css'>
@@ -21,6 +30,8 @@
   <!-- Horror Font -->
   <link href='https://fonts.googleapis.com/css?family=Loved+by+the+King' rel='stylesheet' type='text/css'>
 
+  <!-- Historical Fiction -->
+  <link href='https://fonts.googleapis.com/css?family=Homemade+Apple' rel='stylesheet' type='text/css'>
 <!-- Sci Fi -->
   <link href='https://fonts.googleapis.com/css?family=Krona+One' rel='stylesheet' type='text/css'>
 
@@ -47,17 +58,44 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <li class="home-page">Write Away</li>
+
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav navbar-right">
+          <div class="row">
+
+            <div class="col-xs-3  col-sm-2 col-md-1 text-center">
+              <div class="write-nav">
+                <img class="typewriter" src="http://i.imgur.com/yXJDIRB.png"/>
+                <br>
+                <span class="visible-xs" id="sub-logo">writeaway</span>
+              </div>
+
+            </div>
+            <div class="col-xs-5">
+              <h1 class="home-page hidden-xs">Write Away</h1>
+            </div>
+            <div class="col-xs-2">
+              <img src="<%= @user.image_url %>" class="img-circle profile-picture"</>
+            </div>
+          <div class="col-xs-2">
+            <div class="show-friends"><img src="http://i.imgur.com/bYdRuZZ.png"/><br><span class="prompt-label">writers</span></div>
+          </div>
+          <div class="col-xs-2">
+            <li><%= link_to 'Log Out', '/sessions', method: :delete  %></li>
+          </div>
+          </div>
+
+          <ul class="nav navbar-nav navbar-left">
+
+        </ul>
+
+          <!-- <ul class="nav navbar-nav navbar-right">
             <li id="username"></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle navbar-username" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                 <img src="<%= @user.image_url %>" class="img-circle profile-picture"</>
-                <%= @user.username %> <span class="caret"></span></a>
+              <span class="caret"></span></a>
               <ul class="dropdown-menu">
                 <li class="add-friends"><a>Add Friends</a></li>
                 <li class="show-challenges">Challenges</li>
@@ -66,8 +104,7 @@
                   <li><%= link_to 'Log Out', '/sessions', method: :delete  %></li>
               </ul>
             </li>
-          </ul>
-        </div><!-- /.navbar-collapse -->
+          </ul> -->
       </div><!-- /.container-fluid -->
     </nav>
 
@@ -91,7 +128,7 @@
       </div> -->
 
       <!-- Center -->
-      <div id="center-columns"class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <div id="center-columns"class="col-xs-10 col-xs-offset-1">
         <div id="center-pane">
 
           </div>
@@ -100,11 +137,30 @@
         </div>
       </div>
 
+      <div class="row">
+        <div class="col-xs-2">
+        </div>
+        <div class="col-xs-8">
+          <!-- <img class="typewriter" src="http://i.imgur.com/yXJDIRB.png"/> -->
+        </div>
+        <div class="col-xs-2">
+          <!-- <img class="typewriter" src="http://i.imgur.com/yXJDIRB.png"/> -->
+        </div>
+      </div>
+      <!-- Footer -->
+      <section id="footer">
+        <div class="container">
+          Write Away
+          <div>Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a>, <a href="http://www.flaticon.com/authors/designmodo" title="Designmodo">Designmodo</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a>             is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a></div>
+        </div>
+      </section>
 
 
+<!-- Close Container -->
     </div>
 
-  </div>
+
+
     </script>
 
 
@@ -200,13 +256,24 @@
       <!-- <h1 class="create-post-header">Write</h3> -->
 
         <!-- <form id="create-post"> -->
+
+
+        <div class="row">
+          <div class="col-xs-12"><div class="vertical-space"></div></div>
+        </div>
+
+          <div class="row">
+            <div class="col-xs-12 text-center">
+              <h4 id="prompt-review-container"></h4>
+            </div>
+          </div>
+
           <div class="row">
             <div class="col-xs-12">
-              <h4 id="post-genre"></h4>
             </div>
           </div>
           <div class="row">
-            <div class="col-xs-12">
+            <div class="col-xs-12 text-center">
               <h5 id="post-box-type"></h5>
             </div>
 
@@ -214,10 +281,15 @@
 
 
           <!-- Post Title -->
-          <div class="form-group">
-            <label for="post-title">Title</label>
-            <input type="text" id="post-title" class="form-control">
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="form-group">
+                <label for="post-title">Title</label>
+                <input type="text" id="post-title" class="form-control">
+              </div>
+            </div>
           </div>
+
 
           <div class="form-group">
             <!-- Create the toolbar container -->
@@ -391,12 +463,13 @@
 
 
         <div class="row">
-          <div class="col-xs-4 text-left">
-            <span id="average-rating">  Average Rating:  </span>
+          <div class="col-xs-2  text-center prompt-label">
+            <strong> <%%= genre %> </strong>
             <br>
-            <strong class="prompt-label"> <%%= genre %> </strong>
+            <strong id="created-at">Posted  </strong>
+
           </div>
-          <div class="col-xs-4 text-center">
+          <div class="col-xs-4 col-xs-offset-2 text-center prompt-label">
             <br>
             <div data-no-turbolink id="post-author-stats">
               <div class="post-pic-box">
@@ -408,10 +481,10 @@
           </div>
           </div>
 
-          <div class="col-xs-4 text-right">
-            <strong class="prompt-label"><%%= prompt_type %></strong>
+          <div class="col-xs-2 col-xs-offset-2 text-center prompt-label">
+            Average Rating
             <br>
-            <strong class="prompt-label"><%%= prompt_word_count %> word min.</strong>
+            <span id="average-rating">    </span>
           </div>
         </div>
 
@@ -424,7 +497,7 @@
           <div class="col-xs-6"></div>
         </div>
         <div class="row">
-          <div class="col-xs-12"></div>
+          <div class="col-xs-12"><div class="vertical-space"></div></div>
         </div>
 
         <div class="row">
@@ -438,7 +511,7 @@
           <div class="col-xs-4">
           </div>
           <div class="col-xs-4">
-
+            <div class="vertical-space"></div>
           </div>
         </div>
 
@@ -447,8 +520,8 @@
 
         <div class="row">
           <div class="col-xs-12">
-            <div class="post-box">
-              <div data-no-turbolink  class="prompt-label text-center" id="title-holder"></div>
+            <div class="post-box prompt-label">
+              <div data-no-turbolink  class="prompt-label text-left" id="title-holder"></div>
               <br>
               <p class="posted-message">
                 <%%= message %>
@@ -473,9 +546,6 @@
           </div>
 
           <div class="col-xs-3 text-right">
-            Written
-            <br>
-            <strong class="prompt-label" id="created-at"> </strong>
           </div>
         </div>
 
@@ -522,14 +592,14 @@
         </div>
 
         <div class="row">
-          <div class="col-xs-12">
-            <h5>Rate this Post</h5>
+          <div class="col-xs-12 text-left">
           </div>
         </div>
 
         <div class="row">
-          <div class="col-xs-12">
-            <div class="rating text-center">
+          <div class="col-xs-12 text-center">
+            <span class="prompt-label">Rate this Post</span>
+            <div class="rating">
               <div class="rating-button" data-post="<%%= id %>" id="star5" value="5" /><label for="star5" class="rating-button" id="label-star5" data-post="<%%= id %>"
                 title="Shakespeare" data-value="5">5 stars</label>
               <div class="rating-button" data-post="<%%= id %>" id="star4" value="4" /><label for="star4" class="rating-button" id="label-star4" data-post="<%%= id %>"
@@ -553,15 +623,20 @@
         <div class="row">
           <div class="col-xs-12">
             <div class="new-critique-form">
-              <h5 class="text-left">Give Feedback</h5>
+              <h5 class="text-left prompt-label">Give Feedback</h5>
             </div>
           </div>
         </div>
 
 
     <div class="row">
-      <div class="col-xs-12">
+      <div class="col-xs-12 text-right">
         <textarea id="critique-editor" class="post-body"></textarea>
+
+        <button value="Save" class="save-critique wa-horizontal-button"><img style="width: 25%;" src="http://i.imgur.com/s5p0JYL.png"/><img style="width: 25%; margin-right: 5%;" src="http://i.imgur.com/JlGW9RA.png"/><br>Submit</button>
+
+        <input type="hidden" name="critique[post_id]" id="critique-post-id">
+
       </div>
     </div>
 
@@ -574,8 +649,6 @@
       <div class="col-xs-1 col-xs-offset-9">
       </div>
       <div class="col-xs-1">
-        <button value="Save" class="save-critique wa-horizontal-button">Save</button>
-        <input type="hidden" name="critique[post_id]" id="critique-post-id">
 
       </form>
 
@@ -586,12 +659,20 @@
 
         <div class="row">
           <div class="col-xs-2">
-            <div class="show-critiques-box">
+            <div class="show-critiques-box prompt-label">
 
             </div>
           </div>
           <div class="col-xs-6 col-xs-offset-4">
 
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="vertical-space">
+
+            </div>
           </div>
         </div>
 
@@ -638,6 +719,217 @@
     </script>
 
 
+
+    <!-- New Post -->
+    <script type="text/template" id="new-template">
+
+      <div id="prompt-series">
+
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="vertical-space">
+
+          </div>
+          <div class="vertical-space">
+
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-2"></div>
+
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12 text-center">
+          <h2 class="new-instruction">What Genre Would You Like to Write?</h2>
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="col-xs-4"></div>
+
+        <div class="col-xs-4 text-center">
+          <!-- <div cla="prompt-container"> -->
+          <select class="form-control input-lg tall-input" id="choose-genre">
+              <option>Fiction</option>
+              <option>Fantasy</option>
+              <option>Historical-Fiction</option>
+              <option>Horror</option>
+              <option>Thriller</option>
+              <option>Crime</option>
+              <option>Romance</option>
+              <option>Science-Fiction</option>
+              <option>Poetry</option>
+              <option>Non-Fiction</option>
+          </select>
+        <!-- </div> -->
+        </div>
+      </div>
+
+      <!-- Space -->
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="vertical-space">
+          </div>
+          <div class="vertical-space">
+          </div>
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="col-xs-12 text-center">
+          <h5 class="new-instruction">What type of writing prompt?</h5>
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-xs-12 col-md-4">
+          <select class="form-control" id="choose-type">
+              <option>Use One Word</option>
+              <option>Answer What If</option>
+              <option>Classic First Sentence</option>
+          </select>
+        </div>
+        <div class="col-xs-12 col-md-6 text-center">
+
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-xs-12 col-md-4 text-center">
+          <div id="prompt-description" class="prompt-label">
+            This will hold a description of the selected prompt
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Space -->
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="vertical-space">
+          </div>
+          <div class="vertical-space">
+          </div>
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="col-xs-12 text-center">
+          <h5 class="new-instruction">How many words?</h5>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="vertical-space">
+          </div>
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="col-xs-5 text-center">
+        </div>
+        <div class="col-xs-2 text-center">
+          <input type="number" value="25" min ="25" max="1000" step="25" class="form-control input-lg" id="post-word-count"></input> <span class="prompt-label">1,000 max</span>
+        </div>
+        <div class="col-xs-5 text-center">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="vertical-space">
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-4">
+          <div class="vertical-space">
+          </div>
+        </div>
+        <div class="col-xs-4">
+          <button class="render-prompt btn btn-primary">Generate Prompt</button>
+        </div>
+      </div>
+
+      <div class="post-button-container">
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12 text-center">
+          <div id="prompt-review-container"></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12 text-center">
+          <div id="prompt-container"></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="vertical-space">
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-4">
+
+        </div>
+        <div class="col-xs-12 col-md-4">
+          <div id="start-writing-container">
+          </div>
+        </div>
+      </div>
+
+
+
+
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="vertical-space">
+
+          </div>
+          <div class="vertical-space">
+
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+    </div>
+
+    </script>
+
+
       <!-- Critique -->
       <script type="text/template" id="critique-template">
 
@@ -669,9 +961,9 @@
                 <%%= votes %>
               </div>
               <div class="col-xs-10">
-                <div class="critique-message">
+                <p class="critique-message">
                     <%%= message %>
-                </div>
+                </p>
               </div>
             </div>
 
@@ -840,10 +1132,76 @@
     <!-- Render Prompt Form -->
 
     <script type="text/template" id="friend-view-template">
-      <h3><%%= friend_name %></h3>
-      <button type="button" class="btn btn-danger remove-friend">Remove Friend</button>
-      <button type="button" class="btn btn-info make-challenge">Issue Challenge</button>
-      <button type="button" class="btn btn-info show-challenges">Show Challenges</button>
+
+      <div class="row">
+        <div class="col-xs-2 text-left">
+          <span class="prompt-label">Writer Score: <%%= writer_score %></span>
+          <br>
+          <span class="prompt-label">Reviewer Score: <%%= reviewer_score %></span>
+          <br>
+        </div>
+
+        <div class="col-xs-4 col-xs-offset-2 text-center prompt-label">
+          <div data-no-turbolink id="post-author-stats">
+            <div class="user-pic-box"></div>
+            <h3><%%= username %></h3>
+
+          </div>
+        </div>
+
+        <div class="col-xs-2 col-xs-offset-2 text-right">
+          <span class="remove-friend">Remove Friend</span>
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="col-xs-12"><div class="vertical-space"></div></div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-6 text-left">
+          <span class="prompt-label">Reading: <%%= currently_reading %></span>
+          <br>
+          <span class="prompt-label">Writing Goal: <%%= writing_goal %></span>
+        </div>
+        <div class="col-xs-6 text-left">
+          <span class="prompt-label">Favorite Authors: <%%= favorite_author %></span>
+          <br>
+          <span class="prompt-label">Favorite Books: <%%= favorite_book %></span>
+          <br>
+          <span class="prompt-label">Favorite Genres: <%%= favorite_genre %></span>
+          <br>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12"><div class="vertical-space"></div></div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-3 text-left">
+          <span class="prompt-label">From: <%%= from %></span>
+        </div>
+        <div class="col-xs-9 text-left">
+          <span class="prompt-label">About:<%%= about %></span>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12"><div class="vertical-space"></div></div>
+      </div>
+
+      <div class="row">
+        <button type="button" class="btn btn-info make-challenge">Issue Challenge</button>
+        <button type="button" class="btn btn-info show-challenges">Show Challenges</button>
+      </div>
       <div id="challenge-list">
 
       </div>
