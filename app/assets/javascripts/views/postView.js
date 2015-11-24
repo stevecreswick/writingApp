@@ -181,8 +181,6 @@ app.PostView = Backbone.View.extend({
 
     } else {
 
-      console.log( 'this post is not rated by this user - Post: ' + this.model.get('id' ));
-
     }
 
   },

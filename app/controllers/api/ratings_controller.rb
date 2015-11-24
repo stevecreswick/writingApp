@@ -19,11 +19,23 @@ class Api::RatingsController < ApplicationController
                 @rating = Rating.new(rating_params)
                 @rating.post_id = @post.id
                 @rating.user_id = current_user.id
+
+                # Raises the author's writing score
+                post_author = User.find( @post.user_id )
+                binding.pry
+                puts post_author.writer_score
+                post_author.update({ writer_score: post_author.writer_score = post_author.writer_score + @rating.value.to_i })
+                puts post_author.writer_score
+
+                # Raise the reviewers reviewer score
+                current_user.update({ reviewer_score: current_user.reviewer_score += 1 })
+
                 if @rating.save
                         render json: @post
                 end
             end
         end
+
         def update
             @post = Post.find(params[:id])
             if current_user.id == @post.id

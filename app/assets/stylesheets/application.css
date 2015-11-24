@@ -298,7 +298,9 @@ ul.dropdown-menu{
 }
 
 #prompt-series{
-  height: 75em;
+  /*height: 75em;*/
+  background: white;
+  margin-top: 5em;
 }
 
 #choose-type{

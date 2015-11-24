@@ -28,6 +28,23 @@ class Api::CritiquesController < ApplicationController
     critique.update( user_id: current_user.id )
     critique.update( votes: 0 )
 
+    # Check to see how long the critique was
+    words = critique.message.split(' ').length
+
+    # Raise reviewer score based on length of review
+    if words > 400
+      current_user.update({reviewer_score: current_user.reviewer_score + 5})
+    elsif words > 200
+      current_user.update({reviewer_score: current_user.reviewer_score + 4})
+    elsif words > 100
+      current_user.update({reviewer_score: current_user.reviewer_score + 3})
+    elsif words > 50
+      current_user.update({reviewer_score: current_user.reviewer_score + 2})
+    elsif words > 25
+      current_user.update({reviewer_score: current_user.reviewer_score + 1})
+    end
+
+
     respond_to do |format|
         format.json { render json: critique }
         format.html { redirect_to '/api/posts/' + critique.post_id.to_s }
