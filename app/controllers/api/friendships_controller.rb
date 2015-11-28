@@ -17,6 +17,7 @@ class Api::FriendshipsController < ApplicationController
 
     def index
     @user = current_user
+    render json: @user.friends
     end
 
     def pending
@@ -54,20 +55,19 @@ class Api::FriendshipsController < ApplicationController
       if !already_friends  && (params[:friend_id].to_i != current_user.id)
         @friendship = current_user.friendships.build(:friend_id => params[:friend_id])
         if @friendship.save
-          redirect_to api_friends_path
+          render json: current_user.friendships
         else
-          redirect_to api_friends_path
+          render json: current_user.friendships
         end
       else
-        redirect_to api_friends_path
+          render json: current_user.friendships
       end
     end
 
     def destroy
-        @friendship = current_user.friendships.find( params[:id])
-        @friendship.destroy
-        # Friendship.destroy(id: @friendship.id)
-        redirect_to api_friends_path
+        @friendship = current_user.friendships.where({friend_id: params[:friend_id]})
+        Friendship.destroy(@friendship[0].id)
+        render json: current_user.friendships
     end
 
     private

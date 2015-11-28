@@ -864,7 +864,7 @@
         </div>
       </div>
 
-  
+
       <div class="row">
         <div class="col-xs-12 text-center">
           <div id="prompt-review-container"></div>
@@ -1136,8 +1136,7 @@
           </div>
         </div>
 
-        <div class="col-xs-2 col-xs-offset-2 text-right">
-          <span class="remove-friend">Remove Friend</span>
+        <div class="col-xs-2 col-xs-offset-2 text-right" id="friend-button-holder">
         </div>
       </div>
 
@@ -1186,12 +1185,16 @@
       </div>
 
       <div class="row">
-        <button type="button" class="btn btn-info make-challenge">Issue Challenge</button>
-        <button type="button" class="btn btn-info show-challenges">Show Challenges</button>
+        <!-- <button type="button" class="btn btn-info make-challenge">Issue Challenge</button> -->
+        <!-- <button type="button" class="btn btn-info show-challenges">Show Challenges</button> -->
       </div>
       <div id="challenge-list">
 
       </div>
+
+      <input type="hidden" name="friendship[friend_id]" value="<%%= id %>" class="friend-id-holder">
+      <input type="hidden" name="friendship[user_id]" value="<%= @user.id %>" class="user-id-holder">
+
     </script>
 
     <script type="text/template" id="follower-view-template">

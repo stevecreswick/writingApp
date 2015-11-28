@@ -32,4 +32,13 @@ class User < ActiveRecord::Base
     self.token = SecureRandom.urlsafe_base64(nil, false)
   end
 
+  def friend_ids
+    ids = []
+    self.friendships.map do |friendship|
+      ids.push(friendship.friend_id)
+    end
+      return ids
+
+  end
+
 end
