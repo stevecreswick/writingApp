@@ -92,6 +92,7 @@ class UsersController < ApplicationController
     friends = friendships.map do |friendship|
       friend = User.find( friendship.friend_id )
       data = friend.as_json
+      data['is_friend'] = true
       # data['friend_name'] = friend.username
       # data['friend_image'] = friend.image_url
       # data['writer_score'] = friend.writer_score
@@ -115,10 +116,19 @@ class UsersController < ApplicationController
 
     inverse_friends = current_user.inverse_friends
 
-    followers = inverse_friends.map do |friend|
-      data = friend.as_json
-      data['friend_name'] = friend.username
-      data['friend_image'] = friend.image_url
+    followers = inverse_friends.map do |follower|
+      data = follower.as_json
+
+      friends = current_user.friend_ids
+
+       if friends.include? follower.id
+         data['is_friend'] = true
+       else
+         data['is_friend'] = false
+       end
+
+      data['friend_name'] = follower.username
+      data['friend_image'] = follower.image_url
       data
     end
 
@@ -133,17 +143,18 @@ class UsersController < ApplicationController
 
     add_friends = users.map do |user|
 
-      friends = user.friend_ids
-      puts "****************"
-      puts friends
+      data = user.as_json
+
+      friends = current_user.friend_ids
+
        if friends.include? user.id
-         puts "*************** User is friend"
+         data['is_friend'] = true
+       else
+         data['is_friend'] = false
        end
 
-      data = user.as_json
       data['friend_name'] = user.username
       data['friend_image'] = user.image_url
-      data['is_friend'] = user.image_url
       data
     end
 

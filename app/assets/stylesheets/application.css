@@ -30,7 +30,7 @@
     height: 100%;
     margin: 0px;
     font-family: 'Open Sans Condensed', sans-serif;
-    min-height: 1000px;
+    /*min-height: 1000px;*/
   }
 
   a{
@@ -166,6 +166,14 @@
   width: 100%;
 }
 
+p.character-count {
+  float:left;
+  position: absolute;
+  bottom: 0;
+  z-index: 100;
+  color: gold;
+}
+
 #prompt-container{
   border: 1px grey solid;
   color: black;
@@ -239,7 +247,7 @@ form{
 #header {
   background: white;
   padding: 0% 5% 0% 3%;
-  vertical-align: center;
+  vertical-align: middle;
   color: black;
   overflow: visible;
   height:6em;
@@ -259,12 +267,13 @@ form{
 .profile-picture{
   height: 50px;
   width: 50px;
-  margin-right: 1em;
+  /*margin-right: 1em;*/
   display: inline-block;
 }
 
 .critique-profile-picture{
-  height: 2em;
+  height: 50px;
+  width: 50px;
   display: inline-block;
 }
 
@@ -322,14 +331,14 @@ ul.dropdown-menu{
 
 }
 .tall-input{
-  font-size: 3em;
+  font-size: 2em;
   text-align: center;
   height: 3em;
 }
 
 .new-instruction{
   font-family: 'Oswald', sans-serif;
-  font-size: 5em;
+  font-size: 3em;
 }
 
 .typewriter{
@@ -467,7 +476,7 @@ margin-top: -4.8em;
   }*/
 
   #critique-list-view{
-    height: 10em;
+    height: auto;
   }
 
   .critique-view{
@@ -477,7 +486,8 @@ margin-top: -4.8em;
     padding: 2em;
     border-top: ghostwhite 1px solid;
     border-bottom: ghostwhite 1px solid;
-    width: 80%;
+    width: 90%;
+    margin-left: 5%;
   }
 
   .critique-form-container{
@@ -501,7 +511,7 @@ margin-top: -4.8em;
   height: 100px;
   width: 100px;
   /*float: left;*/
-  display:inline;
+  display: block;
   border: 6px solid #545454;
 }
 
@@ -513,8 +523,27 @@ margin-top: -4.8em;
   text-align: center;
 
 }
-.show-friends > img{
+/*.show-friends > img{
   width:40px;
+}*/
+
+.nav-icon > img {
+  width:40px;
+}
+
+.nav-column {
+  display: table;
+  vertical-align: middle;
+}
+
+.nav-item {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: left;
+}
+
+.nav-item > img {
+  max-width: 100%;
 }
 
 .friends-nav{
@@ -913,7 +942,6 @@ div.sort:hover{
 }
 
 .critique-view:nth-child(even){
-  margin-left: 15%;
   border: 1px solid #545454;
   /*border-right: 2px solid #545454;*/
 }

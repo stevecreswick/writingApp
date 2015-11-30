@@ -84,7 +84,8 @@ app.PostView = Backbone.View.extend({
 
       var username = this.model.get('username');
       var createdAt = this.model.get('created_at');
-      var average = this.model.get('avg_rating');
+
+
       var userId = this.model.get('user_id');
       var prompt = this.model.get('prompt');
 
@@ -108,7 +109,12 @@ app.PostView = Backbone.View.extend({
 
       this.$("div#title-holder").append(link, lineBreak, wordCount);
       this.$("strong#created-at").append(createdAt);
-      this.$("span#average-rating").append(average);
+
+      if (this.model.get('avg_rating')){
+        var average = "Average Rating: " + this.model.get('avg_rating');
+        this.$("span#average-rating").append(average);
+  
+      }
 
       this.$el.find('.post-pic-box').append($profilePic);
       this.$("a.post-author").append(username);

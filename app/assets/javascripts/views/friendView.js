@@ -16,11 +16,18 @@ app.FriendView = Backbone.View.extend({
     var $profilePic = $('<img>').attr("src", profilePic).addClass('user-profile-picture img-circle');
     this.$el.find('.user-pic-box').append($profilePic);
 
+    console.log(this.model.get('username'));
 
     var $removeFriend = $('<span>').addClass('remove-friend').text('Remove Friend');
     var $addFriend = $('<span>').addClass('add-friend').text('Add Friend');
     var $br = $('<br>')
-    this.$el.find('#friend-button-holder').append($removeFriend, $br, $addFriend);
+
+    if ( this.model.get('is_friend') ){
+      this.$el.find('#friend-button-holder').append($removeFriend);
+    } else {
+      this.$el.find('#friend-button-holder').append($addFriend);
+    }
+
     // this.fetchChallenges();
   },
 

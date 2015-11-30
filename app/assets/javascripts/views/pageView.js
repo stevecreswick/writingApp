@@ -34,6 +34,7 @@ app.PageView = Backbone.View.extend({
   },
 
   friendsPage: function(){
+    this.currentPage = 0;
     this.$el.find('#center-pane .sidebar-nav').remove();
     this.$el.find('#post-list').remove();
 
