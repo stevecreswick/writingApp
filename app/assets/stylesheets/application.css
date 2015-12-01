@@ -300,7 +300,9 @@ ul.dropdown-menu{
   margin-right: 5%;
 }
 
-
+div.nav-item:hover{
+  cursor: pointer;
+}
 
 .genre-links{
   padding: 1em 0 1em 0;
@@ -335,7 +337,8 @@ div > .sort{
 }
 
 div.sort{
-  font-size: 8px;
+  font-size: 10px;
+  font-family: 'Open Sans Condensed', serif;
   padding: 0.5em 0.5em 0.5em 2em;
   text-decoration: none;
   list-style: none;
@@ -455,6 +458,8 @@ div.sort img{
   text-align: center;
   font-family: 'Cutive Mono', sans-serif;
   color: #545454;
+  width: 100%;
+  display: inline-block;
 }
 
 
