@@ -48,7 +48,7 @@
 
 
       <!-- Nav Bar -->
-      <nav class="navbar navbar-default  navbar-fixed-top">
+      <!-- <nav class="navbar navbar-default  navbar-fixed-top"> -->
       <div class="container-fluid"  id="header">
         <!-- Brand and toggle get grouped for better mobile display -->
         <!-- <div class="navbar-header">
@@ -62,28 +62,35 @@
         </div> -->
 
         <!-- Collect the nav links, forms, and other content for toggling -->
-          <div class="row">
+          <div class="row" id="header-row">
 
-            <div class="col-xs-3  col-sm-2 col-md-1 text-center nav-column">
-              <div class="write-nav nav-item">
+            <div class="col-xs-2 col-sm-2 text-center nav-column">
+              <div class="write-nav nav-item text-center">
                 <img class="typewriter" src="http://i.imgur.com/yXJDIRB.png"/>
                 <br>
-                <span class="visible-xs" id="sub-logo">writeaway</span>
+                <span id="sub-logo">write</span>
               </div>
+            </div>
 
+            <div class="col-xs-3 col-sm-2 nav-column">
+              <div class="home-page nav-icon nav-item text-center"><img src="http://i.imgur.com/hR2f8aM.png"/>
+                <br>
+                <span id="sub-logo">read</span></div>
             </div>
+
             <div class="col-sm-4 nav-column">
-              <h1 class="home-page hidden-xs nav-item">Write Away</h1>
+              <h1 class="home-page hidden-xs nav-item text-center">writeaway.</h1>
             </div>
-            <div class="col-xs-2 col-sm-2 nav-column">
-              <div class="home-page nav-icon text-right nav-item"><img src="http://i.imgur.com/hR2f8aM.png"/><br><span class="prompt-label">read</span></div>
-            </div>
-          <div class="col-xs-2 col-sm-2 nav-column">
-            <div class="show-friends nav-icon text-center nav-item"><img src="http://i.imgur.com/bYdRuZZ.png"/><br><span class="prompt-label">writers</span></div>
+
+          <div class="col-xs-3 col-sm-2 nav-column">
+            <div class="show-friends nav-icon nav-item text-center"><img src="http://i.imgur.com/bYdRuZZ.png"/>
+              <br>
+              <span id="sub-logo" class="hidden-s">writers</span></div>
           </div>
-          <div class="col-xs-2 col-sm-2 nav-column text-left">
-            <div class="nav-item text-center">
-            <img src="<%= @user.image_url %>" class="img-circle profile-picture nav-item"</><span class="prompt-label"><%= @user.username %></span>
+          <div class="col-xs-2 col-sm-2 nav-column">
+            <div class="nav-item text-center text-center">
+            <img src="<%= @user.image_url %>" class="img-circle profile-picture"</>
+            <span id="sub-logo" class="hidden-s"><%= @user.username %></span>
             </div>
           </div>
 
@@ -114,7 +121,7 @@
             </li>
           </ul> -->
       </div><!-- /.container-fluid -->
-    </nav>
+    <!-- </nav> -->
 
     <div class="container-fluid" id="main-display">
 
@@ -450,21 +457,57 @@
         <div class="col-xs-1"><div class="sort" data-url="Non-Fiction">Non-Fiction</div></div>
         <div class="col-xs-1"></div> -->
 
-        <div class="write-nav">Write</div>
+        <!-- <div class="write-nav">Write</div> -->
 
-        <div class="sort" data-url="all"> All</div>
-        <div class="sort" data-url="Fiction"> Fiction</div>
-        <div class="sort" data-url="Fantasy"> Fantasy</div>
-        <div class="sort" data-url="Horror"> Horror</div>
+        <div class="sort" data-url="all">
+          <img src="http://i.imgur.com/ZNd76fy.png"></img>
+          All
+        </div>
+        <div class="sort" data-url="Fiction">
+          <img src="http://i.imgur.com/BI8PegK.png"></img>
+           Fiction
+         </div>
+        <div class="sort" data-url="Fantasy">
+          <img src="http://i.imgur.com/ffCviDQ.png"></img>
+           Fantasy
+         </div>
+        <div class="sort" data-url="Horror">
+          <img src="http://i.imgur.com/iJvfYS1.png"></img>
+           Horror
+         </div>
+        <div class="sort" data-url="Thriller">
+          <img src="http://i.imgur.com/ojVa8BI.png"></img>
+           Thriller
+         </div>
+        <div class="sort" data-url="Historical-Fiction">
+          <img src="http://i.imgur.com/lHyRvye.png"></img>
+          Historical
+        </div>
+        <div class="sort" data-url="Crime">
+          <img src="http://i.imgur.com/8w44WhP.png"></img>
+          Crime
+        </div>
+        <div class="sort" data-url="Romance">
+          <img src="http://i.imgur.com/zz5QHWN.png"></img>
+           Romance
+         </div>
 
-        <div class="sort" data-url="Thriller"> Thriller</div>
-        <div class="sort" data-url="Historical-Fiction">Historical Fiction</div>
-        <div class="sort" data-url="Crime"> Crime</div>
-        <div class="sort" data-url="Romance"> Romance</div>
-
-        <div class="sort" data-url="Science-Fiction"> SciFi</div>
-        <div class="sort" data-url="Poetry">Poetry</div>
-        <div class="sort" data-url="Non-Fiction">Non-Fiction</div>
+        <div class="sort" data-url="Science-Fiction">
+          <img src="http://i.imgur.com/K1kGfUE.png"></img>
+           SciFi
+         </div>
+        <div class="sort" data-url="Poetry">
+          <img src="http://i.imgur.com/F71bhWM.png"></img>
+          Poetry
+        </div>
+        <div class="sort" data-url="Humor">
+          <img src="http://i.imgur.com/Iw9CxT2.png"></img>
+          Humor
+        </div>
+        <div class="sort" data-url="Non-Fiction">
+          <img src="http://i.imgur.com/tH5XICv.png"></img>
+          Non-Fiction
+        </div>
 
 
       </div>
@@ -948,6 +991,12 @@
               </div>
             </div>
 
+            <div class="row">
+              <div class="col-xs-4">
+                <br>
+              </div>
+            </div>
+
 
             <div class="row">
 
@@ -959,30 +1008,34 @@
             </div>
 
             <div class="row">
+              <div class="col-xs-2">
+                <span class="up-vote vote">Up</span>
+
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-xs-2">
+                <%%= votes %>
+              </div>
+              <div class="col-xs-8 text-right">
+
+              </div>
 
             </div>
 
             <div class="row">
               <div class="col-xs-2">
-                <span class="up-vote vote">Up</span>
-                <%%= votes %>
                 <span class="down-vote vote">Down</span>
+
               </div>
-              <div class="col-xs-4 text-right">
+            </div>
+
+            <div class="row">
+              <div class="col-xs-4 col-xs-offset-8 text-right">
                 <img src="<%%= image_url %>" class="critique-profile-picture img-circle"></img>
-              </div>
-              <div class="col-xs-2 text-left">
                 <%%= username %>
               </div>
-            </div>
-
-            <div class="row">
-              <div class="col-xs-1">
-              </div>
-            </div>
-
-            <div class="row">
-
 
             </div>
 

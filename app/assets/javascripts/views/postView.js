@@ -113,7 +113,7 @@ app.PostView = Backbone.View.extend({
       if (this.model.get('avg_rating')){
         var average = "Average Rating: " + this.model.get('avg_rating');
         this.$("span#average-rating").append(average);
-  
+
       }
 
       this.$el.find('.post-pic-box').append($profilePic);
@@ -213,7 +213,7 @@ app.PostView = Backbone.View.extend({
         collection: this.innerCollection
       });
       var critiqueList = this.$el.find('.critiques-list');
-      critiqueList.css({'height': '40em', 'overflow': 'auto'})
+      // critiqueList.css({'height': '40em', 'overflow': 'auto'})
       console.log(critiqueList);
 
       var button = $(this.el).find("span.render-critiques");

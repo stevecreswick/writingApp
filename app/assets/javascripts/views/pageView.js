@@ -9,6 +9,44 @@ app.PageView = Backbone.View.extend({
   sevenCenter: "col-xs-7 col-sm-8 col-md-7 col-lg-7",
   fiveLeft: "col-xs-5 col-sm-4 col-md-5 col-lg-5",
   centerWidth: 11,
+  fontAll: "'Cutive Mono', sans-serif",
+  fontFiction:"'Cutive Mono', sans-serif",
+  fontFantasy: "'Cutive Mono', sans-serif",
+  fontHorror:"'Cutive Mono', sans-serif",
+  fontThriller: "'Cutive Mono', sans-serif",
+  fontHistorical: "'Cutive Mono', sans-serif",
+  fontFiction: "'Cutive Mono', sans-serif",
+  fontCrime: "'Cutive Mono', sans-serif",
+  fontRomance: "'Cutive Mono', sans-serif",
+  fontSciFi: "'Cutive Mono', sans-serif",
+  fontPoetry: "'Cutive Mono', sans-serif",
+  fontNonFiction: "'Cutive Mono', sans-serif",
+
+  backgroundAll: "'Cutive Mono', sans-serif",
+  backgroundFiction:"'Cutive Mono', sans-serif",
+  backgroundFantasy: "'Cutive Mono', sans-serif",
+  backgroundHorror:"'Cutive Mono', sans-serif",
+  backgroundThriller: "'Cutive Mono', sans-serif",
+  backgroundHistorical: "'Cutive Mono', sans-serif",
+  backgroundFiction: "'Cutive Mono', sans-serif",
+  backgroundCrime: "'Cutive Mono', sans-serif",
+  backgroundRomance: "'Cutive Mono', sans-serif",
+  backgroundSciFi: "'Cutive Mono', sans-serif",
+  backgroundPoetry: "'Cutive Mono', sans-serif",
+  backgroundNonFiction: "'Cutive Mono', sans-serif",
+
+  headerAll: "'Cutive Mono', sans-serif",
+  headerFiction:"'Cutive Mono', sans-serif",
+  headerFantasy: "'Cutive Mono', sans-serif",
+  headerHorror:"'Cutive Mono', sans-serif",
+  headerThriller: "'Cutive Mono', sans-serif",
+  headerHistorical: "'Cutive Mono', sans-serif",
+  headerFiction: "'Cutive Mono', sans-serif",
+  headerCrime: "'Cutive Mono', sans-serif",
+  headerRomance: "'Cutive Mono', sans-serif",
+  headerSciFi: "'Cutive Mono', sans-serif",
+  headerPoetry: "'Cutive Mono', sans-serif",
+  headerNonFiction: "'Cutive Mono', sans-serif",
 
   currentGenre: 'all',
   currentPage: 0,
@@ -93,25 +131,25 @@ app.PageView = Backbone.View.extend({
     switch (genre) {
 
       case "Romance":
-        this.$el.find('.home-page').css({'font-family': "'Lovers Quarrel', cursive", "font-size": "2.5em"});
+        this.$el.find('h1.home-page').css( {'font-family': "'Lovers Quarrel', cursive", "font-size": "2.5em"});
       break;
 
       case "Horror":
-        this.$el.find('.home-page').css({'font-family': "'Loved by the King', cursive", "font-size": "2.5em"});
+        this.$el.find('h1.home-page').css({'font-family': "'Loved by the King', cursive", "font-size": "2.5em"});
         this.$el.find('.post#title-holder').css({'font-family': "'Loved by the King', cursive", "font-size": "2.5em"});
       break;
 
       case "Science-Fiction":
-        this.$el.find('.home-page').css({'font-family': "'Krona One', sans-serif", "font-size": "2.5em", "color": "red"});
+        this.$el.find('h1.home-page').css({'font-family': "'Krona One', sans-serif", "font-size": "2.5em", "color": "red"});
       break;
 
       case "Historical-Fiction":
-        this.$el.find('.home-page').css({'font-family': "'Homemade Apple', cursive", "font-size": "3em"});
+        this.$el.find('h1.home-page').css({'font-family': "'Homemade Apple', cursive", "font-size": "3em"});
       break;
 
           // font-family: ;
       default:
-      this.$el.find('.home-page').css({'font-family': "'Cutive Mono', sans-serif"});
+      this.$el.find('h1.home-page').css({'font-family': this.fontAll });
     }
 
   },
