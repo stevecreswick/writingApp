@@ -590,7 +590,7 @@ margin-top: -4.8em;
     background: white;
     margin-top: 0.3em;
     padding: 2em;
-    border-top: ghostwhite 1px solid;
+    border-top: grey 1px solid;
     border-bottom: ghostwhite 1px solid;
     width: 90%;
     margin-left: 5%;
@@ -658,6 +658,10 @@ margin-top: -4.8em;
   text-align: center;
   font-family: 'Open Sans Condensed', sans-serif;
   margin-bottom: 10em;
+}
+
+.vote img{
+  width: 50px;
 }
 
 
@@ -975,12 +979,12 @@ div.friend-view{
 .critique-view:nth-child(odd){
   /*border-top: 2px solid #545454;
   border-left: 2px solid #545454;*/
-  border: 1px solid #545454;
+  /*border-top: 1px solid #545454;*/
 
 }
 
 .critique-view:nth-child(even){
-  border: 1px solid #545454;
+  /*border: 1px solid #545454;*/
   /*border-right: 2px solid #545454;*/
 }
 

@@ -27,15 +27,20 @@ Rails.application.routes.draw do
     delete '/posts/:id' => 'posts#destroy'
     get '/posts/:id/edit' => 'posts#edit'
     put '/posts/:id' => 'posts#update'
+
+    # Post Ratings
     post '/posts/:id/ratings' => 'ratings#create'
     get '/posts/:id/ratings' => 'ratings#user_rating'
-
 
     # Critique API
     get '/posts/:post_id/critiques' => 'critiques#index'
     post '/posts/:post_id/critiques' => 'critiques#create'
     delete '/posts/:post_id/critiques/:id' => 'critiques#destroy'
     put '/posts/:post_id/critiques/:id' => 'critiques#update'
+
+    # Critique Votes
+    post '/posts/:post_id/critiques/:id/votes' => 'votes#create'
+    get '/posts/:post_id/critiques/:id/votes' => 'votes#user_vote'
 
     # Writing Prompt API
     get '/writing_prompts' => 'writing_prompts#index'

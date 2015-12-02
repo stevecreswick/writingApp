@@ -459,7 +459,7 @@
 
         <!-- <div class="write-nav">Write</div> -->
         <div class="sort" data-url="friends">
-          <img src="http://i.imgur.com/ZNd76fy.png"></img>
+          <img src="http://i.imgur.com/TG0UhYo.png"></img>
           Friends
         </div>
         <div class="sort" data-url="all">
@@ -537,6 +537,9 @@
             <a href="/users/profile/<%%= user_id %>" class="post-author text-right">
                 <!-- username rendered here -->
             </a>
+          <div class="post-add-friend">
+
+          </div>
           </div>
           </div>
 
@@ -1012,14 +1015,16 @@
 
             <div class="row">
               <div class="col-xs-2">
-                <span class="up-vote vote">Up</span>
+                <span class="up-vote vote"><img src="http://i.imgur.com/yGGvK3m.png"/></span>
 
               </div>
             </div>
 
             <div class="row">
               <div class="col-xs-2">
-                <%%= votes %>
+                <%% _.forEach(votes, function (vote) {%>
+                <%%= vote.votes %>
+                <%%})%>
               </div>
               <div class="col-xs-8 text-right">
 
@@ -1029,7 +1034,7 @@
 
             <div class="row">
               <div class="col-xs-2">
-                <span class="down-vote vote">Down</span>
+                <span class="down-vote vote"><img src="http://i.imgur.com/cLJ1Yfv.png"/></span>
 
               </div>
             </div>

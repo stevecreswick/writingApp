@@ -22,10 +22,7 @@ class Api::RatingsController < ApplicationController
 
                 # Raises the author's writing score
                 post_author = User.find( @post.user_id )
-                binding.pry
-                puts post_author.writer_score
                 post_author.update({ writer_score: post_author.writer_score = post_author.writer_score + @rating.value.to_i })
-                puts post_author.writer_score
 
                 # Raise the reviewers reviewer score
                 current_user.update({ reviewer_score: current_user.reviewer_score += 1 })

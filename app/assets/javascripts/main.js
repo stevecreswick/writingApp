@@ -66,7 +66,7 @@
 //= require views/receivedChallengeListView
 
 //= require models/rating
-
+//= require models/vote
 
 //= require views/promptFormView
 //= require views/challengeFormView

@@ -36,7 +36,7 @@ app.CritiqueView = Backbone.View.extend({
     'click button.delete-critique': 'deleteCritique',
     'click span.edit-critique': 'editCritique',
 
-    'click span.up-vote': 'upVote',
+    'click span.vote': 'saveVote',
     'click span.down-vote': 'downVote',
 
     'click span.save-edited-critique': 'saveCritique',
@@ -103,6 +103,25 @@ app.CritiqueView = Backbone.View.extend({
       scope.model.save({url: urlModel});
       scope.render();
     });
+  },
+
+  saveVote: function(e){
+    e.preventDefault();
+    console.log('span clicked');
+    var postId = this.model.get('post_id')
+    var critiqueId = this.model.get('id');
+    var rating = 1;
+
+    // In controller, make votes equal to
+    // var currentValue = this.model.get('votes');
+
+    var urlModel = '/api/posts/' + postId +'/critiques/' + critiqueId + '/votes';
+
+    var newVote = new app.CritiqueVote({url: urlModel});
+    newVote.url = urlModel;
+    newVote.set('votes', rating);
+
+    newVote.save();
   },
 
   upVote: function(){

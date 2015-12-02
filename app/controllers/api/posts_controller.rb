@@ -13,6 +13,8 @@ respond_to :html, :json
     aRposts = Post.order(created_at: :desc)
     posts = aRposts.map do |aRpost|
       data = aRpost.as_json
+
+
       data['username'] = aRpost.user.username
       data['image_url'] = aRpost.user.image_url
       data['created_at'] = Date.strptime(aRpost.user.created_at.to_s)
@@ -49,6 +51,15 @@ respond_to :html, :json
             data['is_rated'] = false
 
           end
+
+          friends = current_user.friend_ids
+
+           if friends.include? aRpost.user.id
+             data['is_friend'] = true
+           else
+             data['is_friend'] = false
+           end
+
 
           data['username'] = aRpost.user.username
           data['image_url'] = aRpost.user.image_url

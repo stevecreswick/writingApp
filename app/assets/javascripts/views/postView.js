@@ -25,6 +25,8 @@ app.PostView = Backbone.View.extend({
 
       var poster = this.model.get('username');
       var currentUser = $('#current_user').val()
+
+
       var $deleteButton = $("<span>").addClass("remove-post").html("<img style='width: 40%;' src='http://i.imgur.com/frbgemj.pngdelete'/><br><span class='prompt-label'>delete</span>");
       var $makeCritique = $("<button>").addClass("make-critique btn btn-info").html("Review");
       var $showCritique = $("<span>").addClass("render-critiques").html("Show Critiques");
@@ -54,7 +56,9 @@ app.PostView = Backbone.View.extend({
     'click span.close-critiques': 'renderWithUserName',
     'click span.render-critiques': 'renderCritiques',
 
-    'click label.rating-button': 'saveRating'
+    'click label.rating-button': 'saveRating',
+    'click span.add-friend': 'addFriend'
+
 
     // Add font size for readability later
     // 'click li.increase-font': 'increaseFont',
@@ -83,8 +87,16 @@ app.PostView = Backbone.View.extend({
       var header = $(this.el).find("div.post-author");
 
       var username = this.model.get('username');
+
       var createdAt = this.model.get('created_at');
 
+      // Add a Follow button to Posts
+      var isFriend = this.model.get('is_friend');
+
+      if (isFriend == false){
+        var $addFriend = $('<span>').addClass('add-friend').text('Follow');
+        this.$el.find('.post-add-friend').append($addFriend)
+      }
 
       var userId = this.model.get('user_id');
       var prompt = this.model.get('prompt');
@@ -254,8 +266,24 @@ app.PostView = Backbone.View.extend({
         scope.renderWithUserName();
         scope.renderCritiques();
         // this.renderCritiques();
+        scope.$('#critique-editor').empty();
       });
     },
+
+    addFriend: function(){
+      console.log('add friend clicked');
+
+      this.addedFriend = new app.FriendCollection();
+      this.addedFriend.fetch();
+      var userId = this.model.get('user_id');
+
+      this.addedFriend.url = "/api/friendships/" + userId;
+      var urlModel = "/api/friendships/" + userId
+      this.addedFriend.create();
+
+
+    },
+
     renderEditor: function(){
       // var toolbarClass = '#full-toolbar' + this.model.get('id');
       // var editorClass = '#critique-editor' + this.model.get('id');

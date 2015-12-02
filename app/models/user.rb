@@ -25,6 +25,10 @@ class User < ActiveRecord::Base
   has_many :rated_posts, :through => :ratings, :source => :post
   # has_many :posts, through: :ratings, as: :rated_posts
 
+  has_many :votes
+  has_many :voted_critiques, :through => :votes, :source => :critique
+
+
   before_create :generate_token
 
 
