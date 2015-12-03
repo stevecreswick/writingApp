@@ -18,6 +18,9 @@ app.CritiqueView = Backbone.View.extend({
     var authorId = this.model.get('user_id');
     var currentId = parseInt( $('#current_id').val() );
 
+    var votes = this.model.get('total_votes');
+    console.log("votes : " + votes);
+
     if ( authorId === currentId ){
       var $editButton = $("<span>").addClass("edit-critique").html("Edit");
       var $deleteButton = $("<a>").addClass("remove-critique").html("X");
@@ -36,7 +39,7 @@ app.CritiqueView = Backbone.View.extend({
     'click button.delete-critique': 'deleteCritique',
     'click span.edit-critique': 'editCritique',
 
-    'click span.vote': 'saveVote',
+    'click span.up-vote': 'upVote',
     'click span.down-vote': 'downVote',
 
     'click span.save-edited-critique': 'saveCritique',
@@ -105,45 +108,54 @@ app.CritiqueView = Backbone.View.extend({
     });
   },
 
-  saveVote: function(e){
-    e.preventDefault();
-    console.log('span clicked');
+  // saveVote: function(e){
+  //   console.log('span clicked');
+  //   var postId = this.model.get('post_id')
+  //   var critiqueId = this.model.get('id');
+  //   var rating = 1;
+  //
+  //   // In controller, make votes equal to
+  //   // var currentValue = this.model.get('votes');
+  //
+  //   var urlModel = '/api/posts/' + postId +'/critiques/' + critiqueId + '/votes';
+  //
+  //   var newVote = new app.CritiqueVote({url: urlModel});
+  //   newVote.url = urlModel;
+  //   newVote.set('votes', rating);
+  //
+  //   newVote.save();
+  // },
+
+  upVote: function(){
     var postId = this.model.get('post_id')
     var critiqueId = this.model.get('id');
     var rating = 1;
-
-    // In controller, make votes equal to
-    // var currentValue = this.model.get('votes');
 
     var urlModel = '/api/posts/' + postId +'/critiques/' + critiqueId + '/votes';
 
     var newVote = new app.CritiqueVote({url: urlModel});
     newVote.url = urlModel;
-    newVote.set('votes', rating);
+    newVote.set('value', rating);
 
     newVote.save();
-  },
-
-  upVote: function(){
-    var postId = parseInt( this.model.get('post_id') );
-    this.model.set('votes', this.model.get('votes') + 1);
-    var urlModel = '/posts/' + postId + '/critiques/' + this.model.get('id');
-    this.model.save({url: urlModel});
+    this.model.fetch()
+    this.render();
   },
 
   downVote: function(){
-    var postId = parseInt( this.model.get('post_id') );
+    var postId = this.model.get('post_id')
+    var critiqueId = this.model.get('id');
+    var rating = -1;
 
-    if ( this.model.get('votes') > 0) {
+    var urlModel = '/api/posts/' + postId +'/critiques/' + critiqueId + '/votes';
 
-      this.model.set('votes', this.model.get('votes') - 1);
+    var newVote = new app.CritiqueVote({url: urlModel});
+    newVote.url = urlModel;
+    newVote.set('value', rating);
 
-    } else {
-
-    }
-
-    var urlModel = '/posts/' + postId + '/critiques/' + this.model.get('id');
-    this.model.save({url: urlModel});
+    newVote.save();
+    this.model.fetch()
+    this.render();
   },
 
   renderEditor: function(){

@@ -18,12 +18,16 @@ class Api::VotesController < ApplicationController
                 render json: @critique
             else
                 @critique_vote = Vote.new(vote_params)
+
+                # if
+
                 @critique_vote.critique_id = @critique.id
                 @critique_vote.user_id = current_user.id
 
                 # Raises the author's writing score
                 critique_author = User.find( @critique.user_id )
-                current_user.update({ reviewer_score: critique_author.reviewer_score += 1 })
+                new_score = critique_author.reviewer_score.to_i + 1
+                current_user.update({ reviewer_score: new_score})
 
                 if @critique_vote.save
                   render json: @critique
@@ -45,14 +49,14 @@ class Api::VotesController < ApplicationController
         #     end
         # end
 
-        def user_rating
+        def user_vote
           @post = Post.find(params[:post_id])
           @critique = @post.critiques.find(params[:id])
 
-          if current_user.id == @post.user_id
-            render json: @post
+          if current_user.id == @critique.user_id
+            render json: @critique
           else
-            @rating = @post.ratings.where({user_id: current_user.id});
+            @vote = @post.ratings.where({user_id: current_user.id});
             render json: @rating[0]
           end
 
@@ -62,7 +66,7 @@ class Api::VotesController < ApplicationController
         private
 
         def vote_params
-          params.require(:vote).permit(:user_id, :critique_id, :votes)
+          params.require(:vote).permit(:user_id, :critique_id, :value)
         end
 
 end

@@ -9,17 +9,69 @@ class Api::CritiquesController < ApplicationController
   # before_action :current_api_user!
   def index
   post = Post.find( params[:post_id] )
+
+  # count = 0
+  # post = Post.find(14)
+  # post.critiques.map do |critique|
+  #
+  #   critique.votes.map do |vote|
+  #     puts "vote: #{ vote.value }"
+  #     count = count + vote.value
+  #     puts count
+  #   end
+  #
+  # end
+
   ar_critiques = post.critiques
 
   critiques = ar_critiques.map do |ar_critique|
+
+    @total_votes = 0
+
+    ar_critique.votes.map do |vote|
+      @total_votes = @total_votes + vote.value
+    end
+
     data = ar_critique.as_json
     author = User.find( ar_critique.user_id )
     data['username'] = author.username
     data['image_url'] = author.image_url
+
+    if @total_votes > 0
+    data['total_votes'] = @total_votes
+    else
+    data['total_votes'] = 0
+    end
+
     data
   end
 
   render json: critiques
+  end
+
+  def show
+    post = Post.find( params[:post_id] )
+    ar_critique = post.critiques.find( params[:id] )
+
+      @total_votes = 0
+
+      ar_critique.votes.map do |vote|
+        @total_votes = @total_votes + vote.value
+      end
+
+      data = ar_critique.as_json
+      author = User.find( ar_critique.user_id )
+      data['username'] = author.username
+      data['image_url'] = author.image_url
+
+      if ( @total_votes > 0 )
+      data['total_votes'] = @total_votes
+      else
+      data['total_votes'] = 0
+      end
+
+    render json: data
+
   end
 
   def create
