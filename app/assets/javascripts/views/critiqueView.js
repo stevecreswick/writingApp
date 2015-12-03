@@ -138,6 +138,7 @@ app.CritiqueView = Backbone.View.extend({
     newVote.set('value', rating);
 
     newVote.save();
+
     this.model.fetch()
     this.render();
   },
@@ -154,6 +155,7 @@ app.CritiqueView = Backbone.View.extend({
     newVote.set('value', rating);
 
     newVote.save();
+    
     this.model.fetch()
     this.render();
   },
