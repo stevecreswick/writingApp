@@ -82,7 +82,7 @@
               <h1 class="home-page hidden-xs nav-item text-center">writeaway.</h1>
             </div>
 
-          <div class="col-xs-3 col-sm-2 nav-column">
+          <div class="col-xs-2 col-sm-2 nav-column">
             <div class="show-friends nav-icon nav-item text-center"><img src="http://i.imgur.com/bYdRuZZ.png"/>
               <br>
               <span id="sub-logo" class="hidden-s">writers</span></div>
@@ -96,33 +96,11 @@
 
           </div>
 
-          <div class="col-xs-2">
-            <li><%= link_to 'Log Out', '/sessions', method: :delete  %></li>
-          </div>
           </div>
 
-          <ul class="nav navbar-nav navbar-left">
+      </div>
 
-        </ul>
-
-          <!-- <ul class="nav navbar-nav navbar-right">
-            <li id="username"></li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle navbar-username" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                <img src="<%= @user.image_url %>" class="img-circle profile-picture"</>
-              <span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                <li class="add-friends"><a>Add Friends</a></li>
-                <li class="show-challenges">Challenges</li>
-                <li class="show-friends">Friends</li>
-                <li role="separator" class="divider"></li>
-                  <li><%= link_to 'Log Out', '/sessions', method: :delete  %></li>
-              </ul>
-            </li>
-          </ul> -->
-      </div><!-- /.container-fluid -->
-    <!-- </nav> -->
-
+    <!-- Main Page Containers -->
     <div class="container-fluid" id="main-display">
 
     <div class="row">
@@ -172,9 +150,9 @@
 <!-- Close Container -->
     </div>
 
-
-
     </script>
+
+
 
     <!-- Current User -->
     <script type="text/template" id="current-user-template">
@@ -200,6 +178,7 @@
           <div data-no-turbolink>
             <a href="/users/edit">Edit</a>
           </div>
+          <%= link_to 'Log Out', '/sessions', method: :delete  %>
         </div>
       </div>
 
@@ -256,79 +235,6 @@
       </div>
     </script>
 
-    <!-- <script type="text/template" id="prompt-form-template">
-
-      <div class="row">
-        <div class="col-xs-9">
-
-        </div>
-        <div class="col-xs-3 prompt-back-holder">
-
-        </div>
-
-      </div>
-      <div class="new-post-box">
-
-
-
-            <form>
-              <div class="row">
-                <div class="col-xs-12">
-                  <h3 class="create-post-header">New Writing Exercise</h3>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-xs-6">
-                  <div id="prompt-container">
-                    Generate a Writing Prompt to start!
-                  </div>
-                </div>
-                <div class="col-xs-6">
-                  <label for="choose-type">Choose Genre</label>
-                  <select class="form-control" id="choose-genre">
-                      <option>Fiction</option>
-                      <option>Fantasy</option>
-                      <option>Horror</option>
-                      <option>Thriller</option>
-                      <option>Crime</option>
-                      <option>Romance</option>
-                      <option>Science-Fiction</option>
-                      <option>Non-Fiction</option>
-                  </select>
-                  <label for="choose-type">Choose Writing Prompt Type</label>
-                  <select class="form-control" id="choose-type">
-                      <option>Use One Word</option>
-                      <option>Answer What If</option>
-                      <option>Classic First Sentence</option>
-                      <option>reddit</option>
-                  </select>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-xs-6">
-                  <input id="post-word-count" type="hidden" name=post[word_count] value="25"/>
-                  <div id="slider-word-count"></div>
-                  <div id="slider-word-count-display">
-                    <label>Write at least <span id="word-count">25</span> words</label>
-                  </div>
-                </div>
-                <div class="col-xs-6">
-                  <div class="post-button-container">
-                    <button class="render-prompt btn btn-primary">Generate Prompt</button>
-                  </div>
-                </div>
-              </div>
-
-
-
-            </form>
-
-
-
-      </div>
-    </div>
-
-    </script> -->
 
     <!-- Show the Prompt -->
     <script type="text/template" id="writing-prompt-template">
@@ -339,10 +245,9 @@
 
 
 
-    <script type="text/template" id="create-post-template">
-      <!-- <h1 class="create-post-header">Write</h3> -->
+    <!-- Make a New Post -->
 
-        <!-- <form id="create-post"> -->
+    <script type="text/template" id="create-post-template">
           <div class="row">
             <div class="col-xs-12 text-center">
               <h4 id="prompt-review-container"></h4>
@@ -500,7 +405,7 @@
           </div>
         </div>
 
-
+        <div id="stopwatch">0:0:0</div>
 
     </script>
 
@@ -1454,12 +1359,6 @@
     <script type="text/template" id="accept-challenge-form-template">
       <div class="new-post-box">
 
-        <!-- <div id="stopwatch">0:0:0</div>
-            <div id="controls">
-              <button id="start">Start</button>
-              <but  ton id="stop">Stop</button>
-              <button id="reset">Reset</button>
-            </div> -->
         <div id="challenge-type"></div>
         <div id="challenge-container"></div>
         <div id="challenge-word-count"></div>

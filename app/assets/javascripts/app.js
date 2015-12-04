@@ -19,14 +19,6 @@ var app = app || {};
   // Create Post
 
 
-// $stopwatch.html(hours + ':' + minutes + ':' + seconds);
-//
-// bindStart();
-// bindStop();
-// bindReset();
-
-
-
   // app.pagePainter.renderPromptForm();
 
 // });

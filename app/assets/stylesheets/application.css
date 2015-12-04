@@ -766,9 +766,9 @@ form#create-post {
   max-width: 75px;
   max-height: 75px;
   border-radius: 100%;
-  padding: 10px;
+  padding-top: 10px;
   font-size: 100px;
-  font-size: 3em;
+  font-size: 1em;
   font-family: 'Open Sans Condensed', serif;
   color: grey;
   background: white;

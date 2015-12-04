@@ -37,6 +37,7 @@ app.promptFormView = Backbone.View.extend({
     this.remove();
     this.render();
   },
+
   minWords: null,
   getPrompt: function(e){
       e.preventDefault();
@@ -127,8 +128,32 @@ app.promptFormView = Backbone.View.extend({
 
       this.renderEditor();
       this.checkWordCount(this.newPrompt);
-
+      this.startClock();
     },
+
+    startClock: function(){
+      var seconds = 0, minutes = 0, hours = 0;
+      var timer;
+      var $stopwatch = this.$el.find('#stopwatch');
+
+      timer = setInterval(this.renderTime, 1000);
+      console.log(timer);
+    },
+
+    renderTime: function(){
+        seconds++;
+        console.log(seconds);
+        if(seconds >= 60){
+          seconds = 0;
+          minutes += 1;
+        } else if (minutes > 59){
+          minutes = 0;
+          hours += 1;
+        } else {
+          $('#stopwatch').html(hours + ':' + minutes + ':' + seconds);
+        }
+    },
+
     submitPost: function(){
         var newMessage = this.$('#post-editor').first().eq(0).children().eq(0).html();
         console.log(newMessage);
