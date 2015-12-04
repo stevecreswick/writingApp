@@ -49,15 +49,24 @@ app.promptFormView = Backbone.View.extend({
 
       if (promptType === 'Use One Word'){
         writingPrompts.url = "/api/writing_prompts/one_word"
+        writingPrompts.fetch({url: writingPrompts.url, async:false});
+        console.log(writingPrompts);
       } else if (promptType === 'Answer What If'){
         writingPrompts.url = "/api/writing_prompts/what_if"
+        writingPrompts.fetch({url: writingPrompts.url, async:false});
+        console.log(writingPrompts);
       } else if (promptType === 'Classic First Sentence'){
         writingPrompts.url = "/api/writing_prompts/first_sentence"
+        writingPrompts.fetch({url: writingPrompts.url, async:false});
+        console.log(writingPrompts);
+      } else if (promptType === 'reddit'){
+        writingPrompts.url = "/api/writing_prompts/reddit"
+        var newPrompt = writingPrompts.fetch({url: writingPrompts.url, async:false}).done(function(){
+          console.log(this);
+        });
       } else {
         console.log('no url for this type : ' + promptType);
       }
-
-      writingPrompts.fetch({url: writingPrompts.url, async:false});
 
       // Record Prompt
       this.prompt = writingPrompts.models[0].get('prompt');

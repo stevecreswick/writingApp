@@ -50,6 +50,8 @@
 //= require views/userView
 //= require collections/userCollection
 //= require views/userListView
+//= require views/currentUserView
+
 
 //= require views/followerView
 //= require collections/followerCollection

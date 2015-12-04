@@ -48,7 +48,7 @@ Rails.application.routes.draw do
     get '/writing_prompts/one_word' => 'writing_prompts#one_word'
     get '/writing_prompts/what_if' => 'writing_prompts#what_if'
     get '/writing_prompts/first_sentence' => 'writing_prompts#first_sentence'
-
+    get '/writing_prompts/reddit' => 'writing_prompts#reddit'
 
     # Friendships API
     get'/friendships' => 'friendships#index', as: :friends

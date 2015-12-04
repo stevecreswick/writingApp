@@ -1,103 +1,102 @@
-<div class="container-fluid" id="profile-page">
 
   <input type="hidden" id="profile_id" value="<%= @user.id %>">
 
-  <nav class="navbar navbar-default  navbar-fixed-top">
   <div class="container-fluid"  id="header">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <li class="home-page">Write Away</li>
+    <div class="to-main">
+    </div>
+    <h1 class="brand">
+      <div data-no-turbolink>
+      <a href="/users/main">
+        <img src="http://i.imgur.com/g8Z3uqu.png"/>
+        writeaway.
+      </a>
+    </div>
+    </h1>
+  </div>
+  <div class="container-fluid">
+
+
+    <div class="friend-view">
+      <div class="row">
+          <div class="col-sm-2">
+            <img src="<%= @user.image_url %>" class="img-circle user-profile-picture"/>
+
+          </div>
+
+      </div>
+
+      <div class="row">
+          <div class="col-sm-2">
+            <h3 class="text-left">
+              <%= @user.username %>
+            </h3>
+          </div>
+      </div>
+
+      <div class="row edit-row">
+        <div class="col-xs-6">
+          <form class="" action="/users/<%= @user.id %>" method="post">
+            <input type="hidden" name="_method" value="put">
+            <div class="form-group text-left">
+              <label for="edit-username" class="prompt-label">Username</label><br>
+              <input type="text" name="user[username]" value="<%= @user.username %>" class="form-control">
+            </div>
+            <div class="form-group text-left">
+              <label class="prompt-label">Profile Image URL</label><br>
+              <input type="text" name="user[image_url]" value="<%= @user.image_url %>" class="form-control">
+            </div>
+            <div class="form-group text-left">
+              <label class="prompt-label">Where are you from?</label><br>
+              <input type="text" name="user[from]" value="<%= @user.from %>" class="form-control">
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="form-group text-left">
+              <label class="prompt-label">Favorite Books</label><br>
+              <input type="text" name="user[favorite_book]" value="<%= @user.favorite_book %>" class="form-control">
+            </div>
+            <div class="form-group text-left">
+              <label class="prompt-label">Favorite Authors</label><br>
+              <input type="text" name="user[favorite_author]" value="<%= @user.favorite_author %>" class="form-control">
+            </div>
+            <div class="form-group text-left">
+              <label class="prompt-label">Favorite Genre</label><br>
+              <input type="text" name="user[favorite_genre]" value="<%= @user.favorite_genre %>" class="form-control">
+            </div>
+          </div>
+        </div>
+
+        <div class="row edit-row">
+          <div class="col-xs-12">
+            <div class="form-group text-left">
+              <label class="prompt-label">What is your writing goal?</label><br>
+              <input type="text" name="user[writing_goal]" value="<%= @user.writing_goal %>" class="form-control">
+            </div>
+          </div>
+        </div>
+
+        <div class="row edit-row">
+          <div class="col-xs-12">
+            <div class="form-group text-left">
+              <label class="prompt-label">Tell us about yourself.</label><br>
+              <textarea type="text" name="user[about]" value="<%= @user.about %>" class="form-control" rows="6"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="row edit-row">
+          <div class="col-sm-3 col-sm-offset-9">
+            <div class="form-group">
+              <input type="submit" class="btn btn-default" value="Update">
+            </div>
+          </div>
+        </div>
+
+          </form>
+
     </div>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav navbar-right">
-        <li id="username"></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle navbar-username" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-            <img src="<%= @user.image_url %>" class="img-circle profile-picture"/>
-            <%= @user.username %> <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li class="add-friends"><a>Add Friends</a></li>
-            <li class="render-friends"><a>Challenges</a></li>
-            <li role="separator" class="divider"></li>
-              <li><%= link_to 'Log Out', '/sessions', method: :delete  %></li>
-          </ul>
-        </li>
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-  </nav>
+
+  </div>
 
 <!-- Edit Page -->
-<h3>EDIT <%= @user.username %> </h3>
-
-
-<div class="row edit-row">
-  <div class="col-xs-6">
-    <form class="" action="/users/<%= @user.id %>" method="post">
-      <input type="hidden" name="_method" value="put">
-      <div class="form-group">
-        <label for="edit-username">Username</label><br>
-        <input type="text" name="user[username]" value="<%= @user.username %>">
-      </div>
-      <div class="form-group">
-        <label>Profile Image URL</label><br>
-        <input type="text" name="user[image_url]" value="<%= @user.image_url %>">
-      </div>
-      <div class="form-group">
-        <label>Where are you from?</label><br>
-        <input type="text" name="user[from]" value="<%= @user.from %>">
-      </div>
-  </div>
-  <div class="col-xs-6">
-      <div class="form-group">
-        <label>Favorite Books</label><br>
-        <input type="text" name="user[favorite_book]" value="<%= @user.favorite_book %>">
-      </div>
-      <div class="form-group">
-        <label>Favorite Authors</label><br>
-        <input type="text" name="user[favorite_author]" value="<%= @user.favorite_author %>">
-      </div>
-      <div class="form-group">
-        <label>Favorite Genre</label><br>
-        <input type="text" name="user[favorite_genre]" value="<%= @user.favorite_genre %>">
-      </div>
-    </div>
-  </div>
-
-  <div class="row edit-row">
-    <div class="col-xs-12">
-      <div class="form-group">
-        <label>What is your writing goal?</label><br>
-        <input type="text" name="user[writing_goal]" value="<%= @user.writing_goal %>">
-      </div>
-    </div>
-  </div>
-
-  <div class="row edit-row">
-    <div class="col-xs-12">
-      <div class="form-group">
-        <label>Tell us about yourself.</label><br>
-        <textarea type="text" name="user[about]" value="<%= @user.about %>"></textarea>
-      </div>
-    </div>
-  </div>
-
-  <div class="row edit-row">
-    <div class="col-xs-12">
-      <div class="form-group">
-        <input type="submit" value="Update">
-      </div>
-    </div>
-  </div>
-
-    </form>
-
-  </div>

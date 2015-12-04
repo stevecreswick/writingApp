@@ -9,6 +9,8 @@ app.PageView = Backbone.View.extend({
   sevenCenter: "col-xs-7 col-sm-8 col-md-7 col-lg-7",
   fiveLeft: "col-xs-5 col-sm-4 col-md-5 col-lg-5",
   centerWidth: 11,
+
+  // Fonts Themes
   fontAll: "'Cutive Mono', sans-serif",
   fontFiction:"'Cutive Mono', sans-serif",
   fontFantasy: "'Cutive Mono', sans-serif",
@@ -22,6 +24,7 @@ app.PageView = Backbone.View.extend({
   fontPoetry: "'Cutive Mono', sans-serif",
   fontNonFiction: "'Cutive Mono', sans-serif",
 
+  // Background Themes
   backgroundAll: "'Cutive Mono', sans-serif",
   backgroundFiction:"'Cutive Mono', sans-serif",
   backgroundFantasy: "'Cutive Mono', sans-serif",
@@ -35,6 +38,7 @@ app.PageView = Backbone.View.extend({
   backgroundPoetry: "'Cutive Mono', sans-serif",
   backgroundNonFiction: "'Cutive Mono', sans-serif",
 
+  // Header Themes
   headerAll: "'Cutive Mono', sans-serif",
   headerFiction:"'Cutive Mono', sans-serif",
   headerFantasy: "'Cutive Mono', sans-serif",
@@ -200,7 +204,9 @@ app.PageView = Backbone.View.extend({
 
     'click li.render-friends': 'renderFriendsPage',
     'click li.render-friends': 'renderFriendsPage',
-    'click .home-page': 'renderMain'
+    'click .home-page': 'renderMain',
+    'click div.show-current-user': 'showCurrentProfile'
+
   },
 
 
@@ -338,6 +344,36 @@ app.PageView = Backbone.View.extend({
     this.$el.find('#center-pane').children().remove();
   },
 
+  showCurrentProfile: function(){
+    this.$el.find('#top-pane .genre-links').remove();
+    this.$el.find('#post-list').remove();
+
+    var $center = this.$el.find('#center-pane');
+    var $userPage = $("<div>").attr('id', 'user-page');
+
+    $center.append( $userPage );
+
+    // create current user model
+    var currentUser = new app.User();
+    // create current user View
+    var currentUserPainter = new app.CurrentUserView({
+      model: currentUser,
+      el: $('#user-page')
+    });
+
+    currentUser.url = "/users/show/" + $('#current_id').val();
+    console.log(currentUser.url);
+    currentUser.fetch({wait:true});
+    console.log(currentUser);
+    // app.friends = new app.FriendCollection();
+    // app.friendPainter = new app.FriendListView({
+    //   collection: app.friends,
+    //   el: $('#friend-page')
+    // });
+    //
+    // app.friends.fetch({wait:true});
+
+  },
 
   renderPromptForm: function(){
     this.$('#top-pane').children().remove();

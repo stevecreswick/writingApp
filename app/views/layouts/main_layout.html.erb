@@ -12,7 +12,7 @@
   <link href='https://fonts.googleapis.com/css?family=Damion' rel='stylesheet' type='text/css'>
 
 
-  <!-- Default Header -->
+  <!--  Header -->
   <link href='https://fonts.googleapis.com/css?family=Cutive+Mono' rel='stylesheet' type='text/css'>
 
   <!-- Title Font -->
@@ -88,7 +88,7 @@
               <span id="sub-logo" class="hidden-s">writers</span></div>
           </div>
           <div class="col-xs-2 col-sm-2 nav-column">
-            <div class="nav-item text-center text-center">
+            <div class="nav-item text-center text-center show-current-user">
             <img src="<%= @user.image_url %>" class="img-circle profile-picture"</>
             <span id="sub-logo" class="hidden-s"><%= @user.username %></span>
             </div>
@@ -178,6 +178,85 @@
 
     </script>
 
+    <!-- Current User -->
+    <script type="text/template" id="current-user-template">
+      <div class="friend-view">
+
+      <div class="row">
+        <div class="col-xs-2 text-left">
+          <span class="prompt-label">Writer Score: <%%= writer_score %></span>
+          <br>
+          <span class="prompt-label">Reviewer Score: <%%= reviewer_score %></span>
+          <br>
+        </div>
+
+        <div class="col-xs-4 col-xs-offset-2 text-center prompt-label">
+          <div data-no-turbolink id="post-author-stats">
+            <div class="user-pic-box"></div>
+            <h3><%%= username %></h3>
+
+          </div>
+        </div>
+
+        <div class="col-xs-2 col-xs-offset-2 text-right">
+          <div data-no-turbolink>
+            <a href="/users/edit">Edit</a>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="col-xs-12"><div class="vertical-space"></div></div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-6 text-left">
+          <span class="prompt-label">Reading: <%%= currently_reading %></span>
+          <br>
+          <span class="prompt-label">Writing Goal: <%%= writing_goal %></span>
+        </div>
+        <div class="col-xs-6 text-left">
+          <span class="prompt-label">Favorite Authors: <%%= favorite_author %></span>
+          <br>
+          <span class="prompt-label">Favorite Books: <%%= favorite_book %></span>
+          <br>
+          <span class="prompt-label">Favorite Genres: <%%= favorite_genre %></span>
+          <br>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12"><div class="vertical-space"></div></div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-3 text-left">
+          <span class="prompt-label">From: <%%= from %></span>
+        </div>
+        <div class="col-xs-9 text-left">
+          <span class="prompt-label">About:<%%= about %></span>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12"><div class="vertical-space"></div></div>
+      </div>
+
+      <div class="row">
+        <!-- <button type="button" class="btn btn-info make-challenge">Issue Challenge</button> -->
+        <!-- <button type="button" class="btn btn-info show-challenges">Show Challenges</button> -->
+      </div>
+      <div id="user-post-list">
+
+      </div>
+    </script>
 
     <script type="text/template" id="prompt-form-template">
 
@@ -230,6 +309,7 @@
                       <option>Use One Word</option>
                       <option>Answer What If</option>
                       <option>Classic First Sentence</option>
+                      <option>reddit</option>
                   </select>
                 </div>
               </div>
@@ -255,6 +335,7 @@
 
 
       </div>
+    </div>
 
     </script>
 
@@ -855,6 +936,7 @@
               <option>Use One Word</option>
               <option>Answer What If</option>
               <option>Classic First Sentence</option>
+              <option>reddit</option>
           </select>
         </div>
         <div class="col-xs-12 col-md-6 text-center">

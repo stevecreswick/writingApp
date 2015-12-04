@@ -50,6 +50,8 @@
     font-family: 'Open Sans Condensed', sans-serif;
   }
 
+
+
   .container-fluid {
     background: ghostwhite;
     /*background: url('binding_dark.png');*/
@@ -1100,3 +1102,18 @@ div.friend-view{
   color: gold;
   /*text-shadow:1px 1px goldenrod, 2px 2px #B57340, .1em .1em .2em rgba(0,0,0,.5);*/
 }
+
+/* Edit Page */
+  h1.brand{
+    font-family: 'Cutive Mono', sans-serif;
+  }
+
+  h1.brand a{
+    color: black;
+    text-decoration: none;
+  }
+
+  .brand img{
+    max-width: 35px;
+    max-height: 35px;
+  }

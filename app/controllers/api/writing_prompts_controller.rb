@@ -35,6 +35,23 @@ class Api::WritingPromptsController < ApplicationController
     render json: prompt
   end
 
+  def reddit
+    response = HTTParty.get('https://www.reddit.com/r/WritingPrompts.json?limit=25')
+    title = response['data']['children'][rand(25)]['data']['title']
+    split_title = title.split(' ')
+
+    # Until the post is a writing prompt, keep doing all of this
+    while ( split_title.first != "[WP]" ) do
+      title = response['data']['children'][rand(25)]['data']['title']
+      split_title = title.split(' ')
+    end
+
+    prompt = title.as_json
+
+    render json: prompt
+
+  end
+
   def show
     prompt = WritingPrompt.find( params[:id] )
     render json: prompt

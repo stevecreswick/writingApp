@@ -33,6 +33,9 @@ gem 'responders'
 
 gem 'will_paginate'
 
+gem 'httparty'
+
+
 group :production do
 
   gem 'rails_12factor'
