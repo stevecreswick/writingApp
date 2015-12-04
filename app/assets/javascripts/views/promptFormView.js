@@ -26,6 +26,8 @@ app.promptFormView = Backbone.View.extend({
     console.log(options);
     if (options.type === "Use One Word") {
       return "Write at least " + options.wordCount + " words, using the word";
+    } else if (options.type === "reddit") {
+      return "Write at least " + options.wordCount + " words, using the /r/writingprompt";
     }
   },
 
@@ -81,6 +83,7 @@ app.promptFormView = Backbone.View.extend({
       });
 
       this.$el.find('#prompt-review-container').html(this.promptInstruction);
+      this.$el.find('#prompt-container').show();
 
       // Resize Prompt Button and Add Start
       // this.$(".render-prompt").css({'width': '50%'}).html("New Prompt");

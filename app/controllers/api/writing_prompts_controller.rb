@@ -36,17 +36,22 @@ class Api::WritingPromptsController < ApplicationController
   end
 
   def reddit
-    response = HTTParty.get('https://www.reddit.com/r/WritingPrompts.json?limit=25')
-    title = response['data']['children'][rand(25)]['data']['title']
+
+    post_limit = 25
+
+    response = HTTParty.get("https://www.reddit.com/r/WritingPrompts.json?limit=#{ post_limit }")
+    title = response['data']['children'][rand(post_limit)]['data']['title']
     split_title = title.split(' ')
 
     # Until the post is a writing prompt, keep doing all of this
-    while ( split_title.first != "[WP]" ) do
-      title = response['data']['children'][rand(25)]['data']['title']
+    until split_title.first == "[WP]" do
+      title = response['data']['children'][rand(post_limit)]['data']['title']
       split_title = title.split(' ')
     end
 
-    prompt = title.as_json
+    split_title.shift
+    title = split_title.join(' ')
+    prompt = { :prompt => title }.to_json
 
     render json: prompt
 

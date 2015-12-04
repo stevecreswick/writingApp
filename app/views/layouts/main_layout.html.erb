@@ -147,8 +147,6 @@
         <div id="center-pane">
 
           </div>
-
-
         </div>
       </div>
 
@@ -258,7 +256,7 @@
       </div>
     </script>
 
-    <script type="text/template" id="prompt-form-template">
+    <!-- <script type="text/template" id="prompt-form-template">
 
       <div class="row">
         <div class="col-xs-9">
@@ -270,14 +268,7 @@
 
       </div>
       <div class="new-post-box">
-        <!-- <h1 class='post-header'>Write</h1> -->
 
-        <!-- <div id="stopwatch">0:0:0</div>
-            <div id="controls">
-              <button id="start">Start</button>
-              <but  ton id="stop">Stop</button>
-              <button id="reset">Reset</button>
-            </div> -->
 
 
             <form>
@@ -337,7 +328,7 @@
       </div>
     </div>
 
-    </script>
+    </script> -->
 
     <!-- Show the Prompt -->
     <script type="text/template" id="writing-prompt-template">
@@ -352,12 +343,6 @@
       <!-- <h1 class="create-post-header">Write</h3> -->
 
         <!-- <form id="create-post"> -->
-
-
-        <div class="row">
-          <div class="col-xs-12"><div class="vertical-space"></div></div>
-        </div>
-
           <div class="row">
             <div class="col-xs-12 text-center">
               <h4 id="prompt-review-container"></h4>
@@ -386,102 +371,108 @@
             </div>
           </div>
 
-
-          <div class="form-group">
-            <!-- Create the toolbar container -->
-            <div id="post-toolbar">
-              <span class="ql-format-group">
-                <span title="Bold" class="ql-format-button ql-bold"></span>
-                <span class="ql-format-separator"></span>
-                <span title="Italic" class="ql-format-button ql-italic"></span>
-                <span class="ql-format-separator"></span>
-                <span title="Underline" class="ql-format-button ql-underline"></span>
-              <select title="Text Color" class="ql-color">
-                <option value="rgb(0, 0, 0)" selected></option>
-                <option value="rgb(230, 0, 0)"></option>
-                <option value="rgb(255, 153, 0)"></option>
-                <option value="rgb(255, 255, 0)"></option>
-                <option value="rgb(0, 138, 0)"></option>
-                <option value="rgb(0, 102, 204)"></option>
-                <option value="rgb(153, 51, 255)"></option>
-                <option value="rgb(255, 255, 255)"></option>
-                <option value="rgb(250, 204, 204)"></option>
-                <option value="rgb(255, 235, 204)"></option>
-                <option value="rgb(255, 255, 204)"></option>
-                <option value="rgb(204, 232, 204)"></option>
-                <option value="rgb(204, 224, 245)"></option>
-                <option value="rgb(235, 214, 255)"></option>
-                <option value="rgb(187, 187, 187)"></option>
-                <option value="rgb(240, 102, 102)"></option>
-                <option value="rgb(255, 194, 102)"></option>
-                <option value="rgb(255, 255, 102)"></option>
-                <option value="rgb(102, 185, 102)"></option>
-                <option value="rgb(102, 163, 224)"></option>
-                <option value="rgb(194, 133, 255)"></option>
-                <option value="rgb(136, 136, 136)"></option>
-                <option value="rgb(161, 0, 0)"></option>
-                <option value="rgb(178, 107, 0)"></option>
-                <option value="rgb(178, 178, 0)"></option>
-                <option value="rgb(0, 97, 0)"></option>
-                <option value="rgb(0, 71, 178)"></option>
-                <option value="rgb(107, 36, 178)"></option>
-                <option value="rgb(68, 68, 68)"></option>
-                <option value="rgb(92, 0, 0)"></option>
-                <option value="rgb(102, 61, 0)"></option>
-                <option value="rgb(102, 102, 0)"></option>
-                <option value="rgb(0, 55, 0)"></option>
-                <option value="rgb(0, 41, 102)"></option>
-                <option value="rgb(61, 20, 102)"></option>
-              </select><span class="ql-format-separator"></span>
-              <select title="Background Color" class="ql-background">
-                <option value="rgb(0, 0, 0)"></option>
-                <option value="rgb(230, 0, 0)"></option>
-                <option value="rgb(255, 153, 0)"></option>
-                <option value="rgb(255, 255, 0)"></option>
-                <option value="rgb(0, 138, 0)"></option>
-                <option value="rgb(0, 102, 204)"></option>
-                <option value="rgb(153, 51, 255)"></option>
-                <option value="rgb(255, 255, 255)" selected></option>
-                <option value="rgb(250, 204, 204)"></option>
-                <option value="rgb(255, 235, 204)"></option>
-                <option value="rgb(255, 255, 204)"></option>
-                <option value="rgb(204, 232, 204)"></option>
-                <option value="rgb(204, 224, 245)"></option>
-                <option value="rgb(235, 214, 255)"></option>
-                <option value="rgb(187, 187, 187)"></option>
-                <option value="rgb(240, 102, 102)"></option>
-                <option value="rgb(255, 194, 102)"></option>
-                <option value="rgb(255, 255, 102)"></option>
-                <option value="rgb(102, 185, 102)"></option>
-                <option value="rgb(102, 163, 224)"></option>
-                <option value="rgb(194, 133, 255)"></option>
-                <option value="rgb(136, 136, 136)"></option>
-                <option value="rgb(161, 0, 0)"></option>
-                <option value="rgb(178, 107, 0)"></option>
-                <option value="rgb(178, 178, 0)"></option>
-                <option value="rgb(0, 97, 0)"></option>
-                <option value="rgb(0, 71, 178)"></option>
-                <option value="rgb(107, 36, 178)"></option>
-                <option value="rgb(68, 68, 68)"></option>
-                <option value="rgb(92, 0, 0)"></option>
-                <option value="rgb(102, 61, 0)"></option>
-                <option value="rgb(102, 102, 0)"></option>
-                <option value="rgb(0, 55, 0)"></option>
-                <option value="rgb(0, 41, 102)"></option>
-                <option value="rgb(61, 20, 102)"></option>
-              </select><span class="ql-format-separator"></span>
-            </div>
-
-            <!-- Create the editor container -->
-            <div class="row">
+          <div class="row">
             <div class="col-xs-12">
-              <div id="post-editor" class="post-body">
+              <div class="form-group">
+                <!-- Create the toolbar container -->
+                <div id="post-toolbar">
+                  <span class="ql-format-group">
+                    <span title="Bold" class="ql-format-button ql-bold"></span>
+                    <span class="ql-format-separator"></span>
+                    <span title="Italic" class="ql-format-button ql-italic"></span>
+                    <span class="ql-format-separator"></span>
+                    <span title="Underline" class="ql-format-button ql-underline"></span>
+                  <select title="Text Color" class="ql-color">
+                    <option value="rgb(0, 0, 0)" selected></option>
+                    <option value="rgb(230, 0, 0)"></option>
+                    <option value="rgb(255, 153, 0)"></option>
+                    <option value="rgb(255, 255, 0)"></option>
+                    <option value="rgb(0, 138, 0)"></option>
+                    <option value="rgb(0, 102, 204)"></option>
+                    <option value="rgb(153, 51, 255)"></option>
+                    <option value="rgb(255, 255, 255)"></option>
+                    <option value="rgb(250, 204, 204)"></option>
+                    <option value="rgb(255, 235, 204)"></option>
+                    <option value="rgb(255, 255, 204)"></option>
+                    <option value="rgb(204, 232, 204)"></option>
+                    <option value="rgb(204, 224, 245)"></option>
+                    <option value="rgb(235, 214, 255)"></option>
+                    <option value="rgb(187, 187, 187)"></option>
+                    <option value="rgb(240, 102, 102)"></option>
+                    <option value="rgb(255, 194, 102)"></option>
+                    <option value="rgb(255, 255, 102)"></option>
+                    <option value="rgb(102, 185, 102)"></option>
+                    <option value="rgb(102, 163, 224)"></option>
+                    <option value="rgb(194, 133, 255)"></option>
+                    <option value="rgb(136, 136, 136)"></option>
+                    <option value="rgb(161, 0, 0)"></option>
+                    <option value="rgb(178, 107, 0)"></option>
+                    <option value="rgb(178, 178, 0)"></option>
+                    <option value="rgb(0, 97, 0)"></option>
+                    <option value="rgb(0, 71, 178)"></option>
+                    <option value="rgb(107, 36, 178)"></option>
+                    <option value="rgb(68, 68, 68)"></option>
+                    <option value="rgb(92, 0, 0)"></option>
+                    <option value="rgb(102, 61, 0)"></option>
+                    <option value="rgb(102, 102, 0)"></option>
+                    <option value="rgb(0, 55, 0)"></option>
+                    <option value="rgb(0, 41, 102)"></option>
+                    <option value="rgb(61, 20, 102)"></option>
+                  </select><span class="ql-format-separator"></span>
+                  <select title="Background Color" class="ql-background">
+                    <option value="rgb(0, 0, 0)"></option>
+                    <option value="rgb(230, 0, 0)"></option>
+                    <option value="rgb(255, 153, 0)"></option>
+                    <option value="rgb(255, 255, 0)"></option>
+                    <option value="rgb(0, 138, 0)"></option>
+                    <option value="rgb(0, 102, 204)"></option>
+                    <option value="rgb(153, 51, 255)"></option>
+                    <option value="rgb(255, 255, 255)" selected></option>
+                    <option value="rgb(250, 204, 204)"></option>
+                    <option value="rgb(255, 235, 204)"></option>
+                    <option value="rgb(255, 255, 204)"></option>
+                    <option value="rgb(204, 232, 204)"></option>
+                    <option value="rgb(204, 224, 245)"></option>
+                    <option value="rgb(235, 214, 255)"></option>
+                    <option value="rgb(187, 187, 187)"></option>
+                    <option value="rgb(240, 102, 102)"></option>
+                    <option value="rgb(255, 194, 102)"></option>
+                    <option value="rgb(255, 255, 102)"></option>
+                    <option value="rgb(102, 185, 102)"></option>
+                    <option value="rgb(102, 163, 224)"></option>
+                    <option value="rgb(194, 133, 255)"></option>
+                    <option value="rgb(136, 136, 136)"></option>
+                    <option value="rgb(161, 0, 0)"></option>
+                    <option value="rgb(178, 107, 0)"></option>
+                    <option value="rgb(178, 178, 0)"></option>
+                    <option value="rgb(0, 97, 0)"></option>
+                    <option value="rgb(0, 71, 178)"></option>
+                    <option value="rgb(107, 36, 178)"></option>
+                    <option value="rgb(68, 68, 68)"></option>
+                    <option value="rgb(92, 0, 0)"></option>
+                    <option value="rgb(102, 61, 0)"></option>
+                    <option value="rgb(102, 102, 0)"></option>
+                    <option value="rgb(0, 55, 0)"></option>
+                    <option value="rgb(0, 41, 102)"></option>
+                    <option value="rgb(61, 20, 102)"></option>
+                  </select><span class="ql-format-separator"></span>
+                </div>
+
+                <!-- Create the editor container -->
+                <div class="row">
+                <div class="col-xs-12">
+                  <div id="post-editor" class="post-body">
+                  </div>
+                </div>
               </div>
+
+                <!-- <textarea class="form-control" id="post-body" rows="10" name="post[message]" placeholder="...post"></textarea> -->
+              </div>
+
+          <!-- Close column and row -->
             </div>
           </div>
 
-            <!-- <textarea class="form-control" id="post-body" rows="10" name="post[message]" placeholder="...post"></textarea> -->
-          </div>
           <span class="btn btn-info submit-new-post">Publish</span>
 
         <!-- </form> -->
@@ -864,13 +855,22 @@
     <!-- New Post -->
     <script type="text/template" id="new-template">
 
-      <div id="prompt-series">
 
       <div class="row">
-        <div class="col-xs-12">
-
+        <div class="col-xs-12 text-right">
+          <div class="circle-button">X</div>
+          <br>
+          <span class="prompt-label">press esc to go back (does not work yet)</span>
         </div>
       </div>
+
+      <div class="row">
+        <div class="col-xs-12 text-right">
+          <div class="vertical-space"></div>
+        </div>
+      </div>
+
+      <div id="prompt-series">
 
       <div class="row">
         <div class="col-xs-12">
@@ -980,12 +980,14 @@
 
 
       <div class="row">
-        <div class="col-xs-5 text-center">
+
+        <div class="col-xs-6 col-xs-offset-3 col-sm-2 col-sm-offset-5 text-center">
+          <input type="number" value="25" min ="25" max="1000" step="25" class="form-control input-lg" id="post-word-count"></input>
+          <span class="prompt-label">1,000 max</span>
         </div>
-        <div class="col-xs-2 text-center">
-          <input type="number" value="25" min ="25" max="1000" step="25" class="form-control input-lg" id="post-word-count"></input> <span class="prompt-label">1,000 max</span>
-        </div>
-        <div class="col-xs-5 text-center">
+        <div class="col-xs-1">
+          <br>
+          <span class="brand-font">words.</span>
         </div>
       </div>
 
@@ -1002,7 +1004,7 @@
           </div>
         </div>
         <div class="col-xs-4">
-          <button class="render-prompt btn btn-primary">Generate Prompt</button>
+          <button class="render-prompt btn btn-default">See Your Prompt</button>
         </div>
       </div>
 
@@ -1030,7 +1032,7 @@
         <div class="col-md-4">
 
         </div>
-        <div class="col-xs-12 col-md-4">
+        <div class="col-xs-12 col-md-6">
           <div id="start-writing-container">
           </div>
         </div>
