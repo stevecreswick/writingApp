@@ -39,29 +39,10 @@
   <script src="//cdn.quilljs.com/0.19.10/quill.min.js"></script>
 
 
-    <!-- Main Page -->
-    <script type="text/template" id="main-page-template">
 
-      <input type="hidden" id="current_user" value="<%= @user.username %>">
-      <input type="hidden" id="current_id" value="<%= @user.id %>">
+<!-- Main Nav Bar -->
+    <script type="text/template" id="nav-bar-template">
 
-
-
-      <!-- Nav Bar -->
-      <!-- <nav class="navbar navbar-default  navbar-fixed-top"> -->
-      <div class="container-fluid"  id="header">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <!-- <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-
-        </div> -->
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="row" id="header-row">
 
             <div class="col-xs-2 col-sm-2 text-center nav-column">
@@ -96,7 +77,50 @@
 
           </div>
 
+    </script>
+
+    <!-- Writing Nav -->
+    <script type="text/template" id="writing-nav-template">
+
+          <div class="row" id="header-row">
+
+            <div class="col-xs-6 col-sm-3 nav-columm">
+              <h1 class="home-page brand">
+                <!-- <div data-no-turbolink>
+                <a href="/users/main"> -->
+                  <img src="http://i.imgur.com/g8Z3uqu.png"/> writeaway.
+                <!-- </a>
+              </div> -->
+              </h1>
+            </div>
+            <div class="col-sm-3">
+              <h5 id="post-box-word-count"></h5>
+            </div>
+            <div class="col-sm-3">
+              <h5 class="header-word-count"></h5>
+            </div>
+            <div class="col-sm-3">
+              <h5 id="stopwatch">0:0:0</h5>
+            </div>
+
+            <!-- <div class="col-sm-4 nav-column">
+              <h1 class="home-page nav-item text-center">writeaway.</h1>
+            </div> -->
+
           </div>
+
+
+    </script>
+
+    <!-- Main Page -->
+    <script type="text/template" id="main-page-template">
+
+      <input type="hidden" id="current_user" value="<%= @user.username %>">
+      <input type="hidden" id="current_id" value="<%= @user.id %>">
+
+      <div class="container-fluid"  id="header">
+
+        <!-- Navbar Content Goes Here -->
 
       </div>
 
@@ -405,7 +429,7 @@
           </div>
         </div>
 
-        <div id="stopwatch">0:0:0</div>
+
 
     </script>
 
@@ -761,13 +785,13 @@
     <script type="text/template" id="new-template">
 
 
-      <div class="row">
+      <!-- <div class="row">
         <div class="col-xs-12 text-right">
           <div class="circle-button">X</div>
           <br>
           <span class="prompt-label">press esc to go back (does not work yet)</span>
         </div>
-      </div>
+      </div> -->
 
       <div class="row">
         <div class="col-xs-12 text-right">
@@ -788,43 +812,8 @@
 
       </div>
 
-      <div class="row">
-        <div class="col-xs-12 text-center">
-          <h2 class="new-instruction">What Genre Would You Like to Write?</h2>
-        </div>
-      </div>
 
 
-      <div class="row">
-        <div class="col-xs-4"></div>
-
-        <div class="col-xs-4 text-center">
-          <!-- <div cla="prompt-container"> -->
-          <select class="form-control input-lg tall-input" id="choose-genre">
-              <option>Fiction</option>
-              <option>Fantasy</option>
-              <option>Historical-Fiction</option>
-              <option>Horror</option>
-              <option>Thriller</option>
-              <option>Crime</option>
-              <option>Romance</option>
-              <option>Science-Fiction</option>
-              <option>Poetry</option>
-              <option>Non-Fiction</option>
-          </select>
-        <!-- </div> -->
-        </div>
-      </div>
-
-      <!-- Space -->
-      <div class="row">
-        <div class="col-xs-12">
-          <div class="vertical-space">
-          </div>
-          <div class="vertical-space">
-          </div>
-        </div>
-      </div>
 
 
       <div class="row">
@@ -857,6 +846,43 @@
           </div>
         </div>
       </div>
+
+      <!-- Space -->
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="vertical-space">
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12 text-center">
+          <h2 class="new-instruction">What Genre Would You Like to Write?</h2>
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="col-xs-4"></div>
+
+        <div class="col-xs-4 text-center">
+          <!-- <div cla="prompt-container"> -->
+          <select class="form-control input-lg tall-input" id="choose-genre">
+              <option>Fiction</option>
+              <option>Fantasy</option>
+              <option>Historical-Fiction</option>
+              <option>Horror</option>
+              <option>Thriller</option>
+              <option>Crime</option>
+              <option>Romance</option>
+              <option>Science-Fiction</option>
+              <option>Poetry</option>
+              <option>Non-Fiction</option>
+          </select>
+        <!-- </div> -->
+        </div>
+      </div>
+
 
 
       <!-- Space -->

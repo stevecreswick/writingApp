@@ -72,6 +72,13 @@ app.PageView = Backbone.View.extend({
   renderMain: function(){
     this.currentPage = 0;
     this.render();
+    this.renderNavBar();
+
+
+    if(this.promptFormPainter){
+      this.promptFormPainter.stopTimer();
+    }
+
     this.renderPosts( this.currentGenre, this.currentPage );
   },
 
@@ -92,6 +99,20 @@ app.PageView = Backbone.View.extend({
     this.renderReceivedChallenges();
     this.renderReceivedChallenges();
 
+  },
+
+  renderNavBar: function(){
+    this.$el.find('#header').empty();
+
+    var $navbar = _.template( $('#nav-bar-template').html() );
+    this.$el.find('#header').append($navbar);
+  },
+
+  renderWritingNav: function(){
+    this.$el.find('#header').empty();
+    var $navbar = _.template( $('#writing-nav-template').html() );
+
+    this.$el.find('#header').append($navbar);
   },
 
   // receivedChallenges: function(){
@@ -182,6 +203,8 @@ app.PageView = Backbone.View.extend({
 
     }
   },
+
+  promptFormPainter: null,
 
   // Event Handling
 
@@ -378,11 +401,11 @@ app.PageView = Backbone.View.extend({
   renderPromptForm: function(){
     this.$('#top-pane').children().remove();
 
-    // this.$('#center-pane').empty();
+    this.renderWritingNav();
+    // empty center of page
     this.emptyCenter();
-    // console.log(this.$('#center-pane'));
 
-    app.promptFormPainter = new app.promptFormView({
+    this.promptFormPainter = new app.promptFormView({
       el: $('#center-pane')
     });
 
@@ -390,7 +413,7 @@ app.PageView = Backbone.View.extend({
 
     // console.log(app.promptFormPainter);
 
-    app.promptFormPainter.render();
+    this.promptFormPainter.render();
     // app.promptFormPainter.bindSlider();
     var $back = $('<div>').html('X').addClass('cancel-post wa-button')
     this.$el.find('.prompt-back-holder').append($back)

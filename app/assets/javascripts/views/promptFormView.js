@@ -5,6 +5,9 @@ app.promptFormView = Backbone.View.extend({
   className: 'prompt-form',
   template: _.template( $('#new-template').html() ),
   wordCount: 0,
+  seconds: 0,
+  minutes: 0,
+  hours: 0,
   newPrompt: {},
   initialize: function(){
     this.bindSlider();
@@ -95,6 +98,7 @@ app.promptFormView = Backbone.View.extend({
       this.$('#start-writing-container').append( $start );
       // this.$el.append(button);
     },
+
     renderWritingForm: function(e){
       var newPost = this.$el.find('.new-post-box');
       console.log(newPost);
@@ -123,35 +127,67 @@ app.promptFormView = Backbone.View.extend({
       //
       // }
 
+      $('h5#post-box-word-count').html(this.newPrompt.wordCount)
 
+      // Old show the word count
       this.$("h4#post-box-word-count").html("<h3 style='color:red'>" + this.newPrompt.wordCount + "</h3>");
 
       this.renderEditor();
       this.checkWordCount(this.newPrompt);
+
       this.startClock();
     },
 
     startClock: function(){
-      var seconds = 0, minutes = 0, hours = 0;
-      var timer;
+
+      if (app.timer){
+        this.stopTimer();
+      }
+
       var $stopwatch = this.$el.find('#stopwatch');
 
-      timer = setInterval(this.renderTime, 1000);
-      console.log(timer);
+      app.seconds = 0;
+      app.minutes = 0;
+      app.hours = 0;
+
+      app.timer = setInterval(this.renderTime, 1000);
+      $('#stopwatch').show();
+
     },
 
     renderTime: function(){
-        seconds++;
-        console.log(seconds);
-        if(seconds >= 60){
-          seconds = 0;
-          minutes += 1;
-        } else if (minutes > 59){
-          minutes = 0;
-          hours += 1;
+        app.seconds++;
+        console.log(app.seconds);
+        if(app.seconds >= 60){
+          app.seconds = 0;
+          app.minutes += 1;
+        } else if (app.minutes > 59){
+          app.minutes = 0;
+          app.hours += 1;
         } else {
-          $('#stopwatch').html(hours + ':' + minutes + ':' + seconds);
+          $('#stopwatch').html(app.hours + ':' + app.minutes + ':' + app.seconds);
         }
+    },
+
+    stopTimer: function(){
+      clearInterval(app.timer);
+      app.timer = null;
+      app.seconds = 0;
+      app.minutes = 0;
+      app.hours = 0;
+      console.log('stopped seconds: ' +  app.seconds);
+    },
+
+    resetTimer: function(){
+      console.log('reseting timer');
+      console.log(this.timer);
+      var $stopwatch = this.$el.find('#stopwatch');
+
+      this.seconds = 0, this.minutes = 0, this.hours = 0;
+      console.log(this.seconds);
+      this.timer = null;
+      console.log(this.timer);
+      // $stopwatch.html(this.hours + ':' + this.minutes + ':' + this.seconds);
     },
 
     submitPost: function(){
@@ -175,6 +211,11 @@ app.promptFormView = Backbone.View.extend({
         } else if (messageLength >= this.newPrompt.wordCount) {
 
           console.log('creating');
+          var $stopwatch = $('#stopwatch');
+
+          // Store the seconds in the post
+          console.log(app.seconds);
+
 
           app.posts.create({
             title: newTitle,
@@ -196,7 +237,6 @@ app.promptFormView = Backbone.View.extend({
         } else {
           this.$('#post-error').text('Not Long Enough');
         }
-
     },
     createPrompt: function(){
       console.log(this.prompt);
@@ -231,7 +271,7 @@ app.promptFormView = Backbone.View.extend({
       $('#post-editor').on('keyup', function(){
         var text = scope.$el.find('#post-editor').find('.ql-editor').text();
         this.wordCount = text.match(/\S+/g).length;
-        $('.character-count').html( this.wordCount );
+        $('h5.header-word-count').html( this.wordCount );
 
         var progressBar = scope.$el.find('#word-count-progress');
 
