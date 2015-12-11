@@ -314,12 +314,8 @@ div.nav-item:hover{
   padding: 1em 0 1em 0;
   left: 0;
   right: 0;
-  text-align: center;
-  /*height: 5em;*/
   font-size: 1.1em;
   width:100%;
-  background: rgba(255,255,224,0.7);
-  line-height: 200%;
   overflow: auto;
   overflow-y: hidden;
   overflow-x: scroll;
@@ -338,20 +334,22 @@ div.write-nav{
 div.write-nav img{
 }
 
-div > .sort{
-  /*margin-left: 5pxs;*/
-}
 
-div.sort{
+div.sidenav-row {
   font-size: 10px;
   font-family: 'Open Sans Condensed', serif;
   padding: 0.5em 0.5em 0.5em 2em;
   text-decoration: none;
   list-style: none;
-  /*margin-right: 5%;*/
-  text-align: center;
-  width: 65px;
-  max-height: 100px;
+  margin: 0 5% 0.3em 0;
+  text-align: left;
+  width: 100%;
+  /*max-height: 30px;*/
+}
+
+div.sidenav-seperator{
+  width: 100%;
+  border: 3px solid black;
 }
 
 div.sort:hover{
@@ -359,11 +357,10 @@ div.sort:hover{
   color: red;
 }
 
-div.sort img{
-  max-width: 30px;
-  display: block;
-  margin: 0 auto;
-  width: 50px;
+img.sort-image{
+  max-width: 25px;
+  max-height: 25px;
+  display: inline-block;
 }
 
 .all-posts{
@@ -960,10 +957,6 @@ div.friend-view{
 
 #center-pane{
   padding-top: 3em;
-}
-
-#left-pane{
-  padding-top: 7em;
 }
 
 .front-screen{

@@ -5,6 +5,7 @@ app.promptFormView = Backbone.View.extend({
   className: 'prompt-form',
   template: _.template( $('#new-template').html() ),
   wordCount: 0,
+  totalTime: 0,
   seconds: 0,
   minutes: 0,
   hours: 0,
@@ -100,9 +101,10 @@ app.promptFormView = Backbone.View.extend({
     },
 
     renderWritingForm: function(e){
-      var newPost = this.$el.find('.new-post-box');
-      console.log(newPost);
-      newPost.css({"display": "none", "z-index": "-2"});
+      // Resize the columns
+      app.pagePainter.columns("main");
+
+      // Get all the prompt info
       this.newPrompt = this.createPrompt();
 
       e.preventDefault();
@@ -119,18 +121,8 @@ app.promptFormView = Backbone.View.extend({
 
       this.$("h5#post-box-type").html( this.newPrompt.prompt )
 
-      // if (this.newPrompt.type === "Use One Word"){
-      //       this.$("h5#post-box-type").html("Write at least " + this.newPrompt.wordCount + " characters using the word " + "<span style='color:red; font-size: 1.4em'>" + this.newPrompt.prompt + "</span>");
-      // } else if (this.newPrompt.type === "Answer What If"){
-      //
-      // } else if (this.newPrompt.type === "Classic First Sentence"){
-      //
-      // }
-
       $('h5#post-box-word-count').html(this.newPrompt.wordCount)
 
-      // Old show the word count
-      this.$("h4#post-box-word-count").html("<h3 style='color:red'>" + this.newPrompt.wordCount + "</h3>");
 
       this.renderEditor();
       this.checkWordCount(this.newPrompt);
@@ -146,6 +138,7 @@ app.promptFormView = Backbone.View.extend({
 
       var $stopwatch = this.$el.find('#stopwatch');
 
+      app.totalTime = 0;
       app.seconds = 0;
       app.minutes = 0;
       app.hours = 0;
@@ -156,38 +149,59 @@ app.promptFormView = Backbone.View.extend({
     },
 
     renderTime: function(){
-        app.seconds++;
-        console.log(app.seconds);
-        if(app.seconds >= 60){
-          app.seconds = 0;
-          app.minutes += 1;
-        } else if (app.minutes > 59){
-          app.minutes = 0;
-          app.hours += 1;
-        } else {
-          $('#stopwatch').html(app.hours + ':' + app.minutes + ':' + app.seconds);
-        }
+      app.totalTime++;
+      app.hours = Math.floor(app.totalTime / 3600);
+      // totalSeconds %= 3600;
+      app.minutes = Math.floor(app.totalTime / 60);
+      app.seconds = app.totalTime % 60;
+
+      // Create Views to Handle :00, :01, etc.
+      var minutesView = app.minutes + ":";
+      var hoursView = app.hours + ":";
+      var secondsView = app.seconds;
+
+
+      if (app.minutes < 10){
+        minutesView = "0" + app.minutes + ":";;
+      }
+
+      if (app.seconds < 10){
+        secondsView = "0" + app.seconds;;
+      }
+
+      if (app.hours == 0){
+        hoursView = ""
+      } else if (app.hours < 10) {
+        hoursView = "0" + app.hours + ":";
+      }
+
+      $('#stopwatch').html(hoursView + minutesView + secondsView);
+
+
+        // app.seconds = app.totalTime;
+
+        // console.log(app.totalTime);
+        // if(app.totalTime % 60 == 0){
+        //   app.seconds = 0;
+        //   app.minutes += 1;
+        // } else if (app.minutes > 59){
+        //   app.minutes = 0;
+        //   app.hours += 1;
+        // } else {
+        //   app.seconds = app.totalTime;
+        //   $('#stopwatch').html(app.hours + ':' + app.minutes + ':' + app.seconds);
+        // }
+
     },
 
     stopTimer: function(){
       clearInterval(app.timer);
       app.timer = null;
+      app.totalTime = 0;
       app.seconds = 0;
       app.minutes = 0;
       app.hours = 0;
       console.log('stopped seconds: ' +  app.seconds);
-    },
-
-    resetTimer: function(){
-      console.log('reseting timer');
-      console.log(this.timer);
-      var $stopwatch = this.$el.find('#stopwatch');
-
-      this.seconds = 0, this.minutes = 0, this.hours = 0;
-      console.log(this.seconds);
-      this.timer = null;
-      console.log(this.timer);
-      // $stopwatch.html(this.hours + ':' + this.minutes + ':' + this.seconds);
     },
 
     submitPost: function(){
@@ -199,36 +213,38 @@ app.promptFormView = Backbone.View.extend({
         var messageText = this.$('#post-editor').find('.ql-editor').text();
         var messageLength = messageText.match(/\S+/g).length;
 
-        console.log(messageLength);
-        console.log(this.newPrompt.wordCount);
 
-        // Check to See if There is a Title
+        // Check Title / Word Count
         if (newTitle === ""){
-          console.log('not created');
           this.$('#post-error').text('No Title');
-
-        // If the message is equal to or longer than the chosen word count -> Submit The post
         } else if (messageLength >= this.newPrompt.wordCount) {
 
-          console.log('creating');
           var $stopwatch = $('#stopwatch');
 
           // Store the seconds in the post
-          console.log(app.seconds);
 
 
+          // Create a Post
           app.posts.create({
+
             title: newTitle,
+            genre: this.newPrompt.genre,
             message: newMessage,
             word_count: messageLength,
+            time_completed: app.totalTime,
+
             prompt: this.newPrompt.prompt,
             prompt_word_count: this.newPrompt.wordCount,
             prompt_type: this.newPrompt.type,
             model_url: this.newPrompt.url,
-            genre: this.newPrompt.genre},
-            {url: '/api/posts',
+
+            },
+
+            {
+            url: '/api/posts',
             wait:true,
-            async: false});
+            async: false
+          });
 
           app.pagePainter.renderMain();
           // this.render();

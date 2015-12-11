@@ -4,10 +4,12 @@ app.PageView = Backbone.View.extend({
   tagName: 'div',
   className: 'main-display',
   template: _.template( $('#main-page-template').html() ),
-  elevenCenter: "col-xs-12 col-sm-11 col-md-11 col-lg-11",
+  tenCenter: "col-xs-12 col-sm-10 col-md-10 col-lg-10",
   oneLeft: "col-sm-1 col-md-1 col-lg-1 hidden-xs",
-  sevenCenter: "col-xs-7 col-sm-8 col-md-7 col-lg-7",
-  fiveLeft: "col-xs-5 col-sm-4 col-md-5 col-lg-5",
+  // sevenCenter: "col-xs-7 col-sm-8 col-md-7 col-lg-7",
+  // fiveLeft: "col-xs-5 col-sm-4 col-md-5 col-lg-5",
+  defaultLeft: "col-md-2 col-lg-2 hidden-xs",
+  defaultCenter: "col-md-10 col-lg-10",
   centerWidth: 11,
 
   // Fonts Themes
@@ -71,6 +73,8 @@ app.PageView = Backbone.View.extend({
 
   renderMain: function(){
     this.currentPage = 0;
+
+    this.columns("main");
     this.render();
     this.renderNavBar();
 
@@ -127,7 +131,7 @@ app.PageView = Backbone.View.extend({
   //
   // },
   renderSideNav: function(){
-    var $top = $('#top-pane').eq(0);
+    var $top = $('#left-pane').eq(0);
     var $sideNav = $(".sidebar-nav");
 
     $sideNav.remove();
@@ -143,7 +147,7 @@ app.PageView = Backbone.View.extend({
   // Render Genres
     renderGenreLinks: function(){
       var $postListHeader = _.template( $('#post-list-menu').html() )
-      this.$el.find('#top-pane').append($postListHeader);
+      this.$el.find('#left-pane').append($postListHeader);
     },
 
 // Page View Utilities
@@ -261,10 +265,6 @@ app.PageView = Backbone.View.extend({
     app.posts = new app.PostCollection();
     app.posts.genre = this.currentGenre;
     app.posts.page = this.currentPage;
-    console.log("************************");
-    console.log(app.posts.genre);
-    console.log(app.posts.page);
-
 
     app.postPainter = new app.PostListView({
       collection: app.posts,
@@ -368,7 +368,7 @@ app.PageView = Backbone.View.extend({
   },
 
   showCurrentProfile: function(){
-    this.$el.find('#top-pane .genre-links').remove();
+    this.$el.find('#left-pane .genre-links').remove();
     this.$el.find('#post-list').remove();
 
     var $center = this.$el.find('#center-pane');
@@ -385,9 +385,7 @@ app.PageView = Backbone.View.extend({
     });
 
     currentUser.url = "/users/show/" + $('#current_id').val();
-    console.log(currentUser.url);
     currentUser.fetch({wait:true});
-    console.log(currentUser);
     // app.friends = new app.FriendCollection();
     // app.friendPainter = new app.FriendListView({
     //   collection: app.friends,
@@ -398,8 +396,24 @@ app.PageView = Backbone.View.extend({
 
   },
 
+  columns: function(page){
+    console.log('columns');
+    console.log(page);
+    if (page == "prompt"){
+
+      this.$('#left-columns').removeClass(this.defaultLeft).addClass(this.oneLeft);
+      this.$('#center-columns').removeClass(this.defaultCenter).addClass(this.tenCenter);
+    } else if (page == "main"){
+      this.$('#left-columns').removeClass(this.oneLeft).addClass(this.defaultLeft);
+      this.$('#center-columns').removeClass(this.oneCenter).addClass(this.defaultCenter);
+    }
+
+  },
+
   renderPromptForm: function(){
-    this.$('#top-pane').children().remove();
+    this.$('#left-pane').children().remove();
+
+    this.columns("prompt");
 
     this.renderWritingNav();
     // empty center of page

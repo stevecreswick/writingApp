@@ -64,10 +64,11 @@
             </div>
 
           <div class="col-xs-2 col-sm-2 nav-column">
-            <div class="show-friends nav-icon nav-item text-center"><img src="http://i.imgur.com/bYdRuZZ.png"/>
+            <!-- <div class="show-friends nav-icon nav-item text-center"><img src="http://i.imgur.com/bYdRuZZ.png"/>
               <br>
-              <span id="sub-logo" class="hidden-s">writers</span></div>
+              <span id="sub-logo" class="hidden-s">writers</span></div> -->
           </div>
+
           <div class="col-xs-2 col-sm-2 nav-column">
             <div class="nav-item text-center text-center show-current-user">
             <img src="<%= @user.image_url %>" class="img-circle profile-picture"</>
@@ -112,6 +113,7 @@
 
     </script>
 
+
     <!-- Main Page -->
     <script type="text/template" id="main-page-template">
 
@@ -120,7 +122,7 @@
 
       <div class="container-fluid"  id="header">
 
-        <!-- Navbar Content Goes Here -->
+        <!-- Navbar is Rendered Here -->
 
       </div>
 
@@ -138,14 +140,13 @@
     <div class="row">
 
       <!-- Left Side -->
-      <!-- <div id="left-columns" class="col-sm-1 col-md-1 col-lg-1 hidden-xs">
+      <div id="left-columns" class="col-md-2 col-lg-2 hidden-xs">
         <div id="left-pane">
-          <br><br><br><br><br><br><br><br><br><br>
         </div>
-      </div> -->
+      </div>
 
       <!-- Center -->
-      <div id="center-columns"class="col-xs-10 col-xs-offset-1">
+      <div id="center-columns"class="col-md-10 col-lg-10">
         <div id="center-pane">
 
           </div>
@@ -441,76 +442,78 @@
 
         <div class="genre-links">
 
-        <!-- <div class="col-xs-1"><div class="write-nav">Write</div></div>
-
-        <div class="col-xs-1"><div class="sort" data-url="all"> All</div></div>
-        <div class="col-xs-1"><div class="sort" data-url="Fiction"> Fiction</div></div>
-        <div class="col-xs-1"><div class="sort" data-url="Fantasy"> Fantasy</div></div>
-        <div class="col-xs-1"><div class="sort" data-url="Horror"> Horror</div></div>
-
-        <div class="col-xs-1"><div class="sort" data-url="Thriller"> Thriller</div></div>
-        <div class="col-xs-1"><div class="sort" data-url="Historical-Fiction">Historical Fiction</div></div>
-        <div class="col-xs-1"><div class="sort" data-url="Crime"> Crime</div></div>
-        <div class="col-xs-1"><div class="sort" data-url="Romance"> Romance</div></div>
-
-        <div class="col-xs-1"><div class="sort" data-url="Science-Fiction"> SciFi</div></div>
-        <div class="col-xs-1"><div class="sort" data-url="Poetry">Poetry</div></div>
-        <div class="col-xs-1"><div class="sort" data-url="Non-Fiction">Non-Fiction</div></div>
-        <div class="col-xs-1"></div> -->
 
         <!-- <div class="write-nav">Write</div> -->
-        <div class="sort" data-url="friends">
-          <img src="http://i.imgur.com/TG0UhYo.png"></img>
-          Friends
+        <div class="sidenav-row">
+          Write
         </div>
-        <div class="sort" data-url="all">
-          <img src="http://i.imgur.com/hR2f8aM.png"></img>
-          All
+
+        <div class="sidenav-row">
+          <img src="http://i.imgur.com/TG0UhYo.png" class="sort-image"></img>
+          Writers
         </div>
-        <div class="sort" data-url="Fiction">
-          <img src="http://i.imgur.com/BI8PegK.png"></img>
-           Fiction
-         </div>
-        <div class="sort" data-url="Fantasy">
-          <img src="http://i.imgur.com/ffCviDQ.png"></img>
-           Fantasy
-         </div>
-        <div class="sort" data-url="Horror">
-          <img src="http://i.imgur.com/iJvfYS1.png"></img>
-           Horror
-         </div>
-        <div class="sort" data-url="Thriller">
-          <img src="http://i.imgur.com/ojVa8BI.png"></img>
-           Thriller
-         </div>
-        <div class="sort" data-url="Historical-Fiction">
-          <img src="http://i.imgur.com/lHyRvye.png"></img>
-          Historical
+
+        <div class="sort sidenav-row" data-url="friends">
+          <div class="sort-text">Friends Post (need to set up route)</div>
         </div>
-        <div class="sort" data-url="Crime">
-          <img src="http://i.imgur.com/8w44WhP.png"></img>
-          Crime
+
+        <div class="sidenav-seperator">
+
         </div>
-        <div class="sort" data-url="Romance">
-          <img src="http://i.imgur.com/zz5QHWN.png"></img>
-           Romance
+
+        <div class="sidenav-row">
+          Posts
+        </div>
+
+
+        <div class="sort sidenav-row" data-url="all">
+          <img src="http://i.imgur.com/hR2f8aM.png" class="sort-image"></img>
+          <div class="sort-text">All</div>
+        </div>
+        <div class="sort sidenav-row" data-url="Fiction">
+          <img src="http://i.imgur.com/BI8PegK.png" class="sort-image"></img>
+           <div class="sort-text">Fiction</div>
+         </div>
+        <div class="sort sidenav-row" data-url="Fantasy">
+          <img src="http://i.imgur.com/ffCviDQ.png" class="sort-image"></img>
+           <div class="sort-text">Fantasy</div>
+         </div>
+        <div class="sort sidenav-row" data-url="Horror">
+          <img src="http://i.imgur.com/iJvfYS1.png" class="sort-image"></img>
+           <div class="sort-text">Horror</div>
+         </div>
+        <div class="sort sidenav-row" data-url="Thriller">
+          <img src="http://i.imgur.com/ojVa8BI.png" class="sort-image"></img>
+           <div class="sort-text">Thriller</div>
+         </div>
+        <div class="sort sidenav-row" data-url="Historical-Fiction">
+          <img src="http://i.imgur.com/lHyRvye.png" class="sort-image"></img>
+          <div class="sort-text">Historical</div>
+        </div>
+        <div class="sort sidenav-row" data-url="Crime">
+          <img src="http://i.imgur.com/8w44WhP.png" class="sort-image"></img>
+          <div class="sort-text">Crime</div>
+        </div>
+        <div class="sort sidenav-row" data-url="Romance">
+          <img src="http://i.imgur.com/zz5QHWN.png" class="sort-image"></img>
+           <div class="sort-text">Romance</div>
          </div>
 
-        <div class="sort" data-url="Science-Fiction">
-          <img src="http://i.imgur.com/K1kGfUE.png"></img>
-           SciFi
+        <div class="sort sidenav-row" data-url="Science-Fiction">
+          <img src="http://i.imgur.com/K1kGfUE.png" class="sort-image"></img>
+           <div class="sort-text">SciFi</div>
          </div>
-        <div class="sort" data-url="Poetry">
-          <img src="http://i.imgur.com/F71bhWM.png"></img>
-          Poetry
+        <div class="sort sidenav-row" data-url="Poetry">
+          <img src="http://i.imgur.com/F71bhWM.png" class="sort-image"></img>
+          <div class="sort-text">Poetry</div>
         </div>
-        <div class="sort" data-url="Humor">
-          <img src="http://i.imgur.com/Iw9CxT2.png"></img>
-          Humor
+        <div class="sort sidenav-row" data-url="Humor">
+          <img src="http://i.imgur.com/Iw9CxT2.png" class="sort-image"></img>
+          <div class="sort-text">Humor</div>
         </div>
-        <div class="sort" data-url="Non-Fiction">
-          <img src="http://i.imgur.com/tH5XICv.png"></img>
-          Non-Fiction
+        <div class="sort sidenav-row" data-url="Non-Fiction">
+          <img src="http://i.imgur.com/tH5XICv.png" class="sort-image"></img>
+          <div class="sort-text">Non-Fiction</div>
         </div>
 
 
