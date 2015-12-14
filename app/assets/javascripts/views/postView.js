@@ -136,8 +136,15 @@ app.PostView = Backbone.View.extend({
     },
 
     getPromptInstruction(options){
+      console.log("type " + options.type);
       if (options.type === "Use One Word") {
         return "Write at least " + options.wordCount + " words, using the word <strong>" + options.prompt + "</strong>";
+      } else if (options.type === "Answer What If") {
+        return "Write at least " + options.wordCount + " words, about what would happen if <strong>" + options.prompt + "</strong>";
+      } else if (options.type === "Classic First Sentence") {
+        return "Write at least " + options.wordCount + " words, using the first sentence <strong>" + options.prompt + "</strong>";
+      } else if (options.type === "reddit"){
+        return "Write at least " + options.wordCount + " words, using the reddit writing prompt <strong>" + options.prompt + "</strong>";
       }
     },
 
@@ -145,11 +152,13 @@ app.PostView = Backbone.View.extend({
     resizePostDiv: function(height){
       this.$el.css({'height': height});
     },
+
     closeCritiqueForm: function(){
       this.$el.empty();
       this.renderWithUserName();
       this.resizePostDiv( this.normalHeight );
     },
+
     createCritique: function(){
       var newMessage = this.$el.find('textarea#critique-editor').val();
 
@@ -160,48 +169,48 @@ app.PostView = Backbone.View.extend({
 
     },
 
-  // Rating
-  saveRating: function(e){
+    // Rating
+    saveRating: function(e){
 
-    $(e.currentTarget).eq(0).addClass('rated-star');
-    var rating = $(e.currentTarget).eq(0).data('value');
+      $(e.currentTarget).eq(0).addClass('rated-star');
+      var rating = $(e.currentTarget).eq(0).data('value');
 
-    this.colorStars(rating);
+      this.colorStars(rating);
 
-    var post = $(e.currentTarget).eq(0);
-    var postId = post.data('post');
-    var currentUser = $('#current_id').val();
+      var post = $(e.currentTarget).eq(0);
+      var postId = post.data('post');
+      var currentUser = $('#current_id').val();
 
-    var urlModel = '/api/posts/' + postId + '/ratings';
+      var urlModel = '/api/posts/' + postId + '/ratings';
 
-    var newRating = new app.Rating({url: urlModel});
-    newRating.url = urlModel;
-    newRating.set('value', rating);
+      var newRating = new app.Rating({url: urlModel});
+      newRating.url = urlModel;
+      newRating.set('value', rating);
 
-    newRating.save();
+      newRating.save();
 
-  },
+    },
 
-  colorStars: function(rating){
-    for (var i = 1; i <= rating; i++) {
-      var divId = "#label-star" + i;
-      var addStar = this.$el.find(divId).eq(0);
-      addStar.addClass('rated-star')
-    }
-  },
+    colorStars: function(rating){
+      for (var i = 1; i <= rating; i++) {
+        var divId = "#label-star" + i;
+        var addStar = this.$el.find(divId).eq(0);
+        addStar.addClass('rated-star')
+      }
+    },
 
-  colorRating: function(){
+    colorRating: function(){
 
-    if ( this.model.get('is_rated') ){
+      if ( this.model.get('is_rated') ){
 
-      var score = this.model.get('rating');
-      this.colorStars(score);
+        var score = this.model.get('rating');
+        this.colorStars(score);
 
-    } else {
+      } else {
 
-    }
+      }
 
-  },
+    },
   // Critique Controller
     fetchCritiques: function(){
 
@@ -233,6 +242,7 @@ app.PostView = Backbone.View.extend({
 
       critiqueList.append(this.innerListView.$el);
     },
+
     renderCritiqueForm: function(){
       this.$el.empty();
       this.renderWithUserName();
@@ -246,6 +256,7 @@ app.PostView = Backbone.View.extend({
       this.bindCritiqueForm(postId);
       this.renderCritiques();
     },
+
     renderCritiqueFormContainer: function(){
       var formContainer = $('<div>').addClass('critique-form-container');
 
@@ -253,6 +264,7 @@ app.PostView = Backbone.View.extend({
 
       this.$el.find('.make-critique-box').append( formContainer );
     },
+
     bindCritiqueForm: function(modelId){
       var scope= this;
       $('form#create-critique').on('submit', function(e){

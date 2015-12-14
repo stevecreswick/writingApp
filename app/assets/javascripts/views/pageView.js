@@ -80,7 +80,7 @@ app.PageView = Backbone.View.extend({
 
 
     if(this.promptFormPainter){
-      this.promptFormPainter.stopTimer();
+      this.promptFormPainter.clearTime();
     }
 
     this.renderPosts( this.currentGenre, this.currentPage );
@@ -88,9 +88,8 @@ app.PageView = Backbone.View.extend({
 
   friendsPage: function(){
     this.currentPage = 0;
-    this.$el.find('#center-pane .sidebar-nav').remove();
-    this.$el.find('#post-list').remove();
-
+    this.$el.find('#center-pane').empty();
+    
     this.friendsNav();
     this.showFollowing();
   },
@@ -144,9 +143,16 @@ app.PageView = Backbone.View.extend({
 
   },
 
-  // Render Genres
+  // Render Main Side Nav
     renderGenreLinks: function(){
       var $postListHeader = _.template( $('#post-list-menu').html() )
+      this.$el.find('#left-pane').append($postListHeader);
+    },
+
+    // Writing Side Nav
+
+    renderWritingSidebar: function(){
+      var $postListHeader = _.template( $('#writing-side-nav').html() )
       this.$el.find('#left-pane').append($postListHeader);
     },
 
@@ -232,11 +238,15 @@ app.PageView = Backbone.View.extend({
     'click li.render-friends': 'renderFriendsPage',
     'click li.render-friends': 'renderFriendsPage',
     'click .home-page': 'renderMain',
-    'click div.show-current-user': 'showCurrentProfile'
+    'click div.show-current-user': 'showCurrentProfile',
+    'click span.show-genres': 'showGenres',
+
 
   },
 
-
+showGenres: function(){
+  $('.genres').show();
+},
 // Rendering Posts
 
 

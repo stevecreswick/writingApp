@@ -222,7 +222,11 @@ form{
 
 #post-list{
   width:100%;
+  overflow: auto;
+  background: white;
+  padding: 5em 1em 3em 1em;
 }
+
 
 /*.critique{
   background: floralwhite;
@@ -316,9 +320,6 @@ div.nav-item:hover{
   right: 0;
   font-size: 1.1em;
   width:100%;
-  overflow: auto;
-  overflow-y: hidden;
-  overflow-x: scroll;
 }
 
 .genre-links * {
@@ -334,6 +335,9 @@ div.write-nav{
 div.write-nav img{
 }
 
+div.genres{
+  display: none:
+}
 
 div.sidenav-row {
   font-size: 10px;
@@ -348,7 +352,8 @@ div.sidenav-row {
 }
 
 div.sidenav-seperator{
-  width: 100%;
+  width: 60%;
+  margin-left: 20%;
   border: 3px solid black;
 }
 
@@ -425,12 +430,6 @@ img.sort-image{
   margin-top: 1.5em;
 }
 
-#choose-genre{
-  font-size: 2em;
-  text-align: center;
-  height: 2em;
-  margin-top: 1.5em;
-}
 
 #prompt-description{
   padding: 3em 2em 2em 2em;
@@ -472,8 +471,8 @@ img.sort-image{
   padding: 2% 2% 4% 2%;
   border-radius: 3px;
   margin: 2em 1em 7em 1em;
-  border-top: 9px solid #545454;
-  border-left: 9px solid #545454;
+  /*border-top: 9px solid #545454;*/
+  /*border-left: 9px solid #545454;*/
 
   text-align: center;
 
@@ -606,10 +605,6 @@ margin-top: -4.8em;
     margin-left: 75%;
   }
 
-/* Post List View */
-#post-list {
-  overflow: auto;
-}
 
 
 /* User View */
@@ -692,7 +687,6 @@ margin-top: -4.8em;
   margin: 0 auto;
   /*border: 1px solid black;*/
   /*font-size: 12px;*/
-  margin-top: 35px;
   font-family: 'Open Sans Condensed', serif;
   display: none;
 }
@@ -748,14 +742,13 @@ form#create-post {
   background-color: rgb(220,220,220);
 }
 
-.submit-new-post {
-  float: right;
+#publish {
   margin-top: 1.5em;
+  font-size: 3em;
 }
 
 .post-body{
   background-color: white;
-  border: 1px solid black;
 }
 
 .circle-button{
@@ -925,9 +918,16 @@ div.friend-view{
   color: red;
 }
 
-#prompt-review-container{
-  font-family: 'Oswald', sans-serif;
-  font-size: 3em;
+/* Write x words using the prompt */
+#prompt-instrustion{
+  margin-top: 1em;
+  font-family: 'Open Sans Condensed', sans-serif;
+  display: inline-block;
+}
+
+/* Holds the writing prompt */
+#prompt {
+  font-family: 'Open Sans Condensed', sans-serif;
 }
 
 /* Profile Page */
@@ -953,13 +953,6 @@ div.friend-view{
 
 .front-screen{
   margin-top: 10em;
-}
-
-#center-pane{
-  padding-top: 3em;
-}
-
-.front-screen{
   text-align: center;
 }
 
