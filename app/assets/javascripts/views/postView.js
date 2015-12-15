@@ -93,13 +93,6 @@ app.PostView = Backbone.View.extend({
 
       var createdAt = this.model.get('created_at');
 
-      // Add a Follow button to Posts
-      var isFriend = this.model.get('is_friend');
-
-      if (isFriend == false){
-        var $addFriend = $('<span>').addClass('add-friend').text('Follow');
-        this.$el.find('.post-add-friend').append($addFriend)
-      }
 
       var userId = this.model.get('user_id');
       var prompt = this.model.get('prompt');
@@ -108,28 +101,47 @@ app.PostView = Backbone.View.extend({
       var href = "/users/" +  userId + "/posts/" + id;
       var link = $('<a>').attr('href', href).text( this.model.get("title") );
       var lineBreak = $('<br>');
+      var $time = $('<div>').attr('id', 'time_completed');
+      var promptType = this.model.get('prompt_type');
 
-      var wordCount = $('<span>').addClass("post-word-count").html( "    " + this.model.get('word_count') + "  words" );
+      var $wordCount = $('<span>').addClass("post-word-count").html( promptType + " | " + this.model.get('word_count') + "  words | completed in: " + this.getTimeCompleted() );
 
       var profilePic = this.model.get('image_url');
       var $profilePic = $('<img>').attr("src", profilePic).addClass('post-profile-picture img-circle');
 
+      // Add a Follow button to Posts not User or Following
+      var isFriend = this.model.get('is_friend');
+      var currentUser = parseInt ( $('#current_id').val() );
+
+      if (isFriend == false && userId !== currentUser ){
+        var $addFriend = $('<span>').addClass('add-friend prompt-label').text('Follow');
+        // this.$el.find('.post-add-friend').append($addFriend)
+      }
+
+
+
       var promptInstruction = this.getPromptInstruction({
-        "type": this.model.get('prompt_type'),
+        "type": promptType,
         "wordCount": this.model.get('prompt_word_count'),
         'prompt': this.model.get('prompt')
       });
 
-      this.$("div.post-prompt-type").append(promptInstruction);
+      var $prompt = $('<span>').addClass('post-word-count').html( promptInstruction );
 
-      this.$("div#title-holder").append(link, lineBreak, wordCount);
-      this.$("strong#created-at").append(createdAt);
+
+      // this.$("div.post-prompt-type").append(promptInstruction);
+
+      this.$("strong#created-at").html("written " + createdAt + " ago");
 
       if (this.model.get('avg_rating')){
         var average = "Average Rating: " + this.model.get('avg_rating');
-        this.$("span#average-rating").append(average);
+        var $average = $('<span>').addClass("average-rating post-word-count").html( average + "stars" );
 
       }
+
+
+      this.$("div#title-holder").append(link, $average, lineBreak, $wordCount, $time, $prompt);
+
 
       var feedbackNum = this.model.get('feedback_num');
       var feedbackLabel;
@@ -145,8 +157,17 @@ app.PostView = Backbone.View.extend({
 
       this.$el.find('.new-critique-form').append($feedback);
 
-      this.$el.find('.post-pic-box').append($profilePic);
+
+      var authorLink = "/users/profile/" + this.model.get('user_id');
+      var $postAuthor = $('<a>').attr('href', authorLink ).addClass("post-author text-center prompt-label");
+
+      this.$el.find('.post-pic-box').append($profilePic, $postAuthor, lineBreak, $addFriend);
+
       this.$("a.post-author").append(username);
+
+
+
+
       // this.renderCritiqueFormContainer();
       // this.renderEditor();
 
@@ -164,6 +185,38 @@ app.PostView = Backbone.View.extend({
       this.renderCritiques();
 
 
+    },
+
+    getTimeCompleted: function(){
+      var totalSeconds = this.model.get('time_completed');
+      var hours = Math.floor(totalSeconds / 3600);
+      // totalSeconds %= 3600;
+      var minutes = Math.floor(totalSeconds / 60);
+      var seconds = totalSeconds % 60;
+
+      // Create Views to Handle :00, :01, etc.
+      var minutesView = minutes + ":";
+      var hoursView = hours + ":";
+      var secondsView = seconds;
+
+
+      if (minutes < 10){
+        minutesView = "0" + minutes + ":";;
+      }
+
+      if (seconds < 10){
+        secondsView = "0" + seconds;;
+      }
+
+      if (hours == 0){
+        hoursView = ""
+      } else if (hours < 10) {
+        hoursView = "0" + hours + ":";
+      }
+
+      var $html = hoursView + minutesView + secondsView;
+
+      return $html;
     },
 
     getPromptInstruction: function(options){

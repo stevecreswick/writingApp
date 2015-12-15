@@ -493,10 +493,6 @@
 
         </div>
 
-        <div class="sidenav-row text-center show-genres">
-          Genres
-        </div>
-
         <div class="genres">
         <div class="sort sidenav-row" data-url="all">
           <img src="http://i.imgur.com/hR2f8aM.png" class="sort-image"></img>
@@ -629,23 +625,35 @@
       <!-- Post  -->
     <script type="text/template" id='post-template'>
 
+      <div class="row">
+        <div class="col-xs-12">
+
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-2">
+          <div class="post-pic-box text-center">
+          </div>
+
+        </div>
+        <div class="col-xs-8 text-left">
+          <div data-no-turbolink  class="prompt-label text-left" id="title-holder"></div>
+        </div>
+        <div class="col-xs-2  text-center prompt-label">
+          <strong> <%%= genre %> </strong>
+          <br>
+          <strong id="created-at">Posted  </strong>
+
+        </div>
+      </div>
 
         <div class="row">
-          <div class="col-xs-2  text-center prompt-label">
-            <strong> <%%= genre %> </strong>
-            <br>
-            <strong id="created-at">Posted  </strong>
-
-          </div>
           <div class="col-xs-4 col-xs-offset-2 text-center prompt-label">
             <br>
             <div data-no-turbolink id="post-author-stats">
-              <div class="post-pic-box">
 
-              </div>
-            <a href="/users/profile/<%%= user_id %>" class="post-author text-right">
-                <!-- username rendered here -->
-            </a>
+
           <div class="post-add-friend">
 
           </div>
@@ -662,35 +670,34 @@
 
           </div>
         </div>
+
         <div class-"row">
           <div class="col-xs-6"></div>
         </div>
+
         <div class="row">
-          <div class="col-xs-12"><div class="vertical-space"></div></div>
+          <!-- <div class="col-xs-12"><div class="vertical-space"></div></div> -->
         </div>
 
         <div class="row">
           <div class="col-xs-10 col-xs-offset-1 text-left">
-            <div class="post-prompt-type"></div>
+            <!-- <div class="post-prompt-type"></div> -->
           </div>
         </div>
 
 
         <div class="row">
           <div class="col-xs-4">
+
           </div>
           <div class="col-xs-4">
-            <div class="vertical-space"></div>
           </div>
         </div>
-
-
 
 
         <div class="row">
           <div class="col-xs-12">
             <div class="post-box prompt-label">
-              <div data-no-turbolink  class="prompt-label text-left" id="title-holder"></div>
               <br>
               <p class="posted-message">
                 <%%= message %>
@@ -701,7 +708,7 @@
 
         <div class="row">
           <div class="col-xs-12">
-            <div class="vertical-space"></div>
+            <!-- <div class="vertical-space"></div> -->
           </div>
         </div>
 
@@ -720,7 +727,7 @@
 
         <div class="row">
           <div class="col-xs-12">
-            <div class="vertical-space"></div>
+            <!-- <div class="vertical-space"></div> -->
           </div>
         </div>
 

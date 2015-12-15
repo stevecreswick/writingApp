@@ -409,6 +409,8 @@ showGenres: function(){
   showCurrentProfile: function(){
     this.$el.find('#left-pane .genre-links').remove();
     this.$el.find('#post-list').remove();
+    this.$el.find('#center-pane').empty();
+
 
     var $center = this.$el.find('#center-pane');
     var $userPage = $("<div>").attr('id', 'user-page');

@@ -52,7 +52,7 @@
 
 
   .container-fluid {
-    background: ghostwhite;
+    background: floralwhite;
     /*background: url('binding_dark.png');*/
     overflow: auto;
     /*padding-top: 5em;*/
@@ -147,10 +147,10 @@
 
 .post-author{
   color: black;
-  margin-bottom: 1em;
+  width: 100%;
   /*width: 50%;*/
   display: inline-block;
-  font-size: 1.5em;
+  font-size: 1em;
   /*float: right;
   position: absolute;
   bottom: 0;
@@ -223,8 +223,10 @@ form{
 #post-list{
   width:100%;
   overflow: auto;
-  background: white;
+  background: ghostwhite;
   padding: 5em 1em 3em 1em;
+  border-left: 9px solid #545454;
+
 }
 
 
@@ -253,7 +255,7 @@ form{
 #header {
   background: white;
   border-bottom: 1px solid gainsboro;
-
+  padding: 0 0 0 0;
   /*padding: 0% 5% 0% 3%;*/
   /*vertical-align: bottom;*/
   color: black;
@@ -484,9 +486,8 @@ img.sort-image{
   background-color: white;
   padding: 2% 2% 4% 2%;
   border-radius: 3px;
-  margin: 2em 1em 7em 1em;
+  margin: 2em 1em 2em 1em;
   /*border-top: 9px solid #545454;*/
-  /*border-left: 9px solid #545454;*/
 
   text-align: center;
 
@@ -511,12 +512,12 @@ img.sort-image{
   /*top: 0;*/
   font-size: 1.8em;
   /*margin-top: -1.5em;*/
-  background: white;
+  padding: 1em 0 0em 1em;
   width: 100%;
   font-family: 'Oswald', serif;
-  text-align: center;
-  margin-bottom: 0.7em;
+  /*margin-top: -5em;*/
   text-transform: uppercase;
+  display: inline-block;
   /*margin-top: -1em;*/
   /*border-radius: 15px 15px 10px 10px;
   -moz-border-radius: 15px 15px 10px 10px;
@@ -534,11 +535,17 @@ img.sort-image{
 }
 
 /* Header */
+
+.post-pic-box{
+  display: inline-block;
+  width: 110px;
+}
+
 .post-profile-picture{
   height: 100px;
   width: 100px;
   /*float: left;*/
-  display:inline;
+  display:inline-block;
   border: 6px solid #545454;
 }
 
@@ -582,7 +589,7 @@ margin-top: -4.8em;
 
   .post-box {
     padding: 1em 10% 1em 10%;
-    margin-top: 1em;
+    /*margin-top: 1em;*/
     /*height: 9em;*/
     /*overflow: auto;*/
     text-align: left;
@@ -820,9 +827,10 @@ div.user-view{
 }
 .add-friend{
   display: inline-block;
-  float: right;
-  margin-right: 10%;
-  margin-top: -2em;
+}
+
+.add-friend:hover{
+  cursor: pointer;
 }
 
 div.friend-view{

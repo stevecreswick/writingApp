@@ -3,6 +3,7 @@ class Api::PostsController < ApplicationController
 include SessionsHelper
 include UsersHelper
 include Api::PostsHelper
+include ActionView::Helpers::DateHelper
 
 respond_to :html, :json
 
@@ -38,7 +39,7 @@ respond_to :html, :json
     page = params[:page].to_i + 1
 
     if params[:genre] == "all"
-      @posts = Post.paginate :page => page
+      @posts = Post.paginate(:page => page).order('updated_at DESC')
     elsif params[:genre] == 'user'
       @posts = current_user.posts.paginate :page => page
     elsif params[:genre] == 'friends'
@@ -54,14 +55,9 @@ respond_to :html, :json
           data = aRpost.as_json
 
           if aRpost.ratings.where({user_id: current_user}).exists?
-            puts "*************** rating exists *********************"
             data['is_rated'] = true
             data['rating'] = Rating.where({post_id: aRpost.id, user_id: current_user})[0].value
-            puts data['is_rated']
-            puts data['rating']
-            puts "*************** ID:" + aRpost.id.to_s  + "*********************"
           else
-            puts "*************** rating *********************"
             data['is_rated'] = false
 
           end
@@ -73,11 +69,14 @@ respond_to :html, :json
            else
              data['is_friend'] = false
            end
-
+           puts "*************** TIME *********************"
+           time = time_ago_in_words(aRpost.created_at)
+           puts time
 
           data['username'] = aRpost.user.username
           data['image_url'] = aRpost.user.image_url
-          data['created_at'] = Date.strptime(aRpost.user.created_at.to_s)
+          # data['created_at'] = Date.strptime(aRpost.user.created_at.to_s)
+          data['created_at'] = time
           data['avg_rating'] = aRpost.average_rating
           data['total_ratings'] = aRpost.ratings.length
           data['feedback_num'] = aRpost.critiques.length
