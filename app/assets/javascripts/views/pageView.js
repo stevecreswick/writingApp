@@ -86,6 +86,22 @@ app.PageView = Backbone.View.extend({
     this.renderPosts( this.currentGenre, this.currentPage );
   },
 
+  writingPage: function(){
+    this.currentPage = 0;
+    this.$('#left-pane').children().remove();
+
+    this.columns("prompt");
+
+    // empty center of page
+    this.emptyCenter();
+
+    this.renderPromptForm();
+
+    var $back = $('<div>').html('X').addClass('cancel-post wa-button')
+    this.$el.find('.prompt-back-holder').append($back)
+
+  },
+
   friendsPage: function(){
     this.currentPage = 0;
     this.$el.find('#center-pane').empty();
@@ -95,7 +111,9 @@ app.PageView = Backbone.View.extend({
   },
 
   challengesPage: function(){
-    this.$el.find('#post-list').remove();
+    this.currentPage = 0;
+    this.$el.find('#center-pane').empty();
+
     var $div = $('<div>').attr('id', "received-challenge-holder");
     this.$el.find('#center-pane').append( $div );
 
@@ -219,7 +237,7 @@ app.PageView = Backbone.View.extend({
   // Event Handling
 
   events:{
-    'click li.write-nav': 'renderPromptForm',
+    'click li.write-nav': 'writingPage',
     'click div.cancel-post': 'renderMain',
 
 
@@ -300,7 +318,6 @@ showGenres: function(){
     };
 
     app.posts.comparator = this.reverseSortBy(app.posts.comparator);
-    console.log(app.posts.url());
     app.posts.fetch({url: app.posts.url(), async:false});
 
 
@@ -330,6 +347,13 @@ showGenres: function(){
 
     app.friends.fetch({wait:true});
 
+    if (app.friends.models.length === 0){
+    var $none = _.template( $('#no-friends-screen').html() );
+    this.$el.find('#friend-page').append( $none );
+    }
+
+
+
   },
 
 
@@ -354,6 +378,11 @@ showGenres: function(){
     });
 
     app.followers.fetch({wait:true});
+
+    if (app.followers.models.length === 0){
+    var $none = _.template( $('#no-friends-screen').html() );
+    this.$el.find('#friend-page').append( $none );
+    }
 
   },
 
@@ -407,8 +436,7 @@ showGenres: function(){
   },
 
   columns: function(page){
-    console.log('columns');
-    console.log(page);
+
     if (page == "prompt"){
 
       this.$('#left-columns').removeClass(this.defaultLeft).addClass(this.oneLeft);
@@ -421,34 +449,16 @@ showGenres: function(){
   },
 
   renderPromptForm: function(){
-    this.$('#left-pane').children().remove();
-
-
-    // this.renderWritingNav();
-
-    this.columns("prompt");
-
-    // empty center of page
-    this.emptyCenter();
 
     this.promptFormPainter = new app.promptFormView({
       el: $('#center-pane')
     });
 
-
-
-    // console.log(app.promptFormPainter);
-
     this.promptFormPainter.render();
-    // app.promptFormPainter.bindSlider();
-    var $back = $('<div>').html('X').addClass('cancel-post wa-button')
-    this.$el.find('.prompt-back-holder').append($back)
 
   },
 
   renderReceivedChallenges: function(){
-    console.log('fetching');
-
 
     var receivedChallenges = new app.ReceivedChallengeCollection();
 
@@ -459,7 +469,6 @@ showGenres: function(){
 
     receivedChallenges.fetch();
 
-    console.log(receivedChallenges.models.length);
     if ( receivedChallenges.models.length === 0){
       var $none = _.template( $('#no-challenges-screen').html() );
       this.$el.find('#center-pane').append( $none );

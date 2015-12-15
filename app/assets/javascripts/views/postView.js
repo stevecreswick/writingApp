@@ -27,7 +27,7 @@ app.PostView = Backbone.View.extend({
       var currentUser = $('#current_user').val()
 
 
-      var $deleteButton = $("<span>").addClass("remove-post").html("<img style='width: 40%;' src='http://i.imgur.com/frbgemj.pngdelete'/><br><span class='prompt-label'>delete</span>");
+      var $deleteButton = $("<span>").addClass("remove-post").html("<span class='prompt-label'>delete</span>");
       var $makeCritique = $("<button>").addClass("make-critique btn btn-info").html("Review");
       var $showCritique = $("<span>").addClass("render-critiques").html("Show Critiques");
 
@@ -78,7 +78,7 @@ app.PostView = Backbone.View.extend({
       confirmModal.modal('toggle');
 
       this.model.url = "/api/posts/" + this.model.get('id');
-      console.log( this.model.url );
+
       this.model.destroy();
       this.$el.remove();
     },
@@ -131,6 +131,20 @@ app.PostView = Backbone.View.extend({
 
       }
 
+      var feedbackNum = this.model.get('feedback_num');
+      var feedbackLabel;
+
+      if (feedbackNum > 0){
+        feedbackLabel = "Give Feedback (" + feedbackNum + ")";
+      } else {
+        feedbackLabel = "Give Feedback";
+      }
+
+      var $feedback = $('<h5>').addClass('show-feedback text-left prompt-label').html( feedbackLabel );
+
+
+      this.$el.find('.new-critique-form').append($feedback);
+
       this.$el.find('.post-pic-box').append($profilePic);
       this.$("a.post-author").append(username);
       // this.renderCritiqueFormContainer();
@@ -139,8 +153,6 @@ app.PostView = Backbone.View.extend({
     },
 
     showFeedback: function(){
-      console.log('showing feedback');
-
       this.$el.empty();
       this.renderWithUserName();
       var $feedback = _.template( $('#critique-post-template').html());
@@ -155,7 +167,6 @@ app.PostView = Backbone.View.extend({
     },
 
     getPromptInstruction: function(options){
-      console.log("type " + options.type);
       if (options.type === "Use One Word") {
         return "Write at least " + options.wordCount + " words, using the word <strong>" + options.prompt + "</strong>";
       } else if (options.type === "Answer What If") {
@@ -301,7 +312,6 @@ app.PostView = Backbone.View.extend({
     },
 
     addFriend: function(){
-      console.log('add friend clicked');
 
       this.addedFriend = new app.FriendCollection();
       this.addedFriend.fetch();
@@ -320,8 +330,6 @@ app.PostView = Backbone.View.extend({
 
       var toolbarPost = this.$el.find('#full-toolbar').eq(0);
       var editorPost = this.$el.find('critique-editor').eq(0);
-      console.log(editorPost);
-      console.log(toolbarPost);
 
       var fullEditor = new Quill(editorPost, {
         modules: {

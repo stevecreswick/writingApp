@@ -1143,3 +1143,9 @@ div.friend-view{
     max-width: 35px;
     max-height: 35px;
   }
+
+  .no-page{
+    height: 100px;
+    background: white;
+    font-family: "Cutive Mono", sans-serif;
+  }

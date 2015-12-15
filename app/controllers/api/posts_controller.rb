@@ -39,6 +39,12 @@ respond_to :html, :json
 
     if params[:genre] == "all"
       @posts = Post.paginate :page => page
+    elsif params[:genre] == 'user'
+      @posts = current_user.posts.paginate :page => page
+    elsif params[:genre] == 'friends'
+
+      # Put Friend's Posts Logic Here
+
     else
       @posts = Post.where({genre: params[:genre]}).paginate :page => page
     end
@@ -73,7 +79,8 @@ respond_to :html, :json
           data['image_url'] = aRpost.user.image_url
           data['created_at'] = Date.strptime(aRpost.user.created_at.to_s)
           data['avg_rating'] = aRpost.average_rating
-          data['total_ratings'] = aRpost.average_rating
+          data['total_ratings'] = aRpost.ratings.length
+          data['feedback_num'] = aRpost.critiques.length
           data
         end
 

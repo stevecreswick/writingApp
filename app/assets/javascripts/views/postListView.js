@@ -14,7 +14,6 @@ app.PostListView = Backbone.View.extend({
     this.$el.empty();
 
       var posts = this.collection.models;
-      console.log(posts.length);
       var view;
         for (var i = 0; i < posts.length; i++) {
           view = new app.PostView({model: posts[i]});
@@ -55,7 +54,6 @@ app.PostListView = Backbone.View.extend({
       this.collection.fetch();
 
       var posts = this.collection.models;
-      console.log(posts);
       for (var i = (app.pagePainter.currentPage * 5); i < posts.length; i++) {
         view = new app.PostView({model: posts[i]});
         //Appends the Username to each Div
@@ -81,7 +79,6 @@ app.PostListView = Backbone.View.extend({
         app.pagePainter.currentPage = app.pagePainter.currentPage - 1;
         this.renderMore();
       } else {
-        console.log('yolo');
       }
     }
 
