@@ -66,8 +66,8 @@
       <ul class="nav navbar-nav">
         <li class="write-nav"><a class="nav-text">Write</a></li>
         <li class="home-page"><a class="nav-text">Read</a></li>
-        <li class="show-friends"><a class="nav-text">Following</a></li>
-        <li><a class="nav-text">Challenges</a></li>
+        <li class="show-friends"><a class="nav-text">Authors</a></li>
+        <li class="show-challenges"><a class="nav-text">Challenges</a></li>
         <li class="show-current-user"><a class="nav-text"><img src="<%= @user.image_url %>" class="img-circle profile-picture"</></a></li>
 
 
@@ -747,15 +747,6 @@
         </div>
 
 
-
-        <div class="row">
-          <div class="col-xs-12">
-            <div class="make-critique-box">
-
-            </div>
-          </div>
-        </div>
-
         <div class="row">
           <div class="col-xs-12 text-left">
           </div>
@@ -782,75 +773,13 @@
         </div>
 
 
-
-
-<!-- Critique Form -->
         <div class="row">
           <div class="col-xs-12">
             <div class="new-critique-form">
-              <h5 class="text-left prompt-label">Give Feedback</h5>
+              <h5 class="text-left prompt-label show-feedback">Give Feedback</h5>
             </div>
           </div>
         </div>
-
-
-    <div class="row">
-      <div class="col-xs-12 text-right">
-        <textarea id="critique-editor" class="post-body"></textarea>
-
-        <button value="Save" class="save-critique wa-horizontal-button"><img style="width: 25%;" src="http://i.imgur.com/s5p0JYL.png"/><img style="width: 25%; margin-right: 5%;" src="http://i.imgur.com/JlGW9RA.png"/><br>Submit</button>
-
-        <input type="hidden" name="critique[post_id]" id="critique-post-id">
-
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-xs-12">
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-xs-1 col-xs-offset-9">
-      </div>
-      <div class="col-xs-1">
-
-      </form>
-
-      </div>
-    </div>
-
-          <!-- <textarea class= "form-control" id="critique-message" rows="10" name="critique[message]" placeholder="...enter critique"></textarea> -->
-
-        <div class="row">
-          <div class="col-xs-2">
-            <div class="show-critiques-box prompt-label">
-
-            </div>
-          </div>
-          <div class="col-xs-6 col-xs-offset-4">
-
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-xs-12">
-            <div class="vertical-space">
-
-            </div>
-          </div>
-        </div>
-
-
-        <div class="row">
-          <div class="col-xs-12">
-            <div class="critiques-list">
-
-            </div>
-          </div>
-        </div>
-
-      </div>
 
 
 
@@ -878,6 +807,83 @@
               </div>
             </div>
           </div>
+
+
+
+    </script>
+
+
+    <script type="text/template" id="critique-post-template">
+
+      <!-- Critique Form -->
+
+
+          <div class="row">
+            <div class="col-xs-12 text-right">
+              <textarea id="critique-editor" class="post-body"></textarea>
+
+              <button value="Save" class="save-critique wa-horizontal-button"><img style="width: 25%;" src="http://i.imgur.com/s5p0JYL.png"/><img style="width: 25%; margin-right: 5%;" src="http://i.imgur.com/JlGW9RA.png"/><br>Submit</button>
+
+              <input type="hidden" name="critique[post_id]" id="critique-post-id">
+
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="make-critique-box">
+
+              </div>
+            </div>
+          </div>
+
+
+          <div class="row">
+            <div class="col-xs-12">
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-xs-1 col-xs-offset-9">
+            </div>
+            <div class="col-xs-1">
+
+            </form>
+
+            </div>
+          </div>
+
+                <!-- <textarea class= "form-control" id="critique-message" rows="10" name="critique[message]" placeholder="...enter critique"></textarea> -->
+
+              <div class="row">
+                <div class="col-xs-2">
+                  <div class="show-critiques-box prompt-label">
+
+                  </div>
+                </div>
+                <div class="col-xs-6 col-xs-offset-4">
+
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-xs-12">
+                  <div class="vertical-space">
+
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="row">
+                <div class="col-xs-12">
+                  <div class="critiques-list">
+
+                  </div>
+                </div>
+              </div>
+
+            </div>
 
 
 
@@ -1357,6 +1363,32 @@
 
     <script type="text/template" id="follower-view-template">
       <h3><%%= username %></h3>
+    </script>
+
+
+    <script type="text/template" id="no-challenges-screen">
+
+      <div class="row">
+        <div class="col-xs-12">
+          You do not have any challenges.  Challenge your friends
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          Find other authors.
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          Challenge your friends!
+        </div>
+      </div>
+
+
+
+
     </script>
 
 

@@ -106,6 +106,8 @@ app.promptFormView = Backbone.View.extend({
 
     renderWritingForm: function(e){
 
+      app.pagePainter.renderWritingNav();
+
       // Resize the columns
       app.pagePainter.columns("main");
       app.pagePainter.renderWritingSidebar();

@@ -53,6 +53,9 @@ app.PostView = Backbone.View.extend({
     'click button.make-critique': 'renderCritiqueForm',
     'click button.save-critique': 'createCritique',
 
+    'click .show-feedback': 'showFeedback',
+
+
     'click span.close-critiques': 'renderWithUserName',
     'click span.render-critiques': 'renderCritiques',
 
@@ -135,7 +138,23 @@ app.PostView = Backbone.View.extend({
 
     },
 
-    getPromptInstruction(options){
+    showFeedback: function(){
+      console.log('showing feedback');
+
+      this.$el.empty();
+      this.renderWithUserName();
+      var $feedback = _.template( $('#critique-post-template').html());
+      this.$el.append( $feedback );
+      var critiqueButton = $(this.el).find('.make-critique');
+      critiqueButton.remove();
+      var postId = parseInt( this.model.get('id') );
+      this.fetchCritiques();
+      this.renderCritiques();
+
+
+    },
+
+    getPromptInstruction: function(options){
       console.log("type " + options.type);
       if (options.type === "Use One Word") {
         return "Write at least " + options.wordCount + " words, using the word <strong>" + options.prompt + "</strong>";
@@ -235,7 +254,6 @@ app.PostView = Backbone.View.extend({
       });
       var critiqueList = this.$el.find('.critiques-list');
       // critiqueList.css({'height': '40em', 'overflow': 'auto'})
-      console.log(critiqueList);
 
       var button = $(this.el).find("span.render-critiques");
       button.removeClass('render-critiques').addClass('close-critiques').html('Hide');

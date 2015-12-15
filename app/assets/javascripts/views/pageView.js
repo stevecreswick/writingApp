@@ -100,7 +100,7 @@ app.PageView = Backbone.View.extend({
     this.$el.find('#center-pane').append( $div );
 
     this.renderReceivedChallenges();
-    this.renderReceivedChallenges();
+
 
   },
 
@@ -252,7 +252,7 @@ showGenres: function(){
 
 // Update Post List
   updateList: function(e){
-    // this.$el.find('#center-pane').children().remove();
+    this.$el.find('#center-pane').empty();
 
     this.currentGenre = $(e.currentTarget).eq(0).data('url');
     this.currentPage = 0;
@@ -423,9 +423,11 @@ showGenres: function(){
   renderPromptForm: function(){
     this.$('#left-pane').children().remove();
 
+
+    // this.renderWritingNav();
+
     this.columns("prompt");
 
-    this.renderWritingNav();
     // empty center of page
     this.emptyCenter();
 
@@ -445,15 +447,25 @@ showGenres: function(){
   },
 
   renderReceivedChallenges: function(){
+    console.log('fetching');
+
 
     var receivedChallenges = new app.ReceivedChallengeCollection();
-    console.log(receivedChallenges);
+
     var receivedChallengesPainter = new app.ReceivedChallengeListView({
       collection: receivedChallenges,
-      el: $('#received-challenge-holder')
+      el: $('#center-pane')
     });
 
     receivedChallenges.fetch();
+
+    console.log(receivedChallenges.models.length);
+    if ( receivedChallenges.models.length === 0){
+      var $none = _.template( $('#no-challenges-screen').html() );
+      this.$el.find('#center-pane').append( $none );
+    }
+
+
   },
 
   reverseSortBy: function(sortByFunction) {

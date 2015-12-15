@@ -77,8 +77,8 @@ class Api::CritiquesController < ApplicationController
   def create
     post = Post.find( params[:post_id] )
     critique = post.critiques.create(critique_params)
-    critique.update( user_id: current_user.id )
-    critique.update( votes: 0 )
+    critique.update( {user_id: current_user.id} )
+    # critique.update( {votes: 0} )
 
     # Check to see how long the critique was
     words = critique.message.split(' ').length
@@ -96,11 +96,8 @@ class Api::CritiquesController < ApplicationController
       current_user.update({reviewer_score: current_user.reviewer_score + 1})
     end
 
+    render json: critique
 
-    respond_to do |format|
-        format.json { render json: critique }
-        format.html { redirect_to '/api/posts/' + critique.post_id.to_s }
-      end
   end
 
   def edit
