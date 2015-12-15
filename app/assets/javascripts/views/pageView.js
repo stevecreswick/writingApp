@@ -89,7 +89,7 @@ app.PageView = Backbone.View.extend({
   friendsPage: function(){
     this.currentPage = 0;
     this.$el.find('#center-pane').empty();
-    
+
     this.friendsNav();
     this.showFollowing();
   },
@@ -219,14 +219,14 @@ app.PageView = Backbone.View.extend({
   // Event Handling
 
   events:{
-    'click div.write-nav': 'renderPromptForm',
+    'click li.write-nav': 'renderPromptForm',
     'click div.cancel-post': 'renderMain',
 
 
     'click a.read-nav': 'renderPosts',
     'click div.sort': 'updateList',
 
-    'click div.show-friends': 'friendsPage',
+    'click li.show-friends': 'friendsPage',
 
     'click span.show-users': 'showUsers',
     'click span.show-following': 'showFollowing',
@@ -238,7 +238,7 @@ app.PageView = Backbone.View.extend({
     'click li.render-friends': 'renderFriendsPage',
     'click li.render-friends': 'renderFriendsPage',
     'click .home-page': 'renderMain',
-    'click div.show-current-user': 'showCurrentProfile',
+    'click .show-current-user': 'showCurrentProfile',
     'click span.show-genres': 'showGenres',
 
 

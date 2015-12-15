@@ -269,17 +269,18 @@ form{
 
 .home-page{
   font-family: 'Cutive Mono', sans-serif;
-  /*font-family: 'Permanent Marker', cursive;*/
   color: black;
   list-style: none;
-  /*font-size: 3em;*/
+  text-decoration: none;
+  font-size: 3em;
   text-decoration: bold;
   display: inline-block;
-  margin-left: -5%;
 }
 
 .home-page:hover{
   cursor: pointer;
+  text-decoration: none;
+  color: black;
 }
 
 .profile-picture{
@@ -448,7 +449,7 @@ img.sort-image{
 
 .typewriter{
   width: 55px;
-  margin-top: 1em;
+  /*margin-top: 1em;*/
   max-height: 50px;
   margin-right: 2%;
   display: inline-block;
@@ -463,6 +464,19 @@ img.sort-image{
   display: inline-block;
 }
 
+.navbar-link{
+  width: 30px;
+  max-width: 30px;
+}
+
+.nav-text{
+  font-size: 16px;
+  font-family: "Open Sans Condensed", serif;
+}
+
+.nav-text:hover{
+  cursor: pointer;
+}
 
 
 /* Post */
