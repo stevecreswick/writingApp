@@ -32,9 +32,6 @@ respond_to :html, :json
 
     # votes = posts.critiques.map { |critique| critique.votes.each { |v| v.votes} }
 
-
-
-
     # Account for Page Starting at 0
     page = params[:page].to_i + 1
 

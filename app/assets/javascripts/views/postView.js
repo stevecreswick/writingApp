@@ -244,11 +244,15 @@ app.PostView = Backbone.View.extend({
 
     createCritique: function(){
       var newMessage = this.$el.find('textarea#critique-editor').val();
+      this.$el.find('textarea#critique-editor').val('')
+
+
 
       if (newMessage.length > 0){
         this.fetchCritiques();
         app.posts.get(this.model.get('id')).critiques.create({message: newMessage});
       }
+
 
     },
 
@@ -349,18 +353,19 @@ app.PostView = Backbone.View.extend({
 
     bindCritiqueForm: function(modelId){
       var scope= this;
+      console.log('huh');
+
       $('form#create-critique').on('submit', function(e){
         e.preventDefault();
-
+        console.log('submitting');
         // Grab Message from div created by Quill Editor
         var newMessage = scope.$('#critique-editor').first().eq(0).children().eq(0).children().eq(0).html();
-
+        console.log(newMessage);
         app.posts.get(modelId).critiques.create({message: newMessage});
 
         scope.renderWithUserName();
         scope.renderCritiques();
-        // this.renderCritiques();
-        scope.$('#critique-editor').empty();
+        scope.$el.find('#critique-editor').empty();
       });
     },
 
