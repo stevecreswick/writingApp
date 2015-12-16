@@ -17,4 +17,5 @@ class Post < ActiveRecord::Base
     @value.to_f / @total.to_f
   end
 
+
 end

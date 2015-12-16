@@ -59,7 +59,9 @@
     height: 100%;
   }
 
-
+#main-display{
+  position: absolute;
+}
 .post-title {
   color: red;
   display: block;
@@ -335,7 +337,8 @@ div.write-nav{
 
 }
 
-div.write-nav img{
+.write-nav:hover{
+  cursor: pointer;
 }
 
 div.genres{

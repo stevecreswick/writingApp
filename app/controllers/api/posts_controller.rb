@@ -36,12 +36,17 @@ respond_to :html, :json
     page = params[:page].to_i + 1
 
     if params[:genre] == "all"
-      @posts = Post.paginate(:page => page).order('updated_at DESC')
+      @posts = Post.paginate(:page => page).order('created_at DESC')
+
     elsif params[:genre] == 'user'
-      @posts = current_user.posts.paginate :page => page
+
+      @posts = current_user.posts.paginate(:page => page).order('created_at DESC')
+
     elsif params[:genre] == 'friends'
 
       # Put Friend's Posts Logic Here
+
+      @posts = friend_posts.paginate(:page => page)
 
     else
       @posts = Post.where({genre: params[:genre]}).paginate :page => page

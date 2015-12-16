@@ -14,6 +14,23 @@ module Api::PostsHelper
     else
         current_user.ratings.new
     end
-end
+  end
+
+
+  def friend_posts
+    # Still worker
+    friend_posts = []
+
+    current_user.friends.each do |friend|
+
+      friend.posts.each do |post|
+      friend_posts.push( post )
+      end
+
+    end
+
+    return friend_posts
+
+  end
 
 end

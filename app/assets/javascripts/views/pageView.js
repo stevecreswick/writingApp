@@ -86,7 +86,7 @@ app.PageView = Backbone.View.extend({
     this.renderPosts( this.currentGenre, this.currentPage );
   },
 
-  writingPage: function(){
+  writingPage: function() {
     this.currentPage = 0;
     this.$('#left-pane').children().remove();
 
@@ -101,7 +101,6 @@ app.PageView = Backbone.View.extend({
     this.$el.find('.prompt-back-holder').append($back)
 
   },
-
   friendsPage: function(){
     this.currentPage = 0;
     this.$el.find('#center-pane').empty();
@@ -237,7 +236,7 @@ app.PageView = Backbone.View.extend({
   // Event Handling
 
   events:{
-    'click li.write-nav': 'writingPage',
+    'click .write-nav': 'writingPage',
     'click div.cancel-post': 'renderMain',
 
 
