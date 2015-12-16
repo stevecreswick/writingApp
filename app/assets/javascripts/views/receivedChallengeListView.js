@@ -10,13 +10,16 @@ app.ReceivedChallengeListView = Backbone.View.extend({
     var $challengesHeader = $('<h1>').text('Received Challenges');
     this.$el.append($challengesHeader);
 
-    var username = $('li#username').html()
-    console.log(username);
+    var username = $('#current_id').val();
+
       var challenges = this.collection.models;
+
       var receivedChallenges = challenges.filter(function (challenge) {
         return challenge.sender !== username;
       });
+
       var view;
+
         for (var i = 0; i < receivedChallenges.length; i++) {
                 if (receivedChallenges[i].get('status') === 'Accepted') {
                   console.log('Accepted Challenge');

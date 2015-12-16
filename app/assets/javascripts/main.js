@@ -61,6 +61,8 @@
 //= require views/challengeView
 //= require collections/challengeCollection
 //= require collections/receivedChallengeCollection
+//= require collections/completedChallengeCollection
+
 //= require views/challengeListView
 //= require views/completedChallengeView
 //= require views/completedChallengeListView
@@ -78,6 +80,8 @@
 //= require timer
 //= require app
 //= require_self
+
+
 
 
 console.log('main manifest');

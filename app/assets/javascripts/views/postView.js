@@ -51,7 +51,7 @@ app.PostView = Backbone.View.extend({
     'click span.remove-post': 'removePost',
     'click button.delete-post': 'deletePost',
     'click button.make-critique': 'renderCritiqueForm',
-    'click button.save-critique': 'createCritique',
+    'click button.save-critique': 'saveCritique',
 
     'click .show-feedback': 'showFeedback',
 
@@ -242,18 +242,16 @@ app.PostView = Backbone.View.extend({
       this.resizePostDiv( this.normalHeight );
     },
 
-    createCritique: function(){
+    saveCritique: function(){
       var newMessage = this.$el.find('textarea#critique-editor').val();
       this.$el.find('textarea#critique-editor').val('')
-
-
-
+      console.log(newMessage);
       if (newMessage.length > 0){
         this.fetchCritiques();
         app.posts.get(this.model.get('id')).critiques.create({message: newMessage});
       }
 
-
+      this.showFeedback();
     },
 
     // Rating
@@ -308,22 +306,16 @@ app.PostView = Backbone.View.extend({
 
       this.innerCollection.fetch();
 
-      // Model based render
-      // this.model.critiques = new app.CritiquesCollection();
-      // this.model.critiques.url = "/api/posts/" + this.model.get('id') + "/critiques";
-      // console.log(this.model.critiques.url);
-      // this.model.critiques.fetch();
       },
     renderCritiques: function(){
-      // this.resizePostDiv( this.openHeight );
       this.fetchCritiques();
       this.innerListView = new app.CritiqueListView({
         collection: this.innerCollection
       });
-      var critiqueList = this.$el.find('.critiques-list');
-      // critiqueList.css({'height': '40em', 'overflow': 'auto'})
 
+      var critiqueList = this.$el.find('.critiques-list');
       var button = $(this.el).find("span.render-critiques");
+
       button.removeClass('render-critiques').addClass('close-critiques').html('Hide');
 
       critiqueList.append(this.innerListView.$el);
@@ -332,14 +324,10 @@ app.PostView = Backbone.View.extend({
     renderCritiqueForm: function(){
       this.$el.empty();
       this.renderWithUserName();
-      // this.$el.find('.post-box').css({'height': "15em", "overflow": "auto"});
-      var critiqueButton = $(this.el).find('.make-critique');
-      critiqueButton.remove();
+
       this.renderCritiqueFormContainer();
-      var postId = parseInt( this.model.get('id') );
       this.fetchCritiques();
-      this.renderEditor();
-      this.bindCritiqueForm(postId);
+
       this.renderCritiques();
     },
 
@@ -351,23 +339,23 @@ app.PostView = Backbone.View.extend({
       this.$el.find('.make-critique-box').append( formContainer );
     },
 
-    bindCritiqueForm: function(modelId){
-      var scope= this;
-      console.log('huh');
-
-      $('form#create-critique').on('submit', function(e){
-        e.preventDefault();
-        console.log('submitting');
-        // Grab Message from div created by Quill Editor
-        var newMessage = scope.$('#critique-editor').first().eq(0).children().eq(0).children().eq(0).html();
-        console.log(newMessage);
-        app.posts.get(modelId).critiques.create({message: newMessage});
-
-        scope.renderWithUserName();
-        scope.renderCritiques();
-        scope.$el.find('#critique-editor').empty();
-      });
-    },
+    // bindCritiqueForm: function(modelId){
+    //   var scope= this;
+    //   console.log('huh');
+    //
+    //   $('form#create-critique').on('submit', function(e){
+    //     e.preventDefault();
+    //     console.log('submitting');
+    //     // Grab Message from div created by Quill Editor
+    //     var newMessage = scope.$('#critique-editor').first().eq(0).children().eq(0).children().eq(0).html();
+    //     console.log(newMessage);
+    //     app.posts.get(modelId).critiques.create({message: newMessage});
+    //
+    //     scope.renderWithUserName();
+    //     scope.renderCritiques();
+    //     scope.$el.find('#critique-editor').empty();
+    //   });
+    // },
 
     addFriend: function(){
 
@@ -379,6 +367,7 @@ app.PostView = Backbone.View.extend({
       var urlModel = "/api/friendships/" + userId
       this.addedFriend.create();
 
+      this.$el.find('.add-friend').remove();
 
     },
 

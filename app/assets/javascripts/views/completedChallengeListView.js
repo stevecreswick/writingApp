@@ -13,13 +13,13 @@ app.CompletedChallengeListView = Backbone.View.extend({
       var view;
         for (var i = 0; i < challenges.length; i++) {
 
-          if (challenges[i].get('status') == 'Accepted'){
+          // if (challenges[i].get('status') == 'Accepted'){
             view = new app.CompletedChallengeView({model: challenges[i]});
             view.render();
             this.$el.append( view.$el );
-          } else {
-            console.log('open challenge: ' + challenges[i].get('id'));
-          }
+        //   } else {
+        //     console.log('open challenge: ' + challenges[i].get('id'));
+        //   }
         }
     }
 });

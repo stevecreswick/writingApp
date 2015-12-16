@@ -105,6 +105,9 @@ app.PageView = Backbone.View.extend({
     this.currentPage = 0;
     this.$el.find('#center-pane').empty();
 
+    this.columns("main");
+    this.renderSideNav();
+
     this.friendsNav();
     this.showFollowing();
   },
@@ -113,10 +116,33 @@ app.PageView = Backbone.View.extend({
     this.currentPage = 0;
     this.$el.find('#center-pane').empty();
 
-    var $div = $('<div>').attr('id', "received-challenge-holder");
-    this.$el.find('#center-pane').append( $div );
+    this.columns("main");
+    this.renderSideNav();
 
-    this.renderReceivedChallenges();
+    var $nav = _.template( $("#challenge-nav-template").html() );
+    this.$el.find('#center-pane').append( $nav )
+    // var $challenges = _.template( $('#challenge-screen-template').html() );
+    // create current user model
+    // var currentUser = new app.User();
+    //
+    // currentUser.url = "/users/show/" + $('#current_id').val();
+    // currentUser.fetch({wait:true});
+    // console.log(currentUser);
+
+    // create current user View
+    var challengeFormPainter = new app.ChallengeFormView({
+      el: $('#challenge-page')
+    });
+
+    challengeFormPainter.renderWithFriendsList();
+
+
+
+    // var name = challengeFormPainter.model.get('username');
+    // var $div = $('<div>').attr('id', "received-challenge-holder");
+    // this.$el.find('#center-pane').append( $challenges );
+
+    this.receivedChallenges();
 
 
   },
@@ -142,10 +168,10 @@ app.PageView = Backbone.View.extend({
   //   });
   //
   //   challenges.fetch();
-  //   console.log(challenges);
   //
   //
   // },
+
   renderSideNav: function(){
     var $top = $('#left-pane').eq(0);
     var $sideNav = $(".sidebar-nav");
@@ -193,6 +219,8 @@ app.PageView = Backbone.View.extend({
 
       case "Science-Fiction":
         this.$el.find('h1.home-page').css({'font-family': "'Krona One', sans-serif", "font-size": "2.5em", "color": "red"});
+        this.$el.find('.container-fluid').css({'background': "darkgrey"});
+
       break;
 
       case "Historical-Fiction":
@@ -236,9 +264,13 @@ app.PageView = Backbone.View.extend({
   // Event Handling
 
   events:{
+
     'click .write-nav': 'writingPage',
     'click div.cancel-post': 'renderMain',
 
+    'click .received-challenges': 'receivedChallenges',
+    'click .completed-challenges': 'completedChallenges',
+    'click .send-challenge': 'renderChallengeForm',
 
     'click a.read-nav': 'renderPosts',
     'click div.sort': 'updateList',
@@ -459,20 +491,45 @@ showGenres: function(){
 
   },
 
-  renderReceivedChallenges: function(){
+  receivedChallenges: function(){
 
     var receivedChallenges = new app.ReceivedChallengeCollection();
 
     var receivedChallengesPainter = new app.ReceivedChallengeListView({
       collection: receivedChallenges,
-      el: $('#center-pane')
+      el: $('#challenge-list')
     });
 
     receivedChallenges.fetch();
 
+
+
     if ( receivedChallenges.models.length === 0){
       var $none = _.template( $('#no-challenges-screen').html() );
-      this.$el.find('#center-pane').append( $none );
+      this.$el.find('#challenge-list').append( $none );
+    }
+
+
+  },
+
+  completedChallenges: function(){
+
+    var completedChallenges = new app.CompletedChallengeCollection();
+
+    var completedChallengesPainter = new app.CompletedChallengeListView ({
+      collection: completedChallenges,
+      el: $('#challenge-list')
+    });
+
+    completedChallenges.fetch({wait:true});
+
+    console.log(completedChallenges);
+
+    if ( completedChallenges.models.length === 0){
+
+      $('#challenge-list').html('Complete some challneges.')
+      // var $none = _.template( $('#no-challenges-screen').html() );
+      // this.$el.find('#challenge-list').append( $none );
     }
 
 

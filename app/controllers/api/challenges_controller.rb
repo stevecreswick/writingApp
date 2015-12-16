@@ -2,6 +2,8 @@ class Api::ChallengesController < ApplicationController
 
   include SessionsHelper
   include UsersHelper
+  include ChallengesHelper
+
 
   respond_to :html, :json
 
@@ -11,28 +13,18 @@ class Api::ChallengesController < ApplicationController
   end
 
   def all_challenges
-    friendships = current_user.friendships
-    all_challenges = []
-
-    friendships.each do |friendship|
-      friendship.challenges.each do |challenge|
-        all_challenges.push(challenge)
-      end
-    end
 
     render json: all_challenges
   end
 
   def received
-    received_challenges = []
-
-    current_user.inverse_friendships.each do |inverse_friendship|
-      inverse_friendship.challenges.each do |inverse_challenge|
-        received_challenges.push( inverse_challenge )
-      end
-    end
 
     render json: received_challenges
+
+  end
+
+  def completed
+    render json: completed_challenges
   end
 
   def show

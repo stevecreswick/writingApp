@@ -597,7 +597,7 @@
 
           <div class="sidenav-row" data-url="friends">
             Word Count:
-            <h5 id="current-word-count"></h5>
+            <h5 id="current-word-count">0</h5>
           </div>
 
           <div class="sidenav-row">
@@ -607,6 +607,7 @@
 
           <div class="sidenav-row" data-url="friends">
             Words Per Minute:
+            <h5 id="current-wpm-count">0</h5>
           </div>
 
           <div class="sidenav-seperator">
@@ -1401,6 +1402,36 @@
       </div>
 
 
+    </script>
+
+
+    <script type="text/template" id="challenge-screen-template">
+
+      <div class="no-page">
+      <div class="row">
+        <div class="col-xs-12">
+          <input type="text" id="friend-name"></input>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <input type="number" value="25" min ="25" max="1000" step="25" class="form-control" id="post-word-count"></input>
+
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="col-xs-12">
+          <div id="challenge-list">
+
+
+          </div>
+          </div>
+        </div>
+      </div>
+
 
 
     </script>
@@ -1422,6 +1453,25 @@
 
     </script>
 
+    <script type="text/template" id="challenge-nav-template">
+      <ul>
+        <li class="received-challenges">
+          Received Challenges
+        </li>
+        <li class="completed-challenges">
+          Completed Challenges
+        </li>
+        <li class="send-challenge">
+          Send Challenge
+        </li>
+      </ul>
+
+      <div id="challenge-page">
+
+
+      </div>
+
+    </script>
 
 
 
@@ -1444,8 +1494,6 @@
 
 <script type="text/template" id="challenge-form-template">
   <div class="new-post-box">
-
-
 
     <div id="challenge-container">
     </div>
@@ -1470,6 +1518,9 @@
 
   </div>
 </script>
+
+
+
 
     <script type="text/template" id="challenge-template">
       <div class="challenge-message">

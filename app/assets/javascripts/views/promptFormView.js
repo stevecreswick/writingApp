@@ -3,13 +3,14 @@ var app = app || {};
 app.requiredWords = 0;
 app.prompt = "";
 app.promptType = "";
+app.wordCount = 0;
+
 
 app.promptFormView = Backbone.View.extend({
   tagName: 'div',
   className: 'prompt-form',
   template: _.template( $('#new-template').html() ),
   minWords: null,
-  wordCount: 0,
   totalTime: 0,
   seconds: 0,
   minutes: 0,
@@ -156,12 +157,29 @@ app.promptFormView = Backbone.View.extend({
 
     },
 
+    wordsPerMinute: function(){
+      var minutes = app.totalTime / 60;
+
+      var wpm = Math.floor( app.wordCount / minutes );
+
+      $("#current-wpm-count").html(wpm)
+    },
+
     renderTime: function(){
       app.totalTime++;
       app.hours = Math.floor(app.totalTime / 3600);
       // totalSeconds %= 3600;
       app.minutes = Math.floor(app.totalTime / 60);
       app.seconds = app.totalTime % 60;
+
+// WPM
+      var minutes = app.totalTime / 60;
+      console.log(app.wordCount);
+
+      var wpm = Math.floor( parseInt(app.wordCount) / minutes );
+      console.log(wpm);
+
+      $("#current-wpm-count").html(wpm)
 
       // Create Views to Handle :00, :01, etc.
       var minutesView = app.minutes + ":";
@@ -187,6 +205,8 @@ app.promptFormView = Backbone.View.extend({
 
 
     },
+
+
 
     clearTime: function(){
       clearInterval(app.timer);
@@ -279,14 +299,18 @@ app.promptFormView = Backbone.View.extend({
     // },
 
     checkWordCount: function(){
-      this.wordCount = 0;
+      app.wordCount = 0;
       var scope = this;
       $('#post-editor').on('keyup', function(){
         var text = scope.$el.find('#post-editor').find('.ql-editor').text();
-        this.wordCount = text.match(/\S+/g).length;
-        $('#current-word-count').eq(0).html( this.wordCount );
+        app.wordCount = text.match(/\S+/g).length;
+        $('#current-word-count').eq(0).html( app.wordCount );
+        // scope.wordsPerMinute();
+
       });
     },
+
+
 
     renderEditor: function(){
       var fullEditor = new Quill('#post-editor', {

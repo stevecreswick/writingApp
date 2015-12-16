@@ -3,10 +3,9 @@ var app = app || {};
 app.ChallengeFormView = Backbone.View.extend({
   tagName: 'div',
   className: 'challenge-form',
-  template: _.template( $('#challenge-form-template').html() ),
+  template: _.template( $('#challenge-screen-template').html() ),
   initialize: function(){
     this.bindSlider();
-    console.log(this.model);
   },
   render: function(){
     this.$el.empty();
@@ -16,6 +15,41 @@ app.ChallengeFormView = Backbone.View.extend({
     this.bindSlider();
     this.bindSubmit();
   },
+
+  renderWithFriendsList: function(){
+    //
+    // app.friends = new app.FriendCollection();
+    //
+    // app.friends.fetch({wait:true});
+    //
+    //   var $select = $('<select>').addClass("form-control").attr("id", "friend-challenged");
+    //
+    //   for (var i = 0; i < app.friends.length; i++) {
+    //     console.log(app.friends[i]);
+    //     $select = $('<option>').val( app.friends[i].get('username') ).data("user_id", app.friends[i].get('id').to_i );
+    //
+    //     $select.append( $option );
+    //   }
+    //
+    //   console.log(app.friends);
+
+      this.render();
+
+
+
+      // this.$el.append( $select );
+
+
+    // if (app.friends.models.length === 0){
+    //
+    // var $none = _.template( $('#no-friends-screen').html() );
+    //
+    // this.$el.find('#friend-page').append( $none );
+    //
+    // }
+
+  },
+
   events:{
     'click button.render-challenge': 'getChallenge'
   },
