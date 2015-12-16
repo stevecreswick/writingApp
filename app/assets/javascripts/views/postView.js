@@ -97,6 +97,12 @@ app.PostView = Backbone.View.extend({
       var userId = this.model.get('user_id');
       var prompt = this.model.get('prompt');
 
+      var writeScore = this.model.get('user_writer_score');
+      var reviewScore = this.model.get('user_reviewer_score');
+
+      var writeLabel = $("<span>").addClass("post-author text-center prompt-label").html("Writer Score: " + writeScore );
+      var reviewLabel = $("<span>").addClass("post-author text-center prompt-label").html( "Reviewer Score: " + reviewScore );
+
       var id = this.model.get('id');
       var href = "/users/" +  userId + "/posts/" + id;
       var link = $('<a>').attr('href', href).text( this.model.get("title") );
@@ -161,7 +167,7 @@ app.PostView = Backbone.View.extend({
       var authorLink = "/users/profile/" + this.model.get('user_id');
       var $postAuthor = $('<a>').attr('href', authorLink ).addClass("post-author text-center prompt-label");
 
-      this.$el.find('.post-pic-box').append($profilePic, $postAuthor, lineBreak, $addFriend);
+      this.$el.find('.post-pic-box').append($profilePic, $postAuthor, lineBreak, $addFriend, writeLabel, reviewLabel);
 
       this.$("a.post-author").append(username);
 

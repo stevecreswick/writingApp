@@ -80,6 +80,10 @@ respond_to :html, :json
           # data['created_at'] = Date.strptime(aRpost.user.created_at.to_s)
           data['created_at'] = time
           data['avg_rating'] = aRpost.average_rating
+
+          data['user_writer_score'] = aRpost.user.writer_score
+          data['user_reviewer_score'] = aRpost.user.reviewer_score
+
           data['total_ratings'] = aRpost.ratings.length
           data['feedback_num'] = aRpost.critiques.length
           data
