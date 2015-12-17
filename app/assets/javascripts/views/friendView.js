@@ -31,6 +31,8 @@ app.FriendView = Backbone.View.extend({
       this.$el.find('#friend-button-holder').append($addFriend);
     }
 
+    this.renderShowPostsButton();
+
     // this.fetchChallenges();
   },
 
@@ -43,7 +45,8 @@ app.FriendView = Backbone.View.extend({
     'click span.add-friend': 'addFriend',
     'click button.make-challenge': 'makeChallenge',
     'click button.show-challenges': 'showChallenges',
-    'click .show-user-posts': 'showPosts'
+    'click .show-user-posts': 'showPosts',
+    'click .hide-user-posts': 'hidePosts'
 
   },
 
@@ -143,6 +146,8 @@ app.FriendView = Backbone.View.extend({
 
       app.postPainter.render();
 
+      this.renderHidePostsButton();
+
     },
 
     createPostList: function(){
@@ -152,6 +157,33 @@ app.FriendView = Backbone.View.extend({
       var $container = $('<div>').attr('id', 'post-list');
       this.$el.append( $container );
 
+    },
+
+    hidePosts: function(){
+      this.$el.find("#post-list").remove();
+      this.renderShowPostsButton();
+
+    },
+
+    renderShowPostsButton: function(){
+      var $hidePosts = this.$el.find('.hide-user-posts');
+
+      if($hidePosts){
+        $hidePosts.remove();
+      }
+
+      var $seePosts = $('<h5>').addClass('show-user-posts text-right prompt-label').html( "See Posts (" + this.model.get("posts_num") + ")" );
+      this.$el.find(".user-posts-container").append( $seePosts );
+    },
+
+    renderHidePostsButton: function(){
+      var $showPosts = this.$el.find('.show-user-posts');
+      $showPosts.remove();
+
+      var $hide = $('<h5>').addClass('hide-user-posts text-right prompt-label').html( "Hide Posts" );
+      this.$el.find(".user-posts-container").append($hide);
+
     }
+
 
 });
