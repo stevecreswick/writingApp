@@ -183,7 +183,7 @@ app.PageView = Backbone.View.extend({
     // var $div = $('<div>').attr('id', "received-challenge-holder");
     // this.$el.find('#center-pane').append( $challenges );
 
-    this.receivedChallenges();
+    this.sendChallenge();
 
 
   },
@@ -346,27 +346,7 @@ showGenres: function(){
     });
 
 
-
-
-    // if ( genre === 'all' ){
-    //   var urlModel = "/api/posts/paginated/" + page;
-    //   app.posts.url = urlModel;
-    //   console.log(urlModel);
-    // } else {
-    //   var urlModel = "/api/posts/sorted/" + genre;
-    //   app.posts.url = urlModel;
-    // }
-
-
-    // Sort by created at
-    app.posts.comparator = function(post) {
-      return post.get("created_at");
-    };
-
-    app.posts.comparator = this.reverseSortBy(app.posts.comparator);
     app.posts.fetch({url: app.posts.url(), async:false});
-
-
 
     app.postPainter.render();
 
@@ -561,10 +541,6 @@ showGenres: function(){
     var $nav = _.template( $("#challenge-nav-template").html() );
     this.$el.find('#center-pane').append( $nav )
 
-    var $challenges = $("<div>").attr("id", "challenge-page");
-    this.$el.find("#center-pane").append($challenges);
-
-
     app.challengeFormPainter = new app.ChallengeFormView ({
       el: $('#challenge-page')
     });
@@ -572,19 +548,7 @@ showGenres: function(){
 
     app.challengeFormPainter.renderWithFriendsList();
 
-  },
-
-  reverseSortBy: function(sortByFunction) {
-  return function(left, right) {
-    var l = sortByFunction(left);
-    var r = sortByFunction(right);
-
-    if (l === void 0) return -1;
-    if (r === void 0) return 1;
-
-    return l < r ? 1 : l > r ? -1 : 0;
-  };
-}
+  }
 
 
 });

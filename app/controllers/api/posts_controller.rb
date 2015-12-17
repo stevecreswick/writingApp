@@ -25,12 +25,8 @@ respond_to :html, :json
     render json: posts
   end
 
+
   def paginated
-
-    # Get number of critiques
-    # posts.critiques.length
-
-    # votes = posts.critiques.map { |critique| critique.votes.each { |v| v.votes} }
 
     # Account for Page Starting at 0
     page = params[:page].to_i + 1
@@ -43,8 +39,6 @@ respond_to :html, :json
       @posts = current_user.posts.paginate(:page => page).order('created_at DESC')
 
     elsif params[:genre] == 'friends'
-
-      # Put Friend's Posts Logic Here
 
       @posts = friend_posts.paginate(:page => page)
 
@@ -92,6 +86,7 @@ respond_to :html, :json
           render json: posts
   end
 
+
   def show
     # current_api_user!
     # aRposts = @current_user.posts
@@ -105,6 +100,7 @@ respond_to :html, :json
     render json: data
   end
 
+
   def genre
   active_record_posts = Post.where({genre: params[:genre]})
   posts = active_record_posts.map do |aRpost|
@@ -117,14 +113,29 @@ respond_to :html, :json
   render json: posts
   end
 
+
   def user_posts
-    # current_api_user!
-    aRposts = Post.where(user_id: params[:user_id] )
+    # Account for Page Starting at 0
+    page = params[:page].to_i + 1
+
+    aRposts = Post.where(user_id: params[:user_id] ).paginate :page => page
+
     posts = aRposts.map do |aRpost|
       data = aRpost.as_json
+
+      time = time_ago_in_words(aRpost.created_at)
+
       data['username'] = aRpost.user.username
       data['image_url'] = aRpost.user.image_url
-      data['created_at'] = Date.strptime(aRpost.user.created_at.to_s)
+
+      data['created_at'] = time
+      data['avg_rating'] = aRpost.average_rating
+
+      data['user_writer_score'] = aRpost.user.writer_score
+      data['user_reviewer_score'] = aRpost.user.reviewer_score
+
+      data['total_ratings'] = aRpost.ratings.length
+      data['feedback_num'] = aRpost.critiques.length
       data
     end
 

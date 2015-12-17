@@ -4,6 +4,9 @@ app.FriendView = Backbone.View.extend({
   tagName: 'div',
   className: 'friend-view',
   template: _.template( $('#friend-view-template').html() ),
+
+  currentPage: 0,
+
   initialize: function(){
   },
   render: function(){
@@ -39,7 +42,9 @@ app.FriendView = Backbone.View.extend({
     'click span.remove-friend': 'removeFriend',
     'click span.add-friend': 'addFriend',
     'click button.make-challenge': 'makeChallenge',
-    'click button.show-challenges': 'showChallenges'
+    'click button.show-challenges': 'showChallenges',
+    'click .show-user-posts': 'showPosts'
+
   },
 
   addFriend: function(){
@@ -65,6 +70,7 @@ app.FriendView = Backbone.View.extend({
     app.friends.fetch();
 
   },
+
   makeChallenge: function(){
     this.resize();
     this.$el.find('#challenge-view').children().remove();
@@ -84,6 +90,7 @@ app.FriendView = Backbone.View.extend({
     app.challengePainter.render();
     // console.log( app.friends.where({friend_id: this.model.get('id')});
   },
+
   fetchChallenges: function(){
     friendship = this.model.get('id');
 
@@ -92,21 +99,59 @@ app.FriendView = Backbone.View.extend({
     this.challenges.fetch()
     console.log(this.challenges);
     },
-  showChallenges: function(){
-    this.$el.find('#challenge-view').remove();
-    var $challenge = $('<div>').attr('id', 'challenge-view');
-    this.$el.append( $challenge )
 
-    this.fetchChallenges();
-    // Fetch critiques not working?
+    showChallenges: function(){
+      this.$el.find('#challenge-view').remove();
+      var $challenge = $('<div>').attr('id', 'challenge-view');
+      this.$el.append( $challenge )
 
-    var challengePainter = new app.ChallengeListView({
-      collection: this.challenges,
-      el: this.$('#challenge-list')
-    });
+      this.fetchChallenges();
+      // Fetch critiques not working?
 
-    challengePainter.render();
-    // this.$el.append(this.innerListView.$el);
-  },
+      var challengePainter = new app.ChallengeListView({
+        collection: this.challenges,
+        el: this.$('#challenge-list')
+      });
+
+      challengePainter.render();
+      // this.$el.append(this.innerListView.$el);
+    },
+
+    showPosts: function(){
+      this.createPostList();
+      this.renderPosts();
+
+    },
+
+    renderPosts: function(){
+      // this.emptyCenter();
+
+      this.createPostList();
+
+      var posts = new app.PostCollection();
+      var userId = this.model.get('id');
+      console.log(userId);
+      var testEl = this.$el.find("#post-list")
+      posts.page = this.currentPage;
+      var postPainter = new app.PostListView({
+        collection: posts,
+        el: testEl
+      });
+
+      var urlModel = "/api/posts/users/" + userId
+      posts.fetch({url: urlModel, async:false});
+
+      app.postPainter.render();
+
+    },
+
+    createPostList: function(){
+      var oldList = this.$el.find("#post-list");
+      oldList.remove();
+
+      var $container = $('<div>').attr('id', 'post-list');
+      this.$el.append( $container );
+
+    }
 
 });

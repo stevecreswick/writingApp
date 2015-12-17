@@ -250,11 +250,16 @@ app.PostView = Backbone.View.extend({
 
     saveCritique: function(){
       var newMessage = this.$el.find('textarea#critique-editor').val();
-      this.$el.find('textarea#critique-editor').val('')
-      console.log(newMessage);
+      this.$el.find('textarea#critique-editor').val('');
+
+      var urlModel = '/api/posts/' + this.model.get('id') + '/critiques';
+      var critiques = new app.CritiquesCollection();
+      critiques.url = urlModel;
+      critiques.fetch();
+
       if (newMessage.length > 0){
-        this.fetchCritiques();
-        app.posts.get(this.model.get('id')).critiques.create({message: newMessage});
+        console.log(newMessage);
+        critiques.create({message: newMessage});
       }
 
       this.showFeedback();

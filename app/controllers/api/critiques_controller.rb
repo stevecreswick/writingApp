@@ -10,18 +10,6 @@ class Api::CritiquesController < ApplicationController
   def index
   post = Post.find( params[:post_id] )
 
-  # count = 0
-  # post = Post.find(14)
-  # post.critiques.map do |critique|
-  #
-  #   critique.votes.map do |vote|
-  #     puts "vote: #{ vote.value }"
-  #     count = count + vote.value
-  #     puts count
-  #   end
-  #
-  # end
-
   ar_critiques = post.critiques
 
   critiques = ar_critiques.map do |ar_critique|
@@ -108,8 +96,8 @@ class Api::CritiquesController < ApplicationController
   def update
     @post = Post.find( params[:post_id] )
     critique = @post.critiques.find( params[:id] )
-    critique.update({message: params[:message] });
-    critique.update({votes: params[:votes] });
+
+      critique.update({message: params[:message] });
 
     respond_to do |format|
 

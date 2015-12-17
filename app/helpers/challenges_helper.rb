@@ -42,7 +42,22 @@ module ChallengesHelper
           end
 
         end
+
       end
+
+
+      current_user.friendships.each do |friendship|
+
+        friendship.challenges.each do |challenge|
+
+          if challenge.status == "Accepted"
+            @completed_challenges.push(challenge)
+          end
+
+        end
+
+      end
+
       @completed_challenges
 
     end
