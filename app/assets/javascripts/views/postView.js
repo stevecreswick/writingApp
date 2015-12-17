@@ -54,6 +54,7 @@ app.PostView = Backbone.View.extend({
     'click button.save-critique': 'saveCritique',
 
     'click .show-feedback': 'showFeedback',
+    'click .hide-feedback': 'hideFeedback',
 
 
     'click span.close-critiques': 'renderWithUserName',
@@ -149,19 +150,7 @@ app.PostView = Backbone.View.extend({
       this.$("div#title-holder").append(link, $average, lineBreak, $wordCount, $time, $prompt);
 
 
-      var feedbackNum = this.model.get('feedback_num');
-      var feedbackLabel;
-
-      if (feedbackNum > 0){
-        feedbackLabel = "Give Feedback (" + feedbackNum + ")";
-      } else {
-        feedbackLabel = "Give Feedback";
-      }
-
-      var $feedback = $('<h5>').addClass('show-feedback text-left prompt-label').html( feedbackLabel );
-
-
-      this.$el.find('.new-critique-form').append($feedback);
+      this.renderFeebackButton();
 
 
       var authorLink = "/users/profile/" + this.model.get('user_id');
@@ -184,14 +173,51 @@ app.PostView = Backbone.View.extend({
       this.renderWithUserName();
       var $feedback = _.template( $('#critique-post-template').html());
       this.$el.append( $feedback );
-      var critiqueButton = $(this.el).find('.make-critique');
-      critiqueButton.remove();
+
+      // Change Show Button to Hide
+      this.renderHideFeeback();
+
       var postId = parseInt( this.model.get('id') );
       this.fetchCritiques();
       this.renderCritiques();
 
 
     },
+
+    renderFeebackButton: function(){
+      var critiqueButton = this.$el.find('.hide-feedback');
+
+      if(critiqueButton){
+        critiqueButton.remove();
+      }
+
+      var feedbackNum = this.model.get('feedback_num');
+      var feedbackLabel;
+
+      if (feedbackNum > 0){
+        feedbackLabel = "Give Feedback (" + feedbackNum + ")";
+      } else {
+        feedbackLabel = "Give Feedback";
+      }
+
+      var $feedbackButton = $('<h5>').addClass('show-feedback text-left prompt-label').html( feedbackLabel );
+      this.$el.find('.new-critique-form').append($feedbackButton);
+    },
+
+    renderHideFeeback: function(){
+      var critiqueButton = this.$el.find('.show-feedback');
+      critiqueButton.remove();
+
+      var $hide = $('<h5>').addClass('hide-feedback text-left prompt-label').html( "Hide" );
+      this.$el.find('.new-critique-form').append($hide);
+
+    },
+
+    hideFeedback: function(){
+      this.$el.find(".critiques-wrapper").remove();
+      this.renderFeebackButton();
+    },
+
 
     getTimeCompleted: function(){
       var totalSeconds = this.model.get('time_completed');
@@ -264,6 +290,7 @@ app.PostView = Backbone.View.extend({
 
       this.showFeedback();
     },
+
 
     // Rating
     saveRating: function(e){
