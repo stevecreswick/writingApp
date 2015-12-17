@@ -62,12 +62,16 @@
 //= require collections/challengeCollection
 //= require collections/receivedChallengeCollection
 //= require collections/completedChallengeCollection
+//= require collections/sentChallengeCollection
+
 
 //= require views/challengeListView
 //= require views/completedChallengeView
 //= require views/completedChallengeListView
 //= require views/receivedChallengeView
 //= require views/receivedChallengeListView
+//= require views/sentChallengeListView
+
 
 //= require models/rating
 //= require models/vote

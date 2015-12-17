@@ -12,15 +12,12 @@ class Api::ChallengesController < ApplicationController
     render json: friendship.challenges
   end
 
-  def all_challenges
-
-    render json: all_challenges
+  def sent
+    render json: sent_challenges
   end
 
   def received
-
     render json: received_challenges
-
   end
 
   def completed

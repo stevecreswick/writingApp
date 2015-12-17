@@ -3,7 +3,7 @@ var app = app || {};
 app.ChallengeFormView = Backbone.View.extend({
   tagName: 'div',
   className: 'challenge-form',
-  template: _.template( $('#challenge-screen-template').html() ),
+  template: _.template( $('#make-challenge-template').html() ),
   initialize: function(){
     this.bindSlider();
   },
@@ -18,41 +18,40 @@ app.ChallengeFormView = Backbone.View.extend({
 
   renderWithFriendsList: function(){
     //
-    // app.friends = new app.FriendCollection();
+    app.friends = new app.FriendCollection();
     //
-    // app.friends.fetch({wait:true});
-    //
-    //   var $select = $('<select>').addClass("form-control").attr("id", "friend-challenged");
-    //
-    //   for (var i = 0; i < app.friends.length; i++) {
-    //     console.log(app.friends[i]);
-    //     $select = $('<option>').val( app.friends[i].get('username') ).data("user_id", app.friends[i].get('id').to_i );
-    //
-    //     $select.append( $option );
-    //   }
-    //
-    //   console.log(app.friends);
+
+    var $select = $('<select>').addClass("form-control").attr("id", "friend-challenged");
+
+    app.friends.fetch({wait:true}).done(function(){
+
+
+      if (app.friends.models.length === 0){
+
+      var $none = _.template( $('#no-friends-screen').html() );
+
+      this.$el.find('#friend-page').append( $none );
+
+      }
+
+      for (var i = 0; i < app.friends.models.length; i++) {
+        $option = $('<option>').val( app.friends.models[i].get('id')  ).html(app.friends.models[i].get('username'));
+        console.log(app.friends.models[i].get('username'));
+        $select.append( $option );
+
+      }
+
+        $('#challenge-page').append( $select );
+    });
 
       this.render();
-
-
-
-      // this.$el.append( $select );
-
-
-    // if (app.friends.models.length === 0){
-    //
-    // var $none = _.template( $('#no-friends-screen').html() );
-    //
-    // this.$el.find('#friend-page').append( $none );
-    //
-    // }
 
   },
 
   events:{
     'click button.render-challenge': 'getChallenge'
   },
+
   createChallenge: function(prompt, wordCount){
     console.log('creating challenge');
     console.log(prompt);

@@ -271,6 +271,8 @@ app.PageView = Backbone.View.extend({
     'click .received-challenges': 'receivedChallenges',
     'click .completed-challenges': 'completedChallenges',
     'click .send-challenge': 'sendChallenge',
+    'click .sent-challenges': 'sentChallenges',
+
 
     'click a.read-nav': 'renderPosts',
     'click div.sort': 'updateList',
@@ -492,6 +494,7 @@ showGenres: function(){
   },
 
   receivedChallenges: function(){
+    this.$el.find("#challenge-page").empty();
 
     var receivedChallenges = new app.ReceivedChallengeCollection();
 
@@ -512,7 +515,31 @@ showGenres: function(){
 
   },
 
+  sentChallenges: function(){
+    this.$el.find("#challenge-page").empty();
+
+    var sentChallenges = new app.SentChallengeCollection();
+
+    var sentChallengesPainter = new app.SentChallengeListView({
+      collection: sentChallenges,
+      el: $('#challenge-page')
+    });
+
+    sentChallenges.fetch();
+
+
+
+    if ( sentChallenges.models.length === 0){
+      var $none = _.template( $('#no-challenges-screen').html() );
+      this.$el.find('#challenge-page').append( $none );
+    }
+
+
+  },
+
   completedChallenges: function(){
+    this.$el.find("#challenge-page").empty();
+
 
     var completedChallenges = new app.CompletedChallengeCollection();
 
@@ -536,7 +563,8 @@ showGenres: function(){
   },
 
   sendChallenge: function(){
-    console.log('sending');
+    this.$el.find("#challenge-page").empty();
+
     // var completedChallenges = new app.CompletedChallengeCollection();
 
     var challengeFormPainter = new app.ChallengeFormView ({

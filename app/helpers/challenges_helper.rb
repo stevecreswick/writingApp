@@ -15,17 +15,17 @@ module ChallengesHelper
       @received_challenges
   end
 
-  def all_challenges
+  def sent_challenges
 
-    @all_challenges = []
+    @sent_challenges = []
 
       current_user.friendships.each do |friendship|
         friendship.challenges.each do |challenge|
-          @all_challenges.push(challenge)
+          @sent_challenges.push(challenge)
         end
       end
 
-    @all_challenges
+    @sent_challenges
     end
 
 

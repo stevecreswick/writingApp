@@ -1405,18 +1405,34 @@
     </script>
 
 
-    <script type="text/template" id="challenge-screen-template">
+    <script type="text/template" id="make-challenge-template">
 
-      <div class="no-page">
       <div class="row">
         <div class="col-xs-12">
-          <input type="text" id="friend-name"></input>
+          <label for="friend-name">Choose Friend</label>
+          <input type="text" class="form-control" id="friend-name"></input>
         </div>
       </div>
 
       <div class="row">
         <div class="col-xs-12">
-          <input type="number" value="25" min ="25" max="1000" step="25" class="form-control" id="post-word-count"></input>
+          <label for="friend-name">Enter Writing Challenge</label>
+          <input type="text" class="form-control" id="friend-name" placeholder="i.e. use the word hyperbolic"></input>
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="col-xs-12">
+          <label for="challenge-word-count">At least how many words should they write?</label>
+          <input type="number" value="25" min ="25" max="1000" step="25" class="form-control" id="challenge-word-count"></input>
+
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <span class="send-challenge">SEND CHALLENGE</span>
 
         </div>
       </div>
@@ -1430,7 +1446,6 @@
           </div>
           </div>
         </div>
-      </div>
 
 
 
@@ -1460,6 +1475,9 @@
         </li>
         <li class="completed-challenges">
           Completed Challenges
+        </li>
+        <li class="sent-challenges">
+          Sent Challenges
         </li>
         <li class="send-challenge">
           Send Challenge
