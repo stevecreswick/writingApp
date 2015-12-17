@@ -44,14 +44,14 @@ app.PageView = Backbone.View.extend({
   headerAll: "'Cutive Mono', sans-serif",
   headerFiction:"'Cutive Mono', sans-serif",
   headerFantasy: "'Cutive Mono', sans-serif",
-  headerHorror:"'Cutive Mono', sans-serif",
+  headerHorror:"rgb(139,0,0)",
   headerThriller: "'Cutive Mono', sans-serif",
-  headerHistorical: "'Cutive Mono', sans-serif",
+  headerHistorical: "rgb(250,235,215)",
   headerFiction: "'Cutive Mono', sans-serif",
   headerCrime: "'Cutive Mono', sans-serif",
-  headerRomance: "'Cutive Mono', sans-serif",
+  headerRomance: "rgb(255,228,225)",
   headerSciFi: "'Cutive Mono', sans-serif",
-  headerPoetry: "'Cutive Mono', sans-serif",
+  headerPoetry: "rgb(240,255,240)",
   headerNonFiction: "'Cutive Mono', sans-serif",
 
   currentGenre: 'all',
@@ -69,6 +69,47 @@ app.PageView = Backbone.View.extend({
     this.$el.append( $html );
 
     this.renderSideNav();
+  },
+
+  updateHeader: function(genre){
+
+    switch (genre) {
+
+      case "Romance":
+        this.$el.find('h1.home-page').css( {'font-family': "'Lovers Quarrel', cursive", "font-size": "2.5em"});
+        this.$el.find('.container-fluid').css({"background-color": this.headerRomance})
+      break;
+
+      case "Horror":
+        this.$el.find('h1.home-page').css({'font-family': "'Loved by the King', cursive", "font-size": "2.5em"});
+        this.$el.find('.post#title-holder').css({'font-family': "'Loved by the King', cursive", "font-size": "2.5em"});
+        this.$el.find('.container-fluid').css({"background-color": this.headerHorror})
+
+      break;
+
+      case "Science-Fiction":
+        this.$el.find('h1.home-page').css({'font-family': "'Krona One', sans-serif", "font-size": "2.5em", "color": "red"});
+        this.$el.find('.container-fluid').css({'background': "darkgrey"});
+
+      break;
+
+      case "Historical-Fiction":
+        this.$el.find('h1.home-page').css({'font-family': "'Homemade Apple', cursive", "font-size": "3em"});
+        this.$el.find('.container-fluid').css({"background-color": this.headerHistorical})
+
+      break;
+
+      case "Poetry":
+        this.$el.find('h1.home-page').css({'font-family': "'Homemade Apple', cursive", "font-size": "3em"});
+        this.$el.find('.container-fluid').css({"background-color": this.headerPoetry})
+
+      break;
+
+          // font-family: ;
+      default:
+      this.$el.find('h1.home-page').css({'font-family': this.fontAll });
+    }
+
   },
 
   renderMain: function(){
@@ -204,35 +245,7 @@ app.PageView = Backbone.View.extend({
     this.$el.empty();
   },
 
-  updateHeader: function(genre){
 
-    switch (genre) {
-
-      case "Romance":
-        this.$el.find('h1.home-page').css( {'font-family': "'Lovers Quarrel', cursive", "font-size": "2.5em"});
-      break;
-
-      case "Horror":
-        this.$el.find('h1.home-page').css({'font-family': "'Loved by the King', cursive", "font-size": "2.5em"});
-        this.$el.find('.post#title-holder').css({'font-family': "'Loved by the King', cursive", "font-size": "2.5em"});
-      break;
-
-      case "Science-Fiction":
-        this.$el.find('h1.home-page').css({'font-family': "'Krona One', sans-serif", "font-size": "2.5em", "color": "red"});
-        this.$el.find('.container-fluid').css({'background': "darkgrey"});
-
-      break;
-
-      case "Historical-Fiction":
-        this.$el.find('h1.home-page').css({'font-family': "'Homemade Apple', cursive", "font-size": "3em"});
-      break;
-
-          // font-family: ;
-      default:
-      this.$el.find('h1.home-page').css({'font-family': this.fontAll });
-    }
-
-  },
 
   toggleColumns: function() {
     if ( this.centerWidth === 11 ){
@@ -271,7 +284,7 @@ app.PageView = Backbone.View.extend({
     'click .received-challenges': 'receivedChallenges',
     'click .completed-challenges': 'completedChallenges',
     'click .send-challenge': 'sendChallenge',
-    'click .sent-challenges': 'sentChallenges',
+    // 'click .sent-challenges': 'sentChallenges',
 
 
     'click a.read-nav': 'renderPosts',
@@ -515,27 +528,6 @@ showGenres: function(){
 
   },
 
-  sentChallenges: function(){
-    this.$el.find("#challenge-page").empty();
-
-    var sentChallenges = new app.SentChallengeCollection();
-
-    var sentChallengesPainter = new app.SentChallengeListView({
-      collection: sentChallenges,
-      el: $('#challenge-page')
-    });
-
-    sentChallenges.fetch();
-
-
-
-    if ( sentChallenges.models.length === 0){
-      var $none = _.template( $('#no-challenges-screen').html() );
-      this.$el.find('#challenge-page').append( $none );
-    }
-
-
-  },
 
   completedChallenges: function(){
     this.$el.find("#challenge-page").empty();
@@ -563,16 +555,22 @@ showGenres: function(){
   },
 
   sendChallenge: function(){
-    this.$el.find("#challenge-page").empty();
-
+    this.$el.find("#center-pane").empty();
     // var completedChallenges = new app.CompletedChallengeCollection();
 
-    var challengeFormPainter = new app.ChallengeFormView ({
+    var $nav = _.template( $("#challenge-nav-template").html() );
+    this.$el.find('#center-pane').append( $nav )
+
+    var $challenges = $("<div>").attr("id", "challenge-page");
+    this.$el.find("#center-pane").append($challenges);
+
+
+    app.challengeFormPainter = new app.ChallengeFormView ({
       el: $('#challenge-page')
     });
 
 
-    challengeFormPainter.renderWithFriendsList();
+    app.challengeFormPainter.renderWithFriendsList();
 
   },
 

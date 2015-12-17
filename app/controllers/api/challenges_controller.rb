@@ -32,17 +32,29 @@ class Api::ChallengesController < ApplicationController
 
   def create
     friendship = Friendship.find( params[:id] )
-    username = current_user.username
     challenge = friendship.challenges.create(challenge_params)
     challenge.update({
       status: 'Open',
-      sender: username
+      sender: current_user.username
       });
 
     respond_to do |format|
         format.json { render json: challenge }
         format.html { redirect_to '/api/friendhsip/' + challenge.friendship_id.to_s }
       end
+  end
+
+  def create_friend
+    friendship = Friendship.where({friend_id: params[:friend_id], user_id: current_user.id})
+    challenge = friendship.first.challenges.create( challenge_params )
+
+    challenge.update({
+      status: 'Open',
+      # sender: current_user.username
+      });
+
+    # render json: friendship.first.challenges
+    render json: challenge
   end
 
   def update
@@ -62,7 +74,7 @@ class Api::ChallengesController < ApplicationController
       friendship = Friendship.find(params[:id])
       challenge = friendship.challenges.find(params[:challenge_id])
       challenge.destroy
-      redirect_to api_friends_path
+      render json: friendship
   end
 
 

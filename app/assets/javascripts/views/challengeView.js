@@ -17,12 +17,17 @@ app.ChallengeView = Backbone.View.extend({
   events:{
     'click button.remove-challenge': 'removeChallenge'
   },
+
   removeChallenge: function(){
     console.log('remove challenge clicked');
-    this.model.destroy();
+
+
+    var urlModel = '/api/friendships/' + this.model.get('friendship_id') + '/challenges/' + this.model.get('id');
+    console.log(urlModel);
+
+    this.model.destroy({"url": urlModel});
     this.$el.remove();
   },
 
-// Critique Events
 
 });

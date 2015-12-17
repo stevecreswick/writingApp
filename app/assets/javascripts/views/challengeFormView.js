@@ -14,6 +14,8 @@ app.ChallengeFormView = Backbone.View.extend({
     this.$el.append( $html );
     this.bindSlider();
     this.bindSubmit();
+
+    this.sentChallenges();
   },
 
   renderWithFriendsList: function(){
@@ -40,8 +42,7 @@ app.ChallengeFormView = Backbone.View.extend({
         $select.append( $option );
 
       }
-
-        $('#challenge-page').append( $select );
+        $("#choose-friend-container").append( $select );
     });
 
       this.render();
@@ -49,21 +50,73 @@ app.ChallengeFormView = Backbone.View.extend({
   },
 
   events:{
-    'click button.render-challenge': 'getChallenge'
+    'click button.render-challenge': 'getChallenge',
+    'click .issue-challenge': 'issueChallenge'
   },
+
+  issueChallenge: function(){
+    console.log('issuing');
+    var friend = $("#friend-challenged").val();
+
+    var selectElement = document.getElementById("friend-challenged");
+    var friendName = selectElement.options[selectElement.selectedIndex].text;
+
+    var prompt = $("#challenge-prompt").val();
+    var wordCount = $("#challenge-word-count").val();
+
+    if (prompt.length > 0){
+      challenges = new app.ChallengeCollection();
+      challenges.url = '/api/friends/' + friend + '/challenges';
+      challenges.create({prompt: prompt, word_count: wordCount});
+
+      $("#challenge-prompt").val("");
+
+
+      this.sentChallenges();
+    } else {
+      var failure = $("<span>").addClass("alert").html("Please enter a prompt");
+      this.$el.find("#challenge-alert-box").append( failure );
+    }
+
+    // this.$el.append()
+  },
+
+
+  sentChallenges: function(){
+    this.$el.find("#challenge-list").remove();
+    var $challengeList = $("<div>").attr("id", "challenge-list");
+    this.$el.append( $challengeList );
+
+    var sentChallenges = new app.SentChallengeCollection();
+
+    var sentChallengesPainter = new app.SentChallengeListView({
+      collection: sentChallenges,
+      el: $('#challenge-list')
+    });
+
+    sentChallenges.fetch();
+
+
+
+    if ( sentChallenges.models.length === 0){
+      var $none = _.template( $('#no-challenges-screen').html() );
+      this.$el.find('#challenge-page').append( $none );
+    }
+
+
+  },
+
 
   createChallenge: function(prompt, wordCount){
     console.log('creating challenge');
     console.log(prompt);
     console.log(wordCount);
-    var friendship = this.model.get('id');
-    challenges = new app.ChallengeCollection();
-    challenges.url = '/api/friendships/' + friendship + '/challenges';
+    // var friendship = this.model.get('id');
     challenges.fetch()
     console.log(challenges);
     console.log(friendship);
-    challenges.create({prompt: prompt, word_count: wordCount});
   },
+
   getChallenge: function(){
       console.log('prompt render');
 
