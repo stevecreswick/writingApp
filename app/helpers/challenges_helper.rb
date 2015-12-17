@@ -6,7 +6,9 @@ module ChallengesHelper
 
       current_user.inverse_friendships.each do |inverse_friendship|
         inverse_friendship.challenges.each do |inverse_challenge|
+          if inverse_challenge.status == "Open"
           @received_challenges.push( inverse_challenge )
+          end
         end
       end
 
@@ -31,7 +33,8 @@ module ChallengesHelper
 
       @completed_challenges = []
 
-      current_user.friendships.each do |friendship|
+      current_user.inverse_friendships.each do |friendship|
+
         friendship.challenges.each do |challenge|
 
           if challenge.status == "Accepted"
@@ -40,7 +43,6 @@ module ChallengesHelper
 
         end
       end
-
       @completed_challenges
 
     end

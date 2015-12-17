@@ -130,11 +130,11 @@ app.PageView = Backbone.View.extend({
     // console.log(currentUser);
 
     // create current user View
-    var challengeFormPainter = new app.ChallengeFormView({
-      el: $('#challenge-page')
-    });
-
-    challengeFormPainter.renderWithFriendsList();
+    // var challengeFormPainter = new app.ChallengeFormView({
+    //   el: $('#challenge-page')
+    // });
+    //
+    // challengeFormPainter.renderWithFriendsList();
 
 
 
@@ -270,7 +270,7 @@ app.PageView = Backbone.View.extend({
 
     'click .received-challenges': 'receivedChallenges',
     'click .completed-challenges': 'completedChallenges',
-    'click .send-challenge': 'renderChallengeForm',
+    'click .send-challenge': 'sendChallenge',
 
     'click a.read-nav': 'renderPosts',
     'click div.sort': 'updateList',
@@ -497,7 +497,7 @@ showGenres: function(){
 
     var receivedChallengesPainter = new app.ReceivedChallengeListView({
       collection: receivedChallenges,
-      el: $('#challenge-list')
+      el: $('#challenge-page')
     });
 
     receivedChallenges.fetch();
@@ -506,7 +506,7 @@ showGenres: function(){
 
     if ( receivedChallenges.models.length === 0){
       var $none = _.template( $('#no-challenges-screen').html() );
-      this.$el.find('#challenge-list').append( $none );
+      this.$el.find('#challenge-page').append( $none );
     }
 
 
@@ -518,20 +518,33 @@ showGenres: function(){
 
     var completedChallengesPainter = new app.CompletedChallengeListView ({
       collection: completedChallenges,
-      el: $('#challenge-list')
+      el: $('#challenge-page')
     });
 
-    completedChallenges.fetch({wait:true});
+    completedChallenges.fetch();
 
     console.log(completedChallenges);
 
     if ( completedChallenges.models.length === 0){
 
-      $('#challenge-list').html('Complete some challneges.')
+      $('#challenge-page').html('Complete some challneges.')
       // var $none = _.template( $('#no-challenges-screen').html() );
       // this.$el.find('#challenge-list').append( $none );
     }
 
+
+  },
+
+  sendChallenge: function(){
+    console.log('sending');
+    // var completedChallenges = new app.CompletedChallengeCollection();
+
+    var challengeFormPainter = new app.ChallengeFormView ({
+      el: $('#challenge-page')
+    });
+
+
+    challengeFormPainter.renderWithFriendsList();
 
   },
 
