@@ -25,7 +25,7 @@ app.ChallengeFormView = Backbone.View.extend({
 
     var $select = $('<select>').addClass("form-control").attr("id", "friend-challenged");
 
-    app.friends.fetch({wait:true}).done(function(){
+    app.friends.fetch({url: "/users/all_friends", wait:true}).done(function(){
 
 
       if (app.friends.models.length === 0){

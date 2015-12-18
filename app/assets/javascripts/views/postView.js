@@ -7,7 +7,7 @@ app.PostView = Backbone.View.extend({
   template: _.template( $('#post-template').html() ),
   normalHeight: '25em',
   openHeight: '40em',
-
+  critiquePage: 0,
 
     initialize: function(){
       this.listenTo( this.model, 'change', this.renderWithUserName );
@@ -159,7 +159,6 @@ app.PostView = Backbone.View.extend({
       this.$el.find('.post-pic-box').append($profilePic, $postAuthor, lineBreak, $addFriend, writeLabel, reviewLabel);
 
       this.$("a.post-author").append(username);
-
 
 
 
@@ -339,7 +338,7 @@ app.PostView = Backbone.View.extend({
     fetchCritiques: function(){
 
       this.innerCollection = new app.CritiquesCollection();
-      var urlModel = "/api/posts/" + this.model.get('id') + "/critiques"
+      var urlModel = "/api/posts/" + this.model.get('id') + "/critiques/page/" + this.critiquePage;
       this.innerCollection.url = urlModel;
       this.model.critiques = this.innerCollection;
 
@@ -349,8 +348,11 @@ app.PostView = Backbone.View.extend({
     renderCritiques: function(){
       this.fetchCritiques();
       this.innerListView = new app.CritiqueListView({
-        collection: this.innerCollection
+        collection: this.innerCollection,
       });
+
+      this.innerListView.postId = this.model.get('id');
+
 
       var critiqueList = this.$el.find('.critiques-list');
       var button = $(this.el).find("span.render-critiques");

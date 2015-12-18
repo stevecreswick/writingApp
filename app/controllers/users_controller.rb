@@ -82,12 +82,19 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
+  def all_friends
+    
+    render json: current_user.friends
 
+  end
 
 # Friends page
 
   def friends
-    friendships = current_user.friendships
+    page = params[:page].to_i + 1
+
+
+    friendships = current_user.friendships.paginate :page => page
     friends = friendships.map do |friendship|
       friend = User.find( friendship.friend_id )
       data = friend.as_json
@@ -114,7 +121,10 @@ class UsersController < ApplicationController
 
   def followers
 
-    inverse_friends = current_user.inverse_friends
+    page = params[:page].to_i + 1
+
+
+    inverse_friends = current_user.inverse_friends.paginate :page => page
 
     followers = inverse_friends.map do |follower|
       data = follower.as_json
@@ -138,26 +148,22 @@ class UsersController < ApplicationController
 
   end
 
+
+
   def add_friends
+
     page = params[:page].to_i + 1
 
-    users = User.paginate :page => page
+    new_friends = current_user.potential_friends.paginate :page => page
 
-    add_friends = users.map do |user|
+    add_friends = new_friends.map do |user|
 
-      data = user.as_json
+        data = user.as_json
+        data['is_friend'] = false
+        data['friend_name'] = user.username
+        data['friend_image'] = user.image_url
+        data
 
-      friends = current_user.friend_ids
-
-       if friends.include? user.id
-         data['is_friend'] = true
-       else
-         data['is_friend'] = false
-       end
-
-      data['friend_name'] = user.username
-      data['friend_image'] = user.image_url
-      data
     end
 
     render json: add_friends

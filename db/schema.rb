@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151207232815) do
+ActiveRecord::Schema.define(version: 20151218071743) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,10 +22,11 @@ ActiveRecord::Schema.define(version: 20151207232815) do
     t.string   "prompt_type"
     t.integer  "word_count"
     t.string   "status"
-    t.string   "message"
+    t.text     "message"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
     t.string   "sender"
+    t.text     "response"
   end
 
   create_table "critiques", force: :cascade do |t|

@@ -371,7 +371,7 @@ showGenres: function(){
       el: $('#friend-page')
     });
 
-    app.friends.fetch({wait:true});
+    app.friends.fetch({url: '/users/friends/' + this.currentPage  });
 
     if (app.friends.models.length === 0){
     var $none = _.template( $('#no-friends-screen').html() );
@@ -403,7 +403,7 @@ showGenres: function(){
       el: $('#friend-page')
     });
 
-    app.followers.fetch({wait:true});
+    app.followers.fetch({url: '/users/followers/' + this.currentPage  });
 
     if (app.followers.models.length === 0){
     var $none = _.template( $('#no-friends-screen').html() );

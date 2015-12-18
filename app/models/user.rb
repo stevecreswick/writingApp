@@ -31,6 +31,18 @@ class User < ActiveRecord::Base
 
   before_create :generate_token
 
+  self.per_page = 10
+
+
+  # Pass in the user and it will return all except that user and its friends
+  scope :all_except, ->(user) { where.not(id: (user.friends + [user]).map(&:id))}
+
+
+  def potential_friends
+
+    @potential_friends = User.all_except(self)
+
+  end
 
   def generate_token
     self.token = SecureRandom.urlsafe_base64(nil, false)

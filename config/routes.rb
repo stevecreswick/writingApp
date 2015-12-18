@@ -34,6 +34,7 @@ Rails.application.routes.draw do
 
     # Critique API
     get '/posts/:post_id/critiques' => 'critiques#index'
+    get '/posts/:post_id/critiques/page/:page' => 'critiques#page'
     get '/posts/:post_id/critiques/:id' => 'critiques#show'
     post '/posts/:post_id/critiques' => 'critiques#create'
     delete '/posts/:post_id/critiques/:id' => 'critiques#destroy'
@@ -89,9 +90,13 @@ put '/users/:id' => 'users#update'
 
 
 get '/users/:user_id/posts/:post_id' => 'users#show_post'
-get '/users/friends' => 'users#friends'
+
+get '/users/friends/:page' => 'users#friends'
+get '/users/all_friends' => 'users#all_friends'
 get '/users/add_friends/:page' => 'users#add_friends'
-get '/users/followers' => 'users#followers'
+get '/users/followers/:page' => 'users#followers'
+
+
 post '/users/request' => 'users#request'
 
 

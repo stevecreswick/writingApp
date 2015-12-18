@@ -8,9 +8,48 @@ class Api::CritiquesController < ApplicationController
 
   # before_action :current_api_user!
   def index
+
+  # Account for Page Starting at 0
+  page = params[:page].to_i + 1
+
   post = Post.find( params[:post_id] )
 
   ar_critiques = post.critiques
+
+  critiques = ar_critiques.map do |ar_critique|
+
+    @total_votes = 0
+
+    ar_critique.votes.map do |vote|
+      @total_votes = @total_votes + vote.value
+    end
+
+    data = ar_critique.as_json
+    author = User.find( ar_critique.user_id )
+    data['username'] = author.username
+    data['image_url'] = author.image_url
+
+    if @total_votes > 0
+    data['total_votes'] = @total_votes
+    else
+    data['total_votes'] = 0
+    end
+
+    data
+  end
+
+  render json: critiques
+  end
+
+
+  def page
+
+  # Account for Page Starting at 0
+  page = params[:page].to_i + 1
+
+  post = Post.find( params[:post_id] )
+
+  ar_critiques = post.critiques.paginate(:page => page).order('created_at DESC')
 
   critiques = ar_critiques.map do |ar_critique|
 

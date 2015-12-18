@@ -19,7 +19,6 @@ app.CritiqueView = Backbone.View.extend({
     var currentId = parseInt( $('#current_id').val() );
 
     var votes = this.model.get('total_votes');
-    console.log("votes : " + votes);
 
     if ( authorId === currentId ){
       var $editButton = $("<span>").addClass("edit-critique").html("Edit");
@@ -28,7 +27,6 @@ app.CritiqueView = Backbone.View.extend({
       this.$el.find('.edit-critique-box').append( $editButton );
       this.$el.find('.remove-critique-box').append( $deleteButton );
     } else {
-      console.log('not written by this user');
     }
 
   },
@@ -155,7 +153,7 @@ app.CritiqueView = Backbone.View.extend({
     newVote.set('value', rating);
 
     newVote.save();
-    
+
     this.model.fetch()
     this.render();
   },
