@@ -1566,13 +1566,48 @@
 
     <script type="text/template" id="received-challenge-template">
       <div class="challenge-message">
+
+        <div class="row">
+          <div class="col-xs-12">
+          </div>
+
+        </div>
+
           <%%= prompt_type %>
           <br>
           <%%= prompt %>|<%%= word_count %>
-          <button type="button" class='accept-challenge btn btn-info'>Accept</button>
-        <button type="button" class='remove-challenge btn btn-danger'>Deny </button>
-
       </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <div id="challenge-required-word-count"></div>
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="col-xs-12">
+          <div id="challenge-form-holder"></div>
+            <!-- <textarea id="challenge-answer" class="form-control"></textarea> -->
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-6">
+          <span class='accept-challenge btn btn-info'>Accept</span>
+        </div>
+        <div class="col-xs-6">
+          <span class='remove-challenge btn btn-danger'>Deny </span>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <div id="received-challenge-error"></div>
+        </div>
+      </div>
+
+
     </script>
 
     <script type="text/template" id="completed-challenge-template">

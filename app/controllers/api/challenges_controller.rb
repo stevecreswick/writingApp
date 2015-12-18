@@ -79,7 +79,7 @@ class Api::ChallengesController < ApplicationController
 
 
   def challenge_params
-    params.require(:challenge).permit(:friendship_id, :prompt, :prompt_type, :word_count, :status, :message, :sender)
+    params.require(:challenge).permit(:friendship_id, :prompt, :prompt_type, :word_count, :status, :message, :sender, :id, :created_at, :updated_at)
   end
 
 end

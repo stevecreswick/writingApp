@@ -286,6 +286,7 @@ app.PostView = Backbone.View.extend({
       if (newMessage.length > 0){
         console.log(newMessage);
         critiques.create({message: newMessage});
+        this.showFeedback();
       }
 
       this.showFeedback();
