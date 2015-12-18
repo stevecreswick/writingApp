@@ -13,7 +13,12 @@ class Api::ChallengesController < ApplicationController
   end
 
   def sent
-    render json: sent_challenges
+    # Account for Page Starting at 0
+    page = params[:page].to_i + 1
+
+    challenges = sent_challenges.paginate(:page => page, :per_page => 10)
+
+    render json: challenges
   end
 
   def received

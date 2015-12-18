@@ -68,7 +68,7 @@ Rails.application.routes.draw do
 
     get '/challenges/received' => 'challenges#received'
     get '/challenges/completed' => 'challenges#completed'
-    get '/challenges/sent' => 'challenges#sent'
+    get '/challenges/sent/:page' => 'challenges#sent'
 
 
     put '/friendships/:id/challenges/:challenge_id' => 'challenges#update'
@@ -86,7 +86,6 @@ get '/users/show/:id' => 'users#show', as: :show
 get '/users/main' => 'users#main', as: :main
 get '/users/edit' => 'users#edit', as: :edit
 put '/users/:id' => 'users#update'
-
 
 
 get '/users/:user_id/posts/:post_id' => 'users#show_post'

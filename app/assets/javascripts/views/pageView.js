@@ -544,8 +544,7 @@ showGenres: function(){
     app.challengeFormPainter = new app.ChallengeFormView ({
       el: $('#challenge-page')
     });
-
-
+    
     app.challengeFormPainter.renderWithFriendsList();
 
   }

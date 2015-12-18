@@ -4,6 +4,8 @@ app.ChallengeFormView = Backbone.View.extend({
   tagName: 'div',
   className: 'challenge-form',
   template: _.template( $('#make-challenge-template').html() ),
+  currentPage: 0,
+
   initialize: function(){
     this.bindSlider();
   },
@@ -24,28 +26,35 @@ app.ChallengeFormView = Backbone.View.extend({
     //
 
     var $select = $('<select>').addClass("form-control").attr("id", "friend-challenged");
+    var scope = this;
 
     app.friends.fetch({url: "/users/all_friends", wait:true}).done(function(){
 
 
-      if (app.friends.models.length === 0){
+      if (app.friends.models.length >  0) {
+
+        for (var i = 0; i < app.friends.models.length; i++) {
+          $option = $('<option>').val( app.friends.models[i].get('id')  ).html(app.friends.models[i].get('username'));
+          console.log(app.friends.models[i].get('username'));
+          $select.append( $option );
+
+        }
+          scope.render();
+          scope.$el.find("#choose-friend-container").append( $select );
+
+
+      } else if (app.friends.models.length === 0) {
 
       var $none = _.template( $('#no-friends-screen').html() );
 
-      this.$el.find('#friend-page').append( $none );
+      $('#challenge-page').append( $none );
 
       }
 
-      for (var i = 0; i < app.friends.models.length; i++) {
-        $option = $('<option>').val( app.friends.models[i].get('id')  ).html(app.friends.models[i].get('username'));
-        console.log(app.friends.models[i].get('username'));
-        $select.append( $option );
 
-      }
-        $("#choose-friend-container").append( $select );
+
     });
 
-      this.render();
 
   },
 
@@ -94,7 +103,10 @@ app.ChallengeFormView = Backbone.View.extend({
       el: $('#challenge-list')
     });
 
-    sentChallenges.fetch();
+    var urlModel = "/api/challenges/sent/" + app.pagePainter.currentPage;
+    console.log(urlModel);
+
+    sentChallenges.fetch({url: urlModel});
 
 
 
