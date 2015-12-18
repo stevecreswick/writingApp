@@ -35,7 +35,8 @@ class Api::ChallengesController < ApplicationController
     challenge = friendship.challenges.create(challenge_params)
     challenge.update({
       status: 'Open',
-      sender: current_user.username
+      sender: current_user.username,
+      sender_id: current_user.id
       });
 
     respond_to do |format|
@@ -50,7 +51,8 @@ class Api::ChallengesController < ApplicationController
 
     challenge.update({
       status: 'Open',
-      # sender: current_user.username
+      sender: current_user.username,
+      sender_id: current_user.id
       });
 
     # render json: friendship.first.challenges
@@ -62,10 +64,7 @@ class Api::ChallengesController < ApplicationController
     challenge = friendship.challenges.find(params[:challenge_id])
     challenge.update(challenge_params)
 
-    respond_to do |format|
-        format.json { render json: challenge }
-        format.html { redirect_to '/api/friendhsip/' + challenge.friendship_id.to_s }
-      end
+    render json: challenge
 
   end
 
@@ -79,7 +78,7 @@ class Api::ChallengesController < ApplicationController
 
 
   def challenge_params
-    params.require(:challenge).permit(:friendship_id, :prompt, :prompt_type, :word_count, :status, :message, :sender, :id, :created_at, :updated_at)
+    params.require(:challenge).permit(:friendship_id, :prompt, :prompt_type, :word_count, :status, :message, :sender, :sender_id, :response, :id, :created_at, :updated_at)
   end
 
 end

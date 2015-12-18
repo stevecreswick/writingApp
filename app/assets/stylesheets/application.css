@@ -65,6 +65,8 @@
 
 #center-columns{
   padding-bottom: 3em;
+  background: ghostwhite;
+  min-height: 1000px;
 }
 .post-title {
   color: red;
@@ -229,9 +231,9 @@ form{
 #post-list{
   width:100%;
   overflow: auto;
-  background: ghostwhite;
+  /*background: ghostwhite;*/
   padding: 5em 1em 3em 1em;
-  border-left: 9px solid #545454;
+  /*border-left: 9px solid #545454;*/
 
 }
 
@@ -857,26 +859,22 @@ div.friend-view{
 
 .completed-challenge-view {
   background-color: white;
-  padding-left: 2em;
+  /*padding-left: 2em;
   padding-right: 2em;
   padding-top: 1em;
   border-radius: 5px;
   border: 1px solid grey;
   margin-top: 1em;
   margin-bottom: 1em;
-  margin-right: 5%;
-  height: 10em;
+  margin-right: 5%;*/
 }
 
 .completed-challenge-message{
-  margin-top: 2em;
-  height: 5em;
-  overflow: auto;
+  margin-top: 1em;
 }
 
 .challenge-message{
   margin-top: 1em;
-  overflow: auto;
 }
 
 .received-challenge{

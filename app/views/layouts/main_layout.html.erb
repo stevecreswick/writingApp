@@ -1618,7 +1618,54 @@
       <div class="completed-challenge-message">
           <%%= message %><br>
       </div>
+      <div id="challenge-required-word-count"></div>
+      <div id="response-holder">
+        <!-- Place Responses in HERE -->
+      </div>
+      <div id="challenge-response-error"></div>
+
     </script>
+
+
+    <script type="text/template" id="challenge-response-template">
+
+      <div class="row">
+        <div class="col-xs-12">
+          <div id="response">
+            <!-- Response to a Challenge Rendered Here -->
+          </div>
+        </div>
+      </div>
+
+    </script>
+
+    <script type="text/template" id="response-form-template">
+
+      <div class="row">
+        <div class="col-xs-12">
+          <textarea id="response-form" class="form-control"></textarea>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <h5 class="respond">RESPOND</h5>
+        </div>
+      </div>
+
+    </script>
+    <!-- <script type="text/template" id="accepted-challenge-template">
+      <div class="post-prompt-type">
+        <strong><%%= prompt_type %></strong>
+        <%%= prompt %> | <%%= word_count %> words
+      </div>
+      <div class="completed-challenge-message">
+          <%%= message %><br>
+      </div>
+
+    </script> -->
+
+
 
     <script type="text/template" id="accept-challenge-form-template">
       <div class="new-post-box">

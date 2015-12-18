@@ -66,7 +66,6 @@ app.ReceivedChallengeView = Backbone.View.extend({
     var form = $("<textarea>").addClass("form-control").attr("id", "challenge-answer");
     this.$el.find("#challenge-form-holder").append(form);
 
-    var i = 0
 
     this.$el.find("#challenge-answer").on("keyup", function(){
       console.log(this);
@@ -77,7 +76,6 @@ app.ReceivedChallengeView = Backbone.View.extend({
       scope.$el.find('#challenge-required-word-count').html( scope.wordCount );
 
       console.log("wordCount" + scope.wordCount);
-      i++;
     });
 
   }

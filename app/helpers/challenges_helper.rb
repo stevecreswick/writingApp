@@ -21,12 +21,16 @@ module ChallengesHelper
 
       current_user.friendships.each do |friendship|
         friendship.challenges.each do |challenge|
+
+          if (challenge.status == "Open")
           @sent_challenges.push(challenge)
+          end
+          
         end
       end
 
     @sent_challenges
-    end
+  end
 
 
     def completed_challenges
@@ -38,6 +42,10 @@ module ChallengesHelper
         friendship.challenges.each do |challenge|
 
           if challenge.status == "Accepted"
+            @completed_challenges.push(challenge)
+          end
+
+          if challenge.status == "Completed"
             @completed_challenges.push(challenge)
           end
 
@@ -54,6 +62,10 @@ module ChallengesHelper
             @completed_challenges.push(challenge)
           end
 
+          if challenge.status == "Completed"
+            @completed_challenges.push(challenge)
+          end
+
         end
 
       end
@@ -61,5 +73,8 @@ module ChallengesHelper
       @completed_challenges
 
     end
+
+
+
 
 end

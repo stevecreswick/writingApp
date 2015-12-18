@@ -59,6 +59,7 @@
 
 //= require models/challenge
 //= require views/challengeView
+//= require views/acceptedChallengeView
 //= require collections/challengeCollection
 //= require collections/receivedChallengeCollection
 //= require collections/completedChallengeCollection
