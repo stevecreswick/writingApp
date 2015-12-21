@@ -1,8 +1,6 @@
 Rails.application.routes.draw do
 
 
-
-
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -72,6 +70,25 @@ Rails.application.routes.draw do
 
 
     put '/friendships/:id/challenges/:challenge_id' => 'challenges#update'
+
+
+    # Writing Tips
+
+      get 'writing_tips' => 'writing_tips#index'
+
+      get 'writing_tips/:id' => 'writing_tips#show'
+
+      get 'writing_tips/edit' => 'writing_tips#edit'
+
+      put 'writing_tips/:id' => 'writing_tips#update'
+
+      get 'writing_tips/new' => 'writing_tips#new'
+
+      post 'writing_tips/create' => 'writing_tips#create'
+
+      get 'writing_tips/delete' => 'writing_tips#delete'
+
+      get 'writing_tips/page/:page' => 'writing_tips#page'
 
 
   end

@@ -370,10 +370,10 @@ div.sidenav-seperator{
   border: 3px solid black;
 }
 
-/*div.sort:hover{
+div.sort:hover{
   cursor: pointer;
   color: red;
-}*/
+}
 
 img.sort-image{
   max-width: 25px;

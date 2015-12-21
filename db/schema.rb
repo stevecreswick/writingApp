@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151218203952) do
+ActiveRecord::Schema.define(version: 20151221032314) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -107,4 +107,17 @@ ActiveRecord::Schema.define(version: 20151218203952) do
     t.string   "model_url"
   end
 
+  create_table "writing_tips", force: :cascade do |t|
+    t.integer  "user_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "link"
+    t.text     "description"
+    t.string   "title"
+    t.integer  "votes"
+  end
+
+  add_index "writing_tips", ["user_id"], name: "index_writing_tips_on_user_id", using: :btree
+
+  add_foreign_key "writing_tips", "users"
 end

@@ -28,6 +28,9 @@ class User < ActiveRecord::Base
   has_many :votes
   has_many :voted_critiques, :through => :votes, :source => :critique
 
+  has_many :writing_tips
+
+
 
   before_create :generate_token
 
