@@ -361,6 +361,7 @@ div.sidenav-row {
   text-align: left;
   width: 100%;
   /*max-height: 30px;*/
+
 }
 
 div.sidenav-seperator{
@@ -369,10 +370,10 @@ div.sidenav-seperator{
   border: 3px solid black;
 }
 
-div.sort:hover{
+/*div.sort:hover{
   cursor: pointer;
   color: red;
-}
+}*/
 
 img.sort-image{
   max-width: 25px;
@@ -620,8 +621,8 @@ margin-top: -4.8em;
     /*height: 3em;*/
     background: white;
     margin-top: 0.3em;
-    padding: 2em;
-    border-top: grey 1px solid;
+    /*padding: 2em;*/
+    /*border-top: grey 1px solid;*/
     border-bottom: ghostwhite 1px solid;
     width: 90%;
     margin-left: 5%;
@@ -1087,6 +1088,10 @@ div.friend-view{
 .rating {
     /*float:left;*/
     display: inline-block;
+}
+
+.rating-heart{
+  color: pink;
 }
 
 /* :not(:checked) is a filter, so that browsers that don’t support :checked don’t

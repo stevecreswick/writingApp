@@ -194,9 +194,9 @@ app.PostView = Backbone.View.extend({
       var feedbackLabel;
 
       if (feedbackNum > 0){
-        feedbackLabel = "Give Feedback (" + feedbackNum + ")";
+        feedbackLabel = "Give Feedback <i class='fa fa-commenting-o'></i>" + feedbackNum ;
       } else {
-        feedbackLabel = "Give Feedback";
+        feedbackLabel = "Give Feedback <i class='fa fa-commenting-o'></i>";
       }
 
       var $feedbackButton = $('<h5>').addClass('show-feedback text-left prompt-label').html( feedbackLabel );
@@ -207,7 +207,7 @@ app.PostView = Backbone.View.extend({
       var critiqueButton = this.$el.find('.show-feedback');
       critiqueButton.remove();
 
-      var $hide = $('<h5>').addClass('hide-feedback text-left prompt-label').html( "Hide" );
+      var $hide = $('<h5>').addClass('hide-feedback text-left prompt-label').html( "Hide  <i class='fa fa-level-up'></i>" );
       this.$el.find('.new-critique-form').append($hide);
 
     },

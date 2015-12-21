@@ -66,7 +66,7 @@ Rails.application.routes.draw do
 
     post '/friends/:friend_id/challenges' => 'challenges#create_friend'
 
-    get '/challenges/received' => 'challenges#received'
+    get '/challenges/received/:page' => 'challenges#received'
     get '/challenges/completed' => 'challenges#completed'
     get '/challenges/sent/:page' => 'challenges#sent'
 

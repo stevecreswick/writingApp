@@ -13,7 +13,7 @@ class Api::ChallengesController < ApplicationController
   end
 
   def sent
-    # Account for Page Starting at 0
+    # Account for Page Starting at
     page = params[:page].to_i + 1
 
     challenges = sent_challenges.paginate(:page => page, :per_page => 10)
@@ -22,7 +22,11 @@ class Api::ChallengesController < ApplicationController
   end
 
   def received
-    render json: received_challenges
+    page = params[:page].to_i + 1
+
+    challenges = received_challenges.paginate(:page => page, :per_page => 5)
+
+    render json: challenges
   end
 
   def completed

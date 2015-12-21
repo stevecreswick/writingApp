@@ -57,7 +57,7 @@ class Api::VotesController < ApplicationController
             render json: @critique
           else
             @vote = @post.ratings.where({user_id: current_user.id});
-            render json: @rating[0]
+            render json: @vote
           end
 
         end

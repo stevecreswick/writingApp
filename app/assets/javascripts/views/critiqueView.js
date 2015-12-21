@@ -137,7 +137,7 @@ app.CritiqueView = Backbone.View.extend({
 
     newVote.save();
 
-    this.model.fetch()
+    this.model.fetch({url: urlModel})
     this.render();
   },
 
@@ -154,7 +154,7 @@ app.CritiqueView = Backbone.View.extend({
 
     newVote.save();
 
-    this.model.fetch()
+    this.model.fetch({url: urlModel})
     this.render();
   },
 

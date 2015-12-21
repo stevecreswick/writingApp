@@ -489,6 +489,11 @@ showGenres: function(){
   receivedChallenges: function(){
     this.$el.find("#challenge-page").empty();
 
+    var urlModel = "/api/challenges/received/" + app.pagePainter.currentPage;
+
+    console.log(urlModel);
+
+
     var receivedChallenges = new app.ReceivedChallengeCollection();
 
     var receivedChallengesPainter = new app.ReceivedChallengeListView({
@@ -496,7 +501,7 @@ showGenres: function(){
       el: $('#challenge-page')
     });
 
-    receivedChallenges.fetch();
+    receivedChallenges.fetch({url: urlModel});
 
 
 
@@ -544,7 +549,7 @@ showGenres: function(){
     app.challengeFormPainter = new app.ChallengeFormView ({
       el: $('#challenge-page')
     });
-    
+
     app.challengeFormPainter.renderWithFriendsList();
 
   }
