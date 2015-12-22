@@ -31,8 +31,15 @@ class Api::WritingTipsController < ApplicationController
   end
 
   def update
-    writing_tip = WritingTip.find(params[:id])
-    writing_tip.update(writing_tips_params)
+    tip = current_user.writing_tips.find(params[:id])
+    tip.update({
+      title: params["title"],
+      link: params["link"],
+      description: params["description"],
+      tags: params["tags"]
+      })
+
+    render json: tip
   end
 
   def delete
@@ -54,7 +61,7 @@ class Api::WritingTipsController < ApplicationController
   private
 
   def writing_tips_params
-    params.require(:writing_tip).permit(:title, :link, :description, :tags, :votes)
+    params.require(:writing_tip).permit(:title, :link, :description, :tags, :votes, :user_id)
   end
 
 end

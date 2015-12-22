@@ -7,15 +7,20 @@ app.ResourcePageView = Backbone.View.extend({
 
   initialize: function(){
     this.listenTo( this.model, 'change', this.render );
+
   },
   render: function(){
     this.$el.empty();
     var html = this.template();
     var $html = $( html );
     this.$el.append( $html );
+
+    this.renderResources();
+
   },
   events:{
-    'click #resource-submit': 'submitNewResource'
+    'click #resource-submit': 'submitNewResource',
+    'click span.delete-resource': 'deleteResource'
   },
 
   submitNewResource: function(){
@@ -28,7 +33,7 @@ app.ResourcePageView = Backbone.View.extend({
 
 
     app.resources.create({
-      name: name,
+      title: name,
       description: description,
       link: link,
       tags: tags
@@ -39,7 +44,25 @@ app.ResourcePageView = Backbone.View.extend({
     this.$el.find("#resource-link").val("");
     this.$el.find("#resource-tags").val("");
 
-  }
+
+  },
+
+  renderResources: function(){
+    app.resources = new app.ResourcesCollection();
+
+    app.resourceList = new app.ResourceListView({
+      collection: app.resources,
+      el: $("#resource-list")
+    });
+
+    app.resources.fetch({wait:true}).done(function(){
+      console.log(app.resources);
+      app.resourceList.render();
+    });
+
+  },
+
+
 
 
 

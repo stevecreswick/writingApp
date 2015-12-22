@@ -1167,3 +1167,9 @@ div.friend-view{
     background: white;
     font-family: "Cutive Mono", sans-serif;
   }
+
+  .resource-wrapper{
+    padding: 1em;
+    background: white;
+    margin-bottom: 0.3em;
+  }

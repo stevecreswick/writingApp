@@ -186,6 +186,7 @@
 
     <script type="text/template" id="resource-page-template">
 
+
       <!-- Resources Form -->
 
       <div class="row">
@@ -196,7 +197,6 @@
         </div>
         <div class="col-xs-7 text-center">
           <label for="resource-name">Name</label>
-
           <input type="text" id="resource-name" class="form-control"></input>
         </div>
         <div class="col-xs-2">
@@ -212,7 +212,6 @@
         </div>
         <div class="col-xs-7 text-center">
           <label for="resource-description">Description</label>
-
           <input type="text" id="resource-description" class="form-control"></input>
         </div>
         <div class="col-xs-2">
@@ -228,7 +227,6 @@
             </div>
             <div class="col-xs-7 text-center">
               <label for="resource-link">URL</label>
-
               <input type="text" id="resource-link" class="form-control"></input>
             </div>
             <div class="col-xs-2">
@@ -245,7 +243,6 @@
             </div>
             <div class="col-xs-7 text-center">
               <label for="resource-tags">Tags (seperate with comma)</label>
-
               <input type="text" id="resource-tags" class="form-control"></input>
             </div>
             <div class="col-xs-2">
@@ -272,7 +269,7 @@
 
 
             <div class="col-xs-12">
-              <div  id="#resource-list">
+              <div  id="resource-list">
               </div>
             </div>
 
@@ -286,7 +283,7 @@
 
     <script type="text/template" id="resource-view-template">
 
-
+      <div class="resource-wrapper">
                 <div class="row">
                   <div class="col-xs-3">
                   </div>
@@ -294,6 +291,7 @@
                     <h5><%%= title %></h5>
                   </div>
                   <div class="col-xs-2">
+                    <span class="edit-resource">Edit</span>
                   </div>
                 </div>
 
@@ -301,7 +299,7 @@
                   <div class="col-xs-3">
                   </div>
                   <div class="col-xs-7 text-right">
-                    <h5><%%= description %></h5>
+                    <h5>DESCRIPTION: <%%= description %></h5>
                   </div>
                   <div class="col-xs-2">
                   </div>
@@ -311,7 +309,7 @@
                   <div class="col-xs-3">
                   </div>
                   <div class="col-xs-7 text-right">
-                    <h5><%%= link %></h5>
+                    <h5>URL: <%%= link %></h5>
                   </div>
                   <div class="col-xs-2">
                   </div>
@@ -321,11 +319,56 @@
                   <div class="col-xs-3">
                   </div>
                   <div class="col-xs-7 text-right">
-                    <h5><%%= tags %></h5>
+                    <h5>Tags: <%%= tags %></h5>
                   </div>
                   <div class="col-xs-2">
                   </div>
                 </div>
+            </div>
+    </script>
+
+    <script type="text/template" id="edit-resource-template">
+      <div class="row">
+        <div class="col-xs-12">
+          Edit Resource
+          </div>
+        </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <label for="resource-name">Title</label>
+          <input type="text" id="edit-resource-title" class="form-control"></input>
+        </div>
+
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <label for="resource-description">Description</label>
+          <input type="text" id="edit-resource-description" class="form-control"></input>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <label for="resource-link">URL</label>
+          <input type="text" id="edit-resource-link" class="form-control"></input>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <label for="resource-tags">Tags (seperate with comma)</label>
+          <input type="text" id="edit-resource-tags" class="form-control"></input>
+        </div>
+      </div>
+
+        <div class="row">
+          <div class="col-xs-6 text-left">
+            <span class="submit-edited-resource">Cancel</span>
+            </div>
+            <div class="col-xs-6 text-right">
+              <span class="submit-edited-resource">Submit</span>
+              </div>
+          </div>
     </script>
 
 

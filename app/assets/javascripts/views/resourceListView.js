@@ -8,10 +8,11 @@ app.ResourceListView = Backbone.View.extend({
   render: function(){
     this.$el.empty();
 
-      var prompts = this.collection.models;
+      var resources = this.collection.models;
       var view;
-        for (var i = 0; i < prompts.length; i++) {
-          view = new app.WritingPromptView({model: prompts[i]});
+        for (var i = 0; i < resources.length; i++) {
+          console.log("rendering");
+          view = new app.ResourceView({model: resources[i]});
           view.render();
           this.$el.append( view.$el );
         }
