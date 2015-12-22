@@ -24,10 +24,11 @@ app.promptFormView = Backbone.View.extend({
     var html = this.template();
     var $html = $( html );
     this.$el.append( $html );
+    this.bindPromptDescription();
   },
   events:{
     'click button.render-prompt': 'getPrompt',
-    'click button.start': 'renderWritingForm',
+    'click a.start': 'renderWritingForm',
     'click span.publish': 'publishPost'
   },
 
@@ -42,6 +43,30 @@ app.promptFormView = Backbone.View.extend({
     // Store Word Count
     app.requiredWords = options.wordCount;
   },
+
+  bindPromptDescription: function(){
+    var scope = this;
+    $( "#choose-type" ).change(function() {
+      scope.changePromptDescription( $('#choose-type').val() );
+    });
+
+  },
+
+  changePromptDescription: function(promptType){
+
+    var $description = this.$el.find("#prompt-description");
+
+    if (promptType === "Use One Word") {
+      $description.html("Description: Write a story using the one word prompt in the first sentence of your post.");
+    } else if (promptType === "reddit") {
+      $description.html("Description: Write a story using a random writing prompt submitted to /r/writingprompts");
+    } else if (promptType === "Classic First Sentence") {
+      $description.html("Description: Write a story using the first sentence from a classic work.");
+    } else if (promptType === "Answer What If") {
+      $description.html("Description: Write a story about what would happen if...");
+    }
+  },
+
 
   updateView: function(){
     this.remove();
@@ -100,7 +125,16 @@ app.promptFormView = Backbone.View.extend({
       this.$el.find('#prompt-container').show();
 
       this.$('.start').remove();
-      var $start = $('<button>').addClass('btn btn-primary btn-success start').html('Start');
+      var $icon = $('<i>').addClass('fa fa-pencil fa-fw');
+      var buttonHTML = "&nbsp; Write"
+      var $start = $('<a>').addClass('btn btn-default start');
+      // var $row = $('<div>').addClass("row");
+      // var $col12 = $('<div>').addClass("col-xs-12 text-right");
+
+      $start.append( $icon, buttonHTML)
+      // $col12.append( $start )
+      // $row.append( $col12 );
+
       this.$('#start-writing-container').append( $start );
 
     },
@@ -111,6 +145,9 @@ app.promptFormView = Backbone.View.extend({
 
       // Resize the columns
       app.pagePainter.columns("main");
+
+      // Render Writing Nav
+      $('#left-pane').children().remove();
       app.pagePainter.renderWritingSidebar();
 
       // Render Writing Form From Template

@@ -37,8 +37,8 @@ app.CritiqueView = Backbone.View.extend({
     'click button.delete-critique': 'deleteCritique',
     'click span.edit-critique': 'editCritique',
 
-    'click span.up-vote': 'upVote',
-    'click span.down-vote': 'downVote',
+    'click .up-vote': 'upVote',
+    'click .down-vote': 'downVote',
 
     'click span.save-edited-critique': 'saveCritique',
     'click a.close-critique': 'render'

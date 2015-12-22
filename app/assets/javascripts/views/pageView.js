@@ -66,7 +66,10 @@ app.PageView = Backbone.View.extend({
     this.$el.empty();
     var html = this.template();
     var $html = $( html );
+
     this.$el.append( $html );
+    this.renderPromptForm();
+
 
     this.renderSideNav();
   },
@@ -123,15 +126,14 @@ app.PageView = Backbone.View.extend({
     if(this.promptFormPainter){
       this.promptFormPainter.clearTime();
     }
-
     this.renderPosts( this.currentGenre, this.currentPage );
   },
 
   writingPage: function() {
     this.currentPage = 0;
-    this.$('#left-pane').children().remove();
+    // this.$('#left-pane').children().remove();
 
-    this.columns("prompt");
+    // this.columns("prompt");
 
     // empty center of page
     this.emptyCenter();

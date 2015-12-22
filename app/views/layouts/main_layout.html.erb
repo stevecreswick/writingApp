@@ -66,8 +66,8 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse nav navbar-nav navbar-right" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="write-nav"><a class="nav-text">Write</a></li>
-        <li class="home-page"><a class="nav-text">Read</a></li>
+        <!-- <li class="write-nav"><a class="nav-text">Write</a></li> -->
+        <li class="home-page"><a class="nav-text">Main</a></li>
         <li class="show-friends"><a class="nav-text">Authors</a></li>
         <li class="show-challenges"><a class="nav-text">Challenges</a></li>
         <li class="show-resources"><a class="nav-text">Resources</a></li>
@@ -285,45 +285,61 @@
 
       <div class="resource-wrapper">
                 <div class="row">
-                  <div class="col-xs-3">
+                  <div class="col-xs-1">
                   </div>
-                  <div class="col-xs-7 text-right">
+                  <div class="col-xs-7">
                     <h5><%%= title %></h5>
                   </div>
                   <div class="col-xs-2">
                     <span class="edit-resource">Edit</span>
                   </div>
-                </div>
-
-                <div class="row">
-                  <div class="col-xs-3">
-                  </div>
-                  <div class="col-xs-7 text-right">
-                    <h5>DESCRIPTION: <%%= description %></h5>
-                  </div>
                   <div class="col-xs-2">
+                    <span class="delete-resource">Delete</span>
                   </div>
                 </div>
 
                 <div class="row">
-                  <div class="col-xs-3">
+                  <div class="col-xs-1 text-center">
+                    <i class="fa fa-caret-up fa-5x resource-up-vote vote"></i>
+                    <div id="resource-votes"></div>
+                    <i class="fa fa-caret-down fa-5x resource-up-vote vote"></i>
                   </div>
-                  <div class="col-xs-7 text-right">
-                    <h5>URL: <%%= link %></h5>
+                  <div class="col-xs-8 text-left">
+
+                                    <div class="row">
+                                      <div class="col-xs-3">
+                                      </div>
+                                      <div class="col-xs-7">
+                                        <h5>DESCRIPTION: <%%= description %></h5>
+                                      </div>
+                                      <div class="col-xs-2">
+                                      </div>
+                                    </div>
+
+                                    <div class="row">
+                                      <div class="col-xs-3">
+                                      </div>
+                                      <div class="col-xs-7">
+                                        <h5>URL: <%%= link %></h5>
+                                      </div>
+                                      <div class="col-xs-2">
+                                      </div>
+                                    </div>
+
+                                    <div class="row">
+                                      <div class="col-xs-3">
+                                      </div>
+                                      <div class="col-xs-7">
+                                        <h5>Tags: <%%= tags %></h5>
+                                      </div>
+                                      <div class="col-xs-2">
+                                      </div>
+                                    </div>
                   </div>
-                  <div class="col-xs-2">
-                  </div>
+                  <!-- <div class="col-xs-2 text-right">
+                  </div> -->
                 </div>
 
-                <div class="row">
-                  <div class="col-xs-3">
-                  </div>
-                  <div class="col-xs-7 text-right">
-                    <h5>Tags: <%%= tags %></h5>
-                  </div>
-                  <div class="col-xs-2">
-                  </div>
-                </div>
             </div>
     </script>
 
@@ -680,73 +696,72 @@ fa-terminal on fa-square<br>
 
 
         <!-- <div class="write-nav">Write</div> -->
-        <div class="sidenav-row write-nav">
-          <a class="list-group-item" href="#"><i class="fa fa-pencil fa-fw"></i>&nbsp; Write</a>
+        <!-- <div class="sidenav-row write-nav">
+          <a class="list-group-item"><i class="fa fa-pencil fa-fw"></i>&nbsp; Write</a>
+        </div> -->
+
+
+
+        <div class="sidenav-row list-group-item home-page" data-url="user">
+          <div class="sort-text">Main</div>
         </div>
 
-        <div class="sidenav-row">
-
-        </div>
-
-        <div class="sort sidenav-row" data-url="user">
+        <div class="sort sidenav-row list-group-item" data-url="user">
           <div class="sort-text">Your Posts</div>
         </div>
 
-        <div class="sort sidenav-row" data-url="friends">
-          <div class="sort-text">Friends Post (need to set up route)</div>
+        <div class="sort sidenav-row list-group-item" data-url="friends">
+          <div class="sort-text">Friends Post</div>
         </div>
 
-        <div class="sidenav-seperator">
-
-        </div>
 
         <div class="genres">
-        <div class="sort sidenav-row" data-url="all">
+        <div class="sort sidenav-row list-group-item" data-url="all">
           <img src="http://i.imgur.com/hR2f8aM.png" class="sort-image"></img>
           <div class="sort-text">All</div>
         </div>
-        <div class="sort sidenav-row" data-url="Fiction">
+        <div class="sort sidenav-row list-group-item" data-url="Fiction">
           <img src="http://i.imgur.com/BI8PegK.png" class="sort-image"></img>
            <div class="sort-text">Fiction</div>
          </div>
-        <div class="sort sidenav-row" data-url="Fantasy">
+        <div class="sort sidenav-row list-group-item" data-url="Fantasy">
           <img src="http://i.imgur.com/ffCviDQ.png" class="sort-image"></img>
            <div class="sort-text">Fantasy</div>
          </div>
-        <div class="sort sidenav-row" data-url="Horror">
+        <div class="sort sidenav-row list-group-item" data-url="Horror">
           <img src="http://i.imgur.com/iJvfYS1.png" class="sort-image"></img>
            <div class="sort-text">Horror</div>
          </div>
-        <div class="sort sidenav-row" data-url="Thriller">
+        <div class="sort sidenav-row list-group-item" data-url="Thriller">
           <img src="http://i.imgur.com/ojVa8BI.png" class="sort-image"></img>
            <div class="sort-text">Thriller</div>
          </div>
-        <div class="sort sidenav-row" data-url="Historical-Fiction">
+        <div class="sort sidenav-row list-group-item" data-url="Historical-Fiction">
           <img src="http://i.imgur.com/lHyRvye.png" class="sort-image"></img>
           <div class="sort-text">Historical</div>
         </div>
-        <div class="sort sidenav-row" data-url="Crime">
+        <div class="sort sidenav-row list-group-item" data-url="Crime">
           <img src="http://i.imgur.com/8w44WhP.png" class="sort-image"></img>
           <div class="sort-text">Crime</div>
         </div>
-        <div class="sort sidenav-row" data-url="Romance">
+        <div class="sort sidenav-row list-group-item" data-url="Romance">
           <img src="http://i.imgur.com/zz5QHWN.png" class="sort-image"></img>
            <div class="sort-text">Romance</div>
          </div>
 
-        <div class="sort sidenav-row" data-url="Science-Fiction">
+        <div class="sort sidenav-row list-group-item" data-url="Science-Fiction">
           <img src="http://i.imgur.com/K1kGfUE.png" class="sort-image"></img>
            <div class="sort-text">SciFi</div>
          </div>
-        <div class="sort sidenav-row" data-url="Poetry">
+        <div class="sort sidenav-row list-group-item" data-url="Poetry">
           <img src="http://i.imgur.com/F71bhWM.png" class="sort-image"></img>
           <div class="sort-text">Poetry</div>
         </div>
-        <div class="sort sidenav-row" data-url="Humor">
+        <div class="sort sidenav-row list-group-item" data-url="Humor">
           <img src="http://i.imgur.com/Iw9CxT2.png" class="sort-image"></img>
           <div class="sort-text">Humor</div>
         </div>
-        <div class="sort sidenav-row" data-url="Non-Fiction">
+        <div class="sort sidenav-row list-group-item" data-url="Non-Fiction">
           <img src="http://i.imgur.com/tH5XICv.png" class="sort-image"></img>
           <div class="sort-text">Non-Fiction</div>
         </div>
@@ -1128,13 +1143,8 @@ fa-terminal on fa-square<br>
         </div>
       </div> -->
 
-      <div class="row">
-        <div class="col-xs-12 text-right">
-          <div class="vertical-space"></div>
-        </div>
-      </div>
 
-      <div id="prompt-series">
+      <div id="prompt-form">
 
       <div class="row">
         <div class="col-xs-12">
@@ -1149,108 +1159,52 @@ fa-terminal on fa-square<br>
 
 
 
-
-
       <div class="row">
         <div class="col-xs-12 text-center">
-          <h5 class="new-instruction">What type of writing prompt?</h5>
         </div>
       </div>
 
 
       <div class="row">
-        <div class="col-md-4"></div>
-        <div class="col-xs-12 col-md-4">
+        <div class="col-xs-12 col-sm-8">
+          <label for="choose-type">Choose your prompt</label>
           <select class="form-control" id="choose-type">
               <option>Use One Word</option>
               <option>Answer What If</option>
               <option>Classic First Sentence</option>
               <option>reddit</option>
           </select>
-        </div>
-        <div class="col-xs-12 col-md-6 text-center">
-
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-md-4"></div>
-        <div class="col-xs-12 col-md-4 text-center">
           <div id="prompt-description" class="prompt-label">
-            This will hold a description of the selected prompt
+
+            <!-- Starts on One Word -->
+            Description: Use the one word prompt in the first sentence of your post.
           </div>
         </div>
-      </div>
-
-      <!-- Space -->
-      <div class="row">
-        <div class="col-xs-12">
-          <div class="vertical-space">
-          </div>
-          <div class="vertical-space">
-          </div>
-        </div>
-      </div>
-
-
-      <div class="row">
-        <div class="col-xs-12 text-center">
-          <h5 class="new-instruction">How many words?</h5>
-      </div>
-
-      <div class="row">
-        <div class="col-xs-12">
-          <div class="vertical-space">
-          </div>
-        </div>
-      </div>
-
-
-      <div class="row">
-
-        <div class="col-xs-6 col-xs-offset-3 col-sm-2 col-sm-offset-5 text-center">
+        <div class="col-xs-12 col-sm-3">
+          <label for="post-word-count">Choose minimum word count</label>
           <input type="number" value="25" min ="25" max="1000" step="25" class="form-control" id="post-word-count"></input>
           <span class="prompt-label">1,000 max</span>
         </div>
-        <div class="col-xs-1">
-          <br>
-          <span class="brand-font">words.</span>
-        </div>
+
       </div>
 
       <div class="row">
-        <div class="col-xs-12">
-          <div class="vertical-space">
-          </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-xs-4">
-          <div class="vertical-space">
-          </div>
-        </div>
-        <div class="col-xs-4">
-          <button class="render-prompt btn btn-default">See Your Prompt</button>
-        </div>
-      </div>
-
-
-      <div class="row">
-        <div class="col-xs-12 text-center">
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-xs-12 text-center">
+        <div class="col-xs-12 col-sm-8 text-center">
           <div id="prompt-container"></div>
         </div>
+        <div class="col-xs-12 col-sm-2 text-center">
+            <button class="render-prompt btn btn-default">Get a Prompt</button>
+        </div>
+        <div class="col-xs-12 col-sm-2 text-center">
+          <div id="start-writing-container"></div>
+        </div>
       </div>
 
+
       <div class="row">
-        <div class="col-xs-12">
-          <div class="vertical-space">
-          </div>
+        <div class="col-xs-12 col-sm-8 text-center">
+        </div>
+        <div class="col-xs-12 col-sm-3">
         </div>
       </div>
 
@@ -1258,28 +1212,8 @@ fa-terminal on fa-square<br>
         <div class="col-md-4">
 
         </div>
-        <div class="col-xs-12 col-md-6">
-          <div id="start-writing-container">
-          </div>
-        </div>
+
       </div>
-
-
-
-
-      <div class="row">
-        <div class="col-xs-12">
-          <div class="vertical-space">
-
-          </div>
-          <div class="vertical-space">
-
-          </div>
-        </div>
-      </div>
-
-
-
 
       <!-- Close Prompt Series -->
     </div>
@@ -1291,7 +1225,7 @@ fa-terminal on fa-square<br>
       <script type="text/template" id="critique-template">
 
             <div class="row">
-              <div class="col-xs-12">
+              <div class="col-xs-12 ">
 
             <div class="row">
               <div class="col-xs-1 col-xs-offset-10">
@@ -1328,11 +1262,11 @@ fa-terminal on fa-square<br>
 
             <div class="row">
               <div class="col-xs-1 text-center">
-                <span class="up-vote vote"><i class="fa fa-caret-up fa-5x"></i></span>
+                <i class="fa fa-caret-up fa-5x up-vote vote"></i>
                 <br>
                 <%%= total_votes %>
                 <br>
-                <span class="down-vote vote"><i class="fa fa-caret-down fa-5x"></i></span>
+                <i class="fa fa-caret-down fa-5x down-vote vote"></i>
               </div>
               <div class="col-xs-8 text-right">
                 <p class="critique-message">

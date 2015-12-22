@@ -11,10 +11,17 @@ app.ResourceView = Backbone.View.extend({
     var html = this.template( this.model.toJSON() );
     var $html = $( html );
     this.$el.append( $html );
+    var votes = this.model.get("total_votes");
+
+    this.$el.find("#resource-votes").html( votes );
   },
   events:{
     'click span.edit-resource': "renderEdit",
-    'click span.submit-edited-resource': "editResource"
+    'click span.submit-edited-resource': "editResource",
+    'click span.delete-resource': "deleteResource",
+
+    'click .resource-up-vote': 'upVote',
+    'click .resource-down-vote': 'downVote'
   },
 
   renderEdit: function(){
@@ -54,6 +61,47 @@ app.ResourceView = Backbone.View.extend({
 
     },
 
+    deleteResource: function(){
+      console.log('delete critique clicked');
+
+      var urlModel = "/api/writing_tips/" + this.model.get('id');
+      this.model.destroy({url: urlModel});
+      this.$el.remove();
+    },
+
+    upVote: function(){
+      console.log('upvoting');
+      var resourceId = this.model.get('id');
+      var rating = 1;
+
+      var urlModel = "/api/writing_tips/" + resourceId + '/tip_votes';
+
+      var newVote = new app.TipVote({url: urlModel});
+      newVote.url = urlModel;
+      newVote.set('value', rating);
+
+      newVote.save();
+
+      this.model.fetch({url: urlModel})
+      this.render();
+    },
+
+    downVote: function(){
+      console.log('downvoting');
+      var resourceId = this.model.get('id');
+      var rating = -1;
+
+      var urlModel = "/api/writing_tips/" + resourceId + '/tip_votes';
+
+      var newVote = new app.TipVote({url: urlModel});
+      newVote.url = urlModel;
+      newVote.set('value', rating);
+
+      newVote.save();
+
+      this.model.fetch({url: urlModel})
+      this.render();
+    },
 
 
 });

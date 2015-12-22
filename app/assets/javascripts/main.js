@@ -78,6 +78,8 @@
 
 //= require models/rating
 //= require models/vote
+//= require models/tipVote
+
 
 //= require models/resource
 //= require collections/resourcesCollection

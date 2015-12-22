@@ -71,6 +71,10 @@ Rails.application.routes.draw do
 
     put '/friendships/:id/challenges/:challenge_id' => 'challenges#update'
 
+    # Tip Votes
+    post '/writing_tips/:id/tip_votes' => 'tip_votes#create'
+    # get '/posts/:post_id/critiques/:id/tip_votes' => 'tip_votes#user_vote'
+
 
     # Writing Tips
 
@@ -86,7 +90,7 @@ Rails.application.routes.draw do
 
       post '/writing_tips' => 'writing_tips#create'
 
-      delete '/writing_tips' => 'writing_tips#delete'
+      delete '/writing_tips/:id' => 'writing_tips#delete'
 
       get '/writing_tips/page/:page' => 'writing_tips#page'
 

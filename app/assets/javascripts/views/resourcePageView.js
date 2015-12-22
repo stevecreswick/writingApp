@@ -44,7 +44,7 @@ app.ResourcePageView = Backbone.View.extend({
     this.$el.find("#resource-link").val("");
     this.$el.find("#resource-tags").val("");
 
-
+    this.renderResources();
   },
 
   renderResources: function(){

@@ -31,6 +31,11 @@ class User < ActiveRecord::Base
   has_many :writing_tips
 
 
+  has_many :tip_votes
+  has_many :voted_writing_tips, :through => :tip_votes, :source => :writing_tip
+
+
+
 
   before_create :generate_token
 

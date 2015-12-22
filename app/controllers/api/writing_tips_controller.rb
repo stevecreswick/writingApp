@@ -2,12 +2,20 @@ class Api::WritingTipsController < ApplicationController
 
   include SessionsHelper
   include UsersHelper
+  include Api::PostsHelper
+
   include ActionView::Helpers::DateHelper
 
   def index
     writing_tips = WritingTip.all
 
-    render json: writing_tips
+    tips = writing_tips.map do |tip|
+      data = tip.as_json
+      data['total_votes'] = tip.total_votes
+      data
+    end
+
+    render json: tips
   end
 
   def show
@@ -53,6 +61,7 @@ class Api::WritingTipsController < ApplicationController
     puts 'Not this users writing tip'
     end
 
+    render :nothing => true, :status => 202
   end
 
   def page

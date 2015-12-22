@@ -35,19 +35,7 @@ class Api::VotesController < ApplicationController
             end
         end
 
-        # def update
-        #     @post = Post.find(params[:id])
-        #     if current_user.id == @post.id
-        #         redirect_to post(@post), :alert => "You cannot rate for your own post"
-        #     else
-        #         @rating = current_user.ratings.post(@post.id)
-        #         if @rating.update_attributes(rating_params)
-        #             respond_to do |format|
-        #                 format.html { redirect_to post(@post), :notice => "Your rating has been updated" }
-        #             end
-        #         end
-        #     end
-        # end
+
 
         def user_vote
           @post = Post.find(params[:post_id])

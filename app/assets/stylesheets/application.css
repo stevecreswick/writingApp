@@ -130,10 +130,6 @@
   height: 25em;
 }
 
-.prompt-text{
-  font-family: 'Cutive Mono', sans-serif;
-  color: red;
-}
 
 
 #new-post-box {
@@ -185,16 +181,18 @@ p.character-count {
 }
 
 #prompt-container{
-  border: 1px grey solid;
   color: black;
   text-align: center;
   padding: 1em;
   font-size: 0.8em;
   margin-top: 2em;
-  background-color: ghostwhite;
-  overflow: auto;
   display: none;
 }
+
+  #prompt-container .prompt-text{
+    font-family: 'Cutive Mono', sans-serif;
+  }
+
 
 button.render-prompt{
   margin-top: 1em;
@@ -357,11 +355,16 @@ div.sidenav-row {
   padding: 0.5em 0.5em 0.5em 2em;
   text-decoration: none;
   list-style: none;
-  margin: 0 5% 0.3em 0;
   text-align: left;
-  width: 100%;
-  /*max-height: 30px;*/
+  width: 80%;
+  margin-left: 10%;
+  height: 40px;
+  max-height: 40px;
 
+}
+
+.sidenav-row:hover {
+  background: ghostwhite;
 }
 
 div.sidenav-seperator{
@@ -432,21 +435,17 @@ img.sort-image{
   color: white;
 }
 
-#prompt-series{
+#prompt-form{
   background: white;
+  padding: 1em;
+  margin-top: 1em;
+  width: 90%;
 }
 
-#choose-type{
-  font-size: 2em;
-  text-align: center;
-  height: 2em;
-  margin-top: 1.5em;
-}
 
 
 #prompt-description{
-  padding: 3em 2em 2em 2em;
-
+  margin: 0.5em 0 0 0.5em;
 }
 .tall-input{
   font-size: 2em;
@@ -454,10 +453,6 @@ img.sort-image{
   height: 3em;
 }
 
-.new-instruction{
-  font-family: 'Oswald', sans-serif;
-  font-size: 3em;
-}
 
 .typewriter{
   width: 55px;
@@ -692,6 +687,9 @@ margin-top: -4.8em;
   width: 50px;
 }
 
+.vote:hover {
+  cursor: pointer;
+}
 
 #critique-editor{
   height: 9em;
