@@ -79,6 +79,8 @@
 //= require models/rating
 //= require models/vote
 //= require models/tipVote
+//= require collections/ratingsCollection
+
 
 
 //= require models/resource

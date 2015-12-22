@@ -23,8 +23,7 @@ class UsersController < ApplicationController
       @user.image_url = "http://i.imgur.com/yvuo0U2.png"
     end
 
-    @user.writer_score = 0
-    @user.reviewer_score = 0
+    @user.update({writer_score: 0, reviewer_score: 0});
 
     if @user.save
       respond_to do |format|

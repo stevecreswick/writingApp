@@ -1,3 +1,4 @@
+
 var app = app || {};
 
 app.requiredWords = 0;

@@ -33,7 +33,26 @@ app.PostView = Backbone.View.extend({
 
       this.$el.find(".show-critiques-box").append( $showCritique );
 
-      this.colorRating();
+      var urlModel = "/api/posts/" + this.model.get("id") + "/ratings"
+
+      this.ratings = new app.RatingsCollection()
+      this.ratings.url = urlModel;
+      this.ratings.fetch({async: false});
+
+      if (this.ratings.models.length > 0) {
+        for (var i = 0; i < this.ratings.models.length; i++) {
+          var skill = this.ratings.models[i].get("skill");
+          var value = this.ratings.models[i].get("value");
+          this.applyRating(value, skill)
+        }
+
+      }
+
+        // this.colorRating();
+
+
+
+
 
       // Add delete button for current user critique for other
       if (currentUser === poster) {
@@ -61,12 +80,40 @@ app.PostView = Backbone.View.extend({
     'click span.render-critiques': 'renderCritiques',
 
     'click label.rating-button': 'saveRating',
-    'click span.add-friend': 'addFriend'
+    'click span.add-friend': 'addFriend',
+    'click .new-rating': 'newRating'
+
 
 
     // Add font size for readability later
     // 'click li.increase-font': 'increaseFont',
     // 'click li.decrease-font': 'decreaseFont'
+  },
+
+  newRating: function(e){
+    console.log();
+
+    $(e.currentTarget).eq(0).addClass('rated-star');
+    var rating = $(e.currentTarget).eq(0).data('value');
+
+    // this.colorStars(rating);
+
+    var post = $(e.currentTarget).eq(0);
+    var postId = post.data('post');
+    var ratingSkill = post.data('skill');
+    var value = post.data('value');
+
+
+    var urlModel = '/api/posts/' + postId + '/ratings';
+
+    this.ratings = new app.RatingsCollection({url: urlModel});
+    this.ratings.url = urlModel;
+
+    this.ratings.create({
+      value: value,
+      skill: ratingSkill,
+      });
+
   },
 
     // Remove Post
@@ -160,7 +207,7 @@ app.PostView = Backbone.View.extend({
 
       this.$("a.post-author").append(username);
 
-
+      this.hoverHearts();
 
       // this.renderCritiqueFormContainer();
       // this.renderEditor();
@@ -314,11 +361,71 @@ app.PostView = Backbone.View.extend({
 
     },
 
-    colorStars: function(rating){
-      for (var i = 1; i <= rating; i++) {
-        var divId = "#label-star" + i;
-        var addStar = this.$el.find(divId).eq(0);
-        addStar.addClass('rated-star')
+    hoverHearts: function(){
+      var scope = this;
+      this.$el.find( ".new-rating i" ).hover(
+        function() {
+          var parent = $(this).parent();
+
+          var value = parent.data("value");
+          var skill = parent.data("skill");
+
+          if ( $(this).hasClass('rated') ) {
+          } else {
+            scope.colorHearts(value, skill);
+          }
+
+        }, function() {
+          var parent = $(this).parent();
+
+          var value = parent.data("value");
+          var skill = parent.data("skill");
+
+          if ( $(this).hasClass('rated') ) {
+          } else {
+            scope.removeColor(value, skill);
+          }
+
+
+        });
+
+
+    },
+
+    colorHearts: function(rating, skill){
+
+      for (var i = 0; i <= rating; i++) {
+        var divId = "#rating-" + skill + "-" + i;
+
+          this.$el.find(divId).find("i").addClass("fa-heart");
+          this.$el.find(divId).find("i").removeClass( "fa-heart-o" );
+
+      }
+    },
+
+    removeColor: function(rating, skill){
+
+      for (var i = 0; i <= rating; i++) {
+        var divId = "#rating-" + skill + "-" + i;
+
+        this.$el.find(divId).find("i").removeClass("fa-heart");
+        this.$el.find(divId).find("i").addClass( "fa-heart-o" );
+
+
+      }
+    },
+
+    applyRating: function(rating, skill){
+      for (var i = 0; i <= rating; i++) {
+        var divId = "#rating-" + skill + "-" + i;
+        $(divId).find('.rating-heart').addClass("fa-heart rated");
+        $(divId).find('.rating-heart').removeClass( "fa-heart-o" );
+      }
+
+      // Add a rated tag to every heart
+      for (var i = 0; i <= 5; i++) {
+        var divId = "#rating-" + skill + "-" + i;
+        $(divId).find('.rating-heart').addClass("rated");
       }
     },
 
@@ -327,7 +434,7 @@ app.PostView = Backbone.View.extend({
       if ( this.model.get('is_rated') ){
 
         var score = this.model.get('rating');
-        this.colorStars(score);
+        // this.colorStars(score);
 
       } else {
 

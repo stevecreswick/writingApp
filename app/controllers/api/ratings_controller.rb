@@ -16,16 +16,20 @@ class Api::RatingsController < ApplicationController
                 puts '**************** Already Rated ******************'
                 render json: @post
             else
-                @rating = Rating.new(rating_params)
-                @rating.post_id = @post.id
-                @rating.user_id = current_user.id
+                @rating = Rating.create(rating_params)
+                @rating.update({
+                  post_id: @post.id,
+                  user_id: current_user.id
+                });
 
                 # Raises the author's writing score
-                post_author = User.find( @post.user_id )
-                post_author.update({ writer_score: post_author.writer_score = post_author.writer_score + @rating.value.to_i })
-
+                # post_author = User.find( @post.user_id )
+                # writer_score = post_author.writer_score + @rating.value.to_i
+                # post_author.update({ writer_score: writer_score  })
+                # post_author.save
                 # Raise the reviewers reviewer score
-                current_user.update({ reviewer_score: current_user.reviewer_score += 1 })
+                # new_score = current_user.reviewer_score + 1
+                # current_user.update({reviewer_score: new_score})
 
                 if @rating.save
                         render json: @post
@@ -53,8 +57,8 @@ class Api::RatingsController < ApplicationController
           if current_user.id == @post.user_id
             render json: @post
           else
-            @rating = @post.ratings.where({user_id: current_user.id});
-            render json: @rating[0]
+            @ratings = @post.ratings.where({user_id: current_user.id});
+            render json: @ratings
           end
 
         end
@@ -63,7 +67,7 @@ class Api::RatingsController < ApplicationController
         private
 
         def rating_params
-          params.require(:rating).permit(:user_id, :post_id, :value)
+          params.require(:rating).permit(:user_id, :post_id, :value, :skill)
         end
 
 end
