@@ -1,4 +1,3 @@
-console.log('critique');
 
 var app = app ||  {};
 

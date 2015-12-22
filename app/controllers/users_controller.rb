@@ -83,7 +83,7 @@ class UsersController < ApplicationController
   end
 
   def all_friends
-    
+
     render json: current_user.friends
 
   end
@@ -167,6 +167,21 @@ class UsersController < ApplicationController
     end
 
     render json: add_friends
+  end
+
+  def search
+    page = params[:page].to_i + 1
+
+  if params[:search] != ""
+     users = User.search(params[:search])
+     searched_users = users.paginate(:page => page, :per_page => 20)
+     render json: searched_users
+  elsif
+    redirect_to add_friends_path
+  end
+
+
+
   end
 
 

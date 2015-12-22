@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151221032314) do
+ActiveRecord::Schema.define(version: 20151222013619) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -115,6 +115,7 @@ ActiveRecord::Schema.define(version: 20151221032314) do
     t.text     "description"
     t.string   "title"
     t.integer  "votes"
+    t.string   "tags"
   end
 
   add_index "writing_tips", ["user_id"], name: "index_writing_tips_on_user_id", using: :btree

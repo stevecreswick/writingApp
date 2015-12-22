@@ -43,6 +43,16 @@ class User < ActiveRecord::Base
   scope :all_except, ->(user) { where.not(id: (user.friends + [user]).map(&:id))}
 
 
+  def self.search(user_name)
+    if user_name
+        user_name.downcase!
+        where('LOWER(username) LIKE ?', "%#{user_name}%")
+    else
+        all
+    end
+  end
+
+
   def potential_friends
 
     @potential_friends = User.all_except(self)

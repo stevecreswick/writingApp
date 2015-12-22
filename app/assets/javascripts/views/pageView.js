@@ -188,6 +188,38 @@ app.PageView = Backbone.View.extend({
 
   },
 
+  showResources: function(){
+    console.log('yo...showing resources');
+
+    this.currentPage = 0;
+    this.$el.find('#center-pane').empty();
+    this.clearResourcesPage();
+
+
+    this.columns("main");
+    this.renderSideNav();
+
+
+    var $resourcePage = $("<div>").attr('id', 'resources-page')
+    var $center = this.$el.find('#center-pane');
+
+    $center.append( $resourcePage )
+
+    app.resourcePainter = new app.ResourcePageView({
+      el: $('#resources-page')
+    });
+
+    app.resourcePainter.render();
+    // app.resources = new app.FriendCollection();
+    // app.friendPainter = new app.FriendListView({
+    //   collection: app.resources,
+    //   el: $('#resources-page')
+    // });
+    //
+    // app.friends.fetch({url: '/users/friends/' + this.currentPage  });
+
+  },
+
   renderNavBar: function(){
     this.$el.find('#header').empty();
 
@@ -280,6 +312,7 @@ app.PageView = Backbone.View.extend({
 
     'click .write-nav': 'writingPage',
     'click div.cancel-post': 'renderMain',
+    'click li.show-resources': 'showResources',
 
     'click .received-challenges': 'receivedChallenges',
     'click .completed-challenges': 'completedChallenges',
@@ -295,6 +328,8 @@ app.PageView = Backbone.View.extend({
     'click span.show-users': 'showUsers',
     'click span.show-following': 'showFollowing',
     'click span.show-followers': 'showFollowers',
+    'click #search-users': 'searchUsers',
+
 
     'click li.show-challenges': 'challengesPage',
 
@@ -311,6 +346,8 @@ app.PageView = Backbone.View.extend({
 showGenres: function(){
   $('.genres').show();
 },
+
+
 // Rendering Posts
 
 
@@ -389,11 +426,38 @@ showGenres: function(){
     var $following = $('<span>').addClass("show-following").text('Following | ');
     var $followers = $('<span>').addClass("show-followers").text('Followers | ');
 
+    var $searchBar = $("<input>").attr("type", "text").attr("id", "user-search-form");
+    var $click = $("<span>").attr("id", "search-users").html("search users");
+
     var header = $('<div>').addClass('friends-nav');
-    header.append($following, $followers, $add);
+    header.append($searchBar, $click, $following, $followers, $add);
     this.$el.find('#center-pane').append( header );
   },
 
+  searchUsers: function(){
+    var search = this.$el.find("#user-search-form").val();
+
+    this.searchTerm = search;
+    console.log( search );
+
+    if (search === ""){
+      this.showUsers();
+    } else {
+      var urlModel = "/users/search/" + search + "/" + this.currentPage;
+
+      app.currentSearch = new app.UserCollection();
+      app.userPainter = new app.SearchedUserListView({
+        collection: app.currentSearch,
+        el: $('#friend-page')
+      });
+
+      app.currentSearch.fetch({url: urlModel});
+
+    }
+
+
+
+  },
   showFollowers: function(){
     this.clearFriendsPage();
 
@@ -415,6 +479,7 @@ showGenres: function(){
   showUsers: function(){
     this.clearFriendsPage();
 
+
     app.users = new app.UserCollection();
     app.userPainter = new app.UserListView({
       collection: app.users,
@@ -426,6 +491,10 @@ showGenres: function(){
 
   clearFriendsPage: function(){
     this.$el.find('#friend-page').children().remove();
+  },
+
+  clearResourcesPage: function(){
+    this.$el.find('#resources-page').children().remove();
   },
 
   emptyCenter: function(){

@@ -70,6 +70,7 @@
         <li class="home-page"><a class="nav-text">Read</a></li>
         <li class="show-friends"><a class="nav-text">Authors</a></li>
         <li class="show-challenges"><a class="nav-text">Challenges</a></li>
+        <li class="show-resources"><a class="nav-text">Resources</a></li>
         <li class="show-current-user"><a class="nav-text"><img src="<%= @user.image_url %>" class="img-circle profile-picture"</></a></li>
 
 
@@ -181,6 +182,152 @@
 
 
     </script>
+
+
+    <script type="text/template" id="resource-page-template">
+
+      <!-- Resources Form -->
+
+      <div class="row">
+
+
+        <div class="col-xs-3">
+
+        </div>
+        <div class="col-xs-7 text-center">
+          <label for="resource-name">Name</label>
+
+          <input type="text" id="resource-name" class="form-control"></input>
+        </div>
+        <div class="col-xs-2">
+        </div>
+
+      </div>
+
+      <div class="row">
+
+
+        <div class="col-xs-3">
+
+        </div>
+        <div class="col-xs-7 text-center">
+          <label for="resource-description">Description</label>
+
+          <input type="text" id="resource-description" class="form-control"></input>
+        </div>
+        <div class="col-xs-2">
+        </div>
+
+      </div>
+
+          <div class="row">
+
+
+            <div class="col-xs-3">
+
+            </div>
+            <div class="col-xs-7 text-center">
+              <label for="resource-link">URL</label>
+
+              <input type="text" id="resource-link" class="form-control"></input>
+            </div>
+            <div class="col-xs-2">
+            </div>
+
+          </div>
+
+
+          <div class="row">
+
+
+            <div class="col-xs-3">
+
+            </div>
+            <div class="col-xs-7 text-center">
+              <label for="resource-tags">Tags (seperate with comma)</label>
+
+              <input type="text" id="resource-tags" class="form-control"></input>
+            </div>
+            <div class="col-xs-2">
+            </div>
+
+          </div>
+
+          <div class="row">
+
+
+            <div class="col-xs-3">
+
+            </div>
+            <div class="col-xs-7 text-right">
+              <h5 id="resource-submit">Submit Resource</h5>
+            </div>
+            <div class="col-xs-2">
+            </div>
+
+          </div>
+
+
+          <div class="row">
+
+
+            <div class="col-xs-12">
+              <div  id="#resource-list">
+              </div>
+            </div>
+
+
+          </div>
+
+      <!-- Resources List -->
+
+
+    </script>
+
+    <script type="text/template" id="resource-view-template">
+
+
+                <div class="row">
+                  <div class="col-xs-3">
+                  </div>
+                  <div class="col-xs-7 text-right">
+                    <h5><%%= title %></h5>
+                  </div>
+                  <div class="col-xs-2">
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-xs-3">
+                  </div>
+                  <div class="col-xs-7 text-right">
+                    <h5><%%= description %></h5>
+                  </div>
+                  <div class="col-xs-2">
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-xs-3">
+                  </div>
+                  <div class="col-xs-7 text-right">
+                    <h5><%%= link %></h5>
+                  </div>
+                  <div class="col-xs-2">
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-xs-3">
+                  </div>
+                  <div class="col-xs-7 text-right">
+                    <h5><%%= tags %></h5>
+                  </div>
+                  <div class="col-xs-2">
+                  </div>
+                </div>
+    </script>
+
 
 
     <!-- Main Page -->
@@ -1467,7 +1614,7 @@ fa-terminal on fa-square<br>
 
       <div class="row">
         <div class="col-xs-11 text-right">
-          <span class="issue-challenge">SEND CHALLENGE</span>
+          <span class="issue-challenge">SEND CHALLENGE <i class="fa fa-paper-plane"></i></span>
 
         </div>
       </div>

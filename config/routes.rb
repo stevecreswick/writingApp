@@ -74,24 +74,24 @@ Rails.application.routes.draw do
 
     # Writing Tips
 
-      get 'writing_tips' => 'writing_tips#index'
+      get '/writing_tips' => 'writing_tips#index'
 
-      get 'writing_tips/:id' => 'writing_tips#show'
+      get '/writing_tips/:id' => 'writing_tips#show'
 
-      get 'writing_tips/edit' => 'writing_tips#edit'
+      get '/writing_tips/edit' => 'writing_tips#edit'
 
-      put 'writing_tips/:id' => 'writing_tips#update'
+      put '/writing_tips/:id' => 'writing_tips#update'
 
-      get 'writing_tips/new' => 'writing_tips#new'
+      get '/writing_tips/new' => 'writing_tips#new'
 
-      post 'writing_tips/create' => 'writing_tips#create'
+      post '/writing_tips' => 'writing_tips#create'
 
-      get 'writing_tips/delete' => 'writing_tips#delete'
+      delete '/writing_tips' => 'writing_tips#delete'
 
-      get 'writing_tips/page/:page' => 'writing_tips#page'
-
+      get '/writing_tips/page/:page' => 'writing_tips#page'
 
   end
+
 
 # User Routes
 get '/users' => 'users#index', as: :users
@@ -102,6 +102,8 @@ get '/users/profile/:id' => 'users#profile', as: :profile
 get '/users/show/:id' => 'users#show', as: :show
 get '/users/main' => 'users#main', as: :main
 get '/users/edit' => 'users#edit', as: :edit
+get '/users/search/:search/:page' => 'users#search'
+
 put '/users/:id' => 'users#update'
 
 
@@ -109,7 +111,7 @@ get '/users/:user_id/posts/:post_id' => 'users#show_post'
 
 get '/users/friends/:page' => 'users#friends'
 get '/users/all_friends' => 'users#all_friends'
-get '/users/add_friends/:page' => 'users#add_friends'
+get '/users/add_friends/:page' => 'users#add_friends', as: :add_friends
 get '/users/followers/:page' => 'users#followers'
 
 

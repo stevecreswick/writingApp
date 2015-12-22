@@ -45,6 +45,8 @@
 //= require collections/friendCollection
 //= require collections/pendingFriendCollection
 //= require views/friendListView
+//= require views/searchedUserListView
+
 
 //= require models/user
 //= require views/userView
@@ -77,9 +79,17 @@
 //= require models/rating
 //= require models/vote
 
+//= require models/resource
+//= require collections/resourcesCollection
+//= require views/resourceView
+//= require views/resourceListView
+
+
+
 //= require views/promptFormView
 //= require views/challengeFormView
 //= require views/acceptChallengeFormView
+//= require views/resourcePageView
 //= require views/pageView
 
 //= require timer
