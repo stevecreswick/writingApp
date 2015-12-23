@@ -80,4 +80,14 @@ class User < ActiveRecord::Base
 
   end
 
+  def skill(skill)
+    @skill = 0
+
+    self.posts.map do |post|
+      @skill = @skill + post.skill_rating(skill)
+    end
+
+    @skill
+  end
+
 end

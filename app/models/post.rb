@@ -17,5 +17,17 @@ class Post < ActiveRecord::Base
     @value.to_f / @total.to_f
   end
 
+  def skill_rating(skill)
+    @skill_rating = 0
+
+    self.ratings.each do |rating|
+      if skill == rating.skill
+        @skill_rating = @skill_rating + rating.value
+      end
+    end
+
+    @skill_rating
+  end
+
 
 end

@@ -33,20 +33,6 @@ app.PostView = Backbone.View.extend({
 
       this.$el.find(".show-critiques-box").append( $showCritique );
 
-      var urlModel = "/api/posts/" + this.model.get("id") + "/ratings"
-
-      this.ratings = new app.RatingsCollection()
-      this.ratings.url = urlModel;
-      this.ratings.fetch({async: false});
-
-      if (this.ratings.models.length > 0) {
-        for (var i = 0; i < this.ratings.models.length; i++) {
-          var skill = this.ratings.models[i].get("skill");
-          var value = this.ratings.models[i].get("value");
-          this.applyRating(value, skill)
-        }
-
-      }
 
         // this.colorRating();
 
@@ -58,7 +44,21 @@ app.PostView = Backbone.View.extend({
       if (currentUser === poster) {
         this.$el.find(".remove-post-box").append( $deleteButton );
       } else {
-        // this.$el.find(".remove-post-box").append( $makeCritique );
+
+        // If not the user... load the ratings
+        // var urlModel = "/api/posts/" + this.model.get("id") + "/ratings"
+        //
+        // this.ratings = new app.RatingsCollection()
+        // this.ratings.url = urlModel;
+        // this.ratings.fetch({async: false});
+        //
+        // if (this.ratings.models.length > 0) {
+        //   for (var i = 0; i < this.ratings.models.length; i++) {
+        //     var skill = this.ratings.models[i].get("skill");
+        //     var value = this.ratings.models[i].get("value");
+        //     this.applyRating(value, skill)
+        //   }
+        // }
 
       }
 
@@ -114,6 +114,7 @@ app.PostView = Backbone.View.extend({
       skill: ratingSkill,
       });
 
+    this.applyRating(value, ratingSkill);
   },
 
     // Remove Post
@@ -209,10 +210,60 @@ app.PostView = Backbone.View.extend({
 
       this.hoverHearts();
 
+      this.skills = this.getSkillRatings();
+      this.applySkills(this.skills)
       // this.renderCritiqueFormContainer();
       // this.renderEditor();
 
     },
+
+    getSkillRatings: function(){
+
+      var skills = {
+        overall: this.model.get("skill_overall"),
+        characters: this.model.get("skill_characters"),
+        plot: this.model.get("skill_plot"),
+        theme: this.model.get("skill_theme"),
+        style: this.model.get("skill_style"),
+        grammar: this.model.get("skill_grammar"),
+        setting: this.model.get("skill_setting"),
+        dialogue: this.model.get("skill_dialogue"),
+        structure: this.model.get("skill_structure")
+      }
+
+        return skills;
+
+    },
+
+    applySkills: function(skills){
+
+        for (var skill in skills) {
+          if (skills.hasOwnProperty(skill)) {
+
+            if (skills[skill] > 0) {
+              this.applyRating(skills[skill], skill);
+            }
+
+          }
+        }
+    },
+
+    applyRating: function(rating, skill){
+
+      for (var i = 0; i <= rating; i++) {
+        var divId = "#rating-" + skill + "-" + i;
+        this.$el.find(divId).find("i").addClass("fa-heart rated");
+        this.$el.find(divId).find("i").removeClass( "fa-heart-o" );
+      }
+
+      // Add a rated tag to every heart
+      for (var i = 0; i <= 5; i++) {
+        var divId = "#rating-" + skill + "-" + i;
+        this.$el.find(divId).find("i").addClass("rated");
+      }
+
+    },
+
 
     showFeedback: function(){
       this.$el.empty();
@@ -415,19 +466,6 @@ app.PostView = Backbone.View.extend({
       }
     },
 
-    applyRating: function(rating, skill){
-      for (var i = 0; i <= rating; i++) {
-        var divId = "#rating-" + skill + "-" + i;
-        $(divId).find('.rating-heart').addClass("fa-heart rated");
-        $(divId).find('.rating-heart').removeClass( "fa-heart-o" );
-      }
-
-      // Add a rated tag to every heart
-      for (var i = 0; i <= 5; i++) {
-        var divId = "#rating-" + skill + "-" + i;
-        $(divId).find('.rating-heart').addClass("rated");
-      }
-    },
 
     colorRating: function(){
 

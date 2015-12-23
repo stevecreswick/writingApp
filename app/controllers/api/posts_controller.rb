@@ -80,6 +80,18 @@ respond_to :html, :json
 
           data['total_ratings'] = aRpost.ratings.length
           data['feedback_num'] = aRpost.critiques.length
+
+          # Get Skill Levels
+          data['skill_characters'] = aRpost.skill_rating("characters")
+          data['skill_setting'] = aRpost.skill_rating("setting")
+          data['skill_plot'] = aRpost.skill_rating("plot")
+          data['skill_structure'] = aRpost.skill_rating("structure")
+          data['skill_dialogue'] = aRpost.skill_rating("dialogue")
+          data['skill_style'] = aRpost.skill_rating("style")
+          data['skill_grammar'] = aRpost.skill_rating("grammar")
+          data['skill_theme'] = aRpost.skill_rating("theme")
+          data['skill_overall'] = aRpost.skill_rating("overall")
+
           data
         end
 

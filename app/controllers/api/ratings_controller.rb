@@ -9,12 +9,15 @@ class Api::RatingsController < ApplicationController
     def create
             @post = Post.find(params[:id])
 
+            # If a rating for that skill exists
+
             if current_user.id == @post.user_id
-                redirect_to main_path, :alert => "You cannot rate for your own post"
-            elsif ( Rating.where({user_id: current_user.id, post_id: @post.id}).exists?)
-                # puts @post.ratings.where(user_id: current_user.id)
+              puts '**************** Users Post ******************'
+
+              render :nothing => true, :status => 500
+            elsif ( Rating.where({user_id: current_user.id, post_id: @post.id, skill: rating_params["skill"]}).exists?)
                 puts '**************** Already Rated ******************'
-                render json: @post
+                render :nothing => true, :status => 333
             else
                 @rating = Rating.create(rating_params)
                 @rating.update({

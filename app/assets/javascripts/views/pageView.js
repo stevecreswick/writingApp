@@ -70,6 +70,7 @@ app.PageView = Backbone.View.extend({
     this.$el.append( $html );
     this.renderPromptForm();
 
+    console.log('post');
 
     this.renderSideNav();
   },
@@ -374,7 +375,6 @@ showGenres: function(){
     // this.emptyCenter();
 
     this.createPostList();
-
     app.posts = new app.PostCollection();
     app.posts.genre = this.currentGenre;
     app.posts.page = this.currentPage;
@@ -385,7 +385,7 @@ showGenres: function(){
     });
 
 
-    app.posts.fetch({url: app.posts.url(), async:false});
+    app.posts.fetch({url: app.posts.url(), async: false});
 
     app.postPainter.render();
 
@@ -428,7 +428,7 @@ showGenres: function(){
     var $following = $('<span>').addClass("show-following").text('Following | ');
     var $followers = $('<span>').addClass("show-followers").text('Followers | ');
 
-    var $searchBar = $("<input>").attr("type", "text").attr("id", "user-search-form");
+    var $searchBar = $("<input>").attr("type", "text").attr("id", "user-search-form").addClass("form-control");
     var $click = $("<span>").attr("id", "search-users").html("search users");
 
     var header = $('<div>').addClass('friends-nav');
