@@ -36,7 +36,7 @@ app.PageView = Backbone.View.extend({
   backgroundFiction: "'Cutive Mono', sans-serif",
   backgroundCrime: "'Cutive Mono', sans-serif",
   backgroundRomance: "'Cutive Mono', sans-serif",
-  backgroundSciFi: "'Cutive Mono', sans-serif",
+  backgroundSciFi: "/assets/stardust.png",
   backgroundPoetry: "'Cutive Mono', sans-serif",
   backgroundNonFiction: "'Cutive Mono', sans-serif",
 
@@ -81,31 +81,41 @@ app.PageView = Backbone.View.extend({
 
       case "Romance":
         this.$el.find('h1.home-page').css( {'font-family': "'Lovers Quarrel', cursive", "font-size": "2.5em"});
-        this.$el.find('.container-fluid').css({"background-color": this.headerRomance})
+        this.$el.find('.container-fluid').css({'background': "url()"});
+
+        this.$el.find('.container-fluid').css({"background": this.headerRomance})
       break;
 
       case "Horror":
         this.$el.find('h1.home-page').css({'font-family': "'Loved by the King', cursive", "font-size": "2.5em"});
         this.$el.find('.post#title-holder').css({'font-family': "'Loved by the King', cursive", "font-size": "2.5em"});
-        this.$el.find('.container-fluid').css({"background-color": this.headerHorror})
+        this.$el.find('.container-fluid').css({'background': "url()"});
+
+        this.$el.find('.container-fluid').css({"background": this.headerHorror})
 
       break;
 
       case "Science-Fiction":
         this.$el.find('h1.home-page').css({'font-family': "'Krona One', sans-serif", "font-size": "2.5em", "color": "red"});
-        this.$el.find('.container-fluid').css({'background': "darkgrey"});
+        this.$el.find('.container-fluid').css({'background': "url()"});
+
+        this.$el.find('.container-fluid').css({'background': "url(" + this.backgroundSciFi + ")"});
 
       break;
 
       case "Historical-Fiction":
         this.$el.find('h1.home-page').css({'font-family': "'Homemade Apple', cursive", "font-size": "3em"});
-        this.$el.find('.container-fluid').css({"background-color": this.headerHistorical})
+        this.$el.find('.container-fluid').css({'background': "url()"});
+
+        this.$el.find('.container-fluid').css({"background": this.headerHistorical})
 
       break;
 
       case "Poetry":
         this.$el.find('h1.home-page').css({'font-family': "'Homemade Apple', cursive", "font-size": "3em"});
-        this.$el.find('.container-fluid').css({"background-color": this.headerPoetry})
+        this.$el.find('.container-fluid').css({'background': "url()"});
+
+        this.$el.find('.container-fluid').css({"background": this.headerPoetry})
 
       break;
 
@@ -153,7 +163,7 @@ app.PageView = Backbone.View.extend({
     this.renderSideNav();
 
     this.friendsNav();
-    this.showFollowing();
+    this.showUsers();
   },
 
   challengesPage: function(){
@@ -400,7 +410,10 @@ showGenres: function(){
     this.clearFriendsPage();
 
     var $center = this.$el.find('#center-pane');
-    var $friendPage = $("<div>").attr('id', 'friend-page')
+    this.$el.find('#friend-page').remove();
+    var $friendPage = $("<div>").attr('id', 'friend-page');
+    var $none = _.template( $('#no-friends-screen').html() );
+
 
     $center.append( $friendPage )
 
@@ -413,7 +426,6 @@ showGenres: function(){
     app.friends.fetch({url: '/users/friends/' + this.currentPage  });
 
     if (app.friends.models.length === 0){
-    var $none = _.template( $('#no-friends-screen').html() );
     this.$el.find('#friend-page').append( $none );
     }
 
@@ -424,16 +436,10 @@ showGenres: function(){
 
 
   friendsNav: function(){
-    var $add = $('<span>').addClass("show-users").text('Add Friends');
-    var $following = $('<span>').addClass("show-following").text('Following | ');
-    var $followers = $('<span>').addClass("show-followers").text('Followers | ');
 
-    var $searchBar = $("<input>").attr("type", "text").attr("id", "user-search-form").addClass("form-control");
-    var $click = $("<span>").attr("id", "search-users").html("search users");
+    var $header = _.template( $('#friend-nav-template').html() );
 
-    var header = $('<div>').addClass('friends-nav');
-    header.append($searchBar, $click, $following, $followers, $add);
-    this.$el.find('#center-pane').append( header );
+    this.$el.find('#center-pane').append( $header );
   },
 
   searchUsers: function(){
@@ -463,6 +469,13 @@ showGenres: function(){
   showFollowers: function(){
     this.clearFriendsPage();
 
+    var $center = this.$el.find('#center-pane');
+    this.$el.find('#friend-page').remove();
+
+    var $friendPage = $("<div>").attr('id', 'friend-page');
+
+    $center.append( $friendPage )
+
     app.followers = new app.FollowerCollection();
     app.followerPainter = new app.FollowerListView({
       collection: app.followers,
@@ -480,6 +493,12 @@ showGenres: function(){
 
   showUsers: function(){
     this.clearFriendsPage();
+
+    var $center = this.$el.find('#center-pane');
+    this.$el.find('#friend-page').remove();
+    var $friendPage = $("<div>").attr('id', 'friend-page');
+
+    $center.append( $friendPage )
 
 
     app.users = new app.UserCollection();

@@ -19,8 +19,6 @@ app.FriendView = Backbone.View.extend({
     var $profilePic = $('<img>').attr("src", profilePic).addClass('user-profile-picture img-circle');
     this.$el.find('.user-pic-box').append($profilePic);
 
-    console.log(this.model.get('username'));
-
     var $removeFriend = $('<span>').addClass('remove-friend').text('Remove Friend');
     var $addFriend = $('<span>').addClass('add-friend').text('Add Friend');
     var $br = $('<br>')
@@ -46,17 +44,17 @@ app.FriendView = Backbone.View.extend({
     'click button.make-challenge': 'makeChallenge',
     'click button.show-challenges': 'showChallenges',
     'click .show-user-posts': 'showPosts',
-    'click .hide-user-posts': 'hidePosts'
+    'click .hide-user-posts': 'hidePosts',
+    'click .about-the-author-show': 'showInfo',
+    'click .about-the-author-hide': 'hideInfo'
 
   },
 
   addFriend: function(){
-    console.log('add friend clicked');
     // var friendID = this.$el.find('.friend-id-holder').val();
     // var userID = this.model.get('id');
     this.addedFriend = new app.FriendCollection();
     this.addedFriend.fetch();
-    console.log(this.model.get('id'));
     this.addedFriend.url = "/api/friendships/" + this.model.get('id');
     var urlModel = "/api/friendships/" + this.model.get('id')
     this.addedFriend.create({friend_id: this.model.get('id'), url: urlModel });
@@ -64,9 +62,19 @@ app.FriendView = Backbone.View.extend({
     app.friends.fetch();
   },
 
-  removeFriend: function(){
-    console.log('remove friend clicked');
+  showInfo: function(){
+    this.$el.find("#author-info").show();
+    this.$el.find(".about-the-author-show").html("Hide Author Info")
+    this.$el.find(".about-the-author-show").addClass('about-the-author-hide').removeClass('about-the-author-show');
+  },
 
+  hideInfo: function(){
+    this.$el.find("#author-info").hide();
+    this.$el.find(".about-the-author-hide").html("Show Author Info")
+    this.$el.find(".about-the-author-hide").addClass('about-the-author-show').removeClass('about-the-author-hide');
+  },
+
+  removeFriend: function(){
     var postId = this.model.get('id');
     var urlModel = "/api/friendships/" + this.model.get('id');
     this.model.destroy({ url: urlModel });
@@ -81,11 +89,8 @@ app.FriendView = Backbone.View.extend({
 
     var $challenge = $('<div>').attr('id', 'challenge-view');
     this.$el.append( $challenge )
-    console.log('make challenge clicked');
-    console.log('Friend ID : ' + this.model.get('id') );
     var friendId = this.model.get('id');
     var friendship = app.friends.where({id: friendId})[0];
-    console.log( friendship );
 
     app.challengePainter = new app.ChallengeFormView({
       el: $('#challenge-view'),
@@ -101,7 +106,6 @@ app.FriendView = Backbone.View.extend({
     this.challenges = new app.ChallengeCollection();
     this.challenges.url = '/api/friendships/' + friendship + '/challenges';
     this.challenges.fetch()
-    console.log(this.challenges);
     },
 
     showChallenges: function(){
@@ -134,7 +138,6 @@ app.FriendView = Backbone.View.extend({
 
       var posts = new app.PostCollection();
       var userId = this.model.get('id');
-      console.log(userId);
       var testEl = this.$el.find("#post-list")
       posts.page = this.currentPage;
       var postPainter = new app.PostListView({
@@ -156,7 +159,7 @@ app.FriendView = Backbone.View.extend({
       oldList.remove();
 
       var $container = $('<div>').attr('id', 'post-list');
-      this.$el.append( $container );
+      this.$el.find("#author-info").append( $container );
 
     },
 

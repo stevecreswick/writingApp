@@ -14,7 +14,6 @@ app.FriendListView = Backbone.View.extend({
           view = new app.FriendView({model: friends[i]});
           view.render();
           this.$el.append( view.$el );
-          console.log(friends[i]);
         }
     }
 });

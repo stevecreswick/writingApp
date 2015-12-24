@@ -14,7 +14,7 @@ app.UserView = Backbone.View.extend({
     this.$el.append( $html );
   },
   events:{
-    'click button.add-friend': 'addFriend'
+    'click .add-friend': 'addFriend'
   },
   addFriend: function(){
     console.log('add friend clicked');
@@ -27,6 +27,7 @@ app.UserView = Backbone.View.extend({
     this.addedFriend.url = urlModel;
     this.addedFriend.create({friend_id: this.model.get('id')});
     app.friends.fetch();
+    this.$el.remove();
   }
 
 });

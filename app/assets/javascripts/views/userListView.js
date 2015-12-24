@@ -18,12 +18,11 @@ app.UserListView = Backbone.View.extend({
 
           // If the user is a friend, do not render
           if (!users[i].get('is_friend')){
-            view = new app.FriendView({model: users[i]});
+            view = new app.UserView({model: users[i]});
             view.render();
             this.$el.append( view.$el );
           }
           else {
-            console.log('user is friend');
           }
 
 

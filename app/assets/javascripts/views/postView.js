@@ -70,7 +70,7 @@ app.PostView = Backbone.View.extend({
     'click span.remove-post': 'removePost',
     'click button.delete-post': 'deletePost',
     'click button.make-critique': 'renderCritiqueForm',
-    'click button.save-critique': 'saveCritique',
+    'click span.save-critique': 'saveCritique',
 
     'click .show-feedback': 'showFeedback',
     'click .hide-feedback': 'hideFeedback',
@@ -292,9 +292,9 @@ app.PostView = Backbone.View.extend({
       var feedbackLabel;
 
       if (feedbackNum > 0){
-        feedbackLabel = "Give Feedback <i class='fa fa-commenting-o'></i>" + feedbackNum ;
+        feedbackLabel = "Write Feedback <i class='fa fa-commenting-o'></i>" + feedbackNum ;
       } else {
-        feedbackLabel = "Give Feedback <i class='fa fa-commenting-o'></i>";
+        feedbackLabel = "Write Feedback <i class='fa fa-commenting-o'></i>";
       }
 
       var $feedbackButton = $('<h5>').addClass('show-feedback text-left prompt-label').html( feedbackLabel );

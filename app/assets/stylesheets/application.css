@@ -652,6 +652,11 @@ margin-top: -4.8em;
 margin-top: -4.8em;
 }
 
+.author-search-box{
+  padding: 1em;
+  margin-bottom: 5em;
+}
+
 .show-friends {
   text-align: center;
 
@@ -831,12 +836,6 @@ form#challenge-accept-form {
   display: inline-block;
 }
 
-div.user-view{
-  border: 1px grey solid;
-  margin-bottom: 1em;
-  padding: 1em;
-  background: white;
-}
 .add-friend{
   display: inline-block;
 }
@@ -845,15 +844,34 @@ div.user-view{
   cursor: pointer;
 }
 
+#author-info{
+  display: none;
+}
+
+.about-the-author{
+  margin-bottom: 3em;
+}
+
 div.friend-view{
   background-color: white;
   padding: 2% 2% 4% 2%;
   border-radius: 3px;
   margin: 2em 1em 7em 1em;
-  border-top: 9px solid #545454;
-  border-left: 9px solid #545454;
+  /*border-left: 9px solid #545454;*/
 
   text-align: center;
+
+  -webkit-box-shadow: 10px 10px 16px 0px rgba(66,66,66,1);
+  -moz-box-shadow: 10px 10px 16px 0px rgba(66,66,66,1);
+  box-shadow: 10px 10px 16px 0px rgba(66,66,66,1);
+}
+
+div.user-view{
+  border-radius: 3px;
+  /*border-left: 9px solid #545454;*/
+  margin-bottom: 1.5em;
+  padding: 1em;
+  background: white;
 
   -webkit-box-shadow: 10px 10px 16px 0px rgba(66,66,66,1);
   -moz-box-shadow: 10px 10px 16px 0px rgba(66,66,66,1);
@@ -870,6 +888,19 @@ div.friend-view{
   margin-top: 1em;
   margin-bottom: 1em;
   margin-right: 5%;*/
+}
+
+.challenge-view{
+  border-radius: 3px;
+  /*border-left: 9px solid #545454;*/
+  margin-bottom: 1.5em;
+  padding: 1em;
+  background: white;
+
+  -webkit-box-shadow: 10px 10px 16px 0px rgba(66,66,66,1);
+  -moz-box-shadow: 10px 10px 16px 0px rgba(66,66,66,1);
+  box-shadow: 10px 10px 16px 0px rgba(66,66,66,1);
+
 }
 
 .completed-challenge-message{
@@ -914,7 +945,6 @@ div.friend-view{
   font-family: 'Damion', cursive;
   color: black;
   font-size: 12em;
-  margin-top: -0.5em;
 }
 
 .welcome-sub-header{

@@ -13,6 +13,11 @@ app.ChallengeView = Backbone.View.extend({
     var html = this.template( this.model.toJSON() );
     var $html = $( html );
     this.$el.append( $html );
+
+    var $img = $("<img>").addClass("img-circle profile-picture").attr("src", this.model.get("image_url") );
+
+    this.$el.find(".challenged-user").append( $img, this.model.get("username") )
+
   },
   events:{
     'click button.remove-challenge': 'removeChallenge'
