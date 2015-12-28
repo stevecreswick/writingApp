@@ -20,8 +20,8 @@
 //= require backbone.pagedcollection
 //= require turbolinks
 //= require bootstrap.min
-//= require bootstrap-slider
-//= require jquery.rating.pack.js
+//= require material.min
+//= require ripples.min
 
 //= require quill.min
 

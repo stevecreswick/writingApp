@@ -28,7 +28,7 @@ app.promptFormView = Backbone.View.extend({
     this.bindPromptDescription();
   },
   events:{
-    'click button.render-prompt': 'getPrompt',
+    'click a.render-prompt': 'getPrompt',
     'click a.start': 'renderWritingForm',
     'click span.publish': 'publishPost'
   },
@@ -39,6 +39,12 @@ app.promptFormView = Backbone.View.extend({
       return "Write at least " + options.wordCount + " words, using the word";
     } else if (options.type === "reddit") {
       return "Write at least " + options.wordCount + " words, using the /r/writingprompt";
+    } else if (options.type === "Classic First Sentence") {
+      return "Write at least " + options.wordCount + " words, using the classic first sentence";
+    } else if (options.type === "Answer What If") {
+      return "Write at least " + options.wordCount + " words, answering what if";
+    } else {
+
     }
 
     // Store Word Count
@@ -132,7 +138,7 @@ app.promptFormView = Backbone.View.extend({
       // var $row = $('<div>').addClass("row");
       // var $col12 = $('<div>').addClass("col-xs-12 text-right");
 
-      $start.append( $icon, buttonHTML)
+      $start.append( $icon, buttonHTML);
       // $col12.append( $start )
       // $row.append( $col12 );
 

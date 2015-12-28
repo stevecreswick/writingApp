@@ -16,7 +16,7 @@ app.ChallengeView = Backbone.View.extend({
 
     var $img = $("<img>").addClass("img-circle profile-picture").attr("src", this.model.get("image_url") );
 
-    this.$el.find(".challenged-user").append( $img, this.model.get("username") )
+    this.$el.find(".challenged-user").append( $img, "&nbsp;", this.model.get("username") )
 
   },
   events:{

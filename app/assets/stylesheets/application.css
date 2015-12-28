@@ -15,6 +15,8 @@
  *= require bootstrap-slider
  *= require jquery-ui.min
  *= require jquery.rating
+ *= require bootstrap-material-design
+ *= require ripples.min
  *= require quill.base
  *= require quill.advanced
  *= require quill.snow
@@ -52,22 +54,54 @@
 
 
   .container-fluid {
-    background: floralwhite;
-    /*background: url('binding_dark.png');*/
+    background: white;
+
     overflow: auto;
     /*padding-top: 5em;*/
     height: 100%;
   }
 
+  #left-columns{
+    height: 100%;
+  }
+
+
+  .user-search-container{
+    margin-top: 1em;
+    margin-bottom: 2em;
+
+    padding: 1em;
+
+    background: white;
+    -webkit-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    -moz-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.friend-nav{
+  padding: 1em 0 0 0;
+}
+
 #main-display{
   position: absolute;
+  background: url('binding_dark.png');
+
 }
 
 #center-columns{
   padding-bottom: 3em;
-  background: ghostwhite;
+  background: floralwhite;
   min-height: 1000px;
 }
+
+#friend-page{
+  margin-top: 2em;
+}
+
+#challenge-page{
+  margin-top: 2em;
+}
+
 .post-title {
   color: red;
   display: block;
@@ -182,7 +216,7 @@ p.character-count {
 
 #prompt-container{
   color: black;
-  text-align: center;
+  text-align: left;
   padding: 1em;
   font-size: 0.8em;
   margin-top: 2em;
@@ -191,6 +225,7 @@ p.character-count {
 
   #prompt-container .prompt-text{
     font-family: 'Cutive Mono', sans-serif;
+
   }
 
 
@@ -295,7 +330,14 @@ form{
   height: 50px;
   width: 50px;
   margin: 0 auto;
-  display: block;
+  display: inline-block;
+}
+
+.resource-profile-picture{
+  height: 25px;
+  width: 25px;
+  margin: 0 auto;
+  display: inline-block;
 }
 
 .critique-profile-picture{
@@ -313,6 +355,10 @@ form{
 
 ul.dropdown-menu{
   z-index: 10;
+}
+
+#resource-list{
+  padding: 1em;
 }
 
 .navbar-right{
@@ -439,7 +485,10 @@ img.sort-image{
   background: white;
   padding: 1em;
   margin-top: 1em;
-  width: 90%;
+  -webkit-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  -moz-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
 }
 
 
@@ -479,6 +528,7 @@ img.sort-image{
 .nav-text{
   font-size: 16px;
   font-family: "Open Sans Condensed", serif;
+  color: black;
 }
 
 .nav-text:hover{
@@ -496,9 +546,13 @@ img.sort-image{
 
   text-align: center;
 
-  -webkit-box-shadow: 10px 10px 16px 0px rgba(66,66,66,1);
+  -webkit-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  -moz-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+  /*-webkit-box-shadow: 10px 10px 16px 0px rgba(66,66,66,1);
   -moz-box-shadow: 10px 10px 16px 0px rgba(66,66,66,1);
-  box-shadow: 10px 10px 16px 0px rgba(66,66,66,1);
+  box-shadow: 10px 10px 16px 0px rgba(66,66,66,1);*/
 }
 
 /* Prompt */
@@ -653,7 +707,7 @@ margin-top: -4.8em;
 }
 
 .author-search-box{
-  padding: 1em;
+  padding-top: 1em;
   margin-bottom: 5em;
 }
 
@@ -861,9 +915,9 @@ div.friend-view{
 
   text-align: center;
 
-  -webkit-box-shadow: 10px 10px 16px 0px rgba(66,66,66,1);
-  -moz-box-shadow: 10px 10px 16px 0px rgba(66,66,66,1);
-  box-shadow: 10px 10px 16px 0px rgba(66,66,66,1);
+  -webkit-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  -moz-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 div.user-view{
@@ -873,9 +927,21 @@ div.user-view{
   padding: 1em;
   background: white;
 
-  -webkit-box-shadow: 10px 10px 16px 0px rgba(66,66,66,1);
-  -moz-box-shadow: 10px 10px 16px 0px rgba(66,66,66,1);
-  box-shadow: 10px 10px 16px 0px rgba(66,66,66,1);
+  -webkit-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  -moz-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.add-resource-form{
+  border-radius: 3px;
+  /*border-left: 9px solid #545454;*/
+  margin: 1em 0 1em 0;
+  padding: 1em;
+  background: white;
+
+  -webkit-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  -moz-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .completed-challenge-view {
@@ -897,9 +963,9 @@ div.user-view{
   padding: 1em;
   background: white;
 
-  -webkit-box-shadow: 10px 10px 16px 0px rgba(66,66,66,1);
-  -moz-box-shadow: 10px 10px 16px 0px rgba(66,66,66,1);
-  box-shadow: 10px 10px 16px 0px rgba(66,66,66,1);
+  -webkit-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  -moz-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
 }
 
@@ -1203,5 +1269,5 @@ div.user-view{
   .resource-wrapper{
     padding: 1em;
     background: white;
-    margin-bottom: 0.3em;
+    margin-bottom: 3em;
   }

@@ -161,6 +161,8 @@ class UsersController < ApplicationController
         data['is_friend'] = false
         data['friend_name'] = user.username
         data['friend_image'] = user.image_url
+        data['posts'] = user.posts.length
+        data['reviews'] = user.critiques.length
         data
 
     end

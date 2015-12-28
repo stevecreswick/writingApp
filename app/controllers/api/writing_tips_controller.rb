@@ -12,6 +12,8 @@ class Api::WritingTipsController < ApplicationController
     tips = writing_tips.map do |tip|
       data = tip.as_json
       data['total_votes'] = tip.total_votes
+      data['submitted_by'] = tip.user.username
+      data['user_image'] = tip.user.image_url
       data
     end
 
@@ -70,7 +72,7 @@ class Api::WritingTipsController < ApplicationController
   private
 
   def writing_tips_params
-    params.require(:writing_tip).permit(:title, :link, :description, :tags, :votes, :user_id)
+    params.require(:writing_tip).permit(:title, :link, :description, :tags, :votes, :user_id, :resource_type)
   end
 
 end

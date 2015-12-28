@@ -186,97 +186,79 @@
 
     <script type="text/template" id="resource-page-template">
 
-
-      <!-- Resources Form -->
-
-      <div class="row">
-
-
-        <div class="col-xs-3">
-
-        </div>
-        <div class="col-xs-7 text-center">
-          <label for="resource-name">Name</label>
-          <input type="text" id="resource-name" class="form-control"></input>
-        </div>
-        <div class="col-xs-2">
-        </div>
-
-      </div>
-
-      <div class="row">
-
-
-        <div class="col-xs-3">
-
-        </div>
-        <div class="col-xs-7 text-center">
-          <label for="resource-description">Description</label>
-          <input type="text" id="resource-description" class="form-control"></input>
-        </div>
-        <div class="col-xs-2">
-        </div>
-
-      </div>
-
+        <!-- Resources Form -->
+        <div class="add-resource-form">
           <div class="row">
-
-
-            <div class="col-xs-3">
-
-            </div>
-            <div class="col-xs-7 text-center">
-              <label for="resource-link">URL</label>
-              <input type="text" id="resource-link" class="form-control"></input>
-            </div>
-            <div class="col-xs-2">
-            </div>
-
-          </div>
-
-
-          <div class="row">
-
-
-            <div class="col-xs-3">
-
-            </div>
-            <div class="col-xs-7 text-center">
-              <label for="resource-tags">Tags (seperate with comma)</label>
-              <input type="text" id="resource-tags" class="form-control"></input>
-            </div>
-            <div class="col-xs-2">
-            </div>
-
-          </div>
-
-          <div class="row">
-
-
-            <div class="col-xs-3">
-
-            </div>
-            <div class="col-xs-7 text-right">
-              <h5 id="resource-submit">Submit Resource</h5>
-            </div>
-            <div class="col-xs-2">
-            </div>
-
-          </div>
-
-
-          <div class="row">
-
-
             <div class="col-xs-12">
-              <div  id="resource-list">
+              <h4 class="text-center">Add a New Writing Resource</h4>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-xs-6 col-xs-offset-3 col-sm-offset-1 col-sm-4">
+              <!-- <div class="form-group label-floating">
+                <label class="control-label" for="focusedInput2">Focus to show the help-block</label>
+                <input class="form-control" id="focusedInput2" type="text">
+                <p class="help-block">You should really write something here</p>
+              </div> -->
+
+              <div class="form-group label-floating">
+              <label for="resource-name" class="label-control">Name</label>
+              <input class="form-control" id="resource-name" type="text" placeholder="Google"></input>
               </div>
             </div>
-
-
+            <div class="form-group label-floating">
+              <div class="col-xs-6 col-sm-6">
+                <label for="resource-description" class="label-control">Description</label>
+                <input class="form-control" id="resource-description" type="text" placeholder="an awesome search engine"></input>
+              </div>
+            </div>
           </div>
 
-      <!-- Resources List -->
+          <div class="row">
+            <div class="col-xs-6 col-xs-offset-3 col-sm-offset-1 col-sm-5">
+              <div class="form-group label-floating">
+                <label for="resource-link" class="label-control">URL </label>
+                <input class="form-control" id="resource-link" type="text" placeholder="http://www.google.com"></input>
+              </div>
+            </div>
+            <div class="col-xs-6 col-sm-5">
+              <div class="form-group label-floating">
+                <label for="resource-tags" class="label-control">Tags (seperate with comma)</label>
+                <input class="form-control" id="resource-tags" type="text" placeholder="reference, search engine"></input>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-xs-6 col-xs-offset-3 col-sm-offset-1 col-sm-5">
+              <div class="form-group label-floating">
+
+                <label for="choose-resource-type" class="label-control">Resource Type</label>
+                <select class="form-control" id="choose-resource-type">
+                    <option>Article</option>
+                    <option>Website</option>
+                    <option>Book</option>
+                    <option>Video</option>
+                    <option>Other</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-xs-3 col-sm-4 text-right">
+              <a id="resource-submit" class="btn btn-raised btn-success">Submit Resource</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Resources List -->
+
+
+        <div class="row">
+          <div class="col-xs-12">
+            <h4>Resources</h4>
+            <div id="resource-list"></div>
+          </div>
+        </div>
 
 
     </script>
@@ -284,22 +266,14 @@
     <script type="text/template" id="resource-view-template">
 
       <div class="resource-wrapper">
-                <div class="row">
-                  <div class="col-xs-1">
-                  </div>
-                  <div class="col-xs-7">
-                    <h5><%%= title %></h5>
-                  </div>
-                  <div class="col-xs-2">
-                    <span class="edit-resource">Edit</span>
-                  </div>
-                  <div class="col-xs-2">
-                    <span class="delete-resource">Delete</span>
-                  </div>
-                </div>
 
+        <div class="row">
+          <div class="col-xs-12">
+            <%%= resource_type || "Type Undefined"  %>
+          </div>
+        </div>
                 <div class="row">
-                  <div class="col-xs-1 text-center">
+                  <div class="col-xs-2 text-center">
                     <i class="fa fa-caret-up fa-5x resource-up-vote vote"></i>
                     <div id="resource-votes"></div>
                     <i class="fa fa-caret-down fa-5x resource-up-vote vote"></i>
@@ -307,37 +281,46 @@
                   <div class="col-xs-8 text-left">
 
                                     <div class="row">
-                                      <div class="col-xs-3">
+                                      <div class="col-xs-8">
+                                        <h3><%%= title %></h3>
                                       </div>
+                                      <div class="col-xs-1">
+                                      </div>
+                                      <div class="col-xs-1">
+                                      </div>
+                                    </div>
+
+                                    <div class="row">
                                       <div class="col-xs-7">
-                                        <h5>DESCRIPTION: <%%= description %></h5>
+                                        <h5><%%= description %></h5>
                                       </div>
                                       <div class="col-xs-2">
                                       </div>
                                     </div>
 
                                     <div class="row">
-                                      <div class="col-xs-3">
-                                      </div>
                                       <div class="col-xs-7">
-                                        <h5>URL: <%%= link %></h5>
+                                        <h5><a href="h<%%= link %>"><%%= link %></a></h5>
                                       </div>
                                       <div class="col-xs-2">
                                       </div>
                                     </div>
 
                                     <div class="row">
-                                      <div class="col-xs-3">
-                                      </div>
                                       <div class="col-xs-7">
                                         <h5>Tags: <%%= tags %></h5>
                                       </div>
-                                      <div class="col-xs-2">
-                                      </div>
+
                                     </div>
                   </div>
-                  <!-- <div class="col-xs-2 text-right">
-                  </div> -->
+                  <div class="col-xs-2 text-right">
+                      <div id="resource-user-info">
+
+                      </div>
+                      <div id="resource-controls">
+
+                      </div>
+                  </div>
                 </div>
 
             </div>
@@ -569,6 +552,9 @@ fa-terminal on fa-square<br>
           </div>
           <div class="row">
             <div class="col-xs-12 text-center">
+              <div class="progress">
+                <div class="progress-bar progress-bar-info" style="width: 20%"></div>
+              </div>
             </div>
 
           </div>
@@ -1236,79 +1222,85 @@ fa-terminal on fa-square<br>
         </div>
       </div> -->
 
-
-      <div id="prompt-form">
-
       <div class="row">
-        <div class="col-xs-12">
-
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-xs-2"></div>
-
-      </div>
+        <div class="col-xs-10 col-xs-offset-1">
+          <div id="prompt-form">
 
 
+          <div class="row">
+            <div class="col-xs-12">
 
-      <div class="row">
-        <div class="col-xs-12 text-center">
-        </div>
-      </div>
-
-
-      <div class="row">
-        <div class="col-xs-12 col-sm-8">
-          <label for="choose-type">Choose your prompt</label>
-          <select class="form-control" id="choose-type">
-              <option>Use One Word</option>
-              <option>Answer What If</option>
-              <option>Classic First Sentence</option>
-              <option>reddit</option>
-          </select>
-          <div id="prompt-description" class="prompt-label">
-
-            <!-- Starts on One Word -->
-            Description: Use the one word prompt in the first sentence of your post.
+            </div>
           </div>
-        </div>
-        <div class="col-xs-12 col-sm-3">
-          <label for="post-word-count">Choose minimum word count</label>
-          <input type="number" value="25" min ="25" max="1000" step="25" class="form-control" id="post-word-count"></input>
-          <span class="prompt-label">1,000 max</span>
+
+          <div class="row">
+            <div class="col-xs-2"></div>
+
+          </div>
+
+
+
+          <div class="row">
+            <div class="col-xs-12 text-center">
+            </div>
+          </div>
+
+
+          <div class="row">
+            <div class="col-xs-12 col-sm-8">
+              <label for="choose-type">Choose your prompt</label>
+              <select class="form-control" id="choose-type">
+                  <option>Use One Word</option>
+                  <option>Answer What If</option>
+                  <option>Classic First Sentence</option>
+                  <option>reddit</option>
+              </select>
+              <div id="prompt-description" class="prompt-label">
+
+                <!-- Starts on One Word -->
+                Description: Use the one word prompt in the first sentence of your post.
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-3">
+              <label for="post-word-count">Choose minimum word count</label>
+              <input type="number" value="25" min ="25" max="1000" step="25" class="form-control" id="post-word-count"></input>
+              <span class="prompt-label">1,000 max</span>
+            </div>
+
+          </div>
+
+          <div class="row">
+            <div class="col-xs-12 col-sm-8 text-center">
+              <div id="prompt-container"></div>
+            </div>
+            <div class="col-xs-12 col-sm-2 text-center">
+                <a class="render-prompt btn btn-default">Get a Prompt</a>
+            </div>
+            <div class="col-xs-12 col-sm-2 text-center">
+              <div id="start-writing-container"></div>
+            </div>
+          </div>
+
+
+          <div class="row">
+            <div class="col-xs-12 col-sm-8 text-center">
+            </div>
+            <div class="col-xs-12 col-sm-3">
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-4">
+
+            </div>
+
+          </div>
+
+          <!-- Close Prompt Series -->
         </div>
 
+<!-- Closes Row and Column -->
       </div>
-
-      <div class="row">
-        <div class="col-xs-12 col-sm-8 text-center">
-          <div id="prompt-container"></div>
-        </div>
-        <div class="col-xs-12 col-sm-2 text-center">
-            <button class="render-prompt btn btn-default">Get a Prompt</button>
-        </div>
-        <div class="col-xs-12 col-sm-2 text-center">
-          <div id="start-writing-container"></div>
-        </div>
-      </div>
-
-
-      <div class="row">
-        <div class="col-xs-12 col-sm-8 text-center">
-        </div>
-        <div class="col-xs-12 col-sm-3">
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-md-4">
-
-        </div>
-
-      </div>
-
-      <!-- Close Prompt Series -->
     </div>
 
     </script>
@@ -1623,14 +1615,48 @@ fa-terminal on fa-square<br>
 
     </script>
 
+
+
     <script type="text/template" id="user-view-template">
 
       <div class="row">
         <div class="col-xs-3">
-          <h3 class="user-name-header"><img src="<%%= image_url %>" class="img-circle profile-picture"</><%%= username %></h3>
+          <h3 class="user-name-header"><img src="<%%= image_url %>" class="img-circle profile-picture"</>&nbsp; <%%= username %></h3>
         </div>
-        <div class="col-xs-6">
+        <div class="col-xs-3">
+
+          <div class="row text-center">
+            <div class="col-xs-12">
+              Writing Score <br>
+              <%%= writer_score || 0 %>
+            </div>
+          </div>
+
+          <div class="row text-center">
+            <div class="col-xs-12">
+              Posts <br>
+              <%%= posts || 0 %>
+            </div>
+          </div>
+
         </div>
+        <div class="col-xs-3">
+          <div class="row text-center">
+            <div class="col-xs-12">
+              Reviewer Score <br>
+              <%%= reviewer_score || 0%>
+            </div>
+          </div>
+
+          <div class="row text-center">
+            <div class="col-xs-12">
+              Feedback Given <br>
+              <%%= reviews || 0 %>
+            </div>
+          </div>
+
+        </div>
+
         <div class="col-xs-3">
             <span class="btn btn-success add-friend">Add Friend</span>
         </div>
@@ -1674,54 +1700,64 @@ fa-terminal on fa-square<br>
 
     <script type="text/template" id="make-challenge-template">
 
-      <div class="row">
-        <div class="col-xs-12">
-          <h4>Issue a Writing Challenge to a Friend</h4>
-        </div>
-      </div>
-
-      <div class="row">
-
-      </div>
 
 
       <div class="row">
-        <div class="col-xs-12 col-sm-4">
-          <label for="friend-name">Choose Friend</label>
-            <div id="choose-friend-container">
+        <div class="col-xs-12 col-sm-8 col-sm-offset-2">
+            <div class="user-search-container">
+              <div class="row">
+                <div class="col-xs-12 text-center">
+                  <h3>Issue a Writing Challenge</h3>
+                </div>
+              </div>
 
-            <!-- Friend Options Rendered Here -->
+              <div class="row">
 
-            </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-12 col-sm-8">
+                  <label for="friend-name">Enter Writing Challenge</label>
+                  <input type="text" class="form-control" id="challenge-prompt" placeholder="i.e. use the word hyperbolic"></input>
+                </div>
+                <div class="col-xs-12 col-sm-2">
+                  <label for="challenge-word-count">Min. Word Count?</label>
+                  <input type="number" value="25" min ="25" max="1000" step="25" class="form-control" id="challenge-word-count"></input>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-xs-12 col-sm-4">
+                  <label for="friend-name">Choose Friend</label>
+                    <div id="choose-friend-container">
+
+                    <!-- Friend Options Rendered Here -->
+
+                    </div>
+                  </div>
+                  <div class="col-xs-12 col-sm-6 col-sm-offset-2 text-center">
+                    <a class="issue-challenge btn btn-raised btn-success">SEND CHALLENGE <i class="fa fa-paper-plane"></i></a>
+                  </div>
+              </div>
+
+              <div class="row">
+                <div class="col-xs-12">
+                  <div id="challenge-alert-box"></span>
+
+                </div>
+              </div>
+
           </div>
-        <div class="col-xs-12 col-sm-4">
-          <label for="friend-name">Enter Writing Challenge</label>
-          <input type="text" class="form-control" id="challenge-prompt" placeholder="i.e. use the word hyperbolic"></input>
-        </div>
-        <div class="col-xs-12 col-sm-4">
-          <label for="challenge-word-count">At least how many words should they write?</label>
-          <input type="number" value="25" min ="25" max="1000" step="25" class="form-control" id="challenge-word-count"></input>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-xs-11 text-right">
-          <span class="issue-challenge">SEND CHALLENGE <i class="fa fa-paper-plane"></i></span>
-
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-xs-12">
-          <div id="challenge-alert-box"></span>
-
         </div>
       </div>
 
 
 
+
+
+
       <div class="row">
-        <div class="col-xs-12">
+        <div class="col-xs-12 text-center ">
+          <h4>Open Challenges</h4>
           <div id="challenge-list">
 
 
@@ -1751,66 +1787,76 @@ fa-terminal on fa-square<br>
     </script>
 
     <script type="text/template" id="friend-nav-template">
-      <div class="friend-nav">
-        <div class="row">
-          <div class="col-xs-12 text-center">
-            <h3>Find other authors.</h3>
-          </div>
-        </div>
+    <div class="friend-nav">
 
-        <div class="author-search-box">
         <div class="row">
           <div class="col-xs-6 col-xs-offset-3 text-center">
-            <input type="text" id="user-search-form" class="form-control" placeholder="Search for a user..."></input>
+            <div class="btn-group btn-group-justified btn-group-raised">
+              <a class="btn btn-info show-following" href="javascript:void(0)">Following</a>
+              <a class="btn btn-info show-followers" href="javascript:void(0)">Followers</a>
+              <a class="btn btn-info show-users" href="javascript:void(0)">All Authors
+              </a>
+            </div>
           </div>
         </div>
 
         <div class="row">
-          <div class="col-xs-6 col-xs-offset-3 text-right">
-            <span id="search-users">Search</span>
+          <div class="col-xs-12 col-sm-8 col-sm-offset-2">
+            <div class="user-search-container">
+
+                <div class="row">
+                  <div class="col-xs-12 text-center">
+                    <h3>Find other authors.</h3>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="author-search-box">
+                  <div class="col-xs-6 col-xs-offset-3">
+                    <div class="form-group label-floating">
+                      <label class="control-label" for="user-search-form">Search for a user...</label>
+                      <input type="text" id="user-search-form" class="form-control" placeholder=""></input>
+                    </div>
+                  </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-xs-6 text-right">
+                    <div id="search-terms"></div>
+                  </div>
+                  <div class="col-xs-4 text-right">
+                    <a class="btn btn-default" id="search-users"><i class="fa fa-search fa-fw"></i>&nbsp; Find Author</a>
+                  </div>
+                </div>
+
+
+
+                </div>
+
+            </div>
           </div>
         </div>
-      </div>
 
 
 
-        <div class="row">
-          <div class="col-xs-4 text-center">
-            <span class="show-following">Following</span>
-          </div>
-          <div class="col-xs-4 text-center">
-            <span class="show-followers">Followers</span>
-          </div>
-          <div class="col-xs-4 text-center">
-            <span class="show-users">All Authors </span>
-          </div>
-        </div>
-      </div>
+
 
     </script>
 
 
     <script type="text/template" id="challenge-nav-template">
 
-      <ul>
+
       <div class="row">
-        <div class="col-xs-4">
-          <li class="send-challenge">
-            Send Challenge
-          </li>
-        </div>
-        <div class="col-xs-4">
-          <li class="received-challenges">
-            Received Challenges
-          </li>
-        </div>
-        <div class="col-xs-4">
-          <li class="completed-challenges">
-            Completed Challenges
-          </li>
+        <div class="col-xs-6 col-xs-offset-3 text-center friend-nav">
+          <div class="btn-group btn-group-justified btn-group-raised">
+            <a href="javascript:void(0)" class="btn btn-danger send-challenge">Send Challenge</a>
+            <a href="javascript:void(0)" class="btn btn-danger received-challenges">Received Challenges</a>
+            <a href="javascript:void(0)" class="btn btn-danger completed-challenges">Completed Challenges</a>
+          </div>
         </div>
       </div>
-      </ul>
 
       <div id="challenge-page">
 

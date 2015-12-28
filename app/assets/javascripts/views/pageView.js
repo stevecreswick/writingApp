@@ -338,9 +338,9 @@ app.PageView = Backbone.View.extend({
 
     'click li.show-friends': 'friendsPage',
 
-    'click span.show-users': 'showUsers',
-    'click span.show-following': 'showFollowing',
-    'click span.show-followers': 'showFollowers',
+    'click .show-users': 'showUsers',
+    'click .show-following': 'showFollowing',
+    'click .show-followers': 'showFollowers',
     'click #search-users': 'searchUsers',
 
 
@@ -438,7 +438,7 @@ showGenres: function(){
   friendsNav: function(){
 
     var $header = _.template( $('#friend-nav-template').html() );
-
+    
     this.$el.find('#center-pane').append( $header );
   },
 

@@ -28,7 +28,9 @@ app.ResourcePageView = Backbone.View.extend({
     var description = this.$el.find("#resource-description").val();
     var link = this.$el.find("#resource-link").val();
     var tags = this.$el.find("#resource-tags").val();
+    var resourceType = this.$el.find("#choose-resource-type").val();
 
+    console.log(resourceType);
     app.resources = new app.ResourcesCollection();
 
 
@@ -36,7 +38,8 @@ app.ResourcePageView = Backbone.View.extend({
       title: name,
       description: description,
       link: link,
-      tags: tags
+      tags: tags,
+      resource_type: resourceType
     });
 
     this.$el.find("#resource-name").val("");

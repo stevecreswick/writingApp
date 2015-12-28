@@ -14,6 +14,18 @@ app.ResourceView = Backbone.View.extend({
     var votes = this.model.get("total_votes");
 
     this.$el.find("#resource-votes").html( votes );
+    var $profilePic = $('<img>').attr("src", this.model.get('user_image')).addClass('resource-profile-picture img-circle');
+
+    if( this.model.get('user_id') === parseInt($('#current_id').val()) ){
+      var $editButton = $("<span>").addClass("edit-resource").html("Edit");
+      var $deleteButton = $("<span>").addClass("delete-resource").html("Delete");
+      this.$el.find("#resource-controls").append($editButton, " ", $deleteButton);
+    }
+
+
+    this.$el.find("#resource-user-info").append("Submitted by <br>", $profilePic, this.model.get('submitted_by') );
+
+
   },
   events:{
     'click span.edit-resource': "renderEdit",
