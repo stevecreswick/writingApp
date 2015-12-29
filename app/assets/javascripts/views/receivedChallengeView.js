@@ -63,7 +63,7 @@ app.ReceivedChallengeView = Backbone.View.extend({
     this.wordCount = 0;
     var scope = this;
 
-    var form = $("<textarea>").addClass("form-control").attr("id", "challenge-answer");
+    var form = $("<textarea>").addClass("form-control").attr("id", "challenge-answer").css("background", "ghostwhite");
     this.$el.find("#challenge-form-holder").append(form);
 
 
@@ -73,9 +73,8 @@ app.ReceivedChallengeView = Backbone.View.extend({
       // var text = scope.$el.find('#post-editor').find('.ql-editor').text();
       // app.wordCount = text
 
-      scope.$el.find('#challenge-required-word-count').html( scope.wordCount );
+      scope.$el.find('#challenge-required-word-count').html("Word Count: " + scope.wordCount );
 
-      console.log("wordCount" + scope.wordCount);
     });
 
   }

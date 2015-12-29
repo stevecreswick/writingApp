@@ -79,6 +79,8 @@ Rails.application.routes.draw do
     # Writing Tips
 
       get '/writing_tips' => 'writing_tips#index'
+      get '/writing_tips/sorted/:type/:page' => 'writing_tips#sorted'
+
 
       get '/writing_tips/:id' => 'writing_tips#show'
 

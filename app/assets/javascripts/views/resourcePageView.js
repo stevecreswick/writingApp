@@ -4,23 +4,49 @@ app.ResourcePageView = Backbone.View.extend({
   tagName: 'div',
   className: 'resource-page-view',
   template: _.template( $('#resource-page-template').html() ),
+  resourceType: "all",
 
   initialize: function(){
     this.listenTo( this.model, 'change', this.render );
 
   },
   render: function(){
+    app.pagePainter.currentPage = 0
     this.$el.empty();
     var html = this.template();
     var $html = $( html );
     this.$el.append( $html );
 
-    this.renderResources();
-
   },
   events:{
     'click #resource-submit': 'submitNewResource',
-    'click span.delete-resource': 'deleteResource'
+    'click span.delete-resource': 'deleteResource',
+    'click .resource-sort': 'sortResources',
+    'click .show-resource-form': 'showForm',
+    'click .remove-form': 'removeForm'
+  },
+
+  sortResources: function(e){
+    app.pagePainter.currentPage = 0
+
+    this.$el.empty();
+    this.render();
+
+    var resourceType = $(e.currentTarget).eq(0).data('value');
+
+    this.renderResources(resourceType);
+  },
+
+  showForm: function(){
+    var $form = _.template( $('#resource-form-template').html() );
+    this.$el.find("#resource-form-holder").empty();
+    this.$el.find("#resource-form-holder").append( $form );
+
+  },
+
+  removeForm: function(){
+    this.$el.find("#resource-form-holder").empty();
+
   },
 
   submitNewResource: function(){
@@ -32,6 +58,8 @@ app.ResourcePageView = Backbone.View.extend({
 
     console.log(resourceType);
     app.resources = new app.ResourcesCollection();
+
+    app.resources.url = "/api/writing_tips";
 
 
     app.resources.create({
@@ -47,10 +75,10 @@ app.ResourcePageView = Backbone.View.extend({
     this.$el.find("#resource-link").val("");
     this.$el.find("#resource-tags").val("");
 
-    this.renderResources();
+    this.renderResources("all");
   },
 
-  renderResources: function(){
+  renderResources: function(type){
     app.resources = new app.ResourcesCollection();
 
     app.resourceList = new app.ResourceListView({
@@ -58,8 +86,9 @@ app.ResourcePageView = Backbone.View.extend({
       el: $("#resource-list")
     });
 
-    app.resources.fetch({wait:true}).done(function(){
-      console.log(app.resources);
+    var urlModel = "/api/writing_tips/sorted/" + type + "/" + app.pagePainter.currentPage;
+
+    app.resources.fetch({url: urlModel, wait:true}).done(function(){
       app.resourceList.render();
     });
 

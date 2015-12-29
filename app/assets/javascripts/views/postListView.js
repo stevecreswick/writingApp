@@ -29,8 +29,8 @@ app.PostListView = Backbone.View.extend({
         var $colCenter = $('<div>').addClass("col-xs-4 text-center");
         var $col2 = $('<div>').addClass("col-xs-4 text-right");
 
-        var $more = $('<span>').addClass('view-more').text('Next');
-        var $previous = $('<span>').addClass('view-previous').text('Previous');
+        var $more = $('<a>').addClass('view-more withripple').text('Next').attr("href", "javascript:void(0)");
+        var $previous = $('<a>').addClass('view-previous withripple').text('Previous').attr("href", "javascript:void(0)");
 
 
         // If it is not the first page,

@@ -202,8 +202,6 @@ app.PageView = Backbone.View.extend({
   },
 
   showResources: function(){
-    console.log('yo...showing resources');
-
     this.currentPage = 0;
     this.$el.find('#center-pane').empty();
     this.clearResourcesPage();
@@ -223,6 +221,8 @@ app.PageView = Backbone.View.extend({
     });
 
     app.resourcePainter.render();
+    app.resourcePainter.renderResources("all");
+
     // app.resources = new app.FriendCollection();
     // app.friendPainter = new app.FriendListView({
     //   collection: app.resources,
@@ -282,6 +282,7 @@ app.PageView = Backbone.View.extend({
 
     renderWritingSidebar: function(){
       var $postListHeader = _.template( $('#writing-side-nav').html() )
+      this.$el.find('#main-display').css({"background": "white"})
       this.$el.find('#left-pane').append($postListHeader);
     },
 
@@ -438,7 +439,7 @@ showGenres: function(){
   friendsNav: function(){
 
     var $header = _.template( $('#friend-nav-template').html() );
-    
+
     this.$el.find('#center-pane').append( $header );
   },
 

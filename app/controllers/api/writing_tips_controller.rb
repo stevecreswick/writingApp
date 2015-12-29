@@ -20,6 +20,38 @@ class Api::WritingTipsController < ApplicationController
     render json: tips
   end
 
+  def sorted
+    sorted = params[:type]
+    page = params[:page].to_i + 1
+
+    if sorted == "all"
+      writing_tips = WritingTip.paginate(:page => page)
+
+      tips = writing_tips.map do |tip|
+        data = tip.as_json
+        data['total_votes'] = tip.total_votes
+        data['submitted_by'] = tip.user.username
+        data['user_image'] = tip.user.image_url
+        data
+      end
+
+    else
+      writing_tips = WritingTip.where({resource_type: sorted}).paginate(:page => page)
+
+      tips = writing_tips.map do |tip|
+        data = tip.as_json
+        data['total_votes'] = tip.total_votes
+        data['submitted_by'] = tip.user.username
+        data['user_image'] = tip.user.image_url
+        data
+      end
+
+    end
+
+    render json: tips
+  end
+
+
   def show
     writing_tip = WritingTip.find(params[:id])
 

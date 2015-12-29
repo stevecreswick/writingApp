@@ -26,20 +26,43 @@ app.CompletedChallengeView = Backbone.View.extend({
       this.bindWordCount();
     } else if ( this.model.get('status') === "Completed" ) {
       this.showResponse();
+    } else if ( senderId !== userId && this.model.get('status') === "Accepted") {
+      this.awaitingResponse();
     }
+
 
   },
 
   renderForm: function() {
     var $responseForm = _.template($("#response-form-template").html());
+    var $header = $('<h4>').html("Respond to " + this.model.get('receiver'))
+    this.$el.find('#response-holder').append($header)
     this.$el.find('#response-holder').append($responseForm)
+
   },
 
   showResponse: function(){
     var $response = _.template($("#challenge-response-template").html());
+    var $img = $("<img>").attr("src", this.model.get("sender_image_url")).addClass("critique-profile-picture img-circle");
+    var $name = this.model.get("sender");
+
     this.$el.find('#response-holder').append($response);
     this.$el.find("#response").html( this.model.get("response") )
+    this.$el.find("#response-user-holder").html($img, $name);
+
   },
+
+  awaitingResponse: function(){
+    var $response = _.template($("#challenge-response-template").html());
+    var $img = $("<img>").attr("src", this.model.get("sender_image_url")).addClass("critique-profile-picture img-circle");
+    var $name = this.model.get("sender");
+
+    this.$el.find('#response-holder').append($response);
+    this.$el.find("#response").html( "Awaiting Response" );
+    this.$el.find("#response-user-holder").html($img, $name);
+
+  },
+
 
   submitResponse: function() {
     var newMessage = this.$el.find('#response-form').val();
@@ -78,7 +101,7 @@ app.CompletedChallengeView = Backbone.View.extend({
 
       scope.wordCount = $(this).val().match(/\S+/g).length;
 
-      scope.$el.find('#challenge-required-word-count').html(scope.wordCount);
+      scope.$el.find('#challenge-required-word-count').html("Word Count: " + scope.wordCount);
 
     });
 

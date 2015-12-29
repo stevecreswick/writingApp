@@ -33,11 +33,30 @@ class Api::ChallengesController < ApplicationController
 
     challenges = received_challenges.paginate(:page => page, :per_page => 5)
 
-    render json: challenges
+
+        sending_challenges = challenges.map do |challenge|
+          data = challenge.as_json
+          data['username'] = challenge.friendship.friend.username
+          data['image_url'] = challenge.friendship.friend.image_url
+          data
+        end
+
+    render json: sending_challenges
   end
 
   def completed
-    render json: completed_challenges
+    challenges = completed_challenges
+
+    sending_challenges = challenges.map do |challenge|
+      data = challenge.as_json
+      data['sender'] = challenge.sender
+      data['sender_image_url'] = challenge.friendship.user.image_url
+      data['receiver'] = challenge.friendship.friend.username
+      data['receiver_image_url'] = challenge.friendship.friend.image_url
+      data
+    end
+
+    render json: sending_challenges
   end
 
   def show

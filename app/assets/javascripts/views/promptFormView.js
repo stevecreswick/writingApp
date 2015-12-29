@@ -82,19 +82,20 @@ app.promptFormView = Backbone.View.extend({
 
 
   getPrompt: function(e){
+
       var scope = this;
       e.preventDefault();
 
       app.promptType = $('#choose-type').val();
 
       app.requiredWords = $('#post-word-count').val();
-      console.log( app.requiredWords );
 
       var writingPrompts = new app.WritingPromptCollection();
       var promptPainter = new app.WritingPromptListView({
         collection: writingPrompts,
         el: $('#prompt-container')
       });
+
 
       if (app.promptType === 'Use One Word'){
         writingPrompts.url = "/api/writing_prompts/one_word"
@@ -120,8 +121,7 @@ app.promptFormView = Backbone.View.extend({
       // Record Prompt
       this.prompt = writingPrompts.models[0].get('prompt');
       this.type = app.promptType;
-      console.log(this.prompt);
-      console.log(this.type);
+
       this.promptInstruction = this.getPromptInstruction({
         "type": this.type,
         "wordCount": app.requiredWords,
@@ -134,7 +134,7 @@ app.promptFormView = Backbone.View.extend({
       this.$('.start').remove();
       var $icon = $('<i>').addClass('fa fa-pencil fa-fw');
       var buttonHTML = "&nbsp; Write"
-      var $start = $('<a>').addClass('btn btn-default start');
+      var $start = $('<a>').addClass('btn btn-default btn-raised btn-info start');
       // var $row = $('<div>').addClass("row");
       // var $col12 = $('<div>').addClass("col-xs-12 text-right");
 
@@ -145,6 +145,7 @@ app.promptFormView = Backbone.View.extend({
       this.$('#start-writing-container').append( $start );
 
     },
+
 
     renderWritingForm: function(e){
 
@@ -172,7 +173,7 @@ app.promptFormView = Backbone.View.extend({
       this.promptInstruction;
       $('#prompt-instrustion').html(this.promptInstruction);
       $("#prompt").html( this.prompt )
-      $('h5#required-word-count').html( app.requiredWords )
+      // $('#required-word-count').html( app.requiredWords )
 
       // Render Text Editor & Bind To Word Count
       this.renderEditor();
@@ -180,6 +181,10 @@ app.promptFormView = Backbone.View.extend({
 
       // Start the Timer
       this.startClock();
+
+      // Put in the starting word count
+      $('#current-word-count').eq(0).html( app.wordCount + "/" + app.requiredWords );
+
     },
 
 
@@ -342,13 +347,22 @@ app.promptFormView = Backbone.View.extend({
     //   return this.newPrompt;
     // },
 
+
+    updateStatus: function(wordCount){
+
+        var progress = Math.floor( (wordCount / app.requiredWords) * 100 ) + "%";
+        console.log(progress);
+        this.$el.find('.progress-bar').css({"width": progress});
+    },
+
     checkWordCount: function(){
       app.wordCount = 0;
       var scope = this;
       $('#post-editor').on('keyup', function(){
         var text = scope.$el.find('#post-editor').find('.ql-editor').text();
         app.wordCount = text.match(/\S+/g).length;
-        $('#current-word-count').eq(0).html( app.wordCount );
+        $('#current-word-count').eq(0).html( app.wordCount + "/" + app.requiredWords );
+        scope.updateStatus(app.wordCount);
         // scope.wordsPerMinute();
 
       });

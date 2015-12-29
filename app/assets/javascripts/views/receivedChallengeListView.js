@@ -13,8 +13,8 @@ app.ReceivedChallengeListView = Backbone.View.extend({
   render: function(){
     console.log('received challenges rendering');
     this.$el.empty();
-    var $challengesHeader = $('<h1>').text('Received Challenges');
-    this.$el.append($challengesHeader);
+    // var $challengesHeader = $('<h1>').text('Received Challenges');
+    // this.$el.append($challengesHeader);
 
     var username = $('#current_id').val();
 

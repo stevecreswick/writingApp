@@ -102,10 +102,19 @@
   margin-top: 2em;
 }
 
+#response{
+  display: inline-block;
+}
+
 .post-title {
   color: red;
   display: block;
   width: 50%;
+}
+
+.writing-page-text{
+  font-size: 4em;
+  color: #0fb2fc;
 }
 
 .wa-button{
@@ -295,12 +304,12 @@ form{
 /* Navbar */
 #header {
   background: white;
-  border-bottom: 1px solid gainsboro;
+  /*border-bottom: 1px solid gainsboro;*/
   padding: 0 0 0 0;
   /*padding: 0% 5% 0% 3%;*/
   /*vertical-align: bottom;*/
   color: black;
-  overflow: visible;
+  /*overflow: visible;*/
   height:6em;
   /*display: table;*/
 }
@@ -945,7 +954,7 @@ div.user-view{
 }
 
 .completed-challenge-view {
-  background-color: white;
+  /*background-color: white;*/
   /*padding-left: 2em;
   padding-right: 2em;
   padding-top: 1em;
@@ -978,12 +987,15 @@ div.user-view{
 }
 
 .received-challenge{
-  border: 1px grey solid;
   background: white;
   margin-bottom: 1em;
   margin-top: 1em;
-  padding: 1em;
+  padding: 2em;
   margin-right: 5%;
+
+  -webkit-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  -moz-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .accept-challenge{
@@ -1042,6 +1054,13 @@ div.user-view{
   font-family: 'Open Sans Condensed', sans-serif;
   font-size: 3em;
   color: red;
+}
+
+#post-editor{
+  height: 350px;
+  -webkit-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  -moz-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 /* Write x words using the prompt */

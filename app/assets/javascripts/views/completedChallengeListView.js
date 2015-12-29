@@ -7,8 +7,8 @@ app.CompletedChallengeListView = Backbone.View.extend({
   render: function(){
     console.log('completed challenges rendering');
     this.$el.empty();
-    var $challengesHeader = $('<h1>').text('Completed Challenges');
-    this.$el.append($challengesHeader);
+    // var $challengesHeader = $('<h1>').text('Completed Challenges');
+    // this.$el.append($challengesHeader);
       var challenges = this.collection.models;
       var view;
         for (var i = 0; i < challenges.length; i++) {
