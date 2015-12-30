@@ -67,17 +67,17 @@ app.PostView = Backbone.View.extend({
 
 // Post Events
   events:{
-    'click span.remove-post': 'removePost',
-    'click button.delete-post': 'deletePost',
-    'click button.make-critique': 'renderCritiqueForm',
-    'click span.save-critique': 'saveCritique',
+    'click .remove-post': 'removePost',
+    'click .delete-post': 'deletePost',
+    'click .make-critique': 'renderCritiqueForm',
+    'click .save-critique': 'saveCritique',
 
     'click .show-feedback': 'showFeedback',
     'click .hide-feedback': 'hideFeedback',
 
 
-    'click span.close-critiques': 'renderWithUserName',
-    'click span.render-critiques': 'renderCritiques',
+    'click .close-critiques': 'renderWithUserName',
+    'click .render-critiques': 'renderCritiques',
 
     'click label.rating-button': 'saveRating',
     'click span.add-friend': 'addFriend',
@@ -269,7 +269,12 @@ app.PostView = Backbone.View.extend({
       this.$el.empty();
       this.renderWithUserName();
       var $feedback = _.template( $('#critique-post-template').html());
+
+
       this.$el.append( $feedback );
+
+      $critique = this.$el.find(".critiques-wrapper");
+      $critique.hide();
 
       // Change Show Button to Hide
       this.renderHideFeeback();
@@ -278,7 +283,7 @@ app.PostView = Backbone.View.extend({
       this.fetchCritiques();
       this.renderCritiques();
 
-
+      $critique.show("slow")
     },
 
     renderFeebackButton: function(){
@@ -292,20 +297,22 @@ app.PostView = Backbone.View.extend({
       var feedbackLabel;
 
       if (feedbackNum > 0){
-        feedbackLabel = "Write Feedback <i class='fa fa-commenting-o'></i>" + feedbackNum ;
+        feedbackLabel = "<i class='fa fa-comment'><span class='tiny-text'>" + feedbackNum + "</span></i>";
       } else {
-        feedbackLabel = "Write Feedback <i class='fa fa-commenting-o'></i>";
+        feedbackLabel = "<i class='fa fa-comment'></i>";
       }
 
-      var $feedbackButton = $('<h5>').addClass('show-feedback text-left prompt-label').html( feedbackLabel );
-      this.$el.find('.new-critique-form').append($feedbackButton);
+      var $feedbackButton = $('<a>').addClass('show-feedback text-left btn btn-raised btn-fab btn-info').html( feedbackLabel );
+      this.$el.find('.new-critique-form').append($feedbackButton, "Feedback");
     },
 
     renderHideFeeback: function(){
+      this.$el.find('.new-critique-form').empty();
+
       var critiqueButton = this.$el.find('.show-feedback');
       critiqueButton.remove();
 
-      var $hide = $('<h5>').addClass('hide-feedback text-left prompt-label').html( "Hide  <i class='fa fa-level-up'></i>" );
+      var $hide = $('<a>').addClass('hide-feedback text-left prompt-label btn btn-raised btn-fab btn-danger').html( "<i class='fa fa-level-up'></i>" );
       this.$el.find('.new-critique-form').append($hide);
 
     },
@@ -371,16 +378,21 @@ app.PostView = Backbone.View.extend({
       this.resizePostDiv( this.normalHeight );
     },
 
-    saveCritique: function(){
-      var newMessage = this.$el.find('textarea#critique-editor').val();
-      this.$el.find('textarea#critique-editor').val('');
+    saveCritique: function(e){
+      e.preventDefault();
+      console.log('saving');
+      // var newMessage = this.$el.find('textarea#critique-editor').val();
+      var newMessage = this.$el.find('.ql-editor').html();
+
+      // In case you need to store the raw text later
+      var justWords = this.$el.find('.ql-editor').text();
 
       var urlModel = '/api/posts/' + this.model.get('id') + '/critiques';
       var critiques = new app.CritiquesCollection();
       critiques.url = urlModel;
       critiques.fetch();
 
-      if (newMessage.length > 0){
+      if (justWords.length > 0){
         console.log(newMessage);
         critiques.create({message: newMessage});
         this.showFeedback();
@@ -504,14 +516,20 @@ app.PostView = Backbone.View.extend({
 
       button.removeClass('render-critiques').addClass('close-critiques').html('Hide');
 
+      critiqueList.hide();
       critiqueList.append(this.innerListView.$el);
+      critiqueList.show("normal");
+
+
+      // this.renderCritiqueFormContainer();
+      this.renderCritiqueEditor();
     },
 
     renderCritiqueForm: function(){
       this.$el.empty();
       this.renderWithUserName();
 
-      this.renderCritiqueFormContainer();
+      // this.renderCritiqueFormContainer();
       this.fetchCritiques();
 
       this.renderCritiques();
@@ -523,6 +541,7 @@ app.PostView = Backbone.View.extend({
       formContainer.html( _.template( $('#critique-form-template').html()) );
 
       this.$el.find('.make-critique-box').append( formContainer );
+
     },
 
     // bindCritiqueForm: function(modelId){
@@ -557,20 +576,35 @@ app.PostView = Backbone.View.extend({
 
     },
 
-    renderEditor: function(){
+    renderCritiqueEditor: function(){
       // var toolbarClass = '#full-toolbar' + this.model.get('id');
       // var editorClass = '#critique-editor' + this.model.get('id');
 
       var toolbarPost = this.$el.find('#full-toolbar').eq(0);
-      var editorPost = this.$el.find('critique-editor').eq(0);
+      var editorPost = this.$el.find('#critique-editor');
 
-      var fullEditor = new Quill(editorPost, {
+      var editorId = 'critique-editor-' + this.model.get("id");
+      var $editor = $("<div>").attr("id", editorId).addClass('critique-editor').hide();
+      var editorGrabber = "#" + editorId;
+
+      var toolbarId = 'toolbar-' + this.model.get('id');
+      this.$el.find('#full-toolbar').addClass( toolbarId );
+      var toolbarGrabber = "." + toolbarId;
+
+      this.$el.find('#critique-editor-holder').append( $editor );
+
+
+      var fullEditor = new Quill(editorGrabber, {
         modules: {
-            'toolbar': { container: toolbarPost },
+            'toolbar': { container: toolbarGrabber },
             'link-tooltip': true
         },
         theme: 'snow'
       });
+
+      $editor.show('normal');
+
     }
+
 
 });

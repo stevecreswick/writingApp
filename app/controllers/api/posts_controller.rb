@@ -38,9 +38,9 @@ respond_to :html, :json
 
       @posts = current_user.posts.paginate(:page => page).order('created_at DESC')
 
-    elsif params[:genre] == 'friends'
+    elsif params[:genre] == 'main'
 
-      @posts = friend_posts.paginate(:page => page)
+      @posts = main_feed.paginate(:page => page)
 
     else
       @posts = Post.where({genre: params[:genre]}).paginate :page => page

@@ -98,7 +98,8 @@ class UsersController < ApplicationController
       friend = User.find( friendship.friend_id )
       data = friend.as_json
       data['is_friend'] = true
-      data['posts_num'] = friend.posts.length
+      data['posts'] = friend.posts.length
+      data['reviews'] = friend.critiques.length
       # data['friend_name'] = friend.username
       # data['friend_image'] = friend.image_url
       # data['writer_score'] = friend.writer_score
@@ -138,8 +139,8 @@ class UsersController < ApplicationController
 
       data['friend_name'] = follower.username
       data['friend_image'] = follower.image_url
-      data['posts_num'] = follower.posts.length
-
+      data['posts'] = follower.posts.length
+      data['reviews'] = follower.critiques.length
       data
     end
 

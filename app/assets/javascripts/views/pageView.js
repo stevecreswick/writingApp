@@ -29,15 +29,15 @@ app.PageView = Backbone.View.extend({
   // Background Themes
   backgroundAll: "'Cutive Mono', sans-serif",
   backgroundFiction:"'Cutive Mono', sans-serif",
-  backgroundFantasy: "'Cutive Mono', sans-serif",
-  backgroundHorror:"'Cutive Mono', sans-serif",
+  backgroundFantasy: "/assets/hold-fast.gif",
+  backgroundHorror:"/assets/COLOURlovers.com-Death_Flowers.png",
   backgroundThriller: "'Cutive Mono', sans-serif",
-  backgroundHistorical: "'Cutive Mono', sans-serif",
+  backgroundHistorical: "'/assets/hod-fast.gif",
   backgroundFiction: "'Cutive Mono', sans-serif",
-  backgroundCrime: "'Cutive Mono', sans-serif",
-  backgroundRomance: "'Cutive Mono', sans-serif",
+  backgroundCrime: "/assets/brickwall.png",
+  backgroundRomance: "/assets/COLOURlovers.com-When_We_Parted.png",
   backgroundSciFi: "/assets/stardust.png",
-  backgroundPoetry: "'Cutive Mono', sans-serif",
+  backgroundPoetry: "/assets/COLOURlovers.com-d_u_s_k.png",
   backgroundNonFiction: "'Cutive Mono', sans-serif",
 
   // Header Themes
@@ -54,7 +54,7 @@ app.PageView = Backbone.View.extend({
   headerPoetry: "rgb(240,255,240)",
   headerNonFiction: "'Cutive Mono', sans-serif",
 
-  currentGenre: 'all',
+  currentGenre: 'main',
   currentPage: 0,
 
   initialize: function(){
@@ -81,41 +81,47 @@ app.PageView = Backbone.View.extend({
 
       case "Romance":
         this.$el.find('h1.home-page').css( {'font-family': "'Lovers Quarrel', cursive", "font-size": "2.5em"});
-        this.$el.find('.container-fluid').css({'background': "url()"});
+        this.$el.find('#main-display').css({'background': "url(" + this.backgroundRomance + ")"})
 
-        this.$el.find('.container-fluid').css({"background": this.headerRomance})
+        // this.$el.find('.container-fluid').css({"background": this.headerRomance})
       break;
 
       case "Horror":
         this.$el.find('h1.home-page').css({'font-family': "'Loved by the King', cursive", "font-size": "2.5em"});
         this.$el.find('.post#title-holder').css({'font-family': "'Loved by the King', cursive", "font-size": "2.5em"});
-        this.$el.find('.container-fluid').css({'background': "url()"});
+        this.$el.find('#main-display').css({'background': "url(" + this.backgroundHorror + ")"});
 
-        this.$el.find('.container-fluid').css({"background": this.headerHorror})
+        this.$el.find('#center-columns').css({"background": "red"});
 
       break;
 
       case "Science-Fiction":
         this.$el.find('h1.home-page').css({'font-family': "'Krona One', sans-serif", "font-size": "2.5em", "color": "red"});
-        this.$el.find('.container-fluid').css({'background': "url()"});
-
-        this.$el.find('.container-fluid').css({'background': "url(" + this.backgroundSciFi + ")"});
+        this.$el.find('#main-display').css({'background': "url(" + this.backgroundSciFi + ")"});
 
       break;
-
       case "Historical-Fiction":
         this.$el.find('h1.home-page').css({'font-family': "'Homemade Apple', cursive", "font-size": "3em"});
         this.$el.find('.container-fluid').css({'background': "url()"});
 
-        this.$el.find('.container-fluid').css({"background": this.headerHistorical})
+        // this.$el.find('.container-fluid').css({"background": this.headerHistorical})
 
       break;
 
       case "Poetry":
         this.$el.find('h1.home-page').css({'font-family': "'Homemade Apple', cursive", "font-size": "3em"});
-        this.$el.find('.container-fluid').css({'background': "url()"});
+        this.$el.find('#main-display').css({'background': "url(" + this.backgroundPoetry + ")"})
 
-        this.$el.find('.container-fluid').css({"background": this.headerPoetry})
+      break;
+
+      case "Crime":
+        this.$el.find('#main-display').css({'background': "url(" + this.backgroundCrime + ")"})
+
+      break;
+
+      case "Fantasy":
+        // this.$el.find('h1.home-page').css({'font-family': "'Homemade Apple', cursive", "font-size": "3em"});
+        this.$el.find('#main-display').css({'background': "url(" + this.backgroundFantasy + ")"})
 
       break;
 
@@ -524,15 +530,16 @@ showGenres: function(){
   },
 
   showCurrentProfile: function(){
-    this.$el.find('#left-pane .genre-links').remove();
     this.$el.find('#post-list').remove();
     this.$el.find('#center-pane').empty();
 
-
     var $center = this.$el.find('#center-pane');
     var $userPage = $("<div>").attr('id', 'user-page');
+    var $postList = $("<div>").attr("id", "post-list");
 
     $center.append( $userPage );
+
+    this.$el.find(".user-posts-container").append($postList);
 
     // create current user model
     var currentUser = new app.User();
@@ -544,6 +551,8 @@ showGenres: function(){
 
     currentUser.url = "/users/show/" + $('#current_id').val();
     currentUser.fetch({wait:true});
+    this.currentGenre = "user";
+    this.renderPosts();
     // app.friends = new app.FriendCollection();
     // app.friendPainter = new app.FriendListView({
     //   collection: app.friends,

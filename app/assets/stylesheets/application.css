@@ -23,6 +23,12 @@
  *= require_self
 
  */
+@font-face {
+  font-family: 'Brand';
+  src: url('/assets/gabriele-br.TTF');
+  font-weight: normal;
+  font-style: normal;
+}
 /* Universal */
  *{
    box-sizing: border-box;
@@ -51,7 +57,9 @@
     font-family: 'Open Sans Condensed', sans-serif;
   }
 
-
+  .tiny-text{
+    font-size: 10px;
+  }
 
   .container-fluid {
     background: white;
@@ -311,6 +319,9 @@ form{
   color: black;
   /*overflow: visible;*/
   height:6em;
+  -webkit-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  -moz-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   /*display: table;*/
 }
 
@@ -320,7 +331,8 @@ form{
 }
 
 .home-page{
-  font-family: 'Cutive Mono', sans-serif;
+  /*font-family: Brand, sans-serif;
+  letter-spacing: 0.2em;*/
   color: black;
   list-style: none;
   text-decoration: none;
@@ -328,6 +340,18 @@ form{
   text-decoration: bold;
   display: inline-block;
 }
+
+.headline{
+  font-family: Brand, sans-serif;
+  letter-spacing: 0.2em;
+  color: black;
+  list-style: none;
+  text-decoration: none;
+  font-size: 3em;
+  text-decoration: bold;
+  display: inline-block;
+}
+
 
 .home-page:hover{
   cursor: pointer;
@@ -582,7 +606,7 @@ img.sort-image{
   /*margin-top: -1.5em;*/
   padding: 1em 0 0em 1em;
   width: 100%;
-  font-family: 'Oswald', serif;
+  font-family: Brand, serif;
   /*margin-top: -5em;*/
   text-transform: uppercase;
   display: inline-block;
@@ -671,12 +695,15 @@ margin-top: -4.8em;
 
 
   /* Critiques */
-  /*.new-critique-form{
-    height:7em;
-  }*/
+  .new-critique-form{
+    text-align: center;
+    width: 100px;
+    float: right;
+  }
 
   #critique-list-view{
     height: auto;
+
   }
 
   .critique-view{
@@ -766,12 +793,12 @@ margin-top: -4.8em;
 #critique-editor{
   height: 9em;
   text-align: left;
+  background: ghostwhite;
 }
 
 #full-toolbar{
   text-align: left;
   background: lightgrey;
-  border: solid 1px black;
 }
 
 #right-pane{
@@ -913,6 +940,7 @@ form#challenge-accept-form {
 
 .about-the-author{
   margin-bottom: 3em;
+  right: 0;
 }
 
 div.friend-view{
@@ -1125,6 +1153,10 @@ div.user-view{
 
 
 .critiques-list{
+  -webkit-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  -moz-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  padding: 1em;
 }
 
 .critique-message{
@@ -1289,4 +1321,22 @@ div.user-view{
     padding: 1em;
     background: white;
     margin-bottom: 3em;
+  }
+
+  .btn-fab{
+    display: table;
+    vertical-align: middle;
+  }
+
+  .btn-fab i{
+    display: table-cell;
+    vertical-align: middle;
+
+  }
+
+  .critique-editor{
+    max-height: 200px;
+    -webkit-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    -moz-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   }

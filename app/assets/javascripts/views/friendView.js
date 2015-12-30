@@ -19,14 +19,14 @@ app.FriendView = Backbone.View.extend({
     var $profilePic = $('<img>').attr("src", profilePic).addClass('user-profile-picture img-circle');
     this.$el.find('.user-pic-box').append($profilePic);
 
-    var $removeFriend = $('<span>').addClass('remove-friend').text('Remove Friend');
-    var $addFriend = $('<span>').addClass('add-friend').text('Add Friend');
+    var $removeFriend = $('<a>').addClass('remove-friend btn btn-raised btn-fab btn-danger').html('<i class="fa fa-user-times"></i>');
+    var $addFriend = $('<a>').addClass('add-friend btn btn-raised btn-fab btn-success').html('<i class="fa fa-user-plus"></i>');
     var $br = $('<br>')
 
     if ( this.model.get('is_friend') ){
-      this.$el.find('#friend-button-holder').append($removeFriend);
+      this.$el.find('#friend-button-holder').append($removeFriend, "Remove Friend");
     } else {
-      this.$el.find('#friend-button-holder').append($addFriend);
+      this.$el.find('#friend-button-holder').append($addFriend, "Add Friend");
     }
 
     this.renderShowPostsButton();
@@ -39,10 +39,10 @@ app.FriendView = Backbone.View.extend({
   },
 
   events: {
-    'click span.remove-friend': 'removeFriend',
-    'click span.add-friend': 'addFriend',
-    'click button.make-challenge': 'makeChallenge',
-    'click button.show-challenges': 'showChallenges',
+    'click .remove-friend': 'removeFriend',
+    'click .add-friend': 'addFriend',
+    'click .make-challenge': 'makeChallenge',
+    'click .show-challenges': 'showChallenges',
     'click .show-user-posts': 'showPosts',
     'click .hide-user-posts': 'hidePosts',
     'click .about-the-author-show': 'showInfo',
@@ -63,15 +63,15 @@ app.FriendView = Backbone.View.extend({
   },
 
   showInfo: function(){
-    this.$el.find("#author-info").show();
-    this.$el.find(".about-the-author-show").html("Hide Author Info")
-    this.$el.find(".about-the-author-show").addClass('about-the-author-hide').removeClass('about-the-author-show');
+    this.$el.find("#author-info").show("slow");
+    this.$el.find(".about-the-author-show").html("<i class='fa fa-times'></i>")
+    this.$el.find(".about-the-author-show").addClass('about-the-author-hide btn-danger').removeClass('about-the-author-show btn-info');
   },
 
   hideInfo: function(){
-    this.$el.find("#author-info").hide();
-    this.$el.find(".about-the-author-hide").html("Show Author Info")
-    this.$el.find(".about-the-author-hide").addClass('about-the-author-show').removeClass('about-the-author-hide');
+    this.$el.find("#author-info").hide("slow");
+    this.$el.find(".about-the-author-hide").html("<i class='fa fa-info'></i>")
+    this.$el.find(".about-the-author-hide").addClass('about-the-author-show btn-info').removeClass('about-the-author-hide btn-danger');
   },
 
   removeFriend: function(){
@@ -138,11 +138,11 @@ app.FriendView = Backbone.View.extend({
 
       var posts = new app.PostCollection();
       var userId = this.model.get('id');
-      var testEl = this.$el.find("#post-list")
+      var $postList = this.$el.find("#post-list")
       posts.page = this.currentPage;
       var postPainter = new app.PostListView({
         collection: posts,
-        el: testEl
+        el: $postList
       });
 
       var urlModel = "/api/posts/users/" + userId
@@ -152,6 +152,7 @@ app.FriendView = Backbone.View.extend({
 
       this.renderHidePostsButton();
 
+      $postList.show("slow");
     },
 
     createPostList: function(){
@@ -159,33 +160,31 @@ app.FriendView = Backbone.View.extend({
       oldList.remove();
 
       var $container = $('<div>').attr('id', 'post-list');
+      $container.hide()
       this.$el.find("#author-info").append( $container );
 
     },
 
     hidePosts: function(){
-      this.$el.find("#post-list").remove();
+      var scope = this;
+      this.$el.find("#post-list").hide('slow', function(){ scope.$el.find("#post-list").remove(); });
       this.renderShowPostsButton();
 
     },
 
     renderShowPostsButton: function(){
-      var $hidePosts = this.$el.find('.hide-user-posts');
+      this.$el.find(".user-posts-container").empty();
 
-      if($hidePosts){
-        $hidePosts.remove();
-      }
 
-      var $seePosts = $('<h5>').addClass('show-user-posts text-right prompt-label').html( "See Posts (" + this.model.get("posts_num") + ")" );
-      this.$el.find(".user-posts-container").append( $seePosts );
+      var $seePosts = $('<a>').addClass('show-user-posts btn btn-raised btn-fab btn-info').html("<i class='fa fa-file'></i>");
+      this.$el.find(".user-posts-container").append( $seePosts, "See Posts (" + this.model.get("posts") + ")" );
     },
 
     renderHidePostsButton: function(){
-      var $showPosts = this.$el.find('.show-user-posts');
-      $showPosts.remove();
+      this.$el.find(".user-posts-container").empty();
 
-      var $hide = $('<h5>').addClass('hide-user-posts text-right prompt-label').html( "Hide Posts" );
-      this.$el.find(".user-posts-container").append($hide);
+      var $hide = $('<h5>').addClass('hide-user-posts btn btn-raised btn-fab btn-danger').html( "<i class='fa fa-times'></i>" );
+      this.$el.find(".user-posts-container").append($hide, "Hide Posts");
 
     }
 

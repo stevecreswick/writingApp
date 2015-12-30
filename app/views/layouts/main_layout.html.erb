@@ -58,8 +58,8 @@
         <span class="icon-bar"></span>
       </button>
       <a class="navbar-brand home-page">
-        <img class="typewriter" src="http://i.imgur.com/yXJDIRB.png"/>
-        <a class="home-page">writeaway.</a>
+        <!-- <img class="typewriter" src="http://i.imgur.com/yXJDIRB.png"/> -->
+        <a class="home-page headline">writeaway.</a>
       </a>
     </div>
 
@@ -203,7 +203,7 @@
           </div>
         </div>
         <div class="col-xs-2">
-          <a href="javascript:void(0)" class="btn btn-success btn-fab show-resource-form">+</a>
+          <a href="javascript:void(0)" class="btn btn-success btn-fab show-resource-form"><i class="fa fa-plus"></i></a>
         </div>
       </div>
 
@@ -335,7 +335,7 @@
               <div class="row">
                 <div class="col-xs-7">
                   <h5>
-                    <a href="h<%%= link %>"><%%= link %></a>
+                    <a href="h<%%= link %>"><i class="fa fa-link"></i>&nbsp;<%%= link %></a>
                   </h5>
                 </div>
                 <div class="col-xs-2"></div>
@@ -441,16 +441,6 @@
         </div>
       </div>
 
-      <div class="row">
-        <div class="col-xs-2">
-        </div>
-        <div class="col-xs-8">
-          <!-- <img class="typewriter" src="http://i.imgur.com/yXJDIRB.png"/> -->
-        </div>
-        <div class="col-xs-2">
-          <!-- <img class="typewriter" src="http://i.imgur.com/yXJDIRB.png"/> -->
-        </div>
-      </div>
       <!-- Footer -->
       <section id="footer">
         <div class="container">
@@ -458,26 +448,29 @@
           <div>Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a>, <a href="http://www.flaticon.com/authors/designmodo" title="Designmodo">Designmodo</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a>             is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a></div>
 
           <span class="fa-stack fa-lg">
-  <i class="fa fa-square-o fa-stack-2x"></i>
-  <i class="fa fa-twitter fa-stack-1x"></i>
-</span>
-fa-twitter on fa-square-o<br>
-<span class="fa-stack fa-lg">
-  <i class="fa fa-circle fa-stack-2x"></i>
-  <i class="fa fa-flag fa-stack-1x fa-inverse"></i>
-</span>
-fa-flag on fa-circle<br>
-<span class="fa-stack fa-lg">
-  <i class="fa fa-square fa-stack-2x"></i>
-  <i class="fa fa-terminal fa-stack-1x fa-inverse"></i>
-</span>
-fa-terminal on fa-square<br>
-        </div>
-      </section>
+            <i class="fa fa-square-o fa-stack-2x"></i>
+            <i class="fa fa-twitter fa-stack-1x"></i>
+            </span>
+            fa-twitter on fa-square-o<br>
+            <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-flag fa-stack-1x fa-inverse"></i>
+            </span>
+            fa-flag on fa-circle<br>
+            <span class="fa-stack fa-lg">
+            <i class="fa fa-square fa-stack-2x"></i>
+            <i class="fa fa-terminal fa-stack-1x fa-inverse"></i>
+            </span>
+            fa-terminal on fa-square<br>
+                  </div>
+        </section>
+
 
 
 <!-- Close Container -->
     </div>
+
+
 
     </script>
 
@@ -739,17 +732,17 @@ fa-terminal on fa-square<br>
 
 
 
-        <div class="sidenav-row list-group-item home-page" data-url="user">
-          <div class="sort-text">Main</div>
+        <div class="sidenav-row list-group-item home-page" data-url="main">
+          <div class="sort-text">Main Feed</div>
         </div>
 
-        <div class="sort sidenav-row list-group-item" data-url="user">
+        <!-- <div class="sort sidenav-row list-group-item" data-url="user">
           <div class="sort-text">Your Posts</div>
-        </div>
+        </div> -->
 
-        <div class="sort sidenav-row list-group-item" data-url="friends">
+        <!-- <div class="sort sidenav-row list-group-item" data-url="friends">
           <div class="sort-text">Friends Post</div>
-        </div>
+        </div> -->
 
 
         <div class="genres">
@@ -985,18 +978,19 @@ fa-terminal on fa-square<br>
 
 
         <div class="row">
-          <div class="col-xs-12">
-            <h4>Rate this post on the following attributes</h4>
+          <div class="col-xs-12 text-center">
+            <h3>Rate the Story</h3>
           </div>
         </div>
 
         <div class="row">
-          <div class="col-xs-12">
+          <div class="col-xs-12 text-left">
+            <br>
           </div>
         </div>
 
         <div class="row">
-          <div class="col-xs-12 col-sm-3 col-sm-offset-3">
+          <div class="col-xs-12 col-sm-4">
             <div class="rating-container">
               Characters <br>
               <div class="new-rating" data-value="1" data-post="<%%= id %>" data-skill="characters" id="rating-characters-1"><i class="fa fa-heart-o rating-heart"></i></div>
@@ -1005,6 +999,8 @@ fa-terminal on fa-square<br>
               <div class="new-rating" data-value="4" data-post="<%%= id %>" data-skill="characters" id="rating-characters-4"><i class="fa fa-heart-o rating-heart"></i></div>
               <div class="new-rating" data-value="5" data-post="<%%= id %>" data-skill="characters" id="rating-characters-5"><i class="fa fa-heart-o rating-heart"></i></div>
             </div>
+          </div>
+          <div class="col-xs-12 col-sm-4">
             <div class="rating-container">
               Setting <br>
               <div class="new-rating" data-value="1" data-post="<%%= id %>" data-skill="setting" id="rating-setting-1"><i class="fa fa-heart-o rating-heart"></i></div>
@@ -1013,6 +1009,8 @@ fa-terminal on fa-square<br>
               <div class="new-rating" data-value="4" data-post="<%%= id %>" data-skill="setting" id="rating-setting-4"><i class="fa fa-heart-o rating-heart"></i></div>
               <div class="new-rating" data-value="5" data-post="<%%= id %>" data-skill="setting" id="rating-setting-5"><i class="fa fa-heart-o rating-heart"></i></div>
             </div>
+          </div>
+          <div class="col-xs-12 col-sm-4">
             <div class="rating-container">
               Plot <br>
               <div class="new-rating" data-value="1" data-post="<%%= id %>" data-skill="plot" id="rating-plot-1"><i class="fa fa-heart-o rating-heart"></i></div>
@@ -1021,6 +1019,18 @@ fa-terminal on fa-square<br>
               <div class="new-rating" data-value="4" data-post="<%%= id %>" data-skill="plot" id="rating-plot-4"><i class="fa fa-heart-o rating-heart"></i></div>
               <div class="new-rating" data-value="5" data-post="<%%= id %>" data-skill="plot" id="rating-plot-5"><i class="fa fa-heart-o rating-heart"></i></div>
             </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-12 text-center">
+            <br>
+          </div>
+        </div>
+
+
+        <div class="row">
+          <div class="col-xs-12 col-sm-4">
             <div class="rating-container">
               Story Structure <br>
               <div class="new-rating" data-value="1" data-post="<%%= id %>" data-skill="structure" id="rating-structure-1"><i class="fa fa-heart-o rating-heart"></i></div>
@@ -1030,8 +1040,7 @@ fa-terminal on fa-square<br>
               <div class="new-rating" data-value="5" data-post="<%%= id %>" data-skill="structure" id="rating-structure-5"><i class="fa fa-heart-o rating-heart"></i></div>
             </div>
           </div>
-
-          <div class="col-xs-12 col-sm-3">
+          <div class="col-xs-12 col-sm-4">
             <div class="rating-container">
               Dialogue (if applicable) <br>
               <div class="new-rating" data-value="1" data-post="<%%= id %>" data-skill="dialogue" id="rating-dialogue-1"><i class="fa fa-heart-o rating-heart"></i></div>
@@ -1040,6 +1049,8 @@ fa-terminal on fa-square<br>
               <div class="new-rating" data-value="4" data-post="<%%= id %>" data-skill="dialogue" id="rating-dialogue-4"><i class="fa fa-heart-o rating-heart"></i></div>
               <div class="new-rating" data-value="5" data-post="<%%= id %>" data-skill="dialogue" id="rating-dialogue-5"><i class="fa fa-heart-o rating-heart"></i></div>
             </div>
+          </div>
+          <div class="col-xs-12 col-sm-4">
             <div class="rating-container">
               Style <br>
               <div class="new-rating" data-value="1" data-post="<%%= id %>" data-skill="style" id="rating-style-1"><i class="fa fa-heart-o rating-heart"></i></div>
@@ -1048,6 +1059,20 @@ fa-terminal on fa-square<br>
               <div class="new-rating" data-value="4" data-post="<%%= id %>" data-skill="style" id="rating-style-4"><i class="fa fa-heart-o rating-heart"></i></div>
               <div class="new-rating" data-value="5" data-post="<%%= id %>" data-skill="style" id="rating-style-5"><i class="fa fa-heart-o rating-heart"></i></div>
             </div>
+          </div>
+        </div>
+<!--
+        <div class="row">
+          <div class="col-xs-12 col-sm-3 col-sm-offset-3">
+
+
+
+
+          </div>
+
+          <div class="col-xs-12 col-sm-3">
+
+
             <div class="rating-container">
               Grammar <br>
               <div class="new-rating" data-value="1" data-post="<%%= id %>" data-skill="grammar" id="rating-grammar-1"><i class="fa fa-heart-o rating-heart"></i></div>
@@ -1064,6 +1089,11 @@ fa-terminal on fa-square<br>
               <div class="new-rating" data-value="4" data-post="<%%= id %>" data-skill="theme" id="rating-theme-4"><i class="fa fa-heart-o rating-heart"></i></div>
               <div class="new-rating" data-value="5" data-post="<%%= id %>" data-skill="theme" id="rating-theme-5"><i class="fa fa-heart-o rating-heart"></i></div>
             </div>
+          </div>
+        </div> -->
+        <div class="row">
+          <div class="col-xs-12 text-center">
+            <br>
           </div>
         </div>
 
@@ -1106,7 +1136,7 @@ fa-terminal on fa-square<br>
 
 
         <div class="row">
-          <div class="col-xs-12">
+          <div class="col-xs-12 text-right">
             <div class="new-critique-form">
 
               <!-- Feedback Link Rendered Here  -->
@@ -1151,22 +1181,129 @@ fa-terminal on fa-square<br>
 
       <!-- Critique Form -->
       <div class="critiques-wrapper">
+        <div class="row text-left">
+          <div class="col-xs-12">
+            <h3>Leave Feedback</h3>
+          </div>
+        </div>
+
+          <div class="row text-left">
+
+            <div class="xs-hidden col-sm-4">
+              <div class="feedback-instructions text-left">
+              <h5 class="text-left">How to give constructive feedback?</h5>
+              <br>
+              <i class="fa fa-thumbs-up"></i> &nbsp; Start with the positive<br>
+              <i class="fa fa-quote-left"></i> &nbsp; Point out specific passages<br>
+              <i class="fa fa-eye"></i> &nbsp; Be descriptive of your reaction<br>
+              <i class="fa fa-gavel"></i> &nbsp; Do not be judgemental or evaluative<br>
+              <i class="fa fa-exchange"></i> &nbsp; Encourage further discussion
+              </div>
+            </div>
 
 
-          <div class="row">
-            <div class="col-xs-12 text-right">
-              <textarea id="critique-editor" class="post-body"></textarea>
-              <h5 class="text-left">What makes constructive feedback?</h5>
+            <div class="col-xs-12 col-sm-8">
+              <!-- <textarea id="critique-editor" class="post-body"></textarea> -->
 
-              <span class="save-critique btn btn-default">Submit</span>
+              <div id="full-toolbar">
+                <span class="ql-format-group">
+                  <span title="Bold" class="ql-format-button ql-bold"></span>
+                  <span class="ql-format-separator"></span>
+                  <span title="Italic" class="ql-format-button ql-italic"></span>
+                  <span class="ql-format-separator"></span>
+                  <span title="Underline" class="ql-format-button ql-underline"></span>
+                <select title="Text Color" class="ql-color">
+                  <option value="rgb(0, 0, 0)" selected></option>
+                  <option value="rgb(230, 0, 0)"></option>
+                  <option value="rgb(255, 153, 0)"></option>
+                  <option value="rgb(255, 255, 0)"></option>
+                  <option value="rgb(0, 138, 0)"></option>
+                  <option value="rgb(0, 102, 204)"></option>
+                  <option value="rgb(153, 51, 255)"></option>
+                  <option value="rgb(255, 255, 255)"></option>
+                  <option value="rgb(250, 204, 204)"></option>
+                  <option value="rgb(255, 235, 204)"></option>
+                  <option value="rgb(255, 255, 204)"></option>
+                  <option value="rgb(204, 232, 204)"></option>
+                  <option value="rgb(204, 224, 245)"></option>
+                  <option value="rgb(235, 214, 255)"></option>
+                  <option value="rgb(187, 187, 187)"></option>
+                  <option value="rgb(240, 102, 102)"></option>
+                  <option value="rgb(255, 194, 102)"></option>
+                  <option value="rgb(255, 255, 102)"></option>
+                  <option value="rgb(102, 185, 102)"></option>
+                  <option value="rgb(102, 163, 224)"></option>
+                  <option value="rgb(194, 133, 255)"></option>
+                  <option value="rgb(136, 136, 136)"></option>
+                  <option value="rgb(161, 0, 0)"></option>
+                  <option value="rgb(178, 107, 0)"></option>
+                  <option value="rgb(178, 178, 0)"></option>
+                  <option value="rgb(0, 97, 0)"></option>
+                  <option value="rgb(0, 71, 178)"></option>
+                  <option value="rgb(107, 36, 178)"></option>
+                  <option value="rgb(68, 68, 68)"></option>
+                  <option value="rgb(92, 0, 0)"></option>
+                  <option value="rgb(102, 61, 0)"></option>
+                  <option value="rgb(102, 102, 0)"></option>
+                  <option value="rgb(0, 55, 0)"></option>
+                  <option value="rgb(0, 41, 102)"></option>
+                  <option value="rgb(61, 20, 102)"></option>
+                </select><span class="ql-format-separator"></span>
+                <select title="Background Color" class="ql-background">
+                  <option value="rgb(0, 0, 0)"></option>
+                  <option value="rgb(230, 0, 0)"></option>
+                  <option value="rgb(255, 153, 0)"></option>
+                  <option value="rgb(255, 255, 0)"></option>
+                  <option value="rgb(0, 138, 0)"></option>
+                  <option value="rgb(0, 102, 204)"></option>
+                  <option value="rgb(153, 51, 255)"></option>
+                  <option value="rgb(255, 255, 255)" selected></option>
+                  <option value="rgb(250, 204, 204)"></option>
+                  <option value="rgb(255, 235, 204)"></option>
+                  <option value="rgb(255, 255, 204)"></option>
+                  <option value="rgb(204, 232, 204)"></option>
+                  <option value="rgb(204, 224, 245)"></option>
+                  <option value="rgb(235, 214, 255)"></option>
+                  <option value="rgb(187, 187, 187)"></option>
+                  <option value="rgb(240, 102, 102)"></option>
+                  <option value="rgb(255, 194, 102)"></option>
+                  <option value="rgb(255, 255, 102)"></option>
+                  <option value="rgb(102, 185, 102)"></option>
+                  <option value="rgb(102, 163, 224)"></option>
+                  <option value="rgb(194, 133, 255)"></option>
+                  <option value="rgb(136, 136, 136)"></option>
+                  <option value="rgb(161, 0, 0)"></option>
+                  <option value="rgb(178, 107, 0)"></option>
+                  <option value="rgb(178, 178, 0)"></option>
+                  <option value="rgb(0, 97, 0)"></option>
+                  <option value="rgb(0, 71, 178)"></option>
+                  <option value="rgb(107, 36, 178)"></option>
+                  <option value="rgb(68, 68, 68)"></option>
+                  <option value="rgb(92, 0, 0)"></option>
+                  <option value="rgb(102, 61, 0)"></option>
+                  <option value="rgb(102, 102, 0)"></option>
+                  <option value="rgb(0, 55, 0)"></option>
+                  <option value="rgb(0, 41, 102)"></option>
+                  <option value="rgb(61, 20, 102)"></option>
+                </select><span class="ql-format-separator"></span>
+              </div>
 
+              <div id="critique-editor-holder"></div>
               <input type="hidden" name="critique[post_id]" id="critique-post-id">
 
             </div>
           </div>
 
+          <div class="row text-left">
+            <div class="col-xs-12 col-sm-8 col-sm-offset-2">
+
+            </div>
+          </div>
+
           <div class="row">
-            <div class="col-xs-12">
+            <div class="col-xs-12 text-right">
+              <a class="save-critique btn btn-raised btn-danger">Give Feedback</a>
+
             </div>
           </div>
 
@@ -1208,10 +1345,8 @@ fa-terminal on fa-square<br>
               </div>
 
               <div class="row">
-                <div class="col-xs-12">
-                  <div class="vertical-space">
-
-                  </div>
+                <div class="col-xs-12 text-left">
+                  <h3>Feedback</h3>
                 </div>
               </div>
 
@@ -1564,12 +1699,6 @@ fa-terminal on fa-square<br>
       <div class="row">
         <div class="col-xs-2 text-left">
           <div class="user-pic-box"></div>
-          <br>
-
-          <br>
-          <span class="prompt-label">Writer Score: <%%= writer_score %></span>
-          <br>
-          <span class="prompt-label">Reviewer Score: <%%= reviewer_score %></span>
         </div>
         <div class="col-xs-4 text-left prompt-label">
           <div data-no-turbolink>
@@ -1577,55 +1706,83 @@ fa-terminal on fa-square<br>
           </div>
         </div>
 
-        <div class="col-xs-2 col-xs-offset-2 text-right" id="friend-button-holder">
+        <div class="col-xs-2 col-xs-offset-2 col-sm-2 col-sm-offset-4 text-center" id="friend-button-holder">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-2 col-xs-offset-2 text-center">
+          <span class="writing-page-text"><%%= writer_score || 0 %></span><br>
+          Writing Score
+        </div>
+        <div class="col-xs-2 text-center">
+          <span class="writing-page-text"><%%= posts || 0 %></span><br>
+          Posts
+        </div>
+        <div class="col-xs-2 text-center">
+          <span class="writing-page-text"><%%= reviewer_score || 0%></span><br>
+          Reviewer Score
+        </div>
+        <div class="col-xs-2 text-center">
+          <span class="writing-page-text"><%%= reviews || 0 %></span><br>
+          Feedback Given
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12 text-center">
+          <br>
         </div>
       </div>
 
 
       <div class="row">
-        <div class="col-xs-12 text-right">
-          <h5 class="about-the-author-show about-the-author">Show Author Info</h5>
+        <div class="col-xs-12 text-center">
+          <a class="about-the-author-show about-the-author btn btn-raised btn-fab btn-info"><i class="fa fa-info"></i></a>about the author
         </div>
       </div>
 
       <div id="author-info">
+
+
+
+        <div class="row">
+          <div class="col-xs-5 col-xs-offset-1 text-center">
+            <h4>Reading</h4>
+              <%%= currently_reading || "nothing" %>
+            <br>
+            <h4>Writing Goal</h4>
+            <%%= writing_goal || "nothing" %>
+          </div>
+          <div class="col-xs-5 text-center">
+            <h4>Favorite Authors</h4>
+            <%%= favorite_author || "nothing" %>
+            <h4>Favorite Books</h4>
+            <%%= favorite_book || "nothing" %>
+            <h4>Favorite Genres</h4>
+            <%%= favorite_genre || "nothing" %>
+            <br>
+          </div>
+        </div>
+
         <div class="row">
           <div class="col-xs-12 text-center">
-            <h4>About the Author</h4>
+            <h4>From</h4>
+            <%%= from || "nothing" %>
           </div>
         </div>
 
         <div class="row">
-          <div class="col-xs-6 text-center">
-            <span class="prompt-label">Reading<br> <%%= currently_reading || "nothing" %></span>
-            <br>
-            <span class="prompt-label">Writing Goal<br> <%%= writing_goal || "nothing" %></span>
-          </div>
-          <div class="col-xs-6 text-center">
-            <span class="prompt-label">Favorite Authors<br> <%%= favorite_author || "nothing" %></span>
-            <br>
-            <span class="prompt-label">Favorite Books<br> <%%= favorite_book || "nothing" %></span>
-            <br>
-            <span class="prompt-label">Favorite Genres<br> <%%= favorite_genre || "nothing" %></span>
-            <br>
+          <div class="col-xs-12 text-center">
+            <h4>About</h4>
+            <%%= about || "nothing" %>
           </div>
         </div>
 
         <div class="row">
-          <div class="col-xs-12"><div class="vertical-space"></div></div>
-        </div>
-
-        <div class="row">
-          <div class="col-xs-3 text-center">
-            <span class="prompt-label">From<br> <%%= from || "nothing" %></span>
+          <div class="col-xs-1 col-xs-offset-11">
+            <div class="user-posts-container"></div>
           </div>
-          <div class="col-xs-9 text-center">
-            <span class="prompt-label">About<br><%%= about || "nothing" %></span>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-xs-12"><div class="user-posts-container"></div></div>
         </div>
 
         <div class="row">
@@ -1647,20 +1804,39 @@ fa-terminal on fa-square<br>
     <script type="text/template" id="user-view-template">
 
       <div class="row">
-        <div class="col-xs-3">
+        <div class="col-xs-2">
           <h3 class="user-name-header"><img src="<%%= image_url %>" class="img-circle profile-picture"</>&nbsp; <%%= username %></h3>
         </div>
-        <div class="col-xs-3">
+        <div class="col-xs-2 text-center">
+          <span class="writing-page-text"><%%= writer_score || 0 %></span><br>
+          Writing Score
+        </div>
+        <div class="col-xs-2 text-center">
+          <span class="writing-page-text"><%%= posts || 0 %></span><br>
+          Posts
+        </div>
+        <div class="col-xs-2 text-center">
+          <span class="writing-page-text"><%%= reviewer_score || 0%></span><br>
+          Reviewer Score
+        </div>
+        <div class="col-xs-2 text-center">
+          <span class="writing-page-text"><%%= reviews || 0 %></span><br>
+          Feedback Given
+        </div>
+        <div class="col-xs-2">
+            <span class="btn btn-success btn-fab add-friend"><i class="fa fa-user-plus"></i></span>
+        </div>
+      </div>
 
-          <div class="row text-center">
-            <div class="col-xs-12">
+          <!-- <div class="row text-center">
+            <div class="col-xs-12 col-sm-2">
               Writing Score <br>
               <%%= writer_score || 0 %>
             </div>
           </div>
 
           <div class="row text-center">
-            <div class="col-xs-12">
+            <div class="col-xs-12 col-sm-2">
               Posts <br>
               <%%= posts || 0 %>
             </div>
@@ -1669,25 +1845,22 @@ fa-terminal on fa-square<br>
         </div>
         <div class="col-xs-3">
           <div class="row text-center">
-            <div class="col-xs-12">
+            <div class="col-xs-12 col-sm-2">
               Reviewer Score <br>
               <%%= reviewer_score || 0%>
             </div>
           </div>
 
           <div class="row text-center">
-            <div class="col-xs-12">
+            <div class="col-xs-12 col-sm-2">
               Feedback Given <br>
               <%%= reviews || 0 %>
             </div>
           </div>
 
-        </div>
+        </div> -->
 
-        <div class="col-xs-3">
-            <span class="btn btn-success add-friend">Add Friend</span>
-        </div>
-      </div>
+
 
         <input type="hidden" name="friendship[friend_id]" value="<%%= id %>" class="friend-id-holder">
         <input type="hidden" name="friendship[user_id]" value="<%= @user.id %>" class="user-id-holder">

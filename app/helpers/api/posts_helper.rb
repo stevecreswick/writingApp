@@ -33,4 +33,29 @@ module Api::PostsHelper
 
   end
 
+  def main_feed
+    # Still worker
+    @main_feed = []
+
+    # main_feed.push(current_user.posts)
+
+    current_user.friends.each do |friend|
+
+      friend.posts.each do |post|
+      @main_feed.push( post )
+      end
+
+    end
+
+    current_user.posts.each do |post|
+
+      @main_feed.push( post )
+
+    end
+
+    return @main_feed
+
+  end
+
+
 end
