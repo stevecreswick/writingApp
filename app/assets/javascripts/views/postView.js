@@ -8,6 +8,17 @@ app.PostView = Backbone.View.extend({
   normalHeight: '25em',
   openHeight: '40em',
   critiquePage: 0,
+  iconFiction: 'http://i.imgur.com/BI8PegK.png',
+  iconFantasy: 'http://i.imgur.com/ffCviDQ.png',
+  iconHorror: 'http://i.imgur.com/iJvfYS1.png',
+  iconThriller: 'http://i.imgur.com/ojVa8BI.png',
+  iconHistorical: 'http://i.imgur.com/lHyRvye.png',
+  iconCrime: 'http://i.imgur.com/8w44WhP.png',
+  iconRomance: 'http://i.imgur.com/zz5QHWN.png',
+  iconSciFi: 'http://i.imgur.com/K1kGfUE.png',
+  iconPoetry: 'http://i.imgur.com/F71bhWM.png',
+  iconHumor: 'http://i.imgur.com/Iw9CxT2.png',
+  iconNonFiction: 'http://i.imgur.com/tH5XICv.png',
 
     initialize: function(){
       this.listenTo( this.model, 'change', this.renderWithUserName );
@@ -27,7 +38,7 @@ app.PostView = Backbone.View.extend({
       var currentUser = $('#current_user').val()
 
 
-      var $deleteButton = $("<span>").addClass("remove-post").html("<span class='prompt-label'>delete</span>");
+      var $deleteButton = $("<a>").addClass("remove-post btn btn-raised btn-fab btn-danger").html("<i class='fa fa-trash'></i>");
       var $makeCritique = $("<button>").addClass("make-critique btn btn-info").html("Review");
       var $showCritique = $("<span>").addClass("render-critiques").html("Show Critiques");
 
@@ -42,7 +53,7 @@ app.PostView = Backbone.View.extend({
 
       // Add delete button for current user critique for other
       if (currentUser === poster) {
-        this.$el.find(".remove-post-box").append( $deleteButton );
+        this.$el.find(".remove-post-box").append( $deleteButton, "delete post" );
       } else {
 
         // If not the user... load the ratings
@@ -63,6 +74,46 @@ app.PostView = Backbone.View.extend({
       }
 
 
+
+    },
+
+    addIcon: function(genre){
+      switch (genre) {
+
+      case "Fiction":
+      this.$el.find('img.genre-icon-img').attr("src", this.iconFiction);
+      break;
+      case "Fantasy":
+      this.$el.find('img.genre-icon-img').attr("src", this.iconFantasy);
+      break;
+      case "Thriller":
+      this.$el.find('img.genre-icon-img').attr("src", this.iconThriller);
+      break;
+      case "Romance":
+      this.$el.find('img.genre-icon-img').attr("src", this.iconRomance);
+      break;
+      case "Horror":
+      this.$el.find('img.genre-icon-img').attr("src", this.iconHorror);
+      break;
+      case "Science-Fiction":
+      this.$el.find('img.genre-icon-img').attr("src", this.iconSciFi);
+      break;
+      case "Historical-Fiction":
+      this.$el.find('img.genre-icon-img').attr("src", this.iconHistorical);
+      break;
+      case "Poetry":
+      this.$el.find('img.genre-icon-img').attr("src", this.iconPoetry);
+      break;
+      case "Humor":
+      this.$el.find('img.genre-icon-img').attr("src", this.iconHumor);
+      break;
+      case "Non-Fiction":
+      this.$el.find('img.genre-icon-img').attr("src", this.iconNonFiction);
+      break;
+      case "Crime":
+      this.$el.find('img.genre-icon-img').attr("src", this.iconCrime);
+      break;
+      }
     },
 
 // Post Events
@@ -146,20 +197,20 @@ app.PostView = Backbone.View.extend({
       var userId = this.model.get('user_id');
       var prompt = this.model.get('prompt');
 
-      var writeScore = this.model.get('user_writer_score');
-      var reviewScore = this.model.get('user_reviewer_score');
+      // var writeScore = this.model.get('user_writer_score');
+      // var reviewScore = this.model.get('user_reviewer_score');
 
-      var writeLabel = $("<span>").addClass("post-author text-center prompt-label").html("Writer Score: " + writeScore );
-      var reviewLabel = $("<span>").addClass("post-author text-center prompt-label").html( "Reviewer Score: " + reviewScore );
+      // var writeLabel = $("<span>").addClass("post-author text-center prompt-label").html("Writer Score: " + writeScore );
+      // var reviewLabel = $("<span>").addClass("post-author text-center prompt-label").html( "Reviewer Score: " + reviewScore );
 
       var id = this.model.get('id');
       var href = "/users/" +  userId + "/posts/" + id;
       var link = $('<a>').attr('href', href).text( this.model.get("title") );
       var lineBreak = $('<br>');
-      var $time = $('<div>').attr('id', 'time_completed');
+      // var $time = $('<div>').attr('id', 'time_completed');
       var promptType = this.model.get('prompt_type');
 
-      var $wordCount = $('<span>').addClass("post-word-count").html( promptType + " | " + this.model.get('word_count') + "  words | completed in: " + this.getTimeCompleted() );
+      // var $wordCount = $('<span>').addClass("post-word-count").html( promptType + " | " + this.model.get('word_count') + "  words | completed in: " + this.getTimeCompleted() );
 
       var profilePic = this.model.get('image_url');
       var $profilePic = $('<img>').attr("src", profilePic).addClass('post-profile-picture img-circle');
@@ -173,7 +224,10 @@ app.PostView = Backbone.View.extend({
         // this.$el.find('.post-add-friend').append($addFriend)
       }
 
+      var genrePic = 'http://i.imgur.com/BI8PegK.png';
+      var $genrePic = $('<img>').attr("src", genrePic).addClass('genre-icon-img');
 
+      this.$el.find(".genre-icon").append( $genrePic );
 
       var promptInstruction = this.getPromptInstruction({
         "type": promptType,
@@ -195,7 +249,7 @@ app.PostView = Backbone.View.extend({
       }
 
 
-      this.$("div#title-holder").append(link, $average, lineBreak, $wordCount, $time, $prompt);
+      this.$el.find("div#post-prompt").append($prompt);
 
 
       this.renderFeebackButton();
@@ -204,14 +258,17 @@ app.PostView = Backbone.View.extend({
       var authorLink = "/users/profile/" + this.model.get('user_id');
       var $postAuthor = $('<a>').attr('href', authorLink ).addClass("post-author text-center prompt-label");
 
-      this.$el.find('.post-pic-box').append($profilePic, $postAuthor, lineBreak, $addFriend, writeLabel, reviewLabel);
+      this.$el.find('.post-pic-box').append($profilePic, $postAuthor, lineBreak, $addFriend);
 
       this.$("a.post-author").append(username);
 
+      this.$el.find("#time-completed").html( "Completed In: " + this.getTimeCompleted() );
       this.hoverHearts();
 
       this.skills = this.getSkillRatings();
       this.applySkills(this.skills)
+      this.addIcon( this.model.get('genre') );
+
       // this.renderCritiqueFormContainer();
       // this.renderEditor();
 
@@ -318,7 +375,8 @@ app.PostView = Backbone.View.extend({
     },
 
     hideFeedback: function(){
-      this.$el.find(".critiques-wrapper").remove();
+      var scope = this;
+      this.$el.find(".critiques-wrapper").hide('slow', function(){ scope.$el.find(".critiques-wrapper").remove(); });
       this.renderFeebackButton();
     },
 

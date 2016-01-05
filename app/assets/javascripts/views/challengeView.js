@@ -20,7 +20,7 @@ app.ChallengeView = Backbone.View.extend({
 
   },
   events:{
-    'click button.remove-challenge': 'removeChallenge'
+    'click .remove-challenge': 'removeChallenge'
   },
 
   removeChallenge: function(){

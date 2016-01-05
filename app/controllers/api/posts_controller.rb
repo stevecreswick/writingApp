@@ -41,7 +41,7 @@ respond_to :html, :json
     elsif params[:genre] == 'main'
 
       @posts = main_feed.paginate(:page => page)
-
+      
     else
       @posts = Post.where({genre: params[:genre]}).paginate :page => page
     end

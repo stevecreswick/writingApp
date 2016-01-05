@@ -48,7 +48,7 @@
 
 
       <nav class="navbar navbar-default">
-  <div class="container-fluid">
+  <div class="container-fluid header-bar">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -59,7 +59,10 @@
       </button>
       <a class="navbar-brand home-page">
         <!-- <img class="typewriter" src="http://i.imgur.com/yXJDIRB.png"/> -->
-        <a class="home-page headline">writeaway.</a>
+        <a href="/users/main" class="home-page headline">writeaway.
+          <div class="sub-headline"></div>
+        </a>
+
       </a>
     </div>
 
@@ -67,7 +70,7 @@
     <div class="collapse navbar-collapse nav navbar-nav navbar-right" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <!-- <li class="write-nav"><a class="nav-text">Write</a></li> -->
-        <li class="home-page"><a class="nav-text">Main</a></li>
+        <li><a href="/users/main" class="nav-text">Main</a></li>
         <li class="show-friends"><a class="nav-text">Authors</a></li>
         <li class="show-challenges"><a class="nav-text">Challenges</a></li>
         <li class="show-resources"><a class="nav-text">Resources</a></li>
@@ -164,12 +167,12 @@
               </div> -->
               </h1>
             </div>
-            <div class="col-xs-7 text-center">
+            <div class="col-xs-6 text-center">
               <div id="prompt-instrustion"><h1 class="brand-font">writeaway.</h1></div>
               <div id="prompt"></div>
             </div>
             <div class="col-xs-2">
-              <p class="post-error text-center"></p>
+              <div class="post-error text-center"></div>
             </div>
 
             <!-- <div class="col-sm-3">
@@ -408,7 +411,7 @@
       <input type="hidden" id="current_user" value="<%= @user.username %>">
       <input type="hidden" id="current_id" value="<%= @user.id %>">
 
-      <div class="container-fluid"  id="header">
+      <div id="header">
 
         <!-- Navbar is Rendered Here -->
 
@@ -434,7 +437,7 @@
       </div>
 
       <!-- Center -->
-      <div id="center-columns"class="col-md-10 col-lg-10">
+      <div id="center-columns"class="col-xs-12 col-md-9">
         <div id="center-pane">
 
           </div>
@@ -705,7 +708,7 @@
                 </div>
 
                 <div class="col-xs-2 text-center">
-                  <h5>Words Per Minute</h5>
+                  <h5>WPM</h5>
                   <div id="current-wpm-count" class="writing-page-text">0</div>
                 </div>
 
@@ -732,8 +735,8 @@
 
 
 
-        <div class="sidenav-row list-group-item home-page" data-url="main">
-          <div class="sort-text">Main Feed</div>
+        <div class="sort sidenav-row list-group-item home-page" data-url="main">
+          <div class="sort-text"><i class="fa fa-dashboard"></i>Main Feed</div>
         </div>
 
         <!-- <div class="sort sidenav-row list-group-item" data-url="user">
@@ -857,12 +860,26 @@
 
         </div>
         <div class="col-xs-8 text-left">
-          <div data-no-turbolink  class="prompt-label text-left" id="title-holder"></div>
+          <div data-no-turbolink  class="prompt-label text-left" id="title-holder">
+            <a href="/users/<%%= user_id || "undefined"%>/posts/<%%= id || "undefined"%>"><%%=title || "Untitled" %></a>
+            </div>
+            <div class="post-info">
+            <span class="post-word-count">
+            <%%= prompt_type || "" %> | <%%= word_count || "" %> words
+
+          </span>
+            <div id="time-completed" class="prompt-label post-word-count"></div>
+            <div id="post-prompt" class="prompt-label"></div>
+          </div>
         </div>
-        <div class="col-xs-2  text-center prompt-label">
-          <strong> <%%= genre %> </strong>
-          <br>
-          <strong id="created-at">Posted  </strong>
+        <div class="col-xs-2 prompt-label">
+          <div class="icon-holder">
+            <div class="genre-icon"></div>
+            <strong> <%%= genre %> </strong>
+            <br>
+            <strong id="created-at">Posted  </strong>
+          </div>
+
 
         </div>
       </div>
@@ -1195,8 +1212,8 @@
               <br>
               <i class="fa fa-thumbs-up"></i> &nbsp; Start with the positive<br>
               <i class="fa fa-quote-left"></i> &nbsp; Point out specific passages<br>
-              <i class="fa fa-eye"></i> &nbsp; Be descriptive of your reaction<br>
-              <i class="fa fa-gavel"></i> &nbsp; Do not be judgemental or evaluative<br>
+              <i class="fa fa-eye"></i> &nbsp; Be descriptive of the reactions and feelings evoked<br>
+              <i class="fa fa-gavel"></i> &nbsp; Do not be judgmental or evaluative<br>
               <i class="fa fa-exchange"></i> &nbsp; Encourage further discussion
               </div>
             </div>
@@ -1406,7 +1423,7 @@
 
           <div class="row">
             <div class="col-xs-12">
-              <h3 class="text-center">Start Writing</h3>
+              <h3 class="text-center start-writing">You are 250 words away from being a better writer. </h3>
             </div>
 
             <div class="col-xs-12 col-sm-8">
@@ -1420,25 +1437,31 @@
               <div id="prompt-description" class="prompt-label">
 
                 <!-- Starts on One Word -->
-                Description: Use the one word prompt in the first sentence of your post.
+                Use the one word prompt in the first sentence of your post.
               </div>
             </div>
             <div class="col-xs-12 col-sm-3">
               <label for="post-word-count">Choose minimum word count</label>
-              <input type="number" value="25" min ="25" max="1000" step="25" class="form-control" id="post-word-count"></input>
-              <span class="prompt-label">1,000 max</span>
+              <select class="form-control" id="post-word-count">
+                  <option data-value="250">250 words</option>
+                  <option data-value="500">500 words</option>
+                  <option data-value="750">750 words</option>
+                  <option data-value="1000">1000 words</option>
+              </select>
+              <!-- <input type="number" value="25" min ="25" max="1000" step="25" class="form-control" id="post-word-count"></input>
+              <span class="prompt-label">1,000 max</span> -->
             </div>
 
           </div>
 
           <div class="row">
-            <div class="col-xs-12 col-sm-8 text-center">
+            <div class="col-xs-12 col-sm-7 text-center">
               <div id="prompt-container"></div>
             </div>
             <div class="col-xs-12 col-sm-2 text-center">
                 <a class="render-prompt btn btn-danger btn-raised">Get a Prompt</a>
             </div>
-            <div class="col-xs-12 col-sm-2 text-center">
+            <div class="col-xs-12 col-sm-3 text-center">
               <div id="start-writing-container"></div>
             </div>
           </div>
@@ -1476,14 +1499,10 @@
 
             <div class="row">
               <div class="col-xs-1 col-xs-offset-10">
-                <div class="edit-critique-box">
 
-                </div>
               </div>
               <div class="col-xs-1">
-                <div class="remove-critique-box">
 
-                </div>
               </div>
             </div>
 
@@ -1515,15 +1534,18 @@
                 <br>
                 <i class="fa fa-caret-down fa-5x down-vote vote"></i>
               </div>
-              <div class="col-xs-8 text-right">
+              <div class="col-xs-7 text-left">
                 <p class="critique-message">
                     <%%= message %>
                 </p>
               </div>
-              <div class="col-xs-2 text-right">
+              <div class="col-xs-4 text-right">
                 <img src="<%%= image_url %>" class="critique-profile-picture img-circle"></img>
                 <%%= username %>
+                <div class="edit-critique-box"></div>
+                <div class="remove-critique-box"></div>
               </div>
+
             </div>
 
             <div class="row">
@@ -1907,7 +1929,7 @@
             <div class="user-search-container">
               <div class="row">
                 <div class="col-xs-12 text-center">
-                  <h3>Issue a Writing Challenge</h3>
+                  <h3>Send a Writing Challenge to a Friend</h3>
                 </div>
               </div>
 
@@ -2120,7 +2142,7 @@
           <div class="challenge-message">Write <%%= word_count %> using the prompt: <%%= prompt %>.</div>
         </div>
         <div class="col-xs-12 col-sm-2 text-left">
-          <button type="button" class='remove-challenge btn btn-danger'>Cancel</button>
+          <a class='remove-challenge btn btn-raised btn-fab btn-danger'><i class="fa fa-times"></i></button>
         </div>
       </div>
 

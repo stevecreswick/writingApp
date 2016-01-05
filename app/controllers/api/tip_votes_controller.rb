@@ -17,13 +17,13 @@ class Api::TipVotesController < ApplicationController
 
             if current_user.id == @tip.user_id
                 # Cannot vote on your own resource
-                render json: @tip
+                render json: @resource
                 puts '*** Cannot Vote for your own Post ***'
 
             elsif ( TipVote.where({user_id: current_user.id, writing_tip_id: @tip.id}).exists?)
 
                 puts '**************** Already Rated ******************'
-                render json: @tip
+                render json: @resource
 
             else
 

@@ -21,8 +21,8 @@ app.CritiqueView = Backbone.View.extend({
     var votes = this.model.get('total_votes');
 
     if ( authorId === currentId ){
-      var $editButton = $("<span>").addClass("edit-critique").html("Edit");
-      var $deleteButton = $("<a>").addClass("remove-critique").html("X");
+      var $editButton = $("<a>").addClass("edit-critique btn btn-raised btn-fab btn-info").html("<i class='fa fa-edit'></i>");
+      var $deleteButton = $("<a>").addClass("remove-critique btn btn-raised btn-fab btn-danger").html("<i class='fa fa-times'></i>");
 
       this.$el.find('.edit-critique-box').append( $editButton );
       this.$el.find('.remove-critique-box').append( $deleteButton );
@@ -35,7 +35,7 @@ app.CritiqueView = Backbone.View.extend({
   events:{
     'click a.remove-critique': 'removeCritique',
     'click button.delete-critique': 'deleteCritique',
-    'click span.edit-critique': 'editCritique',
+    'click a.edit-critique': 'editCritique',
 
     'click .up-vote': 'upVote',
     'click .down-vote': 'downVote',

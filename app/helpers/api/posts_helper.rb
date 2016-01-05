@@ -34,24 +34,11 @@ module Api::PostsHelper
   end
 
   def main_feed
-    # Still worker
-    @main_feed = []
 
-    # main_feed.push(current_user.posts)
+    ids = current_user.friend_ids
+    ids.push( current_user.id )
 
-    current_user.friends.each do |friend|
-
-      friend.posts.each do |post|
-      @main_feed.push( post )
-      end
-
-    end
-
-    current_user.posts.each do |post|
-
-      @main_feed.push( post )
-
-    end
+    @main_feed = Post.where({user_id: ids}).order('created_at DESC')
 
     return @main_feed
 

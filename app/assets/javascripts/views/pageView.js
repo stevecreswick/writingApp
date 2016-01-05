@@ -12,47 +12,93 @@ app.PageView = Backbone.View.extend({
   defaultCenter: "col-md-10 col-lg-10",
   centerWidth: 11,
 
-  // Fonts Themes
-  fontAll: "'Cutive Mono', sans-serif",
-  fontFiction:"'Cutive Mono', sans-serif",
-  fontFantasy: "'Cutive Mono', sans-serif",
-  fontHorror:"'Cutive Mono', sans-serif",
-  fontThriller: "'Cutive Mono', sans-serif",
-  fontHistorical: "'Cutive Mono', sans-serif",
-  fontFiction: "'Cutive Mono', sans-serif",
-  fontCrime: "'Cutive Mono', sans-serif",
-  fontRomance: "'Cutive Mono', sans-serif",
-  fontSciFi: "'Cutive Mono', sans-serif",
-  fontPoetry: "'Cutive Mono', sans-serif",
-  fontNonFiction: "'Cutive Mono', sans-serif",
+  // Main
+  fontDefault:"Brand, sans-serif",
+  headerDefault:"white",
+  backgroundDefault:"/assets/binding_dark.png",
+  centerDefault: "white",
+  headerTextDefault: "black",
 
-  // Background Themes
-  backgroundAll: "'Cutive Mono', sans-serif",
-  backgroundFiction:"'Cutive Mono', sans-serif",
-  backgroundFantasy: "/assets/hold-fast.gif",
-  backgroundHorror:"/assets/COLOURlovers.com-Death_Flowers.png",
-  backgroundThriller: "'Cutive Mono', sans-serif",
-  backgroundHistorical: "'/assets/hod-fast.gif",
-  backgroundFiction: "'Cutive Mono', sans-serif",
-  backgroundCrime: "/assets/brickwall.png",
-  backgroundRomance: "/assets/COLOURlovers.com-When_We_Parted.png",
+  // Fiction
+  fontFiction:"Brand, sans-serif",
+  headerFiction:"white",
+  backgroundFiction:"/assets/COLOURlovers.com-Death_Flowers.png",
+  centerFiction: "white",
+  headerTextFiction: "black",
+
+  // Sci Fi Theme
   backgroundSciFi: "/assets/stardust.png",
-  backgroundPoetry: "/assets/COLOURlovers.com-d_u_s_k.png",
-  backgroundNonFiction: "'Cutive Mono', sans-serif",
+  headerTextSciFi: "red",
+  headerSciFi: "black",
+  fontSciFi: "Perfect Dark, sans-serif",
+  centerSciFi: "rgba(0,0,0,0)",
 
-  // Header Themes
-  headerAll: "'Cutive Mono', sans-serif",
-  headerFiction:"'Cutive Mono', sans-serif",
-  headerFantasy: "'Cutive Mono', sans-serif",
+  // Fantasy
+  fontFantasy: "History, sans-serif",
+  backgroundFantasy: "/assets/hold-fast.gif",
+  headerTextFantasy: "black",
+  headerFantasy: "white",
+  centerFantasy: "white",
+
+  // Horror
+  fontHorror:"'Loved By the King', sans-serif",
   headerHorror:"rgb(139,0,0)",
-  headerThriller: "'Cutive Mono', sans-serif",
-  headerHistorical: "rgb(250,235,215)",
-  headerFiction: "'Cutive Mono', sans-serif",
-  headerCrime: "'Cutive Mono', sans-serif",
-  headerRomance: "rgb(255,228,225)",
-  headerSciFi: "'Cutive Mono', sans-serif",
-  headerPoetry: "rgb(240,255,240)",
-  headerNonFiction: "'Cutive Mono', sans-serif",
+  backgroundHorror:"/assets/COLOURlovers.com-Death_Flowers.png",
+  centerHorror: "white",
+  headerTextHorror: "black",
+
+  // Thriller
+  fontThriller:"Thriller, sans-serif",
+  headerThriller:"white",
+  backgroundThriller:"/assets/COLOURlovers.com-Death_Flowers.png",
+  centerThriller: "white",
+  headerTextThriller: "black",
+
+  // Historical
+  fontHistorical: "'Homemade Apple', sans-serif",
+  headerHistorical:"antiquewhite",
+  backgroundHistorical:"/assets/chess-dark.gif",
+  centerHistorical: "white",
+  headerTextHistorical: "black",
+
+  // Crime
+  fontCrime:"Phorssa, sans-serif",
+  headerCrime:"slategrey",
+  backgroundCrime:"/assets/brickwall.png",
+  centerCrime: "white",
+  headerTextCrime: "white",
+
+  // Romance
+  fontRomance: "'Lovers Quarrel', sans-serif",
+  headerRomance:"white",
+  backgroundRomance:"/assets/pink_rice.png",
+  centerRomance: "white",
+  headerTextRomance: "black",
+
+  // Poetry
+  fontPoetry:"Floral, sans-serif",
+  headerPoetry:"white",
+  backgroundPoetry:"/assets/chess-dark.gif",
+  centerPoetry: "white",
+  headerTextPoetry: "black",
+
+  // Humor
+  fontHumor:"Comedy, sans-serif",
+  headerHumor:"white",
+  backgroundHumor:"/assets/COLOURlovers.com-Death_Flowers.png",
+  centerHumor: "white",
+  headerTextHumor: "black",
+
+  // NonFiction
+  fontNonFiction:"Brand, sans-serif",
+  headerNonFiction:"white",
+  backgroundNonFiction:"/assets/COLOURlovers.com-Death_Flowers.png",
+  centerNonFiction: "white",
+  headerTextNonFiction: "black",
+
+
+  brandFont: 'Brand, sans-serif',
+
 
   currentGenre: 'main',
   currentPage: 0,
@@ -79,55 +125,321 @@ app.PageView = Backbone.View.extend({
 
     switch (genre) {
 
-      case "Romance":
-        this.$el.find('h1.home-page').css( {'font-family': "'Lovers Quarrel', cursive", "font-size": "2.5em"});
-        this.$el.find('#main-display').css({'background': "url(" + this.backgroundRomance + ")"})
+      case "main":
+        var scope = this;
+        // Background and Center
+        // $("#main-page").fadeOut("slow", function () {
+          $('#main-display').css({'background': 'url(' + scope.backgroundDefault + ')'});
+          $('#center-pane').css({'background': scope.centerDefault});
 
-        // this.$el.find('.container-fluid').css({"background": this.headerRomance})
-      break;
+          // navBar
+          $('nav.navbar').css({'background': scope.headerDefault});
 
-      case "Horror":
-        this.$el.find('h1.home-page').css({'font-family': "'Loved by the King', cursive", "font-size": "2.5em"});
-        this.$el.find('.post#title-holder').css({'font-family': "'Loved by the King', cursive", "font-size": "2.5em"});
-        this.$el.find('#main-display').css({'background': "url(" + this.backgroundHorror + ")"});
+          // Nav Text
+          $('.header-bar a').css({'color': scope.headerTextDefault});
+          $('.headline').css({'font-family': scope.fontDefault});
+          $('.sub-headline').css({'font-family': scope.brandFont, 'color': scope.headerTextDefault});
+          scope.$el.find('.sub-headline').html("");
+          scope.$el.find('.sub-headline').show();
+          // $(this).fadeIn("slow");
 
-        this.$el.find('#center-columns').css({"background": "red"});
-
-      break;
-
-      case "Science-Fiction":
-        this.$el.find('h1.home-page').css({'font-family': "'Krona One', sans-serif", "font-size": "2.5em", "color": "red"});
-        this.$el.find('#main-display').css({'background': "url(" + this.backgroundSciFi + ")"});
-
-      break;
-      case "Historical-Fiction":
-        this.$el.find('h1.home-page').css({'font-family': "'Homemade Apple', cursive", "font-size": "3em"});
-        this.$el.find('.container-fluid').css({'background': "url()"});
-
-        // this.$el.find('.container-fluid').css({"background": this.headerHistorical})
+        // });
 
       break;
 
-      case "Poetry":
-        this.$el.find('h1.home-page').css({'font-family': "'Homemade Apple', cursive", "font-size": "3em"});
-        this.$el.find('#main-display').css({'background': "url(" + this.backgroundPoetry + ")"})
+      case "all":
+        var scope = this;
+        // Background and Center
+        $("#main-page").fadeOut("slow", function () {
+          $('#main-display').css({'background': 'url(' + scope.backgroundDefault + ')'});
+          $('#center-pane').css({'background': scope.centerDefault});
+
+          // navBar
+          $('nav.navbar').css({'background': scope.headerDefault});
+
+          // Nav Text
+          $('.header-bar a').css({'color': scope.headerTextDefault});
+          $('.headline').css({'font-family': scope.fontDefault});
+          $('.sub-headline').css({'font-family': scope.brandFont, 'color': scope.headerTextDefault});
+          scope.$el.find('.sub-headline').html("");
+          scope.$el.find('.sub-headline').show();
+          $(this).fadeIn("slow");
+
+        });
 
       break;
 
-      case "Crime":
-        this.$el.find('#main-display').css({'background': "url(" + this.backgroundCrime + ")"})
+      case "Fiction":
+        var scope = this;
+        // Background and Center
+        $("#main-page").fadeOut("slow", function () {
+          $('#main-display').css({'background': 'url(' + scope.backgroundFiction + ')'});
+          $('#center-pane').css({'background': scope.centerFiction});
+
+          // navBar
+          $('nav.navbar').css({'background': scope.headerFiction});
+
+          // Nav Text
+          $('.header-bar a').css({'color': scope.headerTextFiction});
+          $('.headline').css({'font-family': scope.fontFiction});
+          $('.sub-headline').css({'font-family': scope.brandFont, 'color': scope.headerTextFiction});
+          scope.$el.find('.sub-headline').html("Fiction");
+          scope.$el.find('.sub-headline').show();
+          $(this).fadeIn("slow");
+
+        });
 
       break;
 
       case "Fantasy":
-        // this.$el.find('h1.home-page').css({'font-family': "'Homemade Apple', cursive", "font-size": "3em"});
-        this.$el.find('#main-display').css({'background': "url(" + this.backgroundFantasy + ")"})
+      var scope = this;
+      // Background and Center
+      $("#main-page").fadeOut("slow", function () {
+        $('#main-display').css({'background': 'url(' + scope.backgroundFantasy + ')'});
+        $('#center-pane').css({'background': scope.centerFantasy});
+
+        // navBar
+        $('nav.navbar').css({'background': scope.headerFantasy});
+
+        // Nav Text
+        $('.header-bar a').css({'color': scope.headerTextFantasy});
+        $('.headline').css({'font-family': scope.fontFantasy});
+        $('.sub-headline').css({'font-family': scope.brandFont, 'color': scope.headerTextFantasy});
+        scope.$el.find('.sub-headline').html("Fantasy");
+        scope.$el.find('.sub-headline').show();
+        // $('.start-writing').css({'font-family': scope.fontFantasy});
+
+        $(this).fadeIn("slow");
+
+      });
+
+      break;
+
+      case "Thriller":
+      var scope = this;
+      // Background and Center
+      $("#main-page").fadeOut("slow", function () {
+        $('#main-display').css({'background': 'url(' + scope.backgroundThriller + ')'});
+        $('#center-pane').css({'background': scope.centerThriller});
+
+        // navBar
+        $('nav.navbar').css({'background': scope.headerThriller});
+
+        // Nav Text
+        $('.header-bar a').css({'color': scope.headerTextThriller});
+        $('.headline').css({'font-family': scope.fontThriller});
+        $('.sub-headline').css({'font-family': scope.brandFont, 'color': scope.headerTextThriller});
+        scope.$el.find('.sub-headline').html("Thriller");
+        scope.$el.find('.sub-headline').show();
+        // $('.start-writing').css({'font-family': scope.fontThriller});
+
+        $(this).fadeIn("slow");
+
+      });
+
+      break;
+
+      case "Romance":
+      var scope = this;
+      // Background and Center
+      $("#main-page").fadeOut("slow", function () {
+        $('#main-display').css({'background': 'url(' + scope.backgroundRomance + ')'});
+        $('#center-pane').css({'background': scope.centerRomance});
+
+        // navBar
+        $('nav.navbar').css({'background': scope.headerRomance});
+
+        // Nav Text
+        $('.header-bar a').css({'color': scope.headerTextRomance});
+        $('.headline').css({'font-family': scope.fontRomance});
+        $('.sub-headline').css({'font-family': scope.brandFont, 'color': scope.headerTextRomance});
+        scope.$el.find('.sub-headline').html("Romance");
+        scope.$el.find('.sub-headline').show();
+        // $('.start-writing').css({'font-family': scope.fontRomance});
+
+        $(this).fadeIn("slow");
+
+      });
+
+      break;
+
+      case "Horror":
+      var scope = this;
+      // Background and Center
+      $("#main-page").fadeOut("slow", function () {
+        $('#main-display').css({'background': 'url(' + scope.backgroundHorror + ')'});
+        $('#center-pane').css({'background': scope.centerHorror});
+
+        // navBar
+        $('nav.navbar').css({'background': scope.headerHorror});
+
+        // Nav Text
+        $('.header-bar a').css({'color': scope.headerTextHorror});
+        $('.headline').css({'font-family': scope.fontHorror});
+        $('.sub-headline').css({'font-family': scope.brandFont, 'color': scope.headerTextHorror});
+        scope.$el.find('.sub-headline').html("Horror");
+        scope.$el.find('.sub-headline').show();
+        // $('.start-writing').css({'font-family': scope.fontHorror});
+
+        $(this).fadeIn("slow");
+
+      });
+      break;
+
+      case "Science-Fiction":
+
+        var scope = this;
+
+        // Background and Center
+        $("#main-page").fadeOut("slow", function () {
+          $('#main-display').css({'background': 'url(' + scope.backgroundSciFi + ')'});
+          $('#center-pane').css({'background': scope.centerSciFi});
+
+          // navBar
+          $('nav.navbar').css({'background': scope.headerSciFi});
+
+          // Nav Text
+          $('.header-bar a').css({'color': scope.headerTextSciFi});
+          $('.headline').css({'font-family': scope.fontSciFi});
+          $('.sub-headline').css({'font-family': scope.brandFont});
+          $('.sub-headline').css({'color': scope.headerTextSciFi});
+          // $('.start-writing').css({'font-family': scope.fontSciFi});
+
+
+          scope.$el.find('.sub-headline').html("Science Fiction");
+          scope.$el.find('.sub-headline').show();
+
+          // $('.start-writing').css({'font-family': scope.fontSciFi});
+
+          $(this).fadeIn("slow");
+
+        });
+
+      break;
+
+      case "Historical-Fiction":
+        var scope = this;
+        // Background and Center
+        $("#main-page").fadeOut("slow", function () {
+          $('#main-display').css({'background': 'url(' + scope.backgroundHistorical + ')'});
+          $('#center-pane').css({'background': scope.centerHistorical});
+
+          // navBar
+          $('nav.navbar').css({'background': scope.headerHistorical});
+
+          // Nav Text
+          $('.header-bar a').css({'color': scope.headerTextHistorical});
+          $('.headline').css({'font-family': scope.fontHistorical});
+          $('.sub-headline').css({'font-family': scope.brandFont, 'color': scope.headerTextHistorical});
+          scope.$el.find('.sub-headline').html("Historical Fiction");
+          scope.$el.find('.sub-headline').show();
+          // $('.start-writing').css({'font-family': scope.fontHistorical});
+
+          $(this).fadeIn("slow");
+
+      });
+
+      break;
+
+      case "Poetry":
+        var scope = this;
+        // Background and Center
+        $("#main-page").fadeOut("slow", function () {
+          $('#main-display').css({'background': 'url(' + scope.backgroundPoetry + ')'});
+          $('#center-pane').css({'background': scope.centerPoetry});
+
+          // navBar
+          $('nav.navbar').css({'background': scope.headerPoetry});
+
+          // Nav Text
+          $('.header-bar a').css({'color': scope.headerTextPoetry});
+          $('.headline').css({'font-family': scope.fontPoetry});
+          $('.sub-headline').css({'font-family': scope.brandFont, 'color': scope.headerTextPoetry});
+          scope.$el.find('.sub-headline').html("Poetry");
+          scope.$el.find('.sub-headline').show();
+          // $('.start-writing').css({'font-family': scope.fontPoetry});
+
+          $(this).fadeIn("slow");
+
+        });
+
+      break;
+
+      case "Humor":
+        var scope = this;
+        // Background and Center
+        $("#main-page").fadeOut("slow", function () {
+          $('#main-display').css({'background': 'url(' + scope.backgroundHumor + ')'});
+          $('#center-pane').css({'background': scope.centerHumor});
+
+          // navBar
+          $('nav.navbar').css({'background': scope.headerHumor});
+
+          // Nav Text
+          $('.header-bar a').css({'color': scope.headerTextHumor});
+          $('.headline').css({'font-family': scope.fontHumor});
+          $('.sub-headline').css({'font-family': scope.brandFont, 'color': scope.headerTextHumor});
+          scope.$el.find('.sub-headline').html("Humor");
+          scope.$el.find('.sub-headline').show();
+          // $('.start-writing').css({'font-family': scope.fontHumor});
+
+          $(this).fadeIn("slow");
+
+        });
+
+      break;
+
+      case "Non-Fiction":
+        var scope = this;
+        // Background and Center
+        $("#main-page").fadeOut("slow", function () {
+          $('#main-display').css({'background': 'url(' + scope.backgroundNonFiction + ')'});
+          $('#center-pane').css({'background': scope.centerNonFiction});
+
+          // navBar
+          $('nav.navbar').css({'background': scope.headerNonFiction});
+
+          // Nav Text
+          $('.header-bar a').css({'color': scope.headerTextNonFiction});
+          $('.headline').css({'font-family': scope.fontNonFiction});
+          $('.sub-headline').css({'font-family': scope.brandFont, 'color': scope.headerTextNonFiction});
+          scope.$el.find('.sub-headline').html("Non Fiction");
+          scope.$el.find('.sub-headline').show();
+          // $('.start-writing').css({'font-family': scope.fontNonFiction});
+
+          $(this).fadeIn("slow");
+
+      });
+
+      break;
+
+      case "Crime":
+        var scope = this;
+        // Background and Center
+        $("#main-page").fadeOut("slow", function () {
+          $('#main-display').css({'background': 'url(' + scope.backgroundCrime + ')'});
+          $('#center-pane').css({'background': scope.centerCrime});
+
+          // navBar
+          $('nav.navbar').css({'background': scope.headerCrime});
+
+          // Nav Text
+          $('.header-bar a').css({'color': scope.headerTextCrime});
+          $('.headline').css({'font-family': scope.fontCrime});
+          $('.sub-headline').css({'font-family': scope.brandFont, 'color': scope.headerTextCrime});
+          scope.$el.find('.sub-headline').html("Crime");
+          scope.$el.find('.sub-headline').show();
+          // $('.start-writing').css({'font-family': scope.fontCrime});
+
+          $(this).fadeIn("slow");
+
+        });
 
       break;
 
           // font-family: ;
       default:
-      this.$el.find('h1.home-page').css({'font-family': this.fontAll });
+      this.$el.find('h1.home-page').css({'font-family': this.fontDefault });
     }
 
   },
@@ -373,12 +685,20 @@ showGenres: function(){
 
 // Update Post List
   updateList: function(e){
-    this.$el.find('#center-pane').empty();
+    var scope = this;
+    this.$el.find('#post-list').remove();
 
     this.currentGenre = $(e.currentTarget).eq(0).data('url');
+    console.log(this.currentGenre);
     this.currentPage = 0;
+    // $("#center-pane").hide("fast");
     this.updateHeader( this.currentGenre );
-    this.renderPosts( this.currentGenre, this.currentPage );
+
+    // setTimeout(function(){
+      this.renderPosts( this.currentGenre, this.currentPage );
+    // }, 100);
+    // $("#center-pane").show("fast");
+
   },
 
   createPostList: function(){

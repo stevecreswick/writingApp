@@ -177,7 +177,20 @@ class UsersController < ApplicationController
   if params[:search] != ""
      users = User.search(params[:search])
      searched_users = users.paginate(:page => page, :per_page => 20)
-     render json: searched_users
+
+     results = searched_users.map do |user|
+
+         data = user.as_json
+         data['is_friend'] = false
+         data['friend_name'] = user.username
+         data['friend_image'] = user.image_url
+         data['posts'] = user.posts.length
+         data['reviews'] = user.critiques.length
+         data
+
+     end
+
+     render json: results
   elsif
     redirect_to add_friends_path
   end

@@ -67,6 +67,7 @@ app.ResourceView = Backbone.View.extend({
 
     this.model.url = urlModel
     this.model.save();
+
     this.render();
 
 

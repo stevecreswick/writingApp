@@ -23,88 +23,212 @@
  *= require_self
 
  */
+
 @font-face {
   font-family: 'Brand';
   src: url('/assets/gabriele-br.TTF');
   font-weight: normal;
   font-style: normal;
 }
+
+@font-face {
+  font-family: 'Crime';
+  src: url('/assets/xero4.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'History';
+  src: url('/assets/Ruritania.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Shoplift';
+  src: url('/assets/shoplift.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Phorssa';
+  src: url('/assets/Phorssa.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+// @font-face {
+//   font-family: 'Comedy';
+//   src: url('/assets/BAYOC___.TTF');
+//   font-weight: normal;
+//   font-style: normal;
+// }
+
+@font-face {
+  font-family: 'Poetry';
+  src: url('/assets/Briarwood.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Floral';
+  src: url('/assets/FloralOne.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Thriller';
+  src: url('/assets/MAROLA.TTF');
+  font-weight: normal;
+  font-style: italic  ;
+}
+
+@font-face {
+  font-family: 'Comedy';
+  src: url('/assets/Inmyc___.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Perfect Dark';
+  src: url('/assets/pdark.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+$font-main:    'Open Sans Condensed', sans-serif;
+$font-brand:    Brand, sans-serif;
+$font-post: 'Josefin Sans', sans-serif;
+$main-pattern: url('binding_dark.png');
+$scifi-pattern: url('stardust.png');
+
+
 /* Universal */
  *{
    box-sizing: border-box;
  }
 
+
  html, body {
-    /*height: 100%;*/
+
+    // Universal
     margin: 0px;
-    font-family: 'Open Sans Condensed', sans-serif;
+    font: 100% $font-main;
+
+    #main-page{
+      // background: $main-pattern;
+      background: white;
+      a{
+        // color: black;
+      }
+
+      p{
+        font: $font-post;
+        font-size: 1.6em;
+        line-height: 1.8;
+        letter-spacing: 1.1;
+      }
+
+      h1, h2, h3, h4, h5 {
+        font: 150% $font-main;
+      }
+
+      .container-fluid {
+        // background: white;
+        // height: 100%;
+      }
+
+      .header-bar {
+        // background: white;
+        padding-top: 1em;
+        padding-bottom: -1em;
+        max-height: 100px;
+        // margin-bottom: -1em;
+
+        .headline{
+          max-height: 100px;
+        }
+      }
+
+      #friend-page{
+        margin-top: 2em;
+
+        .friend-nav{
+          padding: 1em 0 0 0;
+        }
+
+      }
+
+      #main-display{
+        position: absolute;
+        background: black;
+
+        #center-pane{
+          background: ghostwhite;
+        }
+
+      }
+
+      #center-columns{
+        padding-bottom: 3em;
+        min-height: 1000px;
+
+        // Search for Users
+        .user-search-container{
+          margin-top: 1em;
+          margin-bottom: 2em;
+
+          padding: 1em;
+
+          background: white;
+          -webkit-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+          box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+          -moz-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        }
+
+        // Posts
+        #post-list{
+          width:100%;
+          overflow: auto;
+          padding: 5em 1em 3em 1em;
+          /*border-left: 9px solid #545454;*/
+
+        }
+
+        #critique-editor-holder{
+          height: 15em;
+        }
+
+      }
+
+      #left-columns{
+        height: 100%;
+        // background: url('binding_dark.png');
+      }
+
+
+    }
+
+
   }
 
-  a{
-    color: black;
+  .navbar{
+    margin-bottom: 0;
+    padding-bottom: 10px;
   }
 
-  p{
-    font-family: 'Josefin Sans', sans-serif;
-    /*font-family: 'Open Sans Condensed', sans-serif;*/
-
-    font-size: 1.6em;
-    line-height: 1.8;
-    letter-spacing: 1.1;
-  }
-
-  h1, h2, h3, h4, h5 {
-    font-family: 'Open Sans Condensed', sans-serif;
-  }
 
   .tiny-text{
     font-size: 10px;
   }
 
-  .container-fluid {
-    background: white;
 
-    overflow: auto;
-    /*padding-top: 5em;*/
-    height: 100%;
-  }
-
-  #left-columns{
-    height: 100%;
-  }
-
-
-  .user-search-container{
-    margin-top: 1em;
-    margin-bottom: 2em;
-
-    padding: 1em;
-
-    background: white;
-    -webkit-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    -moz-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
-.friend-nav{
-  padding: 1em 0 0 0;
-}
-
-#main-display{
-  position: absolute;
-  background: url('binding_dark.png');
-
-}
-
-#center-columns{
-  padding-bottom: 3em;
-  background: floralwhite;
-  min-height: 1000px;
-}
-
-#friend-page{
-  margin-top: 2em;
-}
 
 #challenge-page{
   margin-top: 2em;
@@ -118,6 +242,10 @@
   color: red;
   display: block;
   width: 50%;
+}
+
+.post-info{
+  padding-left: 5%;
 }
 
 .writing-page-text{
@@ -206,6 +334,7 @@
   /*width: 50%;*/
   display: inline-block;
   font-size: 1em;
+  margin-top: 1em;
   /*float: right;
   position: absolute;
   bottom: 0;
@@ -278,14 +407,7 @@ form{
   margin-bottom: 1em;
 }
 
-#post-list{
-  width:100%;
-  overflow: auto;
-  /*background: ghostwhite;*/
-  padding: 5em 1em 3em 1em;
-  /*border-left: 9px solid #545454;*/
 
-}
 
 
 /*.critique{
@@ -310,20 +432,6 @@ form{
 }
 
 /* Navbar */
-#header {
-  background: white;
-  /*border-bottom: 1px solid gainsboro;*/
-  padding: 0 0 0 0;
-  /*padding: 0% 5% 0% 3%;*/
-  /*vertical-align: bottom;*/
-  color: black;
-  /*overflow: visible;*/
-  height:6em;
-  -webkit-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  -moz-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  /*display: table;*/
-}
 
 
 #header-row {
@@ -352,6 +460,54 @@ form{
   display: inline-block;
 }
 
+.genre-icon{
+  height: 50px;
+  width: 50px;
+  max-height: 50px;
+
+  max-width: 50px;
+  min-width: 50px;
+
+  /*display: table;*/
+  border: 1px lightgrey solid;
+  border-radius: 50px;
+  margin: 0 auto;
+  vertical-align: middle;
+  text-align: center;
+  background-color: ghostwhite;
+  padding-top: 0.7em;
+  /*margin-bottom: 0.4em;
+
+  -webkit-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  -moz-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);*/
+
+
+}
+
+
+.genre-icon-img{
+  /*height: 25px;*/
+  width: 25px;
+  max-height: 25px;
+  max-width: 25px;
+  /*display: table-cell;*/
+
+  margin: 0 auto;
+  vertical-align: middle;
+  text-align: center;
+  /*display: table-cell;*/
+}
+
+.icon-holder{
+  /*width: 100%;*/
+  vertical-align: middle;
+  margin: 0 auto;
+  display:center;
+  text-align: center;
+
+}
+
 
 .home-page:hover{
   cursor: pointer;
@@ -374,8 +530,8 @@ form{
 }
 
 .critique-profile-picture{
-  height: 50px;
-  width: 50px;
+  height: 25px;
+  width: 25px;
   display: inline-block;
 }
 
@@ -425,7 +581,6 @@ div.write-nav{
 }
 
 div.genres{
-  display: none:
 }
 
 div.sidenav-row {
@@ -501,6 +656,7 @@ img.sort-image{
 
 
 
+
 /*Footer*/
 
 #footer{
@@ -528,6 +684,7 @@ img.sort-image{
 
 #prompt-description{
   margin: 0.5em 0 0 0.5em;
+  font-size: 20px;
 }
 .tall-input{
   font-size: 2em;
@@ -638,7 +795,10 @@ img.sort-image{
   width: 100px;
   /*float: left;*/
   display:inline-block;
-  border: 6px solid #545454;
+  /*border: 6px solid #545454;*/
+  -webkit-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  -moz-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 #post-author-stats{
@@ -670,8 +830,10 @@ margin-top: -4.8em;
 
 
   /* Post Components */
-  #post-error {
+  .post-error {
     color: red;
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 15px;
   }
 
   .post-header {
@@ -1189,6 +1351,10 @@ div.user-view{
   height:10em;
 }
 
+.edit-critique-box{
+  display: inline-block;
+}
+
 
 .show-post{
   margin-top: 6em;
@@ -1339,4 +1505,18 @@ div.user-view{
     -webkit-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     -moz-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+
+  .ql-picker-label{
+    background: lightgrey;
+  }
+
+  .sub-headline{
+    font-size: 15px;
+    padding-left: 10%;
+    display: none;
+  }
+
+  .navbar, .navbar.navbar-default {
+      background-color: white;
   }

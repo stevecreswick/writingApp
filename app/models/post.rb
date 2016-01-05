@@ -10,11 +10,17 @@ class Post < ActiveRecord::Base
 
   def average_rating
     @value = 0
-    self.ratings.each do |rating|
-        @value = @value + rating.value
+
+    if (self.ratings.length > 0)
+      self.ratings.each do |rating|
+          @value = @value + rating.value
+      end
+      @total = self.ratings.size
+      @value.to_f / @total.to_f
     end
-    @total = self.ratings.size
-    @value.to_f / @total.to_f
+
+    return @value
+    
   end
 
   def skill_rating(skill)

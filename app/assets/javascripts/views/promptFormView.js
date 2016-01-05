@@ -26,15 +26,16 @@ app.promptFormView = Backbone.View.extend({
     var $html = $( html );
     this.$el.append( $html );
     this.bindPromptDescription();
+    this.bindHeadline();
+
   },
   events:{
     'click a.render-prompt': 'getPrompt',
     'click a.start': 'renderWritingForm',
-    'click span.publish': 'publishPost'
+    'click a.publish': 'publishPost'
   },
 
   getPromptInstruction(options){
-    console.log(options);
     if (options.type === "Use One Word") {
       return "Write at least " + options.wordCount + " words, using the word";
     } else if (options.type === "reddit") {
@@ -59,18 +60,30 @@ app.promptFormView = Backbone.View.extend({
 
   },
 
+  bindHeadline: function(){
+    var scope = this;
+    $( "#post-word-count" ).change(function() {
+      console.log('yo');
+      var words = $('#post-word-count').val();
+      console.log(words);
+      scope.$el.find(".start-writing").html("You are " + words + " away from being a better writer.")
+      // scope.changePromptDescription( $('#choose-type').val() );
+    });
+
+  },
+
   changePromptDescription: function(promptType){
 
     var $description = this.$el.find("#prompt-description");
 
     if (promptType === "Use One Word") {
-      $description.html("Description: Write a story using the one word prompt in the first sentence of your post.");
+      $description.html("Write a story using the one word prompt in the first sentence of your post.");
     } else if (promptType === "reddit") {
-      $description.html("Description: Write a story using a random writing prompt submitted to /r/writingprompts");
+      $description.html("Write a story using a random writing prompt submitted to /r/writingprompts");
     } else if (promptType === "Classic First Sentence") {
-      $description.html("Description: Write a story using the first sentence from a classic work.");
+      $description.html("Write a story using the first sentence from a classic work.");
     } else if (promptType === "Answer What If") {
-      $description.html("Description: Write a story about what would happen if...");
+      $description.html("Write a story about what would happen if...");
     }
   },
 
@@ -88,7 +101,8 @@ app.promptFormView = Backbone.View.extend({
 
       app.promptType = $('#choose-type').val();
 
-      app.requiredWords = $('#post-word-count').val();
+      app.requiredWords = $('#post-word-count option:selected').data('value');
+
 
       var writingPrompts = new app.WritingPromptCollection();
       var promptPainter = new app.WritingPromptListView({
@@ -100,19 +114,15 @@ app.promptFormView = Backbone.View.extend({
       if (app.promptType === 'Use One Word'){
         writingPrompts.url = "/api/writing_prompts/one_word"
         writingPrompts.fetch({url: writingPrompts.url, async:false});
-        console.log(writingPrompts);
       } else if (app.promptType === 'Answer What If'){
         writingPrompts.url = "/api/writing_prompts/what_if"
         writingPrompts.fetch({url: writingPrompts.url, async:false});
-        console.log(writingPrompts);
       } else if (app.promptType === 'Classic First Sentence'){
         writingPrompts.url = "/api/writing_prompts/first_sentence"
         writingPrompts.fetch({url: writingPrompts.url, async:false});
-        console.log(writingPrompts);
       } else if (app.promptType === 'reddit'){
         writingPrompts.url = "/api/writing_prompts/reddit"
         var newPrompt = writingPrompts.fetch({url: writingPrompts.url, async:false}).done(function(){
-          console.log(this);
         });
       } else {
         console.log('no url for this type : ' + app.promptType);
@@ -223,10 +233,8 @@ app.promptFormView = Backbone.View.extend({
 
 // WPM
       var minutes = app.totalTime / 60;
-      console.log(app.wordCount);
 
       var wpm = Math.floor( parseInt(app.wordCount) / minutes );
-      console.log(wpm);
 
       $("#current-wpm-count").html(wpm)
 
@@ -282,7 +290,9 @@ app.promptFormView = Backbone.View.extend({
         // Check Title / Word Count
         if (newTitle === ""){
           console.log('yo');
-          $('p.post-error').html('No Title');
+          $('.post-error').html('Error: A title is required.');
+          // $('#post-title').css('border', '1px solid red');
+
         } else if (messageLength >= app.requiredWords) {
           var $stopwatch = $('#stopwatch');
 
@@ -316,7 +326,7 @@ app.promptFormView = Backbone.View.extend({
           this.$el.css({'height': 'auto'});
 
         } else {
-          this.$('p.post-error').text('Not Long Enough');
+          this.$('.post-error').text('Error: Post does not meet required word count.');
         }
 
     },
