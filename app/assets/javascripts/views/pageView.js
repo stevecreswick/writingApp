@@ -35,7 +35,7 @@ app.PageView = Backbone.View.extend({
 
   // Fantasy
   fontFantasy: "History, sans-serif",
-  backgroundFantasy: "/assets/hold-fast.gif",
+  backgroundFantasy: "hold-fast.gif",
   headerTextFantasy: "black",
   headerFantasy: "white",
   centerFantasy: "white",
