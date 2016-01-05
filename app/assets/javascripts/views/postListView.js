@@ -7,8 +7,8 @@ app.PostListView = Backbone.View.extend({
   },
 
   events: {
-    'click span.view-more': 'viewMore',
-    'click span.view-previous': "viewPrevious"
+    'click .view-more': 'viewMore',
+    'click .view-previous': "viewPrevious"
   },
   render: function(){
     this.$el.empty();
@@ -24,28 +24,8 @@ app.PostListView = Backbone.View.extend({
           this.$el.append( view.$el );
         }
 
-        var $row = $('<div>').addClass("row");
-        var $col1 = $('<div>').addClass("col-xs-4 text-left previous");
-        var $colCenter = $('<div>').addClass("col-xs-4 text-center");
-        var $col2 = $('<div>').addClass("col-xs-4 text-right");
+        this.renderButtons(posts.length)
 
-        var $more = $('<a>').addClass('view-more withripple').text('Next').attr("href", "javascript:void(0)");
-        var $previous = $('<a>').addClass('view-previous withripple').text('Previous').attr("href", "javascript:void(0)");
-
-
-        // If it is not the first page,
-        // add the previous button and page number
-        if (app.pagePainter.currentPage > 0) {
-          $col1.empty();
-          $col1.append( $previous );
-          $colCenter.html( "Page: " + (app.pagePainter.currentPage + 1) );
-        }
-
-        $col2.append( $more );
-
-        $row.append( $col1, $colCenter, $col2 );
-
-        this.$el.append( $row );
 
     },
 
@@ -62,7 +42,7 @@ app.PostListView = Backbone.View.extend({
         // Append the View to the Post List
         this.$el.append( view.$el );
       }
-
+      this.renderButtons(posts.length)
       // var $more = $('<span>').addClass('view-more').text('View More');
       // this.$el.append( $more );
 
@@ -80,7 +60,37 @@ app.PostListView = Backbone.View.extend({
         this.renderMore();
       } else {
       }
+    },
+
+    renderButtons(length){
+      var $row = $('<div>').addClass("row");
+      var $col1 = $('<div>').addClass("col-xs-4 text-left previous");
+      var $colCenter = $('<div>').addClass("col-xs-4 text-center");
+      var $col2 = $('<div>').addClass("col-xs-4 text-right");
+
+
+      if (length >= 10){
+        var $more = $('<a>').addClass('view-more btn btn-raised btn-fab btn-info withripple').html("<i class='fa fa-angle-right'><div class='tiny-text'>Next</div></i>").attr("href", "javascript:void(0)");
+        $col2.empty();
+        $col2.append( $more );
+      }
+
+      // If it is not the first page,
+      // add the previous button and page number
+      if (app.pagePainter.currentPage > 0) {
+        var $previous = $('<a>').addClass('view-previous btn btn-raised btn-fab btn-danger withripple').html("<i class='fa fa-angle-left'><div class='tiny-text'>Prev</div></i>").attr("href", "javascript:void(0)");
+        $col1.empty();
+        $col1.append( $previous );
+      }
+
+      $colCenter.html( "Page: " + (app.pagePainter.currentPage + 1) );
+
+      $row.append( $col1, $colCenter, $col2 );
+
+      this.$el.append( $row );
+
     }
+
 
 
 });

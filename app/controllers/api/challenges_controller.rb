@@ -33,7 +33,7 @@ class Api::ChallengesController < ApplicationController
   def received
     page = params[:page].to_i + 1
 
-    challenges = received_challenges.paginate(:page => page, :per_page => 5)
+    challenges = received_challenges.paginate(:page => page, :per_page => 10)
 
 
         sending_challenges = challenges.map do |challenge|

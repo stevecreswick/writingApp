@@ -14,7 +14,5 @@ app.AcceptedChallengeView = Backbone.View.extend({
     var $html = $( html );
     this.$el.append( $html );
   },
-  events:{
-  }
 
 });

@@ -44,7 +44,6 @@ app.PostView = Backbone.View.extend({
 
       this.$el.find(".show-critiques-box").append( $showCritique );
 
-
         // this.colorRating();
 
 
@@ -116,6 +115,8 @@ app.PostView = Backbone.View.extend({
       }
     },
 
+
+
 // Post Events
   events:{
     'click .remove-post': 'removePost',
@@ -141,8 +142,18 @@ app.PostView = Backbone.View.extend({
     // 'click li.decrease-font': 'decreaseFont'
   },
 
+  showRating: function(){
+
+    var rating = this.model.get('avg_rating');
+
+    if(rating){
+      this.$el.find('#post-avg-rating').html("<div class='tiny-text'>Avg. Rating: " + rating + "/10 (" + this.model.get('total_ratings') + ")</div>");
+    } else {
+      this.$el.find('#post-avg-rating').html("<div class='tiny-text'>Be the First to Rate this Post.</div>");
+    }
+  },
+
   newRating: function(e){
-    console.log();
 
     $(e.currentTarget).eq(0).addClass('rated-star');
     var rating = $(e.currentTarget).eq(0).data('value');
@@ -268,6 +279,8 @@ app.PostView = Backbone.View.extend({
       this.skills = this.getSkillRatings();
       this.applySkills(this.skills)
       this.addIcon( this.model.get('genre') );
+      this.showRating();
+
 
       // this.renderCritiqueFormContainer();
       // this.renderEditor();

@@ -41,7 +41,7 @@ respond_to :html, :json
     elsif params[:genre] == 'main'
 
       @posts = main_feed.paginate(:page => page)
-      
+
     else
       @posts = Post.where({genre: params[:genre]}).paginate :page => page
     end
@@ -78,7 +78,7 @@ respond_to :html, :json
           data['user_writer_score'] = aRpost.user.writer_score
           data['user_reviewer_score'] = aRpost.user.reviewer_score
 
-          data['total_ratings'] = aRpost.ratings.length
+          data['total_ratings'] = aRpost.ratings.where({skill: "overall"}).length
           data['feedback_num'] = aRpost.critiques.length
 
           # Get Skill Levels

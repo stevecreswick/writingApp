@@ -35,7 +35,7 @@ app.promptFormView = Backbone.View.extend({
     'click a.publish': 'publishPost'
   },
 
-  getPromptInstruction(options){
+  getPromptInstruction: function(options){
     if (options.type === "Use One Word") {
       return "Write at least " + options.wordCount + " words, using the word";
     } else if (options.type === "reddit") {

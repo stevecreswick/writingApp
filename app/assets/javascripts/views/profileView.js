@@ -55,11 +55,11 @@ app.ProfileView = Backbone.View.extend({
       el: $('#post-list')
     });
 
-    app.posts.comparator = function(post) {
-      return post.get("created_at");
-    };
-
-    app.posts.comparator = this.reverseSortBy(app.posts.comparator);
+    // app.posts.comparator = function(post) {
+    //   return post.get("created_at");
+    // };
+    //
+    // app.posts.comparator = this.reverseSortBy(app.posts.comparator);
 
     app.posts.fetch({url: urlModel});
   },
@@ -93,17 +93,17 @@ app.ProfileView = Backbone.View.extend({
   //   this.renderPromptForm();
   //   this.renderPosts();
   // },
-  reverseSortBy: function(sortByFunction) {
-  return function(left, right) {
-    var l = sortByFunction(left);
-    var r = sortByFunction(right);
-
-    if (l === void 0) return -1;
-    if (r === void 0) return 1;
-
-    return l < r ? 1 : l > r ? -1 : 0;
-  };
-},
+//   reverseSortBy: function(sortByFunction) {
+//   return function(left, right) {
+//     var l = sortByFunction(left);
+//     var r = sortByFunction(right);
+//
+//     if (l === void 0) return -1;
+//     if (r === void 0) return 1;
+//
+//     return l < r ? 1 : l > r ? -1 : 0;
+//   };
+// },
 
 addButton: function() {
   var currentId = $('#current_id').val();

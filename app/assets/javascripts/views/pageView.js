@@ -35,7 +35,7 @@ app.PageView = Backbone.View.extend({
 
   // Fantasy
   fontFantasy: "History, sans-serif",
-  backgroundFantasy: "hold-fast.gif",
+  backgroundFantasy: "/assets/hold-fast.gif",
   headerTextFantasy: "black",
   headerFantasy: "white",
   centerFantasy: "white",
@@ -195,7 +195,7 @@ app.PageView = Backbone.View.extend({
       var scope = this;
       // Background and Center
       $("#main-page").fadeOut("slow", function () {
-        $('#main-display').css({'background': 'image-url(' + scope.backgroundFantasy + ')'});
+        $('#main-display').css({'background': 'url(' + scope.backgroundFantasy + ')'});
         $('#center-pane').css({'background': scope.centerFantasy});
 
         // navBar
