@@ -3,6 +3,7 @@ class Api::CritiquesController < ApplicationController
   include SessionsHelper
   include UsersHelper
   include Api::PostsHelper
+  include ActionView::Helpers::DateHelper
 
   respond_to :html, :json
 
@@ -23,11 +24,13 @@ class Api::CritiquesController < ApplicationController
     ar_critique.votes.map do |vote|
       @total_votes = @total_votes + vote.value
     end
+    time = time_ago_in_words(ar_critique.created_at)
 
     data = ar_critique.as_json
     author = User.find( ar_critique.user_id )
     data['username'] = author.username
     data['image_url'] = author.image_url
+    data['created_at'] = time
 
     if @total_votes > 0
     data['total_votes'] = @total_votes
@@ -63,6 +66,9 @@ class Api::CritiquesController < ApplicationController
     author = User.find( ar_critique.user_id )
     data['username'] = author.username
     data['image_url'] = author.image_url
+
+    time = time_ago_in_words(ar_critique.created_at)
+    data['created_at'] = time
 
     if @total_votes > 0
     data['total_votes'] = @total_votes

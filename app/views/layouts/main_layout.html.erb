@@ -233,10 +233,10 @@
             <div class="add-resource-form">
               <div class="row">
                 <div class="col-xs-10">
-                  <h4 class="text-center">Add a New Writing Resource</h4>
+                  <h4 class="text-left">Add a New Writing Resource</h4>
                 </div>
                 <div class="col-xs-2">
-                  <a class="remove-form btn btn-danger">Cancel</a>
+                  <a class="remove-form btn btn-danger btn-raised">Cancel</a>
                 </div>
 
               </div>
@@ -1542,6 +1542,7 @@
               <div class="col-xs-4 text-right">
                 <img src="<%%= image_url %>" class="critique-profile-picture img-circle"></img>
                 <%%= username %>
+                <div class="tiny-text">written <%%= created_at %> ago</div>
                 <div class="edit-critique-box"></div>
                 <div class="remove-critique-box"></div>
               </div>
@@ -2073,10 +2074,11 @@
 
 
       <div class="row">
-        <div class="col-xs-6 col-xs-offset-3 text-center friend-nav">
+        <div class="col-xs-8 col-xs-offset-2 text-center friend-nav">
           <div class="btn-group btn-group-justified btn-group-raised">
             <a href="javascript:void(0)" class="btn btn-danger send-challenge">Send Challenge</a>
             <a href="javascript:void(0)" class="btn btn-danger received-challenges">Received Challenges</a>
+            <a href="javascript:void(0)" class="btn btn-danger awaiting-challenges">Awaiting Response</a>
             <a href="javascript:void(0)" class="btn btn-danger completed-challenges">Completed Challenges</a>
           </div>
         </div>
@@ -2140,6 +2142,7 @@
         </div>
         <div class="col-xs-12 col-sm-8 text-left">
           <div class="challenge-message">Write <%%= word_count %> using the prompt: <%%= prompt %>.</div>
+          <div class="tiny-text">sent <%%= created_at %> ago</div>
         </div>
         <div class="col-xs-12 col-sm-2 text-left">
           <a class='remove-challenge btn btn-raised btn-fab btn-danger'><i class="fa fa-times"></i></button>
@@ -2157,6 +2160,7 @@
           <div class="col-xs-12 col-sm-3">
             <img src="<%%= image_url || "undefined" %>" class="critique-profile-picture img-circle"/>
             <%%= username || "unknown" %>
+            <div class="tiny-text">sent <%%= created_at %> ago</div>
           </div>
           <div class="col-xs-12 col-sm-7">
             Write <%%= word_count %> words, using the prompt: <%%= prompt %>
@@ -2209,6 +2213,7 @@
             <div class="col-xs-12 col-sm-3">
               <img src="<%%= sender_image_url || "undefined" %>" class="critique-profile-picture img-circle"/>
               <%%= sender || "unknown" %>
+              <div class="tiny-text">sent <%%= created_at %> ago</div>
             </div>
             <div class="col-xs-12 col-sm-7">
               <h4 class="panel-header">Write <%%= word_count %> words, using the prompt: <%%= prompt %></h4>

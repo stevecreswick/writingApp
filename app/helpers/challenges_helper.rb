@@ -25,7 +25,7 @@ module ChallengesHelper
           if (challenge.status == "Open")
           @sent_challenges.push(challenge)
           end
-          
+
         end
       end
 
@@ -41,10 +41,6 @@ module ChallengesHelper
 
         friendship.challenges.each do |challenge|
 
-          if challenge.status == "Accepted"
-            @completed_challenges.push(challenge)
-          end
-
           if challenge.status == "Completed"
             @completed_challenges.push(challenge)
           end
@@ -53,14 +49,9 @@ module ChallengesHelper
 
       end
 
-
       current_user.friendships.each do |friendship|
 
         friendship.challenges.each do |challenge|
-
-          if challenge.status == "Accepted"
-            @completed_challenges.push(challenge)
-          end
 
           if challenge.status == "Completed"
             @completed_challenges.push(challenge)
@@ -73,6 +64,40 @@ module ChallengesHelper
       @completed_challenges
 
     end
+
+    def awaiting_challenges
+
+          @awaiting_response = []
+
+          current_user.inverse_friendships.each do |friendship|
+
+            friendship.challenges.each do |challenge|
+
+              if challenge.status == "Accepted"
+                @awaiting_response.push(challenge)
+              end
+
+            end
+
+          end
+
+
+          current_user.friendships.each do |friendship|
+
+            friendship.challenges.each do |challenge|
+
+              if challenge.status == "Accepted"
+                @awaiting_response.push(challenge)
+              end
+
+            end
+
+          end
+
+          @awaiting_response
+
+    end
+
 
 
 

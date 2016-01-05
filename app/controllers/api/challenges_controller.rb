@@ -3,7 +3,7 @@ class Api::ChallengesController < ApplicationController
   include SessionsHelper
   include UsersHelper
   include ChallengesHelper
-
+  include ActionView::Helpers::DateHelper
 
   respond_to :html, :json
 
@@ -22,6 +22,8 @@ class Api::ChallengesController < ApplicationController
       data = challenge.as_json
       data['username'] = challenge.friendship.friend.username
       data['image_url'] = challenge.friendship.friend.image_url
+      time = time_ago_in_words(challenge.created_at)
+      data['created_at'] = time
       data
     end
 
@@ -38,6 +40,8 @@ class Api::ChallengesController < ApplicationController
           data = challenge.as_json
           data['username'] = challenge.friendship.friend.username
           data['image_url'] = challenge.friendship.friend.image_url
+          time = time_ago_in_words(challenge.created_at)
+          data['created_at'] = time
           data
         end
 
@@ -53,6 +57,27 @@ class Api::ChallengesController < ApplicationController
       data['sender_image_url'] = challenge.friendship.user.image_url
       data['receiver'] = challenge.friendship.friend.username
       data['receiver_image_url'] = challenge.friendship.friend.image_url
+      time = time_ago_in_words(challenge.created_at)
+      data['created_at'] = time
+      data
+    end
+
+    render json: sending_challenges
+  end
+
+
+  def awaiting_response
+
+    challenges = awaiting_challenges
+
+    sending_challenges = challenges.map do |challenge|
+      data = challenge.as_json
+      data['sender'] = challenge.sender
+      data['sender_image_url'] = challenge.friendship.user.image_url
+      data['receiver'] = challenge.friendship.friend.username
+      data['receiver_image_url'] = challenge.friendship.friend.image_url
+      time = time_ago_in_words(challenge.created_at)
+      data['created_at'] = time
       data
     end
 

@@ -22,7 +22,7 @@ app.PageView = Backbone.View.extend({
   // Fiction
   fontFiction:"Brand, sans-serif",
   headerFiction:"white",
-  backgroundFiction:"/assets/COLOURlovers.com-Death_Flowers.png",
+  backgroundFiction:"/assets/binding_dark.png",
   centerFiction: "white",
   headerTextFiction: "black",
 
@@ -42,15 +42,15 @@ app.PageView = Backbone.View.extend({
 
   // Horror
   fontHorror:"'Loved By the King', sans-serif",
-  headerHorror:"rgb(139,0,0)",
+  headerHorror:"rgb(9,9,9)",
   backgroundHorror:"/assets/COLOURlovers.com-Death_Flowers.png",
   centerHorror: "white",
-  headerTextHorror: "black",
+  headerTextHorror: "red",
 
   // Thriller
   fontThriller:"Thriller, sans-serif",
   headerThriller:"white",
-  backgroundThriller:"/assets/COLOURlovers.com-Death_Flowers.png",
+  backgroundThriller:"/assets/binding_dark.png",
   centerThriller: "white",
   headerTextThriller: "black",
 
@@ -78,21 +78,21 @@ app.PageView = Backbone.View.extend({
   // Poetry
   fontPoetry:"Floral, sans-serif",
   headerPoetry:"white",
-  backgroundPoetry:"/assets/chess-dark.gif",
+  backgroundPoetry:"/assets/binding_dark.png",
   centerPoetry: "white",
   headerTextPoetry: "black",
 
   // Humor
   fontHumor:"Comedy, sans-serif",
   headerHumor:"white",
-  backgroundHumor:"/assets/COLOURlovers.com-Death_Flowers.png",
+  backgroundHumor:"/assets/binding_dark.png",
   centerHumor: "white",
   headerTextHumor: "black",
 
   // NonFiction
   fontNonFiction:"Brand, sans-serif",
   headerNonFiction:"white",
-  backgroundNonFiction:"/assets/COLOURlovers.com-Death_Flowers.png",
+  backgroundNonFiction:"/assets/binding_dark.png",
   centerNonFiction: "white",
   headerTextNonFiction: "black",
 
@@ -649,6 +649,8 @@ app.PageView = Backbone.View.extend({
     'click .received-challenges': 'receivedChallenges',
     'click .completed-challenges': 'completedChallenges',
     'click .send-challenge': 'sendChallenge',
+    'click .awaiting-challenges': 'awaitingChallenges',
+
     // 'click .sent-challenges': 'sentChallenges',
 
 
@@ -926,6 +928,33 @@ showGenres: function(){
 
 
     if ( receivedChallenges.models.length === 0){
+      var $none = _.template( $('#no-challenges-screen').html() );
+      this.$el.find('#challenge-page').append( $none );
+    }
+
+
+  },
+
+  awaitingChallenges: function(){
+    this.$el.find("#challenge-page").empty();
+
+    var urlModel = "/api/challenges/awaiting/" + app.pagePainter.currentPage;
+
+    console.log(urlModel);
+
+
+    var awaitingChallenges = new app.CompletedChallengeCollection();
+
+    var awaitingChallengesPainter = new app.CompletedChallengeListView ({
+      collection: awaitingChallenges,
+      el: $('#challenge-page')
+    });
+
+    awaitingChallenges.fetch({url: urlModel});
+
+
+
+    if ( awaitingChallenges.models.length === 0){
       var $none = _.template( $('#no-challenges-screen').html() );
       this.$el.find('#challenge-page').append( $none );
     }
