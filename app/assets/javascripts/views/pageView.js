@@ -277,7 +277,7 @@ app.PageView = Backbone.View.extend({
         $('.header-bar a').css({'color': scope.headerTextHorror});
         $('.headline').css({'font-family': scope.fontHorror});
         $('.sub-headline').css({'font-family': scope.brandFont, 'color': scope.headerTextHorror});
-        scope.$el.find('.sub-headline').html("Horror");
+        scope.$el.find('.sub-headline').html("");
         scope.$el.find('.sub-headline').show();
         // $('.start-writing').css({'font-family': scope.fontHorror});
 
@@ -331,7 +331,7 @@ app.PageView = Backbone.View.extend({
           $('.header-bar a').css({'color': scope.headerTextHistorical});
           $('.headline').css({'font-family': scope.fontHistorical});
           $('.sub-headline').css({'font-family': scope.brandFont, 'color': scope.headerTextHistorical});
-          scope.$el.find('.sub-headline').html("Historical Fiction");
+          scope.$el.find('.sub-headline').html("");
           scope.$el.find('.sub-headline').show();
           // $('.start-writing').css({'font-family': scope.fontHistorical});
 

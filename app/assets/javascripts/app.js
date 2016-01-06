@@ -13,15 +13,17 @@ var app = app || {};
 
 
 
-
-// $( document ).ready(function() {
-
-  // Create Post
-
-
-  // app.pagePainter.renderPromptForm();
-
-// });
+// function scrollToTop(){
+//   $(window).scroll(function(){
+//     var scroll = $(window).scrollTop();
+//     console.log(scroll);
+//     if (scroll > 750) {
+//       $('#up-arrow').show();
+//       // $('#left-columns').append("YOOOOOOOOO");
+//     }
+//   });
+//
+// }
 
 
 var do_on_load = function() {
@@ -37,8 +39,7 @@ var do_on_load = function() {
   app.pagePainter.renderPosts( app.pagePainter.currentGenre, app.pagePainter.currentPage );
   app.pagePainter.renderNavBar();
 
-//
-
+// scrollToTop();
 
 }
 $(document).ready(do_on_load)

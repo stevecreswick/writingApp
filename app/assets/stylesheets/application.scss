@@ -230,6 +230,15 @@ $scifi-pattern: url('stardust.png');
 
 
 
+#up-arrow{
+  display: none;
+  color: red;
+  float: left;
+  position: absolute;
+  // bottom: 0;
+  // left: 0;
+}
+
 #challenge-page{
   margin-top: 2em;
 }
@@ -1171,18 +1180,45 @@ div.user-view{
   margin-bottom: 1em;
 }
 
+.welcome-text{
+  font-size: 15px;
+  font-family: $font-main, sans-serif;
+  width: 50%;
+  margin-left: 25%;
+}
+
 
 .welcome-header{
-  font-family: 'Damion', cursive;
+  font-family: $font-brand, sans-serif;
   color: black;
-  font-size: 12em;
+  font-size: 3em;
+  margin-top: 3em;
 }
 
 .welcome-sub-header{
-  font-family: 'Poiret One', cursive;
+  font-family: $font-brand, sans-serif;
   color: black;
-  margin-left: 5%;
-  margin-top: -0.7em;
+}
+
+.welcome-icon{
+  display: inline-block;
+  height: 100px;
+  width: 100px;
+  border-radius: 50px;
+  border: 1px black solid;
+  vertical-align: middle;
+  padding-top: 0.5em;
+  background: contain;
+  background-color: ghostwhite;
+
+  -webkit-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  -moz-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.welcome-icon img{
+  max-width:55px;
+  margin-top: 1em;
 }
 
 .welcome-info{
@@ -1190,8 +1226,26 @@ div.user-view{
   text-align: center;
 }
 
+.welcome-post {
+  background-color: white;
+  padding: 2% 2% 4% 2%;
+  border-radius: 3px;
+  margin: 2em 1em 2em 1em;
+  /*border-top: 9px solid #545454;*/
+  height: 25em;
+  text-align: center;
+  overflow-y: auto;
+  -webkit-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  -moz-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+  /*-webkit-box-shadow: 10px 10px 16px 0px rgba(66,66,66,1);
+  -moz-box-shadow: 10px 10px 16px 0px rgba(66,66,66,1);
+  box-shadow: 10px 10px 16px 0px rgba(66,66,66,1);*/
+}
+
 .login-row{
-  background: black;
+  // background: black;
   text-align: center;
   margin-top: 1em;
 }
@@ -1201,6 +1255,16 @@ div.user-view{
 }
 
 #welcome-body{
+  // background: url('typewriter.jpg');
+  background-size: cover;
+  background-repeat: none;
+  // font-family: $font-brand, sans-serif;
+}
+
+#welcome-post-editor{
+  // background: url('typewriter.jpg');
+  height: 20em;
+  // font-family: $font-brand, sans-serif;
 }
 
 #post-box-type{

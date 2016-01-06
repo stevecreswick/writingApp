@@ -1,12 +1,36 @@
-<h3>Log In</h3>
+<div class="row">
+  <div class="col-xs-12 text-center">
+  <h1 class="welcome-header">writeaway.</h3>
+    <h3 class="welcome-sub-header">a social network for aspiring writers.</h3>
+  </div>
+</div>
 
-<form class="" action="/sessions" method="post">
+
+<div class="row">
+  <div class="col-xs-12 text-center">
+  <div class="vertical-space"></div>
+  </div>
+</div>
+
+
+
+<div class="row">
+<form action="/sessions" method="post">
   <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-  <input type="text" name="username" placeholder="...enter username">
-  <input type="text" name="password" placeholder="...enter password">
-  <input type="submit">
+  <div class="col-xs-12 col-sm-3 col-sm-offset-3">
+    <div class="form-group">
+      <h3 class="welcome-sub-header text-center">Name</h3>
+      <input type="text" name="username" placeholder="billshakespeare" class="form-control">
+    </div>
+  </div>
+  <div class="col-xs-12 col-sm-3">
+    <div class="form-group">
+    <h3 class="welcome-sub-header text-center">Password</h3>
+    <input type="password" name="password" placeholder="*********" class="form-control">
+    </div>
+  </div>
+  <div class="col-xs-9 text-right">
+    <input type="submit" value="Log In" class="btn btn-raised btn-success">
+  </div>
 </form>
-
-
-
-<!-- DELETE THIS VIEW -->
+</div>

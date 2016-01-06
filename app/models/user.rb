@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   has_secure_password
   # validates_uniqueness_of :email, :case_sensitive => false
   validates_uniqueness_of :username, :case_sensitive => false
+  validates_uniqueness_of :email
 
   # Posts & Critiques
   has_many :posts
