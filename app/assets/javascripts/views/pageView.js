@@ -96,7 +96,6 @@ app.PageView = Backbone.View.extend({
   centerNonFiction: "white",
   headerTextNonFiction: "black",
 
-
   brandFont: 'Brand, sans-serif',
 
 
