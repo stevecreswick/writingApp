@@ -33,6 +33,34 @@
 }
 
 @font-face {
+  font-family: 'AnywhereButHome';
+  src: font-url( asset-path('abh1.ttf') );
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'PoetryPen';
+  src: font-url( asset-path('Postit-Penscript.otf') );
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Signature';
+  src: font-url( asset-path('Signature.ttf') );
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Italian';
+  src: font-url( asset-path('italian_cursive.TTF') );
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
   font-family: 'Crime';
   src: font-url( asset-path('xero4.ttf') );
   font-weight: normal;
@@ -124,7 +152,7 @@ $scifi-pattern: url('stardust.png');
 
     #main-page{
       // background: $main-pattern;
-      background: white;
+      // background: white;
       a{
         // color: black;
       }
@@ -168,10 +196,10 @@ $scifi-pattern: url('stardust.png');
 
       #main-display{
         position: absolute;
-        background: black;
+        background: white;
 
         #center-pane{
-          background: ghostwhite;
+          // background: ghostwhite;
         }
 
       }

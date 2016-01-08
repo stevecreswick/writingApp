@@ -15,21 +15,21 @@ app.PageView = Backbone.View.extend({
   // Main
   fontDefault:"Brand, sans-serif",
   headerDefault:"white",
-  backgroundDefault:"/assets/images/binding_dark.png",
+  backgroundDefault:"/assets/binding_dark.png",
   centerDefault: "white",
   headerTextDefault: "black",
 
   // Fiction
   fontFiction:"Brand, sans-serif",
   headerFiction:"white",
-  backgroundFiction:"/assets/binding_dark.png",
+  backgroundFiction:"/assets/antique.jpg",
   centerFiction: "white",
   headerTextFiction: "black",
 
   // Sci Fi Theme
   backgroundSciFi: "/assets/stardust.png",
-  headerTextSciFi: "red",
-  headerSciFi: "black",
+  headerTextSciFi: "black",
+  headerSciFi: "white",
   fontSciFi: "Perfect Dark, sans-serif",
   centerSciFi: "rgba(0,0,0,0)",
 
@@ -42,8 +42,8 @@ app.PageView = Backbone.View.extend({
 
   // Horror
   fontHorror:"'Loved By the King', sans-serif",
-  headerHorror:"rgb(9,9,9)",
-  backgroundHorror:"/assets/COLOURlovers.com-Death_Flowers.png",
+  headerHorror:"/assets/dark_wood.png",
+  backgroundHorror:"/assets/grey_paper.png",
   centerHorror: "white",
   headerTextHorror: "red",
 
@@ -55,37 +55,37 @@ app.PageView = Backbone.View.extend({
   headerTextThriller: "black",
 
   // Historical
-  fontHistorical: "'Homemade Apple', sans-serif",
-  headerHistorical:"antiquewhite",
-  backgroundHistorical:"/assets/chess-dark.gif",
+  fontHistorical: "Italian, sans-serif",
+  headerHistorical:"white",
+  backgroundHistorical:"/assets/seamlesspaper4.jpg",
   centerHistorical: "white",
   headerTextHistorical: "black",
 
   // Crime
   fontCrime:"Phorssa, sans-serif",
-  headerCrime:"slategrey",
+  headerCrime:"white",
   backgroundCrime:"/assets/brickwall.png",
   centerCrime: "white",
-  headerTextCrime: "white",
+  headerTextCrime: "black",
 
   // Romance
   fontRomance: "'Lovers Quarrel', sans-serif",
-  headerRomance:"floralwhite",
+  headerRomance:"white",
   backgroundRomance:"/assets/pink_rice.png",
   centerRomance: "white",
   headerTextRomance: "black",
 
   // Poetry
-  fontPoetry:"Floral, sans-serif",
+  fontPoetry:"PoetryPen, sans-serif",
   headerPoetry:"white",
-  backgroundPoetry:"/assets/binding_dark.png",
+  // backgroundPoetry:"/assets/watercolor9.jpg",
   centerPoetry: "white",
   headerTextPoetry: "black",
 
   // Humor
   fontHumor:"Comedy, sans-serif",
   headerHumor:"white",
-  backgroundHumor:"/assets/binding_dark.png",
+  // backgroundHumor:"/assets/brick-wall.jpg",
   centerHumor: "white",
   headerTextHumor: "black",
 
@@ -129,8 +129,8 @@ app.PageView = Backbone.View.extend({
         var scope = this;
         // Background and Center
         // $("#main-page").fadeOut("slow", function () {
-          $('#main-display').css({'background': 'url(' + scope.backgroundDefault + ')'});
-          $('#center-pane').css({'background': scope.centerDefault});
+          // $('#main-display').css({'background': 'url(' + scope.backgroundDefault + ')'});
+          // $('#center-pane').css({'background': scope.centerDefault});
 
           // navBar
           $('nav.navbar').css({'background': scope.headerDefault});
@@ -151,8 +151,8 @@ app.PageView = Backbone.View.extend({
         var scope = this;
         // Background and Center
         $("#main-page").fadeOut("slow", function () {
-          $('#main-display').css({'background': 'url(' + scope.backgroundDefault + ')'});
-          $('#center-pane').css({'background': scope.centerDefault});
+          // $('#main-display').css({'background': 'url(' + scope.backgroundDefault + ')'});
+          // $('#center-pane').css({'background': scope.centerDefault});
 
           // navBar
           $('nav.navbar').css({'background': scope.headerDefault});
@@ -173,8 +173,8 @@ app.PageView = Backbone.View.extend({
         var scope = this;
         // Background and Center
         $("#main-page").fadeOut("slow", function () {
-          $('#main-display').css({'background': 'url(' + scope.backgroundFiction + ')'});
-          $('#center-pane').css({'background': scope.centerFiction});
+          // $('#main-display').css({'background': 'url(' + scope.backgroundFiction + ')'});
+          // $('#center-pane').css({'background': scope.centerFiction});
 
           // navBar
           $('nav.navbar').css({'background': scope.headerFiction});
@@ -195,8 +195,8 @@ app.PageView = Backbone.View.extend({
       var scope = this;
       // Background and Center
       $("#main-page").fadeOut("slow", function () {
-        $('#main-display').css({'background-image': 'url(' + scope.backgroundFantasy + ')'});
-        $('#center-pane').css({'background': scope.centerFantasy});
+        // $('#main-display').css({'background-image': 'url(' + scope.backgroundFantasy + ')'});
+        // $('#center-pane').css({'background': scope.centerFantasy});
 
         // navBar
         $('nav.navbar').css({'background': scope.headerFantasy});
@@ -219,8 +219,8 @@ app.PageView = Backbone.View.extend({
       var scope = this;
       // Background and Center
       $("#main-page").fadeOut("slow", function () {
-        $('#main-display').css({'background': 'url(' + scope.backgroundThriller + ')'});
-        $('#center-pane').css({'background': scope.centerThriller});
+        // $('#main-display').css({'background': 'url(' + scope.backgroundThriller + ')'});
+        // $('#center-pane').css({'background': scope.centerThriller});
 
         // navBar
         $('nav.navbar').css({'background': scope.headerThriller});
@@ -243,8 +243,8 @@ app.PageView = Backbone.View.extend({
       var scope = this;
       // Background and Center
       $("#main-page").fadeOut("slow", function () {
-        $('#main-display').css({'background': 'url(' + scope.backgroundRomance + ')'});
-        $('#center-pane').css({'background': scope.centerRomance});
+        // $('#main-display').css({'background': 'url(' + scope.backgroundRomance + ')'});
+        // $('#center-pane').css({'background': scope.centerRomance});
 
         // navBar
         $('nav.navbar').css({'background': scope.headerRomance});
@@ -267,17 +267,17 @@ app.PageView = Backbone.View.extend({
       var scope = this;
       // Background and Center
       $("#main-page").fadeOut("slow", function () {
-        $('#main-display').css({'background': 'url(' + scope.backgroundHorror + ')'});
-        $('#center-pane').css({'background': scope.centerHorror});
+        // $('#main-display').css({'background': 'url(' + scope.backgroundHorror + ')'});
+        // $('#center-pane').css({'background': scope.centerHorror});
 
         // navBar
-        $('nav.navbar').css({'background': scope.headerHorror});
+        // $('nav.navbar').css({'background': 'url(' + scope.headerHorror + ')'});
 
         // Nav Text
-        $('.header-bar a').css({'color': scope.headerTextHorror});
+        // $('.header-bar a').css({'color': scope.headerTextHorror});
         $('.headline').css({'font-family': scope.fontHorror});
         $('.sub-headline').css({'font-family': scope.brandFont, 'color': scope.headerTextHorror});
-        scope.$el.find('.sub-headline').html("");
+        scope.$el.find('.sub-headline').html("Horror");
         scope.$el.find('.sub-headline').show();
         // $('.start-writing').css({'font-family': scope.fontHorror});
 
@@ -292,8 +292,8 @@ app.PageView = Backbone.View.extend({
 
         // Background and Center
         $("#main-page").fadeOut("slow", function () {
-          $('#main-display').css({'background': 'url(' + scope.backgroundSciFi + ')'});
-          $('#center-pane').css({'background': scope.centerSciFi});
+          // $('#main-display').css({'background': 'url(' + scope.backgroundSciFi + ')'});
+          // $('#center-pane').css({'background': scope.centerSciFi});
 
           // navBar
           $('nav.navbar').css({'background': scope.headerSciFi});
@@ -321,17 +321,17 @@ app.PageView = Backbone.View.extend({
         var scope = this;
         // Background and Center
         $("#main-page").fadeOut("slow", function () {
-          $('#main-display').css({'background': 'url(' + scope.backgroundHistorical + ')'});
-          $('#center-pane').css({'background': scope.centerHistorical});
+          // $('#main-display').css({'background': 'url(' + scope.backgroundHistorical + ')'});
+          // $('#center-pane').css({'background': scope.centerHistorical});
 
           // navBar
-          $('nav.navbar').css({'background': scope.headerHistorical});
+          // $('nav.navbar').css({'background': 'url(' + scope.backgroundHistorical + ')'});
 
           // Nav Text
           $('.header-bar a').css({'color': scope.headerTextHistorical});
           $('.headline').css({'font-family': scope.fontHistorical});
           $('.sub-headline').css({'font-family': scope.brandFont, 'color': scope.headerTextHistorical});
-          scope.$el.find('.sub-headline').html("");
+          scope.$el.find('.sub-headline').html("Historical Fiction");
           scope.$el.find('.sub-headline').show();
           // $('.start-writing').css({'font-family': scope.fontHistorical});
 
@@ -345,8 +345,8 @@ app.PageView = Backbone.View.extend({
         var scope = this;
         // Background and Center
         $("#main-page").fadeOut("slow", function () {
-          $('#main-display').css({'background': 'url(' + scope.backgroundPoetry + ')'});
-          $('#center-pane').css({'background': scope.centerPoetry});
+          // $('#main-display').css({'background': 'url(' + scope.backgroundPoetry + ')'});
+          // $('#center-pane').css({'background': scope.centerPoetry});
 
           // navBar
           $('nav.navbar').css({'background': scope.headerPoetry});
@@ -369,8 +369,8 @@ app.PageView = Backbone.View.extend({
         var scope = this;
         // Background and Center
         $("#main-page").fadeOut("slow", function () {
-          $('#main-display').css({'background': 'url(' + scope.backgroundHumor + ')'});
-          $('#center-pane').css({'background': scope.centerHumor});
+          // $('#main-display').css({'background': 'url(' + scope.backgroundHumor + ')'});
+          // $('#center-pane').css({'background': scope.centerHumor});
 
           // navBar
           $('nav.navbar').css({'background': scope.headerHumor});
@@ -393,8 +393,8 @@ app.PageView = Backbone.View.extend({
         var scope = this;
         // Background and Center
         $("#main-page").fadeOut("slow", function () {
-          $('#main-display').css({'background': 'url(' + scope.backgroundNonFiction + ')'});
-          $('#center-pane').css({'background': scope.centerNonFiction});
+          // $('#main-display').css({'background': 'url(' + scope.backgroundNonFiction + ')'});
+          // $('#center-pane').css({'background': scope.centerNonFiction});
 
           // navBar
           $('nav.navbar').css({'background': scope.headerNonFiction});
@@ -417,8 +417,8 @@ app.PageView = Backbone.View.extend({
         var scope = this;
         // Background and Center
         $("#main-page").fadeOut("slow", function () {
-          $('#main-display').css({'background': 'url(' + scope.backgroundCrime + ')'});
-          $('#center-pane').css({'background': scope.centerCrime});
+          // $('#main-display').css({'background': 'url(' + scope.backgroundCrime + ')'});
+          // $('#center-pane').css({'background': scope.centerCrime});
 
           // navBar
           $('nav.navbar').css({'background': scope.headerCrime});
