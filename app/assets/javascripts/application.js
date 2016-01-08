@@ -48,7 +48,7 @@ $('#welcome-post-editor').on("keyup", function(){
 
 });
 
-}
+};
 
 welcome.hoverHearts = function(){
 
@@ -122,12 +122,12 @@ welcome.updateStatus = function(wordCount){
     var progress = Math.floor( (wordCount / 25) * 100 ) + "%";
 
     $('.progress-bar').css({"width": progress});
-},
+};
 
 
 
 
-$( document ).ready(function() {
+$( document ).ready(function(){
 
   welcome.renderEditor();
   welcome.bindPost();
@@ -135,7 +135,7 @@ $( document ).ready(function() {
   welcome.checkWordCount();
 
 
-  $.material.init()
+  $.material.init();
 
 
 

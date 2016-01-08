@@ -68,7 +68,7 @@ app.ResourceListView = Backbone.View.extend({
 
     },
 
-    renderButtons(length){
+    renderButtons: function(length){
       var $row = $('<div>').addClass("row");
       var $col1 = $('<div>').addClass("col-xs-4 text-left previous");
       var $colCenter = $('<div>').addClass("col-xs-4 text-center");
