@@ -71,14 +71,14 @@ app.PageView = Backbone.View.extend({
   // Romance
   fontRomance: "'Lovers Quarrel', sans-serif",
   headerRomance:"floralwhite",
-  backgroundRomance:"/assets/images/pink_rice.png",
+  backgroundRomance:"/assets/pink_rice.png",
   centerRomance: "white",
   headerTextRomance: "black",
 
   // Poetry
   fontPoetry:"Floral, sans-serif",
   headerPoetry:"white",
-  backgroundPoetry:"/assets/images/binding_dark.png",
+  backgroundPoetry:"/assets/binding_dark.png",
   centerPoetry: "white",
   headerTextPoetry: "black",
 
