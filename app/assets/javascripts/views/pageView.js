@@ -662,6 +662,8 @@ app.PageView = Backbone.View.extend({
     'click .show-users': 'showUsers',
     'click .show-following': 'showFollowing',
     'click .show-followers': 'showFollowers',
+    'click .show-top-reviewers': 'showReviewers',
+
     'click #search-users': 'searchUsers',
 
 
@@ -836,7 +838,26 @@ showGenres: function(){
       el: $('#friend-page')
     });
 
-    app.users.fetch({url: '/users/add_friends/' + this.currentPage  });
+    app.users.fetch({url: '/users/leaderboard/' + this.currentPage  });
+  },
+
+  showReviewers: function(){
+    this.clearFriendsPage();
+
+    var $center = this.$el.find('#center-pane');
+    this.$el.find('#friend-page').remove();
+    var $friendPage = $("<div>").attr('id', 'friend-page');
+
+    $center.append( $friendPage )
+
+
+    app.users = new app.UserCollection();
+    app.userPainter = new app.UserListView({
+      collection: app.users,
+      el: $('#friend-page')
+    });
+
+    app.users.fetch({url: '/users/top_readers/' + this.currentPage  });
   },
 
   clearFriendsPage: function(){
@@ -980,7 +1001,7 @@ showGenres: function(){
 
     if ( completedChallenges.models.length === 0){
 
-      $('#challenge-page').html('Complete some challneges.')
+      $('#challenge-page').html('Complete some challenges.')
       // var $none = _.template( $('#no-challenges-screen').html() );
       // this.$el.find('#challenge-list').append( $none );
     }

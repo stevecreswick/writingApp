@@ -171,6 +171,56 @@ class UsersController < ApplicationController
     render json: add_friends
   end
 
+
+  def writers_leaderboard
+
+    page = params[:page].to_i + 1
+
+    writing_leaders = User.order('writer_score desc')
+    users = writing_leaders.paginate :page => page
+
+    results = users.map do |user|
+
+        data = user.as_json
+        data['is_friend'] = false
+        data['friend_name'] = user.username
+        data['friend_image'] = user.image_url
+        data['posts'] = user.posts.length
+        data['reviews'] = user.critiques.length
+        data
+
+    end
+
+    render json: results
+
+  end
+
+
+  def readers_leaderboard
+
+    page = params[:page].to_i + 1
+
+    reading_leaders = User.order('reviewer_score desc')
+    users = reading_leaders.paginate :page => page
+
+    results = users.map do |user|
+
+        data = user.as_json
+        data['is_friend'] = false
+        data['friend_name'] = user.username
+        data['friend_image'] = user.image_url
+        data['posts'] = user.posts.length
+        data['reviews'] = user.critiques.length
+        data
+
+    end
+
+    render json: results
+
+  end
+
+
+
   def search
     page = params[:page].to_i + 1
 

@@ -17,6 +17,7 @@ app.promptFormView = Backbone.View.extend({
   minutes: 0,
   hours: 0,
   newPrompt: {},
+
   initialize: function(){
   },
   render: function(){
@@ -36,7 +37,7 @@ app.promptFormView = Backbone.View.extend({
   },
 
   getPromptInstruction: function(options){
-    if (options.type === "Use One Word") {
+    if (options.type === "Start My Sentences") {
       return "Write at least " + options.wordCount + " words, using the word";
     } else if (options.type === "reddit") {
       return "Write at least " + options.wordCount + " words, using the /r/writingprompt";
@@ -76,8 +77,8 @@ app.promptFormView = Backbone.View.extend({
 
     var $description = this.$el.find("#prompt-description");
 
-    if (promptType === "Use One Word") {
-      $description.html("Write a story using the one word prompt in the first sentence of your post.");
+    if (promptType === "Start My Sentences") {
+      $description.html("Write a story using a random word to start each sentence.  Typing a period and space will generate a new word.");
     } else if (promptType === "reddit") {
       $description.html("Write a story using a random writing prompt submitted to /r/writingprompts");
     } else if (promptType === "Classic First Sentence") {
@@ -111,7 +112,7 @@ app.promptFormView = Backbone.View.extend({
       });
 
 
-      if (app.promptType === 'Use One Word'){
+      if (app.promptType === 'Start My Sentences'){
         writingPrompts.url = "/api/writing_prompts/one_word"
         writingPrompts.fetch({url: writingPrompts.url, async:false});
       } else if (app.promptType === 'Answer What If'){
@@ -182,12 +183,15 @@ app.promptFormView = Backbone.View.extend({
       // Add Prompt Instruction
       this.promptInstruction;
       $('#prompt-instrustion').html(this.promptInstruction);
-      $("#prompt").html( this.prompt )
+      $("#prompt").html( this.prompt );
       // $('#required-word-count').html( app.requiredWords )
 
       // Render Text Editor & Bind To Word Count
       this.renderEditor();
-      this.checkWordCount();
+      this.listenToForm();
+
+      $('.ql-editor').children().last().html( this.prompt.charAt(0).toUpperCase() + this.prompt.slice(1) + " ");
+
 
       // Start the Timer
       this.startClock();
@@ -330,55 +334,96 @@ app.promptFormView = Backbone.View.extend({
         }
 
     },
-    // createPrompt: function(){
-    //   console.log('creating');
-    //
-    //   this.newPrompt = {
-    //     prompt:  $('.prompt-text').text(),
-    //     wordCount: $('#post-word-count').val(),
-    //     type: $('#choose-type').val(),
-    //   };
-    //
-    //   console.log(this.newPrompt);
-    //
-    //   if (this.newPrompt.type === 'One Word'){
-    //     console.log('one word');
-    //     newPrompt.url = 'one_word'
-    //   } else if (this.newPrompt.type === 'What If'){
-    //     console.log('what if');
-    //     newPrompt.url = 'what_if'
-    //   } else if (this.newPrompt.type === 'First Sentence'){
-    //     console.log('first');
-    //     newPrompt.url = 'first_sentence'
-    //   } else {
-    //     console.log('no url for this type : ' + this.newPrompt.type);
-    //   }
-    //
-    //   return this.newPrompt;
-    // },
 
-
-    updateStatus: function(wordCount){
+    updateWordCountStatus: function(wordCount){
 
         var progress = Math.floor( (wordCount / app.requiredWords) * 100 ) + "%";
         console.log(progress);
         this.$el.find('.progress-bar').css({"width": progress});
     },
 
-    checkWordCount: function(){
+    listenToForm: function(){
       app.wordCount = 0;
       var scope = this;
-      $('#post-editor').on('keyup', function(){
+
+      $('#post-editor').on('keyup', function(e){
+
         var text = scope.$el.find('#post-editor').find('.ql-editor').text();
         app.wordCount = text.match(/\S+/g).length;
         $('#current-word-count').eq(0).html( app.wordCount + "/" + app.requiredWords );
-        scope.updateStatus(app.wordCount);
-        // scope.wordsPerMinute();
+
+        scope.updateWordCountStatus(app.wordCount);
+        scope.addWord(e);
 
       });
+
+
     },
 
+    addWord: function(e){
+      var periodKey = 190;
+      var spaceKey = 32;
 
+      app.currentKey = e.keyCode;
+
+      if ( app.currentKey === spaceKey && app.lastKey === periodKey )   {
+        console.log("period then space");
+
+        var currentPost = $('#post-editor').find('.ql-editor').html();
+
+        this.nextWord = new app.WritingPromptCollection();
+        this.nextWord.url = "/api/writing_prompts/one_word";
+        this.nextWord.fetch({url: this.nextWord.url, async:false});
+
+        var nextWord = this.nextWord.models[0].get('prompt');
+
+        var startWith = nextWord.charAt(0).toUpperCase() + nextWord.slice(1);
+        var newWord = $('.ql-editor').children().last();
+
+        $(newWord).append(startWith + " ");
+
+        this.setCaret();
+
+      }
+
+      app.lastKey = e.keyCode;
+
+
+    },
+
+    setCaret: function() {
+    var el = $('#post-editor').find('.ql-editor');
+    var range = document.createRange();
+    console.log(range);
+    var sel = window.getSelection();
+    console.log(sel);
+    var node = el.children().last();
+
+    console.log(node[0]);
+    console.log($(node).length);
+
+    range.setStart(node[0], $(node).length + 1 );
+    range.collapse(true);
+    sel.removeAllRanges();
+    sel.addRange(range);
+    el.focus();
+  },
+    //
+    // startMySentences(lastKey){
+    //   var scope = this;
+    //   $('#post-editor').on('keyup', function(){
+    //
+    //
+    //
+    //     var text = scope.$el.find('#post-editor').find('.ql-editor').text();
+    //     app.wordCount = text.match(/\S+/g).length;
+    //     $('#current-word-count').eq(0).html( app.wordCount + "/" + app.requiredWords );
+    //     scope.updateWordCountStatus(app.wordCount);
+    //
+    //   });
+    //   console.log("new word");
+    //
+    // },
 
     renderEditor: function(){
       var fullEditor = new Quill('#post-editor', {

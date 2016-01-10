@@ -121,6 +121,9 @@ get '/users/:user_id/posts/:post_id' => 'users#show_post'
 get '/users/friends/:page' => 'users#friends'
 get '/users/all_friends' => 'users#all_friends'
 get '/users/add_friends/:page' => 'users#add_friends', as: :add_friends
+get '/users/leaderboard/:page' => 'users#writers_leaderboard', as: :leaderboard
+get '/users/top_readers/:page' => 'users#readers_leaderboard'
+
 get '/users/followers/:page' => 'users#followers'
 
 
