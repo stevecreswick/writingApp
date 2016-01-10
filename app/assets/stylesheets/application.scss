@@ -257,6 +257,9 @@ $scifi-pattern: url('stardust.png');
     font-size: 10px;
   }
 
+  .brand-font{
+    font-family: Brand, sans-serif;
+  }
 
 
 #up-arrow{
@@ -582,6 +585,13 @@ div.write-nav{
 }
 
 div.genres{
+  background: url('binding_dark.png');
+  border-radius: 3px;
+  -webkit-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  -moz-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  padding: 1em;
+
 }
 
 div.sidenav-row {
@@ -1060,9 +1070,6 @@ form#create-post {
   /*float: right;*/
 }
 
-.brand-font{
-  font-family: 'Cutive Mono', serif;
-}
 
 .circle-button:hover{
   background: ghostwhite;
