@@ -31,7 +31,7 @@ app.promptFormView = Backbone.View.extend({
 
   },
   events:{
-    'click a.render-prompt': 'getPrompt',
+    'click a.render-prompt': 'renderPrompt',
     'click a.start': 'renderWritingForm',
     'click a.publish': 'publishPost'
   },
@@ -95,15 +95,32 @@ app.promptFormView = Backbone.View.extend({
   },
 
 
-  getPrompt: function(e){
+  renderPrompt: function(e){
 
       var scope = this;
+
       e.preventDefault();
 
       app.promptType = $('#choose-type').val();
-
       app.requiredWords = $('#post-word-count option:selected').data('value');
 
+      scope.getPrompt();
+
+      $('#prompt-instrustion').html(this.promptInstruction);
+      this.$el.find('#prompt-container').show();
+
+      this.$('.start').remove();
+      var $icon = $('<i>').addClass('fa fa-pencil fa-fw');
+      var buttonHTML = "&nbsp; Write"
+      var $start = $('<a>').addClass('btn btn-default btn-raised btn-info start');
+
+      $start.append( $icon, buttonHTML);
+
+      this.$('#start-writing-container').append( $start );
+
+    },
+
+    getPrompt: function() {
 
       var writingPrompts = new app.WritingPromptCollection();
       var promptPainter = new app.WritingPromptListView({
@@ -129,7 +146,6 @@ app.promptFormView = Backbone.View.extend({
         console.log('no url for this type : ' + app.promptType);
       }
 
-      // Record Prompt
       this.prompt = writingPrompts.models[0].get('prompt');
       this.type = app.promptType;
 
@@ -139,24 +155,8 @@ app.promptFormView = Backbone.View.extend({
         'prompt': this.prompt
       });
 
-      $('#prompt-instrustion').html(this.promptInstruction);
-      this.$el.find('#prompt-container').show();
-
-      this.$('.start').remove();
-      var $icon = $('<i>').addClass('fa fa-pencil fa-fw');
-      var buttonHTML = "&nbsp; Write"
-      var $start = $('<a>').addClass('btn btn-default btn-raised btn-info start');
-      // var $row = $('<div>').addClass("row");
-      // var $col12 = $('<div>').addClass("col-xs-12 text-right");
-
-      $start.append( $icon, buttonHTML);
-      // $col12.append( $start )
-      // $row.append( $col12 );
-
-      this.$('#start-writing-container').append( $start );
 
     },
-
 
     renderWritingForm: function(e){
 
