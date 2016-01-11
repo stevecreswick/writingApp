@@ -20,6 +20,7 @@ app.promptFormView = Backbone.View.extend({
 
   initialize: function(){
   },
+
   render: function(){
     this.$el.empty();
 
@@ -93,7 +94,6 @@ app.promptFormView = Backbone.View.extend({
     this.remove();
     this.render();
   },
-
 
   renderPrompt: function(e){
 
@@ -353,7 +353,10 @@ app.promptFormView = Backbone.View.extend({
         $('#current-word-count').eq(0).html( app.wordCount + "/" + app.requiredWords );
 
         scope.updateWordCountStatus(app.wordCount);
-        scope.addWord(e);
+
+        if (app.promptType === "Start My Sentences"){
+          scope.addWord(e);
+        }
 
       });
 
