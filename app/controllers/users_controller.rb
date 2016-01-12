@@ -45,12 +45,14 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     @user.update(user_params)
+    binding.pry
     if @user.save
-      respond_to do |format|
-      format.html { redirect_to main_path}
-      format.json { render json: @user }
-      end
+      # respond_to do |format|
+      redirect_to main_path
+      # format.json { render json: @user }
+      # end
     end
+    # redirect_to main_path
   end
 
   def main

@@ -428,13 +428,13 @@ app.PostView = Backbone.View.extend({
 
     getPromptInstruction: function(options){
       if (options.type === "Use One Word") {
-        return "Write at least " + options.wordCount + " words, using the word <strong>" + options.prompt + "</strong>";
+        return "Write at least " + options.wordCount + " words, using the word <div class='prompt-strong'>" + options.prompt + "</div>";
       } else if (options.type === "Answer What If") {
-        return "Write at least " + options.wordCount + " words, about what would happen if <strong>" + options.prompt + "</strong>";
+        return "Write at least " + options.wordCount + " words, about what would happen if <div class='prompt-strong'>" + options.prompt + "</div>";
       } else if (options.type === "Classic First Sentence") {
-        return "Write at least " + options.wordCount + " words, using the first sentence <strong>" + options.prompt + "</strong>";
+        return "Write at least " + options.wordCount + " words, using the first sentence <div class='prompt-strong'>" + options.prompt + "</div>";
       } else if (options.type === "reddit"){
-        return "Write at least " + options.wordCount + " words, using the reddit writing prompt <strong>" + options.prompt + "</strong>";
+        return "Write at least " + options.wordCount + " words, using the reddit writing prompt <div class='prompt-strong'>" + options.prompt + "</div>";
       }
     },
 

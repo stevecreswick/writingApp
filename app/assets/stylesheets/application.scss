@@ -159,7 +159,7 @@ $scifi-pattern: url('stardust.png');
 
       p{
         font: $font-post;
-        font-size: 1.6em;
+        font-size: 1.2em;
         line-height: 1.8;
         letter-spacing: 1.1;
       }
@@ -309,7 +309,9 @@ $scifi-pattern: url('stardust.png');
   height: 25em;
 }
 
-
+.prompt-strong {
+  font-size: 1.5em;
+}
 
 #new-post-box {
   padding: 2em;
