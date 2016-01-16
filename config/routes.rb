@@ -44,10 +44,14 @@ Rails.application.routes.draw do
 
     # Writing Prompt API
     get '/writing_prompts' => 'writing_prompts#index'
+    post '/writing_prompts' => 'writing_prompts#create'
+    delete '/writing_prompts/:id' => 'writing_prompts#destroy'
     get '/writing_prompts/one_word' => 'writing_prompts#one_word'
     get '/writing_prompts/what_if' => 'writing_prompts#what_if'
     get '/writing_prompts/first_sentence' => 'writing_prompts#first_sentence'
     get '/writing_prompts/reddit' => 'writing_prompts#reddit'
+    get '/writing_prompts/writeaway/page/:page' => 'writing_prompts#submitted'
+
 
     # Friendships API
     get'/friendships' => 'friendships#index', as: :friends
@@ -77,6 +81,9 @@ Rails.application.routes.draw do
     # Tip Votes
     post '/writing_tips/:id/tip_votes' => 'tip_votes#create'
     # get '/posts/:post_id/critiques/:id/tip_votes' => 'tip_votes#user_vote'
+
+    # Prompt Votes
+    post '/writing_prompts/:id/prompt_votes' => 'prompt_votes#create'
 
 
     # Writing Tips

@@ -39,7 +39,7 @@ app.promptFormView = Backbone.View.extend({
 
   getPromptInstruction: function(options){
     if (options.type === "Start My Sentences") {
-      return "Write at least " + options.wordCount + " words, using the word";
+      return "Write at least " + options.wordCount + " words.  A Period and Space will give you a random word.";
     } else if (options.type === "reddit") {
       return "Write at least " + options.wordCount + " words, using the /r/writingprompt";
     } else if (options.type === "Classic First Sentence") {

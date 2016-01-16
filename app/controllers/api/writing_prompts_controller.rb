@@ -1,9 +1,17 @@
 class Api::WritingPromptsController < ApplicationController
 
+  include SessionsHelper
+  include UsersHelper
+  include Api::PostsHelper
+  include ActionView::Helpers::DateHelper
+
   def new
   end
 
   def create
+    prompt = WritingPrompt.create(prompt_params)
+
+    render json: prompt
   end
 
   def index
@@ -33,6 +41,15 @@ class Api::WritingPromptsController < ApplicationController
     prompt = prompts.sample
 
     render json: prompt
+  end
+
+  def submitted
+    page = params[:page].to_i + 1
+
+    # Add an approved column to writing prompts table
+    prompts = WritingPrompt.where({prompt_type: "user-submitted"})
+
+    render json: prompts
   end
 
   def reddit
@@ -66,6 +83,18 @@ class Api::WritingPromptsController < ApplicationController
   end
 
   def destroy
+    current_api_user!
+    @deleted_prompt = WritingPrompt.find(params[:id])
+    @deleted_prompt.destroy
+    render nothing: true
   end
+
+
+    private
+
+    def prompt_params
+      params.require(:writing_prompt).permit(:prompt, :prompt_type, :approved, :submitted_by)
+    end
+
 
 end

@@ -77,6 +77,12 @@ app.UserListView = Backbone.View.extend({
         var $more = $('<a>').addClass('view-more-users btn btn-raised btn-fab btn-info withripple').html("<i class='fa fa-angle-right'><div class='tiny-text'>Next</div></i>").attr("href", "javascript:void(0)");
         $col2.empty();
         $col2.append( $more );
+
+        $colCenter.html( "Page: " + (app.pagePainter.currentPage + 1) );
+
+        $row.append( $col1, $colCenter, $col2 );
+
+        this.$el.append( $row );
       }
 
       // If it is not the first page,
@@ -85,13 +91,15 @@ app.UserListView = Backbone.View.extend({
         var $previous = $('<a>').addClass('view-previous-users btn btn-raised btn-fab btn-danger withripple').html("<i class='fa fa-angle-left'><div class='tiny-text'>Prev</div></i>").attr("href", "javascript:void(0)");
         $col1.empty();
         $col1.append( $previous );
+
+        $colCenter.html( "Page: " + (app.pagePainter.currentPage + 1) );
+
+        $row.append( $col1, $colCenter, $col2 );
+
+        this.$el.append( $row );
       }
 
-      $colCenter.html( "Page: " + (app.pagePainter.currentPage + 1) );
 
-      $row.append( $col1, $colCenter, $col2 );
-
-      this.$el.append( $row );
 
     }
 });

@@ -35,8 +35,8 @@ class User < ActiveRecord::Base
   has_many :tip_votes
   has_many :voted_writing_tips, :through => :tip_votes, :source => :writing_tip
 
-
-
+  has_many :prompt_votes
+  has_many :voted_writing_prompts, :through => :prompt_votes, :source => :writing_prompt
 
   before_create :generate_token
 

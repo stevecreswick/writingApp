@@ -27,6 +27,7 @@
 
 //= require models/writingPrompt
 //= require views/writingPromptView
+//= require views/submittedPromptView
 //= require collections/writingPromptCollection
 //= require views/writingPromptListView
 

@@ -473,6 +473,51 @@ app.PageView = Backbone.View.extend({
     this.$el.find('.prompt-back-holder').append($back)
 
   },
+
+  promptsPage: function(){
+    this.currentPage = 0;
+    this.$el.find('#center-pane').empty();
+    var $promptPage = _.template( $("#prompt-page-template").html() );
+    this.$el.find("#center-pane").append( $promptPage );
+
+    this.columns("main");
+    this.renderSideNav();
+    this.showPrompts();
+  },
+
+  addPrompt: function(){
+    var newPrompt = this.$el.find("#new-prompt").val();
+
+    app.prompts.create({
+      "prompt": newPrompt,
+      "prompt_type": "user-submitted",
+      "approved": false,
+      "submitted_by": $('#current_id').val()
+    });
+
+    this.$el.find("#new-prompt").val("");
+
+  },
+
+  showPrompts: function(){
+    console.log("showing prompts");
+
+    app.prompts = new app.WritingPromptCollection();
+    app.writingPromptPainter = new app.WritingPromptListView({
+      collection: app.prompts,
+      el: $("#prompts-list")
+    });
+    var promptUrl = '/api/writing_prompts/writeaway/page/' + app.pagePainter.currentPage;
+
+    // ADD URL TO PROMPTS
+    app.prompts.fetch({url: promptUrl});
+
+    // $("#prompts-list").show();
+    // app.writingPromptPainter.render();
+
+  },
+
+
   friendsPage: function(){
     this.currentPage = 0;
     this.$el.find('#center-pane').empty();
@@ -653,7 +698,7 @@ app.PageView = Backbone.View.extend({
 
     // 'click .sent-challenges': 'sentChallenges',
 
-
+    'click .see-all-prompts': 'promptsPage',
     'click a.read-nav': 'renderPosts',
     'click div.sort': 'updateList',
 
@@ -666,7 +711,7 @@ app.PageView = Backbone.View.extend({
 
     'click #search-users': 'searchUsers',
 
-
+    'click .add-prompt': 'addPrompt',
     'click li.show-challenges': 'challengesPage',
 
 
@@ -726,9 +771,11 @@ showGenres: function(){
     });
 
 
-    app.posts.fetch({url: app.posts.url(), async: false});
+    app.posts.fetch({url: app.posts.url()}).done(function(){
 
-    app.postPainter.render();
+      app.postPainter.render();
+
+    });
 
 
   },

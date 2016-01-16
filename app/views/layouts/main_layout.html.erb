@@ -187,6 +187,67 @@
     </script>
 
 
+    <script type="text/template" id="prompt-page-template">
+
+      <div class="add-a-prompt">
+          <div class="row text-center">
+
+            <div class="col-xs-12">
+              <h1 class="brand-font">Prompt Page</h1>
+            </div>
+          </div>
+          <div class="row text-center">
+            <div class="col-xs-12 col-sm-8 col-sm-offset-2">
+              <div class="form-group">
+                <label for="new-prompt" class="label-control">Enter a new writing premise</label>
+                <textarea type="text" id="new-prompt" name="new-prompt" class="form-control" placeholder="i.e. a team of scientists have successfully teleported an apple. It reappears with a bite taken out of it."></textarea>
+              </div>
+          </div>
+
+          <div class="col-xs<%  %>12 col-sm-8 col-sm-offset-2 text-right">
+            <a class="add-prompt">Add Prompt</a>
+          </div>
+
+            </div>
+
+        </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <div id="prompts-list"></div>
+        </div>
+      </div>
+
+
+    </script>
+
+
+    <script type="text/template" id="submitted-prompt-template">
+        <h4 class="prompt-text submitted-by">
+            submitted by: <%%= submitted_by || "unknown" %>
+        </h4>
+
+        <div class="row">
+          <div class="col-xs-1 text-center">
+            <i class="fa fa-caret-up fa-2x up-vote-prompt vote-prompt"></i>
+            <br>
+            <!-- VOTES -->
+            <br>
+            <i class="fa fa-caret-down fa-2x down-vote-prompt vote-prompt"></i>
+          </div>
+          <div class="col-xs-7 text-center">
+                <%%= prompt || "waiting..." %>
+          </div>
+          <div class="col-xs-4 text-right">
+            <a class="accept-prompt">Accept</a>
+            <a class="reject-prompt">Reject</a>
+          </div>
+
+        </div>
+
+    </script>
+
+
     <script type="text/template" id="resource-page-template">
 
 
@@ -750,7 +811,6 @@
           <div class="sort sidenav-row list-group-item home-page" data-url="main">
             <div class="sort-text"><i class="fa fa-dashboard"></i>Main Feed</div>
           </div>
-
         <div class="sort sidenav-row list-group-item" data-url="all">
           <img src="http://i.imgur.com/hR2f8aM.png" class="sort-image"></img>
           <div class="sort-text">All</div>
@@ -1422,6 +1482,7 @@
 
           <div class="row">
             <div class="col-xs-12 text-center">
+                <div class="see-all-prompts sort-text"><i class="fa fa-file"></i>Prompts</div>
             </div>
           </div>
 
@@ -1946,7 +2007,7 @@
               <div class="row">
                 <div class="col-xs-12 col-sm-8">
                   <label for="friend-name">Enter Writing Challenge</label>
-                  <input type="text" class="form-control" id="challenge-prompt" placeholder="i.e. use the word hyperbolic"></input>
+                  <input type="text" class="form-control" id="challenge-prompt" placeholder="i.e. use the letter z in every sentence."></input>
                 </div>
                 <div class="col-xs-12 col-sm-2">
                   <label for="challenge-word-count">Min. Word Count?</label>
@@ -2019,12 +2080,12 @@
     <div class="friend-nav">
 
         <div class="row">
-          <div class="col-xs-6 col-xs-offset-3 text-center">
+          <div class="col-xs-12 col-sm-6 col-sm-offset-3 text-center">
             <div class="btn-group btn-group-justified btn-group-raised">
-              <a class="btn btn-info show-following" href="javascript:void(0)">Following</a>
-              <a class="btn btn-info show-followers" href="javascript:void(0)">Followers</a>
               <a class="btn btn-info show-users" href="javascript:void(0)">Top Authors</a>
               <a class="btn btn-info show-top-reviewers" href="javascript:void(0)">Top Reviewers</a>
+              <a class="btn btn-info show-following" href="javascript:void(0)">Following</a>
+              <a class="btn btn-info show-followers" href="javascript:void(0)">Followers</a>
             </div>
           </div>
         </div>

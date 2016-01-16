@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151228205342) do
+ActiveRecord::Schema.define(version: 20160112233257) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -65,6 +65,14 @@ ActiveRecord::Schema.define(version: 20151228205342) do
     t.integer  "time_completed"
   end
 
+  create_table "prompt_votes", force: :cascade do |t|
+    t.integer  "writing_prompt_id"
+    t.integer  "user_id"
+    t.integer  "value"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
   create_table "ratings", force: :cascade do |t|
     t.string   "user_id"
     t.string   "post_id"
@@ -112,9 +120,11 @@ ActiveRecord::Schema.define(version: 20151228205342) do
   create_table "writing_prompts", force: :cascade do |t|
     t.string   "prompt"
     t.string   "prompt_type"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
     t.string   "model_url"
+    t.boolean  "approved"
+    t.string   "submitted_by"
   end
 
   create_table "writing_tips", force: :cascade do |t|
