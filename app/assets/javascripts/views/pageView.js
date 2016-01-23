@@ -150,7 +150,7 @@ app.PageView = Backbone.View.extend({
       case "all":
         var scope = this;
         // Background and Center
-        $("#main-page").fadeOut("slow", function () {
+        // $("#main-page").fadeOut("slow", function () {
           // $('#main-display').css({'background': 'url(' + scope.backgroundDefault + ')'});
           // $('#center-pane').css({'background': scope.centerDefault});
 
@@ -163,16 +163,16 @@ app.PageView = Backbone.View.extend({
           $('.sub-headline').css({'font-family': scope.brandFont, 'color': scope.headerTextDefault});
           scope.$el.find('.sub-headline').html("");
           scope.$el.find('.sub-headline').show();
-          $(this).fadeIn("slow");
+          // $(this).fadeIn("slow");
 
-        });
+        // });
 
       break;
 
       case "Fiction":
         var scope = this;
         // Background and Center
-        $("#main-page").fadeOut("slow", function () {
+        // $("#main-page").fadeOut("slow", function () {
           // $('#main-display').css({'background': 'url(' + scope.backgroundFiction + ')'});
           // $('#center-pane').css({'background': scope.centerFiction});
 
@@ -185,16 +185,16 @@ app.PageView = Backbone.View.extend({
           $('.sub-headline').css({'font-family': scope.brandFont, 'color': scope.headerTextFiction});
           scope.$el.find('.sub-headline').html("Fiction");
           scope.$el.find('.sub-headline').show();
-          $(this).fadeIn("slow");
+          // $(this).fadeIn("slow");
 
-        });
+        // });
 
       break;
 
       case "Fantasy":
       var scope = this;
       // Background and Center
-      $("#main-page").fadeOut("slow", function () {
+      // $("#main-page").fadeOut("slow", function () {
         // $('#main-display').css({'background-image': 'url(' + scope.backgroundFantasy + ')'});
         // $('#center-pane').css({'background': scope.centerFantasy});
 
@@ -209,16 +209,16 @@ app.PageView = Backbone.View.extend({
         scope.$el.find('.sub-headline').show();
         // $('.start-writing').css({'font-family': scope.fontFantasy});
 
-        $(this).fadeIn("slow");
+        // $(this).fadeIn("slow");
 
-      });
+      // });
 
       break;
 
       case "Thriller":
       var scope = this;
       // Background and Center
-      $("#main-page").fadeOut("slow", function () {
+      // $("#main-page").fadeOut("slow", function () {
         // $('#main-display').css({'background': 'url(' + scope.backgroundThriller + ')'});
         // $('#center-pane').css({'background': scope.centerThriller});
 
@@ -233,16 +233,16 @@ app.PageView = Backbone.View.extend({
         scope.$el.find('.sub-headline').show();
         // $('.start-writing').css({'font-family': scope.fontThriller});
 
-        $(this).fadeIn("slow");
+        // $(this).fadeIn("slow");
 
-      });
+      // });
 
       break;
 
       case "Romance":
       var scope = this;
       // Background and Center
-      $("#main-page").fadeOut("slow", function () {
+      // $("#main-page").fadeOut("slow", function () {
         // $('#main-display').css({'background': 'url(' + scope.backgroundRomance + ')'});
         // $('#center-pane').css({'background': scope.centerRomance});
 
@@ -257,16 +257,16 @@ app.PageView = Backbone.View.extend({
         scope.$el.find('.sub-headline').show();
         // $('.start-writing').css({'font-family': scope.fontRomance});
 
-        $(this).fadeIn("slow");
+        // $(this).fadeIn("slow");
 
-      });
+      // });
 
       break;
 
       case "Horror":
       var scope = this;
       // Background and Center
-      $("#main-page").fadeOut("slow", function () {
+      // $("#main-page").fadeOut("slow", function () {
         // $('#main-display').css({'background': 'url(' + scope.backgroundHorror + ')'});
         // $('#center-pane').css({'background': scope.centerHorror});
 
@@ -281,9 +281,9 @@ app.PageView = Backbone.View.extend({
         scope.$el.find('.sub-headline').show();
         // $('.start-writing').css({'font-family': scope.fontHorror});
 
-        $(this).fadeIn("slow");
+        // $(this).fadeIn("slow");
 
-      });
+      // });
       break;
 
       case "Science-Fiction":
@@ -291,7 +291,7 @@ app.PageView = Backbone.View.extend({
         var scope = this;
 
         // Background and Center
-        $("#main-page").fadeOut("slow", function () {
+        // $("#main-page").fadeOut("slow", function () {
           // $('#main-display').css({'background': 'url(' + scope.backgroundSciFi + ')'});
           // $('#center-pane').css({'background': scope.centerSciFi});
 
@@ -311,16 +311,16 @@ app.PageView = Backbone.View.extend({
 
           // $('.start-writing').css({'font-family': scope.fontSciFi});
 
-          $(this).fadeIn("slow");
+          // $(this).fadeIn("slow");
 
-        });
+        // });
 
       break;
 
       case "Historical-Fiction":
         var scope = this;
         // Background and Center
-        $("#main-page").fadeOut("slow", function () {
+        // $("#main-page").fadeOut("slow", function () {
           // $('#main-display').css({'background': 'url(' + scope.backgroundHistorical + ')'});
           // $('#center-pane').css({'background': scope.centerHistorical});
 
@@ -335,16 +335,16 @@ app.PageView = Backbone.View.extend({
           scope.$el.find('.sub-headline').show();
           // $('.start-writing').css({'font-family': scope.fontHistorical});
 
-          $(this).fadeIn("slow");
+          // $(this).fadeIn("slow");
 
-      });
+      // });
 
       break;
 
       case "Poetry":
         var scope = this;
         // Background and Center
-        $("#main-page").fadeOut("slow", function () {
+        // $("#main-page").fadeOut("slow", function () {
           // $('#main-display').css({'background': 'url(' + scope.backgroundPoetry + ')'});
           // $('#center-pane').css({'background': scope.centerPoetry});
 
@@ -359,16 +359,16 @@ app.PageView = Backbone.View.extend({
           scope.$el.find('.sub-headline').show();
           // $('.start-writing').css({'font-family': scope.fontPoetry});
 
-          $(this).fadeIn("slow");
+          // $(this).fadeIn("slow");
 
-        });
+        // });
 
       break;
 
       case "Humor":
         var scope = this;
         // Background and Center
-        $("#main-page").fadeOut("slow", function () {
+        // $("#main-page").fadeOut("slow", function () {
           // $('#main-display').css({'background': 'url(' + scope.backgroundHumor + ')'});
           // $('#center-pane').css({'background': scope.centerHumor});
 
@@ -383,16 +383,16 @@ app.PageView = Backbone.View.extend({
           scope.$el.find('.sub-headline').show();
           // $('.start-writing').css({'font-family': scope.fontHumor});
 
-          $(this).fadeIn("slow");
+          // $(this).fadeIn("slow");
 
-        });
+        // });
 
       break;
 
       case "Non-Fiction":
         var scope = this;
         // Background and Center
-        $("#main-page").fadeOut("slow", function () {
+        // $("#main-page").fadeOut("slow", function () {
           // $('#main-display').css({'background': 'url(' + scope.backgroundNonFiction + ')'});
           // $('#center-pane').css({'background': scope.centerNonFiction});
 
@@ -407,16 +407,16 @@ app.PageView = Backbone.View.extend({
           scope.$el.find('.sub-headline').show();
           // $('.start-writing').css({'font-family': scope.fontNonFiction});
 
-          $(this).fadeIn("slow");
+          // $(this).fadeIn("slow");
 
-      });
+      // });
 
       break;
 
       case "Crime":
         var scope = this;
         // Background and Center
-        $("#main-page").fadeOut("slow", function () {
+        // $("#main-page").fadeOut("slow", function () {
           // $('#main-display').css({'background': 'url(' + scope.backgroundCrime + ')'});
           // $('#center-pane').css({'background': scope.centerCrime});
 
@@ -431,9 +431,9 @@ app.PageView = Backbone.View.extend({
           scope.$el.find('.sub-headline').show();
           // $('.start-writing').css({'font-family': scope.fontCrime});
 
-          $(this).fadeIn("slow");
+          // $(this).fadeIn("slow");
 
-        });
+        // });
 
       break;
 
@@ -492,6 +492,7 @@ app.PageView = Backbone.View.extend({
       "prompt": newPrompt,
       "prompt_type": "user-submitted",
       "approved": false,
+      "total_votes": 0,
       "submitted_by": $('#current_id').val()
     });
 
@@ -508,12 +509,14 @@ app.PageView = Backbone.View.extend({
       el: $("#prompts-list")
     });
     var promptUrl = '/api/writing_prompts/writeaway/page/' + app.pagePainter.currentPage;
-
+    console.log(promptUrl);
     // ADD URL TO PROMPTS
-    app.prompts.fetch({url: promptUrl});
+    app.prompts.fetch({url: promptUrl}).done(function(){
+      console.log(app.prompts);
+      $("#prompts-list").show();
+      app.writingPromptPainter.render();
+    });
 
-    // $("#prompts-list").show();
-    // app.writingPromptPainter.render();
 
   },
 

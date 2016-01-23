@@ -15,15 +15,15 @@ class Api::PromptVotesController < ApplicationController
 
             @prompt = WritingPrompt.find(params[:id])
 
-            if current_user.id == @prompt.user_id
+            if current_user.id == @prompt.submitted_by
                 # Cannot vote on your own resource
-                render json: @prompt
+                render nothing: true
                 puts '*** Cannot Vote for your own Prompt ***'
 
             elsif ( PromptVote.where({user_id: current_user.id, writing_prompt_id: @prompt.id}).exists?)
 
                 puts '**************** Already Rated ******************'
-                render json: @prompt
+                render nothing: true
 
             else
 
@@ -35,7 +35,7 @@ class Api::PromptVotesController < ApplicationController
                 @prompt_vote.user_id = current_user.id
 
                 if @prompt_vote.save
-                  render json: @prompt
+                  render nothing: true
                 end
             end
         end

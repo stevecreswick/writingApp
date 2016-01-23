@@ -80,6 +80,7 @@
 //= require models/rating
 //= require models/vote
 //= require models/tipVote
+//= require models/promptVote
 //= require collections/ratingsCollection
 
 

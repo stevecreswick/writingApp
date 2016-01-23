@@ -13,9 +13,11 @@ app.SubmittedPromptView = Backbone.View.extend({
     var $html = $( html );
     var scope = this;
     var poster = new app.User();
+
     poster.fetch({url: "/users/show/" + this.model.get('submitted_by')}).done(function(){
         $($html[0]).html( poster.get('username') );
         scope.$el.append( $html );
+        var votes = scope.model.get('total_votes');
     });
   },
 
@@ -44,43 +46,44 @@ app.SubmittedPromptView = Backbone.View.extend({
   },
 
   upVote: function(){
+    var scope = this;
     console.log('upvote clicked...');
     var promptId = this.model.get('id');
     console.log(promptId);
 
     var rating = 1;
 
-    var urlModel = "/api/writing_prompts/" + promptId + "/tip_votes";
-    // var urlModel = '/api/posts/' + postId +'/critiques/' + critiqueId + '/votes';
+    var urlModel = "/api/writing_prompts/" + promptId + "/prompt_votes";
 
-    // var newVote = new app.CritiqueVote({url: urlModel});
-    // newVote.url = urlModel;
-    // newVote.set('value', rating);
-    //
-    // newVote.save();
-    //
-    // this.model.fetch({url: urlModel})
-    // this.render();
+    var newVote = new app.PromptVote({url: urlModel});
+    newVote.url = urlModel;
+    newVote.set('value', rating);
+
+    newVote.save();
+
+    var promptUrl = "/api/writing_prompts/show/" + promptId;
+    this.model.fetch({url: promptUrl}).done(function(){
+      scope.render();
+    });
   },
 
   downVote: function(){
     console.log('downvote clicked...');
 
     var promptId = this.model.get('id');
-    console.log(promptId);
-  //   var critiqueId = this.model.get('id');
-  //   var rating = -1;
-  //
-  //   var urlModel = '/api/posts/' + postId +'/critiques/' + critiqueId + '/votes';
-  //
-  //   var newVote = new app.CritiqueVote({url: urlModel});
-  //   newVote.url = urlModel;
-  //   newVote.set('value', rating);
-  //
-  //   newVote.save();
-  //
-  //   this.model.fetch({url: urlModel})
-  //   this.render();
+
+    var rating = -1;
+
+    var urlModel = "/api/writing_prompts/" + promptId + "/prompt_votes";
+
+    var newVote = new app.PromptVote({url: urlModel});
+    newVote.url = urlModel;
+    newVote.set('value', rating);
+
+    newVote.save();
+    var promptUrl = "/api/writing_prompts/show/" + promptId;
+    this.model.fetch({url: promptUrl})
+    this.render();
   }
 
 });

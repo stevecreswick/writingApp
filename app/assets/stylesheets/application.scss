@@ -1559,5 +1559,22 @@ div.user-view{
   }
 
   .navbar, .navbar.navbar-default {
-      background-color: white;
+    background-color: white;
+  }
+
+  .see-all-prompts {
+    text-align: right;
+  }
+
+  .add-a-prompt {
+    margin-bottom: 2em;
+  }
+
+  .writing-prompt {
+    border: 1px solid lightgrey;
+    -webkit-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    -moz-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin-bottom: 1em;
+    padding: 0 1em 0 1em;
   }

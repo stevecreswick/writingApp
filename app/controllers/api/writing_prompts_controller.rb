@@ -49,7 +49,25 @@ class Api::WritingPromptsController < ApplicationController
     # Add an approved column to writing prompts table
     prompts = WritingPrompt.where({prompt_type: "user-submitted"})
 
-    render json: prompts
+    submitted_prompts = prompts.map do |writing_prompt|
+
+      @total_votes = 0
+
+      writing_prompt.prompt_votes.map do |prompt_vote|
+        @total_votes = @total_votes + prompt_vote.value
+      end
+
+      data = writing_prompt.as_json
+
+      if @total_votes > 0
+      data['total_votes'] = @total_votes
+      else
+      data['total_votes'] = 0
+      end
+      data
+    end
+
+    render json: submitted_prompts
   end
 
   def reddit
@@ -75,8 +93,25 @@ class Api::WritingPromptsController < ApplicationController
   end
 
   def show
-    prompt = WritingPrompt.find( params[:id] )
-    render json: prompt
+
+    writing_prompt = WritingPrompt.find( params[:id] )
+
+    @total_votes = 0
+
+    writing_prompt.prompt_votes.map do |prompt_vote|
+      @total_votes = @total_votes + prompt_vote.value
+    end
+
+    data = writing_prompt.as_json
+
+    if @total_votes > 0
+    data['total_votes'] = @total_votes
+    else
+    data['total_votes'] = 0
+    end
+
+
+    render json: data
   end
 
   def edit
