@@ -105,7 +105,6 @@
 //= require views/resourcePageView
 //= require views/pageView
 
-//= require timer
 //= require app
 //= require_self
 
