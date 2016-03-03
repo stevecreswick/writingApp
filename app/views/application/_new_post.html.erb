@@ -1,0 +1,45 @@
+<div class="row">
+  <div class="col-xs-12">
+    <div class="form-group">
+
+      <div id="post-toolbar">
+        <%= render 'quill_editor_toolbar' %>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <div id="post-editor" class="post-body"></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="progress">
+            <div class="progress-bar progress-bar-info"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-2  col-xs-offset-3 text-center">
+    <h5>Word Count</h5>
+    <div id="current-word-count" class="writing-page-text">0</div>
+  </div>
+
+  <div class="col-xs-2 text-center">
+    <h5>Time Elapsed</h5>
+    <div id="stopwatch" class="writing-page-text">00:00</div>
+  </div>
+
+  <div class="col-xs-2 text-center">
+    <h5>WPM</h5>
+    <div id="current-wpm-count" class="writing-page-text">0</div>
+  </div>
+
+  <div class="col-xs-2 text-right">
+    <a class="publish btn btn-raised btn-info">Publish</a>
+  </div>
+</div>
