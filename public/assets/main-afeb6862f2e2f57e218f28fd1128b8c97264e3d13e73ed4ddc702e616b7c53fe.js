@@ -20341,7 +20341,7 @@ app.promptType = "";
 app.wordCount = 0;
 
 
-app.writingPage = Backbone.View.extend({
+app.WritingPage = Backbone.View.extend({
   tagName: 'div',
   className: 'prompt-form',
   template: _.template( $('#new-template').html() ),
@@ -21088,13 +21088,13 @@ app.PageView = Backbone.View.extend({
   renderNavBar: function(){
     this.$el.find('#header').empty();
 
-    var $navbar = _.template( $('#nav-bar-template').html() );
+    var $navbar = _.template( $('#navbar-template').html() );
     this.$el.find('#header').append($navbar);
   },
 
   renderWritingNav: function(){
     this.$el.find('#header').empty();
-    var $navbar = _.template( $('#writing-nav-template').html() );
+    var $navbar = _.template( $('#writing-navbar-template').html() );
 
     this.$el.find('#header').append($navbar);
   },
@@ -21375,7 +21375,7 @@ showGenres: function(){
 
   renderPromptForm: function(){
 
-    this.promptFormPainter = new app.writingPage({
+    this.promptFormPainter = new app.WritingPage({
       el: $('#center-pane')
     });
 

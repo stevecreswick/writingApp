@@ -64,7 +64,7 @@ app.ProfileView = Backbone.View.extend({
     app.posts.fetch({url: urlModel});
   },
   // renderPromptForm: function(){
-  //   app.WritingPageController = new app.writingPage({
+  //   app.WritingPageController = new app.WritingPage({
   //     el: $('#new-post-box')
   //   });
   //   this.$('#new-post-box').empty();

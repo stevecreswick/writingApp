@@ -113,13 +113,27 @@ app.PageView = Backbone.View.extend({
     var $html = $( html );
 
     this.$el.append( $html );
-    this.renderPromptForm();
-
-    console.log('post');
 
     this.renderSideNav();
     this.updateHeader('main');
   },
+
+
+  // Refactored Functions
+
+  renderWritingPage: function(){
+    this.currentPage = 0;
+    this.emptyCurrentView();
+
+    this.WritingPageView = new app.WritingPage({
+      el: $( '#current-view' )
+    });
+
+    this.WritingPageView.render();
+
+  },
+
+  // To Refactor
 
   updateHeader: function(genre){
 
@@ -458,21 +472,6 @@ app.PageView = Backbone.View.extend({
     this.renderPosts( this.currentGenre, this.currentPage );
   },
 
-  writingPage: function() {
-    this.currentPage = 0;
-    // this.$('#left-pane').children().remove();
-
-    // this.columns("prompt");
-
-    // empty center of page
-    this.emptyCenter();
-
-    this.renderPromptForm();
-
-    var $back = $('<div>').html('X').addClass('cancel-post wa-button')
-    this.$el.find('.prompt-back-holder').append($back)
-
-  },
 
   promptsPage: function(){
     this.currentPage = 0;
@@ -602,13 +601,13 @@ app.PageView = Backbone.View.extend({
   renderNavBar: function(){
     this.$el.find('#header').empty();
 
-    var $navbar = _.template( $('#nav-bar-template').html() );
+    var $navbar = _.template( $('#navbar-template').html() );
     this.$el.find('#header').append($navbar);
   },
 
   renderWritingNav: function(){
     this.$el.find('#header').empty();
-    var $navbar = _.template( $('#writing-nav-template').html() );
+    var $navbar = _.template( $('#writing-navbar-template').html() );
 
     this.$el.find('#header').append($navbar);
   },
@@ -690,7 +689,7 @@ app.PageView = Backbone.View.extend({
 
   events:{
 
-    'click .write-nav': 'writingPage',
+    'click .write-nav': 'renderWritingPage',
     'click div.cancel-post': 'renderMain',
     'click li.show-resources': 'showResources',
 
@@ -809,8 +808,6 @@ showGenres: function(){
     if (app.friends.models.length === 0){
     this.$el.find('#friend-page').append( $none );
     }
-
-
 
   },
 
@@ -931,6 +928,10 @@ showGenres: function(){
     this.$el.find('#center-pane').children().remove();
   },
 
+  emptyCurrentView: function(){
+    this.$el.find('#current-view').children().remove();
+  },
+
   showCurrentProfile: function(){
     this.$el.find('#post-list').remove();
     this.$el.find('#center-pane').empty();
@@ -975,16 +976,6 @@ showGenres: function(){
       this.$('#left-columns').removeClass(this.oneLeft).addClass(this.defaultLeft);
       this.$('#center-columns').removeClass(this.oneCenter).addClass(this.defaultCenter);
     }
-
-  },
-
-  renderPromptForm: function(){
-
-    this.promptFormPainter = new app.writingPage({
-      el: $('#center-pane')
-    });
-
-    this.promptFormPainter.render();
 
   },
 

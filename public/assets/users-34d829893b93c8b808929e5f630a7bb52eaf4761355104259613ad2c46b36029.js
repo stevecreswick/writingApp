@@ -19495,7 +19495,7 @@ app.ReceivedChallengeListView = Backbone.View.extend({
 ;
 var app = app || {};
 
-app.writingPage = Backbone.View.extend({
+app.WritingPage = Backbone.View.extend({
   tagName: 'div',
   className: 'prompt-form',
   template: _.template( $('#prompt-form-template').html() ),
@@ -19872,7 +19872,7 @@ app.PageView = Backbone.View.extend({
     app.posts.fetch();
   },
   renderPromptForm: function(){
-    app.WritingPageController = new app.writingPage({
+    app.WritingPageController = new app.WritingPage({
       el: $('#left-pane')
     });
     this.$('#left-pane').empty();

@@ -43,149 +43,9 @@
 
 
 <!-- Main Nav Bar -->
-    <script type="text/template" id="nav-bar-template">
-
-
-
-      <nav class="navbar navbar-default">
-  <div class="container-fluid header-bar">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand home-page">
-        <!-- <img class="typewriter" src="http://i.imgur.com/yXJDIRB.png"/> -->
-        <a href="/users/main" class="home-page headline">writeaway.
-          <div class="sub-headline"></div>
-        </a>
-
-      </a>
-    </div>
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse nav navbar-nav navbar-right" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <!-- <li class="write-nav"><a class="nav-text">Write</a></li> -->
-        <li><a href="/users/main" class="nav-text">Main</a></li>
-        <li class="show-friends"><a class="nav-text">Authors</a></li>
-        <li class="show-challenges"><a class="nav-text">Challenges</a></li>
-        <li class="show-resources"><a class="nav-text">Resources</a></li>
-        <li class="show-current-user"><a class="nav-text"><img src="<%= @user.image_url %>" class="img-circle profile-picture"</></a></li>
-
-
-        <!-- Unused Drop Down -->
-        <!-- <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Hmm</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">One more separated link</a></li>
-          </ul>
-        </li> -->
-      </ul>
-
-      <!-- Search Bar -->
-
-      <!-- <form class="navbar-form navbar-left" role="search">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search">
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-      </form> -->
-
-<!--
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Link</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-          </ul>
-        </li>
-      </ul> -->
-
-
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
-
-          <!-- <div class="row" id="header-row">
-
-            <div class="col-xs-5 col-sm-5 nav-column">
-              <div class="write-nav nav-item">
-                <img class="typewriter" src="http://i.imgur.com/yXJDIRB.png"/>
-                <a class="home-page">writeaway.</a>
-              </div>
-            </div>
-
-            <div class="col-xs-7 col-sm-7 nav-column text-right">
-                <li class="nav-item text-right navbar-link">Write</li>
-                <li class="nav-item text-right navbar-link">Read</li>
-                <li class="nav-item text-right navbar-link">Following</li>
-                <li class="nav-item text-right navbar-link">Challenges</li>
-                <li class="nav-item text-right navbar-link">
-                  <img src="<%= @user.image_url %>" class="img-circle profile-picture"</>
-                </li>
-            </div>
-
-          <div class="col-xs-2 col-sm-2 nav-column">
-          </div>
-
-          <div class="col-xs-2 col-sm-2 nav-column">
-            <div class="nav-item text-center text-center show-current-user">
-            <span id="sub-logo" class="hidden-s"><%= @user.username %></span>
-            </div>
-          </div>
-
-          </div> -->
-
+    <script type="text/template" id="navbar-template">
+      <%= render 'navbar' %>
     </script>
-
-    <!-- Writing Nav -->
-    <script type="text/template" id="writing-nav-template">
-
-          <div class="row" id="header-row">
-
-            <div class="col-xs-3 nav-columm">
-              <h1 class="home-page brand">
-                <!-- <div data-no-turbolink>
-                <a href="/users/main"> -->
-                  <img src="http://i.imgur.com/g8Z3uqu.png"/>
-                <!-- </a>
-              </div> -->
-              </h1>
-            </div>
-            <div class="col-xs-6 text-center">
-              <div id="prompt-instrustion"><h1 class="brand-font">writeaway.</h1></div>
-              <div id="prompt"></div>
-            </div>
-            <div class="col-xs-2">
-              <div class="post-error text-center"></div>
-            </div>
-
-            <!-- <div class="col-sm-3">
-            </div> -->
-            <!-- <div class="col-sm-4 nav-column">
-              <h1 class="home-page nav-item text-center">writeaway.</h1>
-            </div> -->
-
-          </div>
-
-
-    </script>
-
 
     <script type="text/template" id="prompt-page-template">
 
@@ -217,7 +77,6 @@
           <div id="prompts-list"></div>
         </div>
       </div>
-
 
     </script>
 
@@ -469,6 +328,8 @@
     <!-- Main Page -->
     <script type="text/template" id="main-page-template">
 
+      <div id="current-view" >
+
       <input type="hidden" id="current_user" value="<%= @user.username %>">
       <input type="hidden" id="current_id" value="<%= @user.id %>">
 
@@ -529,6 +390,7 @@
         </div>
         </section>
 
+    </div>
 
 
 <!-- Close Container -->
@@ -1451,109 +1313,19 @@
 
 
     <!-- New Post -->
-    <script type="text/template" id="new-template">
+    <script type="text/template" id="writing-page-template">
 
+      <div id="writing-page" class="container-fluid">
 
-      <!-- <div class="row">
-        <div class="col-xs-12 text-right">
-          <div class="circle-button">X</div>
-          <br>
-          <span class="prompt-label">press esc to go back (does not work yet)</span>
-        </div>
-      </div> -->
+        <%= render 'writing_navbar' %>
 
-      <div class="row">
-        <div class="col-xs-10 col-xs-offset-1">
-          <div id="prompt-form">
-
-
-          <div class="row">
-            <div class="col-xs-12">
-
-            </div>
+        <div class="row">
+          <div class="col-xs-10 col-xs-offset-1">
+            <%= render 'prompt_form' %>
           </div>
-
-          <div class="row">
-            <div class="col-xs-2"></div>
-
-          </div>
-
-
-
-          <div class="row">
-            <div class="col-xs-12 text-center">
-                <div class="see-all-prompts sort-text">Add a Prompt</div>
-            </div>
-          </div>
-
-
-          <div class="row">
-            <div class="col-xs-12">
-              <h3 class="text-center start-writing">You are 100 words away from being a better writer. </h3>
-            </div>
-
-            <div class="col-xs-12 col-sm-8">
-              <label for="choose-type">Choose your prompt</label>
-              <select class="form-control" id="choose-type">
-                  <option>Start My Sentences</option>
-                  <option>Answer What If</option>
-                  <option>Classic First Sentence</option>
-                  <option>reddit</option>
-              </select>
-              <div id="prompt-description" class="prompt-label">
-
-                <!-- Starts on One Word -->
-                Write a story using a random word to start each sentence.  Typing a period and space will generate a new word.
-              </div>
-            </div>
-            <div class="col-xs-12 col-sm-3">
-              <label for="post-word-count">Choose minimum word count</label>
-              <select class="form-control" id="post-word-count">
-                <option data-value="100">100 words</option>
-                  <option data-value="250">250 words</option>
-                  <option data-value="500">500 words</option>
-                  <option data-value="750">750 words</option>
-                  <option data-value="1000">1000 words</option>
-              </select>
-              <!-- <input type="number" value="25" min ="25" max="1000" step="25" class="form-control" id="post-word-count"></input>
-              <span class="prompt-label">1,000 max</span> -->
-            </div>
-
-          </div>
-
-          <div class="row">
-            <div class="col-xs-12 col-sm-7 text-center">
-              <div id="prompt-container"></div>
-            </div>
-            <div class="col-xs-12 col-sm-2 text-center">
-                <a class="render-prompt btn btn-danger btn-raised">Get a Prompt</a>
-            </div>
-            <div class="col-xs-12 col-sm-3 text-center">
-              <div id="start-writing-container"></div>
-            </div>
-          </div>
-
-
-          <div class="row">
-            <div class="col-xs-12 col-sm-8 text-center">
-            </div>
-            <div class="col-xs-12 col-sm-3">
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-md-4">
-
-            </div>
-
-          </div>
-
-          <!-- Close Prompt Series -->
         </div>
 
-<!-- Closes Row and Column -->
       </div>
-    </div>
 
     </script>
 
@@ -2529,12 +2301,8 @@
 
 <body id="main-page">
 
-
-  <!-- <div class="container-fluid" > -->
-
     <%= yield %>
 
-  <!-- </div> -->
 
   <%= javascript_include_tag 'main', 'data-turbolinks-track' => true %>
 </body>
