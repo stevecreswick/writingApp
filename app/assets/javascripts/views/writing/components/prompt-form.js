@@ -126,10 +126,8 @@ app.WritingPagePromptForm = Backbone.View.extend({
 
     app.currentPrompt = this.currentPrompt.models[0].get('prompt');
 
-    this.type = app.promptType;
-
     app.WritingPageController.components.navbar.getPromptInstruction({
-      "type": this.type,
+      "type": app.promptType,
       "wordCount": app.requiredWords,
       'prompt': app.currentPrompt
     });
