@@ -35,24 +35,35 @@ $font-brand:    Brand, sans-serif;
     }
   }
 
-  #prompt-form {
+  #writing-page-main {
 
-    .prompt-description{
-      margin: 0.5em 0 0 0.5em;
-      font-size: 20px;
+    #prompt-form {
+
+      .prompt-description{
+        margin: 0.5em 0 0 0.5em;
+        font-size: 20px;
+      }
+
+      .prompt-container {
+        padding-left: 3%;
+      }
+
+      .start-writing {
+        font: $font-brand;
+      }
+
+      a.start{
+        display: none;
+        width: 100%;
+      }
     }
 
-    .prompt-container {
-      padding-left: 3%;
-    }
-
-    .start-writing {
-      font: $font-brand;
-    }
-
-    a.start{
-      display: none;
-      width: 100%;
+    #post-editor{
+      height: 350px;
+      -webkit-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      -moz-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      
     }
   }
 }

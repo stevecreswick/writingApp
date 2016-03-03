@@ -812,9 +812,6 @@ margin-top: -4.8em;
     display: inline-block;
   }
 
-
-
-
   /* Critiques */
   .new-critique-form{
     text-align: center;
@@ -846,8 +843,6 @@ margin-top: -4.8em;
     margin-left: 75%;
   }
 
-
-
 /* User View */
 
 /*Friends */
@@ -872,9 +867,6 @@ margin-top: -4.8em;
   text-align: center;
 
 }
-/*.show-friends > img{
-  width:40px;
-}*/
 
 .nav-icon > img {
   width:40px;
@@ -917,11 +909,6 @@ margin-top: -4.8em;
   background: ghostwhite;
 }
 
-#full-toolbar{
-  text-align: left;
-  background: lightgrey;
-}
-
 #right-pane{
   height:100%;
   width: 100%;
@@ -930,45 +917,8 @@ margin-top: -4.8em;
 }
 
 
-#stopwatch {
-  /*width: 400px;*/
-  /*height: 100px;*/
-  margin: 0 auto;
-  /*border: 1px solid black;*/
-  /*font-size: 12px;*/
-  font-family: 'Open Sans Condensed', serif;
-  display: none;
-}
-
 #controls {
   text-align: center;
-}
-
-button {
-  padding: 24px 24px 16px 24px;
-  background: mediumaquamarine;
-  border:none;
-  border-bottom: 2px solid forestgreen;
-  border-radius: 5px;
-  color: white;
-  font-size: 24px;
-  font-family: 'Orbitron', 'Courier New', monospace;
-  font-weight: 700;
-}
-
-#stop {
-  background-color: crimson;
-  border-bottom: 2px solid darkred;
-}
-
-#reset {
-  background-color: moccasin;
-  border-bottom: 2px solid goldenrod;
-}
-
-button:hover, #stop:hover, #reset:hover {
-  cursor: pointer;
-  border-bottom: 2px solid black;
 }
 
 .render-friends:hover{
@@ -994,10 +944,6 @@ form#create-post {
 #publish {
   margin-top: 1.5em;
   font-size: 3em;
-}
-
-.post-body{
-  background-color: white;
 }
 
 .circle-button{
@@ -1170,13 +1116,6 @@ div.user-view{
   font-family: 'Open Sans Condensed', sans-serif;
   font-size: 3em;
   color: red;
-}
-
-#post-editor{
-  height: 350px;
-  -webkit-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  -moz-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 

@@ -238,22 +238,6 @@ app.WritingPageEditor = Backbone.View.extend({
       sel.addRange(range);
       el.focus();
     },
-      //
-      // startMySentences(lastKey){
-      //   var scope = this;
-      //   $('#post-editor').on('keyup', function(){
-      //
-      //
-      //
-      //     var text = scope.$el.find('#post-editor').find('.ql-editor').text();
-      //     app.wordCount = text.match(/\S+/g).length;
-      //     $('#current-word-count').eq(0).html( app.wordCount + "/" + app.requiredWords );
-      //     scope.updateWordCountStatus(app.wordCount);
-      //
-      //   });
-      //   console.log("new word");
-      //
-      // },
 
       renderEditor: function(){
         var fullEditor = new Quill('#post-editor', {
