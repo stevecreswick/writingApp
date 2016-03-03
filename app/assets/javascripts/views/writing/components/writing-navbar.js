@@ -1,12 +1,10 @@
 var app = app || {};
 
-app.WritingPagePrompt = Backbone.View.extend({
+app.WritingPageNavbar = Backbone.View.extend({
   tagName: 'div',
-  className: 'prompt-form',
-  template: _.template( $('#new-template').html() ),
-
 
   getPromptInstruction: function(options){
+
     if (options.type === "Start My Sentences") {
       return "Write at least " + options.wordCount + " words.  A Period and Space will give you a random word.";
     } else if (options.type === "reddit") {

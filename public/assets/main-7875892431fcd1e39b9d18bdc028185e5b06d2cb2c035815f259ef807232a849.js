@@ -20538,7 +20538,7 @@ app.WritingPage = Backbone.View.extend({
         'prompt': this.prompt
       });
 
-      $('#prompt-instrustion').html(this.promptInstruction);
+      $('#prompt-instruction').html(this.promptInstruction);
       this.$el.find('#prompt-container').show();
 
       this.$('.start').remove();
@@ -20568,7 +20568,7 @@ app.WritingPage = Backbone.View.extend({
 
       // Add Prompt Instruction
       this.promptInstruction;
-      $('#prompt-instrustion').html(this.promptInstruction);
+      $('#prompt-instruction').html(this.promptInstruction);
       $("#prompt").html( this.prompt )
       $('h5#required-word-count').html( app.requiredWords )
 

@@ -10,6 +10,49 @@ $font-brand:    Brand, sans-serif;
 
 #writing-page {
 
+  #writing-navbar {
 
-  
+    .home-page{
+      color: black;
+      list-style: none;
+      text-decoration: none;
+      text-decoration: bold;
+      display: inline-block;
+      font-family: $font-brand;
+    }
+
+    .post-error {
+      color: red;
+      font-family: 'Open Sans Condensed', sans-serif;
+      font-size: 15px;
+      background-color: lightblue;
+    }
+
+    #prompt-instruction{
+      margin-top: 1em;
+      font-family: 'Open Sans Condensed', sans-serif;
+      display: inline-block;
+    }
+  }
+
+  #prompt-form {
+
+    .prompt-description{
+      margin: 0.5em 0 0 0.5em;
+      font-size: 20px;
+    }
+
+    .prompt-container {
+      padding-left: 3%;
+    }
+
+    .start-writing {
+      font: $font-brand;
+    }
+
+    a.start{
+      display: none;
+      width: 100%;
+    }
+  }
 }

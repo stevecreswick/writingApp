@@ -125,11 +125,11 @@ app.PageView = Backbone.View.extend({
     this.currentPage = 0;
     this.emptyCurrentView();
 
-    this.WritingPageView = new app.WritingPage({
+    app.WritingPageController = new app.WritingPage({
       el: $( '#current-view' )
     });
 
-    this.WritingPageView.render();
+    app.WritingPageController.render();
 
   },
 

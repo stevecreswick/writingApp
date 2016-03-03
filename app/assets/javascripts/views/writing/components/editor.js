@@ -3,41 +3,21 @@ var app = app || {};
 app.WritingPageEditor = Backbone.View.extend({
   tagName: 'div',
   className: 'prompt-form',
-  template: _.template( $('#new-template').html() ),
+  template: _.template( $('#create-post-template').html() ),
 
-  renderWritingForm: function(e){
+  renderWritingForm: function(){
 
-    app.pagePainter.renderWritingNav();
-
-    // Resize the columns
-    app.pagePainter.columns("main");
-
-    // Render Writing Nav
-    $('#left-pane').children().remove();
-    app.pagePainter.renderWritingSidebar();
-
-    // Render Writing Form From Template
-    e.preventDefault();
     this.$el.empty();
-    var template = _.template( $('#create-post-template').html() );
-    var html = template();
-    var $html = $( html );
-    this.$el.append( $html );
-
-    // Get all the prompt info
-    // this.createPrompt();
-
-    // Add Prompt Instruction
+    this.$el.append( $( this.template() ) );
     this.promptInstruction;
-    $('#prompt-instrustion').html(this.promptInstruction);
-    $("#prompt").html( this.prompt );
-    // $('#required-word-count').html( app.requiredWords )
 
-    // Render Text Editor & Bind To Word Count
+    $('#prompt-instruction').html(this.promptInstruction);
+    $("#prompt").html( app.currentPrompt );
+
     this.renderEditor();
     this.listenToForm();
 
-    $('.ql-editor').children().last().html( this.prompt.charAt(0).toUpperCase() + this.prompt.slice(1) + " ");
+    $('.ql-editor').children().last().html( app.currentPrompt.charAt(0).toUpperCase() + app.currentPrompt.slice(1) + " ");
 
 
     // Start the Timer

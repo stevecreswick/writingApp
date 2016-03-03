@@ -91,8 +91,8 @@
 //= require views/resourceListView
 
 
+//= require views/writing/components/writing-navbar
 //= require views/writing/components/prompt-form
-//= require views/writing/components/prompt
 //= require views/writing/components/editor
 //= require views/writing/components/post-info
 

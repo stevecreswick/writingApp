@@ -369,27 +369,15 @@ p.character-count {
   color: gold;
 }
 
-#prompt-container{
-  color: black;
-  text-align: left;
-  padding: 1em;
-  font-size: 0.8em;
-  margin-top: 2em;
-  display: none;
+.post-word-count, #created-at{
+  margin-left: 2%;
+  font-size: 10px;
+  font-family: serif;
+  color: grey;
+  font-family: 'Open Sans Condensed', sans-serif;
+  background-color: red;
 }
 
-  #prompt-container .prompt-text{
-    font-family: 'Cutive Mono', sans-serif;
-
-  }
-
-
-button.render-prompt{
-  margin-top: 1em;
-  margin-bottom: 2em;
-  display: inline-block;
-  width: 100%;
-}
 
 #slider-word-count-display{
   text-align: center;
@@ -397,10 +385,7 @@ button.render-prompt{
   margin-bottom: -1em;
 }
 
-button.start{
-  display: inline-block;
-  width: 100%;
-}
+
 
 label{
   color:black;
@@ -440,23 +425,6 @@ form{
   display: none;
 }
 
-/* Navbar */
-
-
-#header-row {
-
-}
-
-.home-page{
-  /*font-family: Brand, sans-serif;
-  letter-spacing: 0.2em;*/
-  color: black;
-  list-style: none;
-  text-decoration: none;
-  font-size: 3em;
-  text-decoration: bold;
-  display: inline-block;
-}
 
 .headline{
   font-family: Brand, sans-serif;
@@ -696,16 +664,6 @@ img.sort-image{
 
 }
 
-.start-writing {
-  font: $font-brand;
-}
-
-
-
-#prompt-description{
-  margin: 0.5em 0 0 0.5em;
-  font-size: 20px;
-}
 .tall-input{
   font-size: 2em;
   text-align: center;
@@ -766,10 +724,7 @@ img.sort-image{
 }
 
 /* Prompt */
-.prompt-label{
-  font-family: 'Open Sans Condensed', sans-serif;
-  color: #545454;
-}
+
 
 .post-prompt-type {
   font-size: 2em;
@@ -837,24 +792,8 @@ margin-top: -4.8em;
   margin-bottom: 1em;
 }
 
-.post-word-count, #created-at{
-  margin-left: 2%;
-  font-size: 10px;
-  font-family: serif;
-  color: grey;
-  font-family: 'Open Sans Condensed', sans-serif;
-
-}
-
-
-
-
   /* Post Components */
-  .post-error {
-    color: red;
-    font-family: 'Open Sans Condensed', sans-serif;
-    font-size: 15px;
-  }
+
 
   .post-header {
     height: 1em;
@@ -1240,12 +1179,6 @@ div.user-view{
   -moz-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-/* Write x words using the prompt */
-#prompt-instrustion{
-  margin-top: 1em;
-  font-family: 'Open Sans Condensed', sans-serif;
-  display: inline-block;
-}
 
 /* Holds the writing prompt */
 #prompt {
