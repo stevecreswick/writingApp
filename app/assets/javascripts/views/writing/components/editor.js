@@ -5,7 +5,7 @@ app.WritingPageEditor = Backbone.View.extend({
   className: 'prompt-form',
   template: _.template( $('#create-post-template').html() ),
 
-  renderWritingForm: function(){
+  render: function(){
 
     this.$el.empty();
     this.$el.append( $( this.template() ) );

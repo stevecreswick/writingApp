@@ -38,9 +38,7 @@ app.WritingPagePromptForm = Backbone.View.extend({
 
   renderWritingForm: function(){
 
-    console.log('clicked');
-    console.log(app.WritingPageController);
-    app.WritingPageController.components.editor.renderWritingForm();
+    app.WritingPageController.components.editor.render();
 
   },
 
@@ -117,7 +115,6 @@ app.WritingPagePromptForm = Backbone.View.extend({
       this.currentPrompt.fetch({url: this.currentPrompt.url, async:false});
     } else if (app.promptType === 'reddit'){
       this.currentPrompt.url = "/api/writing_prompts/reddit"
-
       var newPrompt = this.currentPrompt.fetch({url: this.currentPrompt.url, async:false}).done(function(){
       });
     } else {
