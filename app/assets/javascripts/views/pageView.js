@@ -877,8 +877,12 @@ showGenres: function(){
 
     var $center = this.$el.find('#center-pane');
     this.$el.find('#friend-page').remove();
-    var $friendPage = $("<div>").attr('id', 'friend-page');
+    this.$el.find('.author-header').remove();
 
+    var $friendPage = $("<div>").attr('id', 'friend-page');
+    var header = $("<h1>").addClass('author-header').html("Top Authors");
+
+    $center.append(header);
     $center.append( $friendPage )
 
 
@@ -896,9 +900,14 @@ showGenres: function(){
 
     var $center = this.$el.find('#center-pane');
     this.$el.find('#friend-page').remove();
-    var $friendPage = $("<div>").attr('id', 'friend-page');
+    this.$el.find('.author-header').remove();
 
+    var $friendPage = $("<div>").attr('id', 'friend-page');
+    var header = $("<h1>").addClass('author-header').html("Top Reviewers");
+
+    $center.append(header);
     $center.append( $friendPage )
+
 
 
     app.users = new app.UserCollection();
@@ -971,7 +980,7 @@ showGenres: function(){
 
   renderPromptForm: function(){
 
-    this.promptFormPainter = new app.promptFormView({
+    this.promptFormPainter = new app.writingPage({
       el: $('#center-pane')
     });
 

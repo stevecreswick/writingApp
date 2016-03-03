@@ -92,7 +92,7 @@
 
 
 
-//= require views/promptFormView
+//= require views/writingPage
 //= require views/challengeFormView
 //= require views/acceptChallengeFormView
 //= require views/resourcePageView

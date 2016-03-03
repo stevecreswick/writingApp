@@ -1,0 +1,9 @@
+@font-face {
+  font-family: 'Brand';
+  src: font-url( asset-path('gabriele-br.TTF') );
+  font-weight: normal;
+  font-style: normal;
+}
+
+$font-main:    'Open Sans Condensed', sans-serif;
+$font-brand:    Brand, sans-serif;

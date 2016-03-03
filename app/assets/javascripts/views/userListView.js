@@ -11,7 +11,6 @@ app.UserListView = Backbone.View.extend({
   },
   render: function(){
     this.$el.empty();
-
       var users = this.collection.models;
       var view;
         for (var i = 0; i < users.length; i++) {

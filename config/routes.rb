@@ -10,7 +10,6 @@ Rails.application.routes.draw do
   # Landing Page for Logged Out Users
   get '/welcome' => 'welcome#welcome', as: :welcome
 
-
 # API Routes
   namespace :api do
 

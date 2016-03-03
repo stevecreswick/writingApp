@@ -14,13 +14,10 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require bootstrap.min
-//= require bootstrap-slider
-//= require quill.min
 //= require material.min
-
 //= require ripples.min
 
-
+//= require quill.min
 
 
 
@@ -31,10 +28,6 @@ var welcome = welcome || {};
 
 welcome.renderEditor = function(){
   var fullEditor = new Quill('#welcome-post-editor', {
-    modules: {
-        'toolbar': { container: '#welcome-post-toolbar' },
-        'link-tooltip': true,
-    },
     theme: 'snow'
   });
 }
@@ -49,64 +42,64 @@ $('#welcome-post-editor').on("keyup", function(){
 });
 
 };
-
-welcome.hoverHearts = function(){
-
-var scope = this;
-
-$( ".new-rating i" ).hover(
-  function() {
-    var parent = $(this).parent();
-
-    var value = parent.data("value");
-    var skill = parent.data("skill");
-
-    if ( $(this).hasClass('rated') ) {
-    } else {
-      scope.colorHearts(value, skill);
-    }
-
-  }, function() {
-    var parent = $(this).parent();
-
-    var value = parent.data("value");
-    var skill = parent.data("skill");
-
-    if ( $(this).hasClass('rated') ) {
-    } else {
-      scope.removeColor(value, skill);
-    }
-
-
-  });
-
-
-}
-
-
-welcome.colorHearts = function(rating, skill){
-
-  for (var i = 0; i <= rating; i++) {
-    var divId = "#rating-" + skill + "-" + i;
-
-      $(divId).find("i").addClass("fa-heart");
-      $(divId).find("i").removeClass( "fa-heart-o" );
-
-  }
-};
-
-welcome.removeColor = function(rating, skill){
-
-  for (var i = 0; i <= rating; i++) {
-    var divId = "#rating-" + skill + "-" + i;
-
-    $(divId).find("i").removeClass("fa-heart");
-    $(divId).find("i").addClass( "fa-heart-o" );
-
-
-  }
-};
-
+//
+// welcome.hoverHearts = function(){
+//
+// var scope = this;
+//
+// $( ".new-rating i" ).hover(
+//   function() {
+//     var parent = $(this).parent();
+//
+//     var value = parent.data("value");
+//     var skill = parent.data("skill");
+//
+//     if ( $(this).hasClass('rated') ) {
+//     } else {
+//       scope.colorHearts(value, skill);
+//     }
+//
+//   }, function() {
+//     var parent = $(this).parent();
+//
+//     var value = parent.data("value");
+//     var skill = parent.data("skill");
+//
+//     if ( $(this).hasClass('rated') ) {
+//     } else {
+//       scope.removeColor(value, skill);
+//     }
+//
+//
+//   });
+//
+//
+// }
+//
+//
+// welcome.colorHearts = function(rating, skill){
+//
+//   for (var i = 0; i <= rating; i++) {
+//     var divId = "#rating-" + skill + "-" + i;
+//
+//       $(divId).find("i").addClass("fa-heart");
+//       $(divId).find("i").removeClass( "fa-heart-o" );
+//
+//   }
+// };
+//
+// welcome.removeColor = function(rating, skill){
+//
+//   for (var i = 0; i <= rating; i++) {
+//     var divId = "#rating-" + skill + "-" + i;
+//
+//     $(divId).find("i").removeClass("fa-heart");
+//     $(divId).find("i").addClass( "fa-heart-o" );
+//
+//
+//   }
+// };
+//
 welcome.checkWordCount = function(){
   welcome.wordCount = 0;
   $('#welcome-post-editor').on('keyup', function(){
@@ -131,7 +124,7 @@ $( document ).ready(function(){
 
   welcome.renderEditor();
   welcome.bindPost();
-  welcome.hoverHearts();
+  // welcome.hoverHearts();
   welcome.checkWordCount();
 
 

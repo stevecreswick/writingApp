@@ -20296,7 +20296,7 @@ app.requiredWords = 0;
 app.prompt = "";
 app.promptType = "";
 
-app.promptFormView = Backbone.View.extend({
+app.writingPage = Backbone.View.extend({
   tagName: 'div',
   className: 'prompt-form',
   template: _.template( $('#new-template').html() ),
@@ -21195,7 +21195,7 @@ showGenres: function(){
 
   renderPromptForm: function(){
 
-    this.promptFormPainter = new app.promptFormView({
+    this.promptFormPainter = new app.writingPage({
       el: $('#center-pane')
     });
 
@@ -21667,12 +21667,12 @@ app.ProfileView = Backbone.View.extend({
     app.posts.fetch({url: urlModel});
   },
   // renderPromptForm: function(){
-  //   app.promptFormPainter = new app.promptFormView({
+  //   app.WritingPageController = new app.writingPage({
   //     el: $('#new-post-box')
   //   });
   //   this.$('#new-post-box').empty();
-  //   app.promptFormPainter.render();
-  //   app.promptFormPainter.bindSlider();
+  //   app.WritingPageController.render();
+  //   app.WritingPageController.bindSlider();
   // },
   // renderFriendsPage: function(){
   //   this.$('#left-pane').empty();

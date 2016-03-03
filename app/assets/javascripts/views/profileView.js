@@ -64,12 +64,12 @@ app.ProfileView = Backbone.View.extend({
     app.posts.fetch({url: urlModel});
   },
   // renderPromptForm: function(){
-  //   app.promptFormPainter = new app.promptFormView({
+  //   app.WritingPageController = new app.writingPage({
   //     el: $('#new-post-box')
   //   });
   //   this.$('#new-post-box').empty();
-  //   app.promptFormPainter.render();
-  //   app.promptFormPainter.bindSlider();
+  //   app.WritingPageController.render();
+  //   app.WritingPageController.bindSlider();
   // },
   // renderFriendsPage: function(){
   //   this.$('#left-pane').empty();

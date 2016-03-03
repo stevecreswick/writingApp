@@ -1,12 +1,46 @@
-<h3>Register for an Account</h3>
+<div class="container-fluid">
 
-<form class="" action="/users" method="post">
-  <input type="text" name="user[username]" placeholder="...enter username">
-  <input type="text" name="user[password]" placeholder="...enter password">
-  <input type="submit">
-</form>
+  <div class="row">
+    <div class="col-xs-12 text-right">
+      Already have an account? &nbsp; <%= link_to "Log in.", log_in_path %>
+    </div>
+  </div>
 
-<a href="/users/login">Already have an account?  Log in here.</a>
+<div class="register-container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-6 col-sm-offset-3 text-center">
+      <div class="user-info-container">
+      <h2 class="wa-register"><%= link_to "writeaway.", welcome_path, :"data-no-turbolink" => true %>
+        <span class="wa-sub-header">a social network for aspiring writers.</span>
+      </h2>
+      <h3 class="register-header">Sign Up</h3>
+      <form class="" action="/users" method="post">
+        <div class="input-container">
+          <h3 class="welcome-sub-header">User Name</h3>
+          <input type="text" class="form-control" name="user[username]" placeholder="...enter username">
+        </div>
+        <div class="input-container">
+        <h3 class="welcome-sub-header">Password</h3>
+        <input type="text" class="form-control" name="user[password]" placeholder="...enter password">
+        </div>
+        <div class="input-container">
+        <h3 class="welcome-sub-header">Repeat Password</h3>
+        <input type="password" name="repeat_password" id="password-repeat" placeholder="...enter password" class="form-control">
+        </div>
+        <div class="input-container">
+        <h3 class="welcome-sub-header">Email</h3>
+        <input type="text" name="user[email]" placeholder="...enter email" class="form-control">
+        </div>
+        <div class="input-container">
+        <h3 class="welcome-sub-header">Profile Image URL</h3>
+        <input type="text" name="user[image_url]" placeholder="...enter image url" class="form-control">
+        </div>
+        <input type="submit" value="Start Writing" class="btn btn-raised btn-success" id="join">
+      </form>
+      </div>
+    </div>
+  </div>
 
+</div>
 
-<!-- DELETE THIS VIEW -->
+</div>

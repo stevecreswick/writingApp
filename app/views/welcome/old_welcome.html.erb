@@ -1,0 +1,404 @@
+<div class="welcome">
+
+  <div class="row">
+    <div class="col-xs-12 text-right">
+      Already have an account? <%= link_to "Log in.", log_in_path %>
+  </div>
+
+    <div class="row">
+      <div class="col-xs-12 text-center">
+      <h1 class="welcome-header">writeaway.</h3>
+        <h3 class="welcome-sub-header">a social network for aspiring writers.</h3>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12 text-center">
+        <div class="register-container">
+          <%= link_to "Register", register_path %>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-3 col-xs-offset-3 text-center">
+        <div class="welcome-icon"><img src="http://i.imgur.com/yXJDIRB.png"/></div>
+        <h4 class="welcome-sub-header">
+          Write
+        </h4>
+        <p class="welcome-text">
+          Write from a prompt and share with other authors
+        </p>
+      </div>
+      <div class="col-xs-3 text-center">
+        <div class="welcome-icon"><img src="http://i.imgur.com/hR2f8aM.png"/></div>
+
+        <h4 class="welcome-sub-header">
+          Read
+        </h4>
+        <p class="welcome-text">
+          Read posts from other users and find your new favorite flash fiction author
+        </p>
+    </div>
+    </div>
+
+    <div class="row welcome-info text-center">
+      <div class="col-xs-4">
+        <div class="welcome-icon"><i class="fa fa-lightbulb-o fa-5x"></i></div>
+        <h4 class="welcome-sub-header">
+          Find Inspiration
+        </h4>
+          <p class="welcome-text">
+            Find and share your top writing resources for new ideas and techniques.
+          </p>
+      </div>
+      <div class="col-xs-4">
+        <div class="welcome-icon"><i class="fa fa-comments fa-4x"></i></div>
+        <h4 class="welcome-sub-header">
+          Get Feedback
+        </h4>
+        <p class="welcome-text">
+          Receive writing advice and ratings from other users to better judge your work.
+        </p>
+      </div>
+      <div class="col-xs-4">
+        <div class="welcome-icon"><i class="fa fa-users fa-4x"></i></div>
+        <h4 class="welcome-sub-header">
+          Make Friends
+        </h4>
+        <p class="welcome-text">
+          Make friends and issue writing challenges to push them to become better writers.
+        </p>
+      </div>
+    </div>
+
+  <div class="row">
+    <div class="col-xs-12 text-center">
+    <div class="vertical-space"></div>
+    </div>
+  </div>
+
+
+    <div class="row">
+      <div class="col-xs-12 text-center">
+      <div class="vertical-space"></div>
+      </div>
+    </div>
+
+
+      <div class="row">
+      <div class="col-xs-12 col-sm-5 col-sm-offset-1 text-left">
+        <div class="row">
+          <div class="col-xs-12">
+            <h5 class="welcome-sub-header">Prompt</h5>
+            The tooth fairy has collected billions of teeth in her time. But there is nothing she wants more than the set she can never have, the teeth that will never fall out no matter how long she waits: the fangs of a vampire.
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="form-group">
+              <!-- Create the toolbar container -->
+              <!-- <div id="welcome-post-toolbar">
+                <span class="ql-format-group">
+                  <span title="Bold" class="ql-format-button ql-bold"></span>
+                  <span class="ql-format-separator"></span>
+                  <span title="Italic" class="ql-format-button ql-italic"></span>
+                  <span class="ql-format-separator"></span>
+                  <span title="Underline" class="ql-format-button ql-underline"></span>
+                <select title="Text Color" class="ql-color">
+                  <option value="rgb(0, 0, 0)" selected></option>
+                  <option value="rgb(230, 0, 0)"></option>
+                  <option value="rgb(255, 153, 0)"></option>
+                  <option value="rgb(255, 255, 0)"></option>
+                  <option value="rgb(0, 138, 0)"></option>
+                  <option value="rgb(0, 102, 204)"></option>
+                  <option value="rgb(153, 51, 255)"></option>
+                  <option value="rgb(255, 255, 255)"></option>
+                  <option value="rgb(250, 204, 204)"></option>
+                  <option value="rgb(255, 235, 204)"></option>
+                  <option value="rgb(255, 255, 204)"></option>
+                  <option value="rgb(204, 232, 204)"></option>
+                  <option value="rgb(204, 224, 245)"></option>
+                  <option value="rgb(235, 214, 255)"></option>
+                  <option value="rgb(187, 187, 187)"></option>
+                  <option value="rgb(240, 102, 102)"></option>
+                  <option value="rgb(255, 194, 102)"></option>
+                  <option value="rgb(255, 255, 102)"></option>
+                  <option value="rgb(102, 185, 102)"></option>
+                  <option value="rgb(102, 163, 224)"></option>
+                  <option value="rgb(194, 133, 255)"></option>
+                  <option value="rgb(136, 136, 136)"></option>
+                  <option value="rgb(161, 0, 0)"></option>
+                  <option value="rgb(178, 107, 0)"></option>
+                  <option value="rgb(178, 178, 0)"></option>
+                  <option value="rgb(0, 97, 0)"></option>
+                  <option value="rgb(0, 71, 178)"></option>
+                  <option value="rgb(107, 36, 178)"></option>
+                  <option value="rgb(68, 68, 68)"></option>
+                  <option value="rgb(92, 0, 0)"></option>
+                  <option value="rgb(102, 61, 0)"></option>
+                  <option value="rgb(102, 102, 0)"></option>
+                  <option value="rgb(0, 55, 0)"></option>
+                  <option value="rgb(0, 41, 102)"></option>
+                  <option value="rgb(61, 20, 102)"></option>
+                </select><span class="ql-format-separator"></span>
+                <select title="Background Color" class="ql-background">
+                  <option value="rgb(0, 0, 0)"></option>
+                  <option value="rgb(230, 0, 0)"></option>
+                  <option value="rgb(255, 153, 0)"></option>
+                  <option value="rgb(255, 255, 0)"></option>
+                  <option value="rgb(0, 138, 0)"></option>
+                  <option value="rgb(0, 102, 204)"></option>
+                  <option value="rgb(153, 51, 255)"></option>
+                  <option value="rgb(255, 255, 255)" selected></option>
+                  <option value="rgb(250, 204, 204)"></option>
+                  <option value="rgb(255, 235, 204)"></option>
+                  <option value="rgb(255, 255, 204)"></option>
+                  <option value="rgb(204, 232, 204)"></option>
+                  <option value="rgb(204, 224, 245)"></option>
+                  <option value="rgb(235, 214, 255)"></option>
+                  <option value="rgb(187, 187, 187)"></option>
+                  <option value="rgb(240, 102, 102)"></option>
+                  <option value="rgb(255, 194, 102)"></option>
+                  <option value="rgb(255, 255, 102)"></option>
+                  <option value="rgb(102, 185, 102)"></option>
+                  <option value="rgb(102, 163, 224)"></option>
+                  <option value="rgb(194, 133, 255)"></option>
+                  <option value="rgb(136, 136, 136)"></option>
+                  <option value="rgb(161, 0, 0)"></option>
+                  <option value="rgb(178, 107, 0)"></option>
+                  <option value="rgb(178, 178, 0)"></option>
+                  <option value="rgb(0, 97, 0)"></option>
+                  <option value="rgb(0, 71, 178)"></option>
+                  <option value="rgb(107, 36, 178)"></option>
+                  <option value="rgb(68, 68, 68)"></option>
+                  <option value="rgb(92, 0, 0)"></option>
+                  <option value="rgb(102, 61, 0)"></option>
+                  <option value="rgb(102, 102, 0)"></option>
+                  <option value="rgb(0, 55, 0)"></option>
+                  <option value="rgb(0, 41, 102)"></option>
+                  <option value="rgb(61, 20, 102)"></option>
+                </select><span class="ql-format-separator"></span>
+              </div> -->
+
+              <!-- Create the editor container -->
+              <div class="row">
+              <div class="col-xs-12">
+                <div id="welcome-post-editor" class="post-body">
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-xs-12">
+                <div class="progress">
+                  <div class="progress-bar progress-bar-info"></div>
+                </div>
+              </div>
+            </div>
+
+
+              <!-- <textarea class="form-control" id="post-body" rows="10" name="post[message]" placeholder="...post"></textarea> -->
+              <!-- Close Form Group  -->
+            </div>
+
+            <!-- Close writing form column and row -->
+              </div>
+            </div>
+
+      </div>
+      <div class="col-xs-10 col-xs-offset-1 col-sm-5 col-sm-offset-0">
+
+      <div class="welcome-post">
+      <div class="row">
+        <div class="col-xs-12">
+
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-2">
+          <div class="post-pic-box text-center">
+          </div>
+
+        </div>
+        <div class="col-xs-8 text-left">
+          <div class="prompt-label text-left" id="title-holder">
+            Your Post
+          </div>
+        </div>
+        <div class="col-xs-2 prompt-label">
+          <div class="icon-holder">
+            <div class="genre-icon"><img class="genre-icon-img" src="http://i.imgur.com/BI8PegK.png"/></div>
+            <strong> Fiction </strong>
+          </div>
+        </div>
+      </div>
+
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="post-box prompt-label">
+              <br>
+              <p class="posted-message">
+                START WRITING
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-12 text-center">
+            <div class="rating-container">
+              RATE THIS POST <br>
+              <div class="new-rating" data-value="1" data-post="<%%= id %>" data-skill="overall" id="rating-overall-1"><i class="fa fa-heart-o rating-heart"></i></div>
+              <div class="new-rating" data-value="2" data-post="<%%= id %>" data-skill="overall" id="rating-overall-2"><i class="fa fa-heart-o rating-heart"></i></div>
+              <div class="new-rating" data-value="3" data-post="<%%= id %>" data-skill="overall" id="rating-overall-3"><i class="fa fa-heart-o rating-heart"></i></div>
+              <div class="new-rating" data-value="4" data-post="<%%= id %>" data-skill="overall" id="rating-overall-4"><i class="fa fa-heart-o rating-heart"></i></div>
+              <div class="new-rating" data-value="5" data-post="<%%= id %>" data-skill="overall" id="rating-overall-5"><i class="fa fa-heart-o rating-heart"></i></div>
+              <div class="new-rating" data-value="6" data-post="<%%= id %>" data-skill="overall" id="rating-overall-6"><i class="fa fa-heart-o rating-heart"></i></div>
+              <div class="new-rating" data-value="7" data-post="<%%= id %>" data-skill="overall" id="rating-overall-7"><i class="fa fa-heart-o rating-heart"></i></div>
+              <div class="new-rating" data-value="8" data-post="<%%= id %>" data-skill="overall" id="rating-overall-8"><i class="fa fa-heart-o rating-heart"></i></div>
+              <div class="new-rating" data-value="9" data-post="<%%= id %>" data-skill="overall" id="rating-overall-9"><i class="fa fa-heart-o rating-heart"></i></div>
+              <div class="new-rating" data-value="10" data-post="<%%= id %>" data-skill="overall" id="rating-overall-10"><i class="fa fa-heart-o rating-heart"></i></div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="row">
+          <div class="col-xs-12 text-left">
+            <h4 class="welcome-sub-header">
+              Feedback
+            </h4>
+            <br>
+            <div class="critique-view text-left">
+              Great Post!
+            </div>
+            <div class="critique-view text-left">
+              Awesome Job.
+            </div>
+          </div>
+        </div>
+
+        <!-- Close Weclome Post -->
+      </div>
+
+      </div>
+    </div>
+    <!-- Close outer column and row -->
+
+
+
+    <div class="row">
+      <div class="col-xs-12 text-center">
+      <div class="vertical-space"></div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12 text-center">
+      <div class="vertical-space"></div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12 text-center">
+      <div class="vertical-space"></div>
+      </div>
+    </div>
+
+
+    <!-- Register -->
+    <div class="row login-row">
+        <h3 class="welcome-sub-header">Register for an Account</h3>
+        <div class="error-message"></div>
+        <div class="row">
+          <div class="col-xs-12 text-center">
+          <div class="vertical-space"></div>
+          </div>
+        </div>
+
+        <form class="" action="/users" method="post">
+          <div class="col-xs-4 col-xs-offset-2">
+          <div class="form-group">
+            <h3 class="welcome-sub-header">User Name</h3>
+            <input type="text" name="user[username]" placeholder="...enter username" class="form-control">
+          </div>
+        </div>
+        <div class="col-xs-4">
+          <div class="form-group">
+            <h3 class="welcome-sub-header">Profile Image URL</h3>
+            <input type="text" name="user[image_url]" placeholder="...enter image url" class="form-control">
+          </div>
+        </div>
+        <div class="col-xs-4 col-xs-offset-2">
+          <div class="form-group">
+            <h3 class="welcome-sub-header">Password</h3>
+            <input type="password" name="user[password]" id="password" placeholder="...enter password" class="form-control">
+          </div>
+        </div>
+        <div class="col-xs-4">
+          <div class="form-group">
+            <h3 class="welcome-sub-header">Repeat Password</h3>
+            <input type="password" name="repeat_password" id="password-repeat" placeholder="...enter password" class="form-control">
+          </div>
+        </div>
+
+        <div class="col-xs-4 col-xs-offset-4">
+          <div class="form-group">
+            <h3 class="welcome-sub-header">Email</h3>
+            <input type="text" name="user[email]" placeholder="...enter email" class="form-control">
+          </div>
+        </div>
+        <div class="col-xs-8 col-xs-offset-2">
+          <div class="form-group text-right">
+            <input type="submit" value="Join" class="btn btn-raised btn-success">
+          </div>
+        </div>
+        </form>
+
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12 text-center">
+      Already have an account? <%= link_to "Log in.", log_in_path %>
+      </div>
+    </div>
+
+</div>
+
+<div class="row">
+  <div class="col-xs-12 text-center">
+  <div class="vertical-space"></div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12 text-center">
+  <div class="vertical-space"></div>
+  </div>
+</div>
+
+<!-- Footer -->
+<section id="footer">
+  <div class="container">
+    Write Away
+    <div>Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a>, <a href="http://www.flaticon.com/authors/designmodo" title="Designmodo">Designmodo</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a>             is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a></div>
+
+    <span class="fa-stack fa-lg">
+      <i class="fa fa-square-o fa-stack-2x"></i>
+      <i class="fa fa-twitter fa-stack-1x"></i>
+      </span>
+      fa-twitter on fa-square-o<br>
+      <span class="fa-stack fa-lg">
+      <i class="fa fa-circle fa-stack-2x"></i>
+      <i class="fa fa-flag fa-stack-1x fa-inverse"></i>
+      </span>
+      fa-flag on fa-circle<br>
+      <span class="fa-stack fa-lg">
+      <i class="fa fa-square fa-stack-2x"></i>
+      <i class="fa fa-terminal fa-stack-1x fa-inverse"></i>
+      </span>
+      fa-terminal on fa-square<br>
+            </div>
+  </section>

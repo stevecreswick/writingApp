@@ -20151,7 +20151,7 @@ var app = app || {};
 app.CritiqueVote = Backbone.Model.extend({});
 var app = app || {};
 
-app.promptFormView = Backbone.View.extend({
+app.writingPage = Backbone.View.extend({
   tagName: 'div',
   className: 'prompt-form',
   template: _.template( $('#new-template').html() ),
@@ -21040,16 +21040,16 @@ app.PageView = Backbone.View.extend({
     // empty center of page
     this.emptyCenter();
 
-    this.promptFormPainter = new app.promptFormView({
+    this.promptFormPainter = new app.writingPage({
       el: $('#center-pane')
     });
 
 
 
-    // console.log(app.promptFormPainter);
+    // console.log(app.WritingPageController);
 
     this.promptFormPainter.render();
-    // app.promptFormPainter.bindSlider();
+    // app.WritingPageController.bindSlider();
     var $back = $('<div>').html('X').addClass('cancel-post wa-button')
     this.$el.find('.prompt-back-holder').append($back)
 

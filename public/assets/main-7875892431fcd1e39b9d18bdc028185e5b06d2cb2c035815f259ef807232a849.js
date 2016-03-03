@@ -20448,7 +20448,7 @@ app.promptType = "";
 app.wordCount = 0;
 
 
-app.promptFormView = Backbone.View.extend({
+app.writingPage = Backbone.View.extend({
   tagName: 'div',
   className: 'prompt-form',
   template: _.template( $('#new-template').html() ),
@@ -21482,7 +21482,7 @@ showGenres: function(){
 
   renderPromptForm: function(){
 
-    this.promptFormPainter = new app.promptFormView({
+    this.promptFormPainter = new app.writingPage({
       el: $('#center-pane')
     });
 

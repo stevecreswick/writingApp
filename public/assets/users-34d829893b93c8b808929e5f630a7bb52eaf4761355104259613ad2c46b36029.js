@@ -19495,7 +19495,7 @@ app.ReceivedChallengeListView = Backbone.View.extend({
 ;
 var app = app || {};
 
-app.promptFormView = Backbone.View.extend({
+app.writingPage = Backbone.View.extend({
   tagName: 'div',
   className: 'prompt-form',
   template: _.template( $('#prompt-form-template').html() ),
@@ -19872,12 +19872,12 @@ app.PageView = Backbone.View.extend({
     app.posts.fetch();
   },
   renderPromptForm: function(){
-    app.promptFormPainter = new app.promptFormView({
+    app.WritingPageController = new app.writingPage({
       el: $('#left-pane')
     });
     this.$('#left-pane').empty();
-    app.promptFormPainter.render();
-    app.promptFormPainter.bindSlider();
+    app.WritingPageController.render();
+    app.WritingPageController.bindSlider();
   },
   renderFriendsPage: function(){
     this.$('#left-pane').empty();

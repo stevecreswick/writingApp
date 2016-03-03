@@ -1,0 +1,190 @@
+@font-face {
+  font-family: 'Brand';
+  src: font-url( asset-path('gabriele-br.TTF') );
+  font-weight: normal;
+  font-style: normal;
+}
+
+$font-main:    'Open Sans Condensed', sans-serif;
+$font-brand:    Brand, sans-serif;
+
+// Old Welcome Page
+
+// .welcome-text{
+//   font-size: 15px;
+//   font-family: $font-main, sans-serif;
+//   width: 50%;
+//   margin-left: 25%;
+// }
+//
+//
+// .welcome-header{
+//   font-family: $font-brand, sans-serif;
+//   color: black;
+//   font-size: 3em;
+//   margin-top: 3em;
+// }
+//
+// .welcome-sub-header{
+//   font-family: $font-brand, sans-serif;
+//   color: black;
+// }
+//
+// .welcome-icon{
+//   display: inline-block;
+//   height: 100px;
+//   width: 100px;
+//   border-radius: 50px;
+//   border: 1px black solid;
+//   vertical-align: middle;
+//   padding-top: 0.5em;
+//   background: contain;
+//   background-color: ghostwhite;
+//
+//   -webkit-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+//   box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+//   -moz-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+// }
+//
+// .welcome-icon img{
+//   max-width:55px;
+//   margin-top: 1em;
+// }
+//
+// .welcome-info{
+//   margin-top: 8em;
+//   text-align: center;
+// }
+//
+// .welcome-post {
+//   background-color: white;
+//   padding: 2% 2% 4% 2%;
+//   border-radius: 3px;
+//   margin: 2em 1em 2em 1em;
+//   height: 25em;
+//   text-align: center;
+//   overflow-y: auto;
+//   -webkit-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+//   box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+//   -moz-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+//
+// }
+//
+// .login-row{
+//   text-align: center;
+//   margin-top: 1em;
+// }
+//
+//
+// .login-header{
+//   color: white;
+// }
+//
+// #welcome-body{
+//   background-size: cover;
+//   background-repeat: none;
+// }
+//
+// #welcome-post-editor{
+//   height: 20em;
+// }
+
+.welcome-container {
+  background-color: white;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+
+  .welcome-header{
+    font-family: $font-brand, sans-serif;
+    color: black;
+    font-size: 4em;
+  }
+
+  .welcome-sub-header{
+    font-family: $font-brand, sans-serif;
+    font-size: 1.5em;
+  }
+
+  .writing-example {
+    background-color: #6e7783;
+    margin: 3em -20px 0 -20px;
+    height: 500px;
+    padding: 70px 0 70px 5%;
+
+
+    .writing-container {
+      width: 600px;
+      height: 300px;
+      float: right;
+      margin-right: 50px;
+      // border: 1px solid #6e7783;
+
+      #writing-prompt {
+        height: 60px;
+        background: white;
+        padding: 5px 0 5px 10px;
+
+        #welcome-prompt {
+          height: 50px;
+          width: 525px;
+          display: inline-block;
+
+        }
+
+        .get-new-prompt {
+          float: right;
+          // min-height: 50px;
+          // min-width: 50px;
+          margin: 10px 25px 0 10px;
+          display: inline-block;
+          text-align: center;
+          // height: 100%;
+        }
+      }
+    }
+  }
+
+
+  .main-frame {
+    margin-top: 100px;
+    bottom: 0;
+
+    .welcome-icon{
+      display: inline-block;
+      height: 100px;
+      width: 100px;
+      margin-bottom: -1em;
+
+      img {
+        max-width:55px;
+        margin-top: 1em;
+      }
+
+      .fa {
+        margin-top: 0.2em;
+      }
+    }
+
+    .welcome-text{
+      font-size: 15px;
+      font-family: $font-main, sans-serif;
+      width: 50%;
+      margin-left: 25%;
+    }
+  }
+
+  .register-container {
+    margin-top: 3.5em;
+
+    .register {
+      width: 120px;
+    }
+
+    .login {
+      margin-top: 2em;
+      width: 120px;
+
+    }
+  }
+}

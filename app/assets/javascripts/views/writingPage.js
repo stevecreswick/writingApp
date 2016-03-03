@@ -7,7 +7,7 @@ app.promptType = "";
 app.wordCount = 0;
 
 
-app.promptFormView = Backbone.View.extend({
+app.writingPage = Backbone.View.extend({
   tagName: 'div',
   className: 'prompt-form',
   template: _.template( $('#new-template').html() ),

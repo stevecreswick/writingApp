@@ -1,36 +1,35 @@
-<div class="row">
-  <div class="col-xs-12 text-center">
-  <h1 class="welcome-header">writeaway.</h3>
-    <h3 class="welcome-sub-header">a social network for aspiring writers.</h3>
-  </div>
-</div>
+<div class="container-fluid">
 
-
-<div class="row">
-  <div class="col-xs-12 text-center">
-  <div class="vertical-space"></div>
-  </div>
-</div>
-
-
-
-<div class="row">
-<form action="/sessions" method="post">
-  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-  <div class="col-xs-12 col-sm-3 col-sm-offset-3">
-    <div class="form-group">
-      <h3 class="welcome-sub-header text-center">Name</h3>
-      <input type="text" name="username" placeholder="billshakespeare" class="form-control">
+  <div class="row">
+    <div class="col-xs-12 text-right">
+      Don't have an account? &nbsp; <%= link_to "Sign up.", register_path %>
     </div>
   </div>
-  <div class="col-xs-12 col-sm-3">
-    <div class="form-group">
-    <h3 class="welcome-sub-header text-center">Password</h3>
-    <input type="password" name="password" placeholder="*********" class="form-control">
+
+<div class="register-container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-6 col-sm-offset-3 text-center">
+      <div class="user-info-container">
+      <h2 class="wa-register"><%= link_to "writeaway.", welcome_path, :"data-no-turbolink" => true %>
+        <span class="wa-sub-header">a social network for aspiring writers.</span>
+      </h2>
+      <h3 class="register-header">Login</h3>
+      <form action="/sessions" method="post">
+        <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+        <div class="input-container">
+          <h3 class="welcome-sub-header">User Name</h3>
+          <input type="text" name="username" placeholder="billshakespeare" class="form-control">
+        </div>
+        <div class="input-container">
+        <h3 class="welcome-sub-header">Password</h3>
+        <input type="password" name="password" placeholder="*********" class="form-control">
+        </div>
+        <input type="submit" value="Login" class="btn btn-raised btn-success" id="join">
+      </form>
+      </div>
     </div>
   </div>
-  <div class="col-xs-9 text-right">
-    <input type="submit" value="Log In" class="btn btn-raised btn-success">
-  </div>
-</form>
+
+</div>
+
 </div>
