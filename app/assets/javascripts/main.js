@@ -94,7 +94,6 @@
 //= require views/writing/components/writing-navbar
 //= require views/writing/components/prompt-form
 //= require views/writing/components/editor
-//= require views/writing/components/post-info
 
 //= require views/writing/writingPage
 

@@ -52,15 +52,9 @@ app.WritingPage = Backbone.View.extend({
       model: this.Post
     });
 
-    this.components.postInfo = new app.WritingPostInfo({
-      el: $( '#post-info' ),
-      model: this.Post
-    });
-
   },
 
   events:{
-    'click a.publish': 'publishPost'
   }
 
 });

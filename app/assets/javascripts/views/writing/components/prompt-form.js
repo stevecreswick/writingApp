@@ -83,6 +83,7 @@ app.WritingPagePromptForm = Backbone.View.extend({
   },
 
   renderPrompt: function( e ){
+    console.log('rendering');
 
     var scope = this;
 

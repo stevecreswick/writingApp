@@ -5,6 +5,10 @@ app.WritingPageEditor = Backbone.View.extend({
   className: 'prompt-form',
   template: _.template( $('#new-post-template').html() ),
 
+  events: {
+    'click a.publish': 'publishPost'
+  },
+
   render: function(){
 
     this.$el.empty();
@@ -120,15 +124,11 @@ app.WritingPageEditor = Backbone.View.extend({
 
           // Check Title / Word Count
           if (newTitle === ""){
-            console.log('yo');
             $('.post-error').html('Error: A title is required.');
-            // $('#post-title').css('border', '1px solid red');
 
           } else if (messageLength >= app.requiredWords) {
+
             var $stopwatch = $('#stopwatch');
-
-            // Store the seconds in the post
-
             console.log(this.newPrompt);
             // Create a Post
             app.posts.create({
