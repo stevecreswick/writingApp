@@ -4,11 +4,9 @@ app.WritingPageNavbar = Backbone.View.extend({
   tagName: 'div',
 
   events: {
-    'click.cancel-post': 'triggerCancelModal'
   },
 
   initialize: function() {
-    // $('#cancel-this-post').modal();
   },
 
   getPromptInstruction: function(options){
@@ -34,12 +32,5 @@ app.WritingPageNavbar = Backbone.View.extend({
       scope.changePromptDescription( $('#choose-type').val() );
     });
 
-  },
-
-  triggerCancelModal: function() {
-    this.$el.find('#cancel-this-post')
-      .modal('toggle');
   }
-
-
 });
