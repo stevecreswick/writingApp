@@ -3,6 +3,14 @@ var app = app || {};
 app.WritingPageNavbar = Backbone.View.extend({
   tagName: 'div',
 
+  events: {
+    'click.cancel-post': 'triggerCancelModal'
+  },
+
+  initialize: function() {
+    // $('#cancel-this-post').modal();
+  },
+
   getPromptInstruction: function(options){
 
     if (options.type === "Start My Sentences") {
@@ -34,6 +42,11 @@ app.WritingPageNavbar = Backbone.View.extend({
     var $back = $('<div>').html('X').addClass('cancel-post wa-button')
     this.$el.find('.prompt-back-holder').append($back)
 
+  },
+
+  triggerCancelModal: function() {
+    this.$el.find('#cancel-this-post')
+      .modal('toggle');
   }
 
 

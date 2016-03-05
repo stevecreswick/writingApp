@@ -1,27 +1,39 @@
-<div class="row" id="writing-navbar">
-  <div class="col-xs-3 nav-columm">
-    <h1 class="home-page">
-      writeaway.
-    </h1>
-  </div>
-  <div class="col-xs-6 text-center">
-    <div id="prompt-instruction">
-
-      <!-- Writing Prompt Rendered Here -->
-
+<div id="writing-navbar">
+  <div class="row">
+    <div class="col-xs-3 nav-columm">
+      <h1 class="home-page">
+        writeaway.
+      </h1>
     </div>
-    <div id="prompt">
+    <div class="col-xs-6 text-center">
+      <div id="prompt-instruction">
 
-      <!-- Writing Prompt Rendered Here -->
+        <!-- Writing Prompt Rendered Here -->
 
+      </div>
+      <div id="prompt">
+
+        <!-- Writing Prompt Rendered Here -->
+
+      </div>
+    </div>
+    <div class="col-xs-2">
+      <a class="cancel-post">
+        X
+        <!-- <span class="esc-cancel">esc</span> -->
+      </a>
     </div>
   </div>
-  <div class="col-xs-2 text-center">
-    <a class="home-page">
-      X
-    </a>
-    <div class="post-error">
-      This is a test error message.
+
+  <div class="row" id="post-error-container">
+    <div class="col-xs-10 col-xs-offset-1">
+      <div class="post-error">
+        This is a test error message.
+      </div>
     </div>
+
   </div>
+
+  <%= render 'cancel_post_modal' %>
+
 </div>
