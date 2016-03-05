@@ -36,14 +36,6 @@ app.WritingPageNavbar = Backbone.View.extend({
 
   },
 
-  renderNav: function() {
-
-    // This should be added in the template
-    var $back = $('<div>').html('X').addClass('cancel-post wa-button')
-    this.$el.find('.prompt-back-holder').append($back)
-
-  },
-
   triggerCancelModal: function() {
     this.$el.find('#cancel-this-post')
       .modal('toggle');
