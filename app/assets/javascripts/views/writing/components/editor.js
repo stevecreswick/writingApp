@@ -13,63 +13,54 @@ app.WritingPageEditor = Backbone.View.extend({
 
     this.$el.empty();
     this.$el.append( $( this.template() ) );
-    this.promptInstruction;
 
-    $('#prompt-instruction').html(this.promptInstruction);
     $("#prompt").html( app.currentPrompt );
 
     this.renderEditor();
     this.listenToForm();
-
-    $('.ql-editor').children().last().html( app.currentPrompt.charAt(0).toUpperCase() + app.currentPrompt.slice(1) + " ");
-
-
-    // Start the Timer
     this.startClock();
 
-    // Put in the starting word count
     $('#current-word-count').eq(0).html( app.wordCount + "/" + app.requiredWords );
 
   },
 
 
-      startClock: function(){
+  startClock: function() {
+    if (app.timer){
+      this.clearTime();
+    }
 
-        if (app.timer){
-          this.clearTime();
-        }
+    var $stopwatch = this.$el.find('#stopwatch');
 
-        var $stopwatch = this.$el.find('#stopwatch');
+    app.totalTime = 0;
+    app.seconds = 0;
+    app.minutes = 0;
+    app.hours = 0;
 
-        app.totalTime = 0;
-        app.seconds = 0;
-        app.minutes = 0;
-        app.hours = 0;
+    app.timer = setInterval(this.renderTime, 1000);
+    $('#stopwatch').show();
 
-        app.timer = setInterval(this.renderTime, 1000);
-        $('#stopwatch').show();
+  },
 
-      },
+  wordsPerMinute: function(){
+    var minutes = app.totalTime / 60;
 
-      wordsPerMinute: function(){
-        var minutes = app.totalTime / 60;
+    var wpm = Math.floor( app.wordCount / minutes );
 
-        var wpm = Math.floor( app.wordCount / minutes );
+    $("#current-wpm-count").html(wpm)
+  },
 
-        $("#current-wpm-count").html(wpm)
-      },
-
-      renderTime: function(){
-        app.totalTime++;
-        app.hours = Math.floor(app.totalTime / 3600);
-        // totalSeconds %= 3600;
-        app.minutes = Math.floor(app.totalTime / 60);
-        app.seconds = app.totalTime % 60;
+  renderTime: function(){
+    app.totalTime++;
+    app.hours = Math.floor(app.totalTime / 3600);
+    // totalSeconds %= 3600;
+    app.minutes = Math.floor(app.totalTime / 60);
+    app.seconds = app.totalTime % 60;
 
   // WPM
-        var minutes = app.totalTime / 60;
+    var minutes = app.totalTime / 60;
 
-        var wpm = Math.floor( parseInt(app.wordCount) / minutes );
+    var wpm = Math.floor( parseInt(app.wordCount) / minutes );
 
         $("#current-wpm-count").html(wpm)
 
@@ -97,8 +88,6 @@ app.WritingPageEditor = Backbone.View.extend({
 
 
       },
-
-
 
       clearTime: function(){
         clearInterval(app.timer);
@@ -155,12 +144,14 @@ app.WritingPageEditor = Backbone.View.extend({
         // No Title
         else if ( postTitle.length === 0 )
         {
-          this.$('.post-error').html('Error: A title is required.');
+          $('.post-error').html('Error: A title is required.');
+          $('.post-error').show();
         }
 
         // Not Long Enough
         else {
-          this.$('.post-error').text('Error: Post does not meet required word count.');
+          $('.post-error').text('Error: Post does not meet required word count.');
+          $('.post-error').show();
         }
 
       },
