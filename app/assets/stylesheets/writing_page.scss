@@ -50,6 +50,7 @@ $font-brand:    Brand, sans-serif;
     }
 
     .post-error {
+      display: none;
       color: #f68657;
       border: solid 1px #f68657;
       background-color: #ffeee4;
@@ -94,6 +95,23 @@ $font-brand:    Brand, sans-serif;
       a.start{
         display: none;
         width: 100%;
+      }
+    }
+
+
+
+    #post-toolbar {
+      background-color: white;
+
+      .title-container {
+        width:33%;
+        display: inline-block;
+      }
+
+      .genre-container {
+        padding-left: 3%;
+        width: 33%;
+        display: inline-block;
       }
     }
 
