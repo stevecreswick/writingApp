@@ -721,7 +721,7 @@ app.PageView = Backbone.View.extend({
 
     'click li.render-friends': 'renderFriendsPage',
     'click li.render-friends': 'renderFriendsPage',
-    // 'click .home-page': 'renderMain',
+    'click .render-main-page': 'renderMain',
     'click .show-current-user': 'showCurrentProfile',
     'click span.show-genres': 'showGenres',
 
