@@ -101,13 +101,14 @@ app.WritingPageEditor = Backbone.View.extend({
 
       publishPost: function(){
 
-        var newMessage = $('#post-editor').first().eq(0).children().eq(0).htm
+        var newMessage = $('#post-editor').first().eq(0).children().eq(0).html(),
             postTitle = $('#post-title').val(),
             genre = $('#choose-genre').val(),
             prompt = $('#prompt').text(),
             rawText = $('#post-editor').find('.ql-editor').text(),
             messageLength = rawText.match(/\S+/g).length;
 
+            console.log(newMessage);
         if ( postTitle.length > 0
             && messageLength >= app.requiredWords )
           {
@@ -156,22 +157,34 @@ app.WritingPageEditor = Backbone.View.extend({
 
       },
 
-      updateWordCountStatus: function(wordCount){
-          var progress = Math.floor( (wordCount / app.requiredWords) * 100 ) + "%";
-          this.$el.find('.progress-bar').css({"width": progress});
+      updateSubmitStatus: function(wordCount){
+
+          this.progress = Math.floor(
+            (wordCount / app.requiredWords) * 100
+          );
+
+          this.$el.find('.progress-bar')
+            .css({"width": ( this.progress + "%" )});
+
+          this.progress >= 100 ?
+            this.$el.find('.publish').eq(0)
+              .addClass('publish-enabled') :
+            this.$el.find('.publish').eq(0)
+              .removeClass('publish-enabled');
       },
+
 
       listenToForm: function(){
         app.wordCount = 0;
         var scope = this;
 
-        $('#post-editor').on('keyup', function(e){
+        $( '#post-editor' ).on('keyup', function(e){
 
-          var text = scope.$el.find('#post-editor').find('.ql-editor').text();
+          var text = scope.$el.find( '#post-editor' ).find( '.ql-editor' ).text();
           app.wordCount = text.match(/\S+/g).length;
           $('#current-word-count').eq(0).html( app.wordCount + "/" + app.requiredWords );
 
-          scope.updateWordCountStatus(app.wordCount);
+          scope.updateSubmitStatus( app.wordCount );
 
           if (app.promptType === "Start My Sentences"){
             scope.addWord(e);
