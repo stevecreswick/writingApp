@@ -73,6 +73,13 @@ $font-brand:    Brand, sans-serif;
       font-family: 'Open Sans Condensed', sans-serif;
       display: inline-block;
     }
+
+    #prompt {
+      font-size: 1.5em;
+      color: black;
+      font-family: $font-brand;
+
+    }
   }
 
   #writing-page-main {
