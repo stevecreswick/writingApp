@@ -108,7 +108,6 @@ app.WritingPageEditor = Backbone.View.extend({
             rawText = $('#post-editor').find('.ql-editor').text(),
             messageLength = rawText.match(/\S+/g).length;
 
-            console.log(newMessage);
         if ( postTitle.length > 0
             && messageLength >= app.requiredWords )
           {
