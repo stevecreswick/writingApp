@@ -112,28 +112,22 @@ app.WritingPageEditor = Backbone.View.extend({
 
       publishPost: function(){
 
-        console.log('publishing');
-          var newMessage = $('#post-editor').first().eq(0).children().eq(0).html();
-          var newTitle = $('#post-title').val();
-          var genre = $('#choose-genre').val();
-          var prompt = $('#prompt').text();
+        var newMessage = $('#post-editor').first().eq(0).children().eq(0).htm
+            postTitle = $('#post-title').val(),
+            genre = $('#choose-genre').val(),
+            prompt = $('#prompt').text(),
+            rawText = $('#post-editor').find('.ql-editor').text(),
+            messageLength = rawText.match(/\S+/g).length;
 
-          // Find Word Count
-          var messageText = $('#post-editor').find('.ql-editor').text();
-          var messageLength = messageText.match(/\S+/g).length;
-
-          // Check Title / Word Count
-          if (newTitle === ""){
-            $('.post-error').html('Error: A title is required.');
-
-          } else if (messageLength >= app.requiredWords) {
+        if ( postTitle.length > 0
+            && messageLength >= app.requiredWords )
+          {
 
             var $stopwatch = $('#stopwatch');
-            console.log(this.newPrompt);
-            // Create a Post
+
             app.posts.create({
 
-              title: newTitle,
+              title: postTitle,
               genre: genre,
               message: newMessage,
               word_count: messageLength,
@@ -156,16 +150,23 @@ app.WritingPageEditor = Backbone.View.extend({
             // this.render();
             this.$el.css({'height': 'auto'});
 
-          } else {
-            this.$('.post-error').text('Error: Post does not meet required word count.');
           }
+
+        // No Title
+        else if ( postTitle.length === 0 )
+        {
+          this.$('.post-error').html('Error: A title is required.');
+        }
+
+        // Not Long Enough
+        else {
+          this.$('.post-error').text('Error: Post does not meet required word count.');
+        }
 
       },
 
       updateWordCountStatus: function(wordCount){
-
           var progress = Math.floor( (wordCount / app.requiredWords) * 100 ) + "%";
-          console.log(progress);
           this.$el.find('.progress-bar').css({"width": progress});
       },
 
@@ -187,7 +188,6 @@ app.WritingPageEditor = Backbone.View.extend({
 
         });
 
-
       },
 
       addWord: function(e){
@@ -197,7 +197,6 @@ app.WritingPageEditor = Backbone.View.extend({
         app.currentKey = e.keyCode;
 
         if ( app.currentKey === spaceKey && app.lastKey === periodKey )   {
-          console.log("period then space");
 
           var currentPost = $('#post-editor').find('.ql-editor').html();
 
@@ -208,36 +207,14 @@ app.WritingPageEditor = Backbone.View.extend({
           var nextWord = this.nextWord.models[0].get('prompt');
 
           var startWith = nextWord.charAt(0).toUpperCase() + nextWord.slice(1);
-          var newWord = $('.ql-editor').children().last();
 
-          $(newWord).append(startWith + " ");
-
-          this.setCaret();
-
+          $("#prompt").empty();
+          $("#prompt").append( startWith );
         }
 
         app.lastKey = e.keyCode;
 
-
       },
-
-      setCaret: function() {
-      var el = $('#post-editor').find('.ql-editor');
-      var range = document.createRange();
-      console.log(range);
-      var sel = window.getSelection();
-      console.log(sel);
-      var node = el.children().last();
-
-      console.log(node[0]);
-      console.log($(node).length);
-
-      range.setStart(node[0], $(node).length + 1 );
-      range.collapse(true);
-      sel.removeAllRanges();
-      sel.addRange(range);
-      el.focus();
-    },
 
       renderEditor: function(){
         var fullEditor = new Quill('#post-editor', {
