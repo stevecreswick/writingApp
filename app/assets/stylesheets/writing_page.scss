@@ -49,25 +49,6 @@ $font-brand:    Brand, sans-serif;
       }
     }
 
-    .post-error {
-      display: none;
-      color: #f68657;
-      border: solid 1px #f68657;
-      background-color: #ffeee4;
-      margin-top: 2em;
-      padding: 0.5em;
-      text-align: left;
-      vertical-align: middle;
-      font-family: 'Open Sans Condensed', sans-serif;
-      font-size: 18px;
-      text-decoration: bold;
-
-      -webkit-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-      box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-      -moz-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-
-    }
-
     #prompt-instruction{
       margin-top: 1em;
       font-family: 'Open Sans Condensed', sans-serif;
@@ -106,28 +87,67 @@ $font-brand:    Brand, sans-serif;
     }
 
 
+    #new-post-container {
 
-    #post-toolbar {
-      background-color: white;
 
-      .title-container {
-        width:33%;
-        display: inline-block;
-      }
+        #post-toolbar {
+          background-color: white;
+          margin-bottom: -1em;
 
-      .genre-container {
-        padding-left: 3%;
-        width: 33%;
-        display: inline-block;
-      }
-    }
+          #post-error-container {
 
-    #post-editor{
-      height: 350px;
-      -webkit-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-      box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-      -moz-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            .post-error {
+              display: none;
+              color: #f68657;
+              border: solid 1px #f68657;
+              background-color: #ffeee4;
+              padding: 0.5em;
+              text-align: left;
+              vertical-align: middle;
+              font-family: 'Open Sans Condensed', sans-serif;
+              font-size: 18px;
+              text-decoration: bold;
 
+            }
+          }
+
+          .toolbar-inner-container {
+            padding-left: 3%;
+            width: 30%;
+            display: inline-block;
+          }
+
+        }
+
+        #post-editor{
+          height: 60%;
+          background-color: white;
+          padding: 2em 4em 1em 4em;
+
+        }
+
+        #post-info {
+          font-size: 16px;
+
+          .writing-page-text {
+            color: #0fb2fc;
+          }
+
+          .new-post-label {
+            display: block;
+            font-size: 12px;
+          }
+
+          .publish {
+            margin-top: 2em;
+            background-color: #999999;
+            width: 100%;
+          }
+
+          .publish-enabled {
+            background-color: #03a9f4;
+          }
+        }
     }
   }
 }
