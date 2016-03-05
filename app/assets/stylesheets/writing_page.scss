@@ -68,21 +68,31 @@ $font-brand:    Brand, sans-serif;
     #prompt-form {
 
       .prompt-description{
-        margin: 0.5em 0 0 0.5em;
+        margin: 0.5em 0 1em 0.5em;
         font-size: 20px;
+        width: 100%;
+        height: 50px;
       }
 
       .prompt-container {
         padding-left: 3%;
+        height: 120px;
       }
 
       .start-writing {
         font: $font-brand;
       }
 
-      a.start{
+      .render-prompt {
+        width: 100%;
+        padding: 1em 0 1em 0;
+        text-align: center;
+      }
+
+      .start{
         display: none;
         width: 100%;
+        padding: 1em 0 1em 0;
       }
     }
 
