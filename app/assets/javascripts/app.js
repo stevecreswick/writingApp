@@ -1,6 +1,4 @@
-
 var app = app || {};
-
 
   app.token = $('#api-token').val();
   $.ajaxSetup({
@@ -9,8 +7,6 @@ var app = app || {};
       "token": app.token
     }
   });
-
-
 
 var do_on_load = function() {
 
@@ -25,7 +21,6 @@ var do_on_load = function() {
   app.pagePainter.render();
   app.pagePainter.renderPosts( app.pagePainter.currentGenre, app.pagePainter.currentPage );
   app.pagePainter.renderNavBar();
-
 
 }
 
