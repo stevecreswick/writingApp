@@ -118,6 +118,13 @@ app.PageView = Backbone.View.extend({
     this.updateHeader('main');
   },
 
+  currentUser: function() {
+    var scope = this;
+    scope.model = app.currentUser = new app.User();
+    app.currentUser.id = $("#current_id").val();
+    app.currentUser.url();
+    app.currentUser.fetch({wait: true});
+  },
 
   // Refactored Functions
 

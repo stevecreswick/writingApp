@@ -17,10 +17,13 @@ var do_on_load = function() {
 
 
   $.material.init()
-
   app.pagePainter.render();
   app.pagePainter.renderPosts( app.pagePainter.currentGenre, app.pagePainter.currentPage );
   app.pagePainter.renderNavBar();
+  app.pagePainter.currentUser();
+
+
+
 
 }
 
