@@ -43,81 +43,16 @@
   <script src="//cdn.jsdelivr.net/medium-editor/latest/js/medium-editor.min.js"></script>
   <link rel="stylesheet" href="//cdn.jsdelivr.net/medium-editor/latest/css/medium-editor.min.css" type="text/css" media="screen" charset="utf-8">
 
-<!-- Main Nav Bar -->
+  <!-- Main Page -->
     <script type="text/template" id="navbar-template">
       <%= render 'navbar' %>
     </script>
 
-    <script type="text/template" id="prompt-page-template">
-      <%= render 'prompt_page' %>
-    </script>
-
-
-    <script type="text/template" id="submitted-prompt-template">
-      <%= render 'submitted_prompt' %>
-    </script>
-
-
-    <script type="text/template" id="resource-page-template">
-      <%= render 'resource_page' %>
-    </script>
-
-
-
-    <script type="text/template" id="resource-form-template">
-      <%= render 'resource_form' %>
-    </script>
-
-    <script id="resource-view-template" type="text/template">
-      <%= render 'resource_view' %>
-    </script>
-
-    <script type="text/template" id="edit-resource-template">
-      <%= render 'edit_resource' %>
-    </script>
-
-
-
-    <!-- Main Page -->
     <script type="text/template" id="main-page-template">
       <%= render 'main_page' %>
     </script>
 
-
-    <!-- Current User -->
-    <script type="text/template" id="current-user-template">
-      <%= render 'current_user' %>
-    </script>
-
-
-    <script type="text/template" id="writing-prompt-template">
-        <h4 class="prompt-text">
-            <%%= prompt %>
-        </h4>
-    </script>
-
-
-
-
-  <!-- Post List Menu -->
-    <script type="text/template" id="post-list-menu">
-      <%= render 'post_feed_menu' %>
-    </script>
-
-
-      <!-- Post  -->
-    <script type="text/template" id='post-template'>
-      <%= render 'post' %>
-    </script>
-
-
-    <script type="text/template" id="critique-post-template">
-      <%= render 'critique_post' %>
-    </script>
-
-
-
-    <!-- Writing Page Post -->
+  <!-- Writing Page -->
     <script type="text/template" id="writing-page-template">
       <%= render 'writing_page' %>
     </script>
@@ -126,17 +61,52 @@
       <%= render 'new_post' %>
     </script>
 
-      <!-- Critique -->
-    <script type="text/template" id="critique-template">
-      <%= render 'critique' %>
+    <script type="text/template" id="writing-prompt-template">
+        <h4 class="prompt-text">
+            <%%= prompt %>
+        </h4>
     </script>
 
-        <!-- Critique Form -->
-    <script type="text/template" id="critique-form-template">
-      <%= render 'critique_form' %>
+    <!-- Posts -->
+      <script type="text/template" id="post-list-menu">
+        <%= render 'post_feed_menu' %>
+      </script>
+
+      <script type="text/template" id='post-template'>
+        <%= render 'post' %>
+      </script>
+
+    <!-- Critiques -->
+      <script type="text/template" id="critique-template">
+        <%= render 'critique' %>
+      </script>
+
+      <script type="text/template" id="critique-form-template">
+        <%= render 'critique_form' %>
+      </script>
+
+      <script type="text/template" id="critique-post-template">
+        <%= render 'critique_post' %>
+      </script>
+
+  <!-- Prompts Page -->
+    <script type="text/template" id="prompt-page-template">
+      <%= render 'prompt_page' %>
     </script>
 
-    <!-- Render Prompt Form -->
+    <script type="text/template" id="submitted-prompt-template">
+      <%= render 'submitted_prompt' %>
+    </script>
+
+  <!-- Profile Page -->
+    <script type="text/template" id="current-user-template">
+      <%= render 'current_user' %>
+    </script>
+
+  <!-- Friends -->
+    <script type="text/template" id="friend-nav-template">
+      <%= render 'friend_nav' %>
+    </script>
 
     <script type="text/template" id="friend-view-template">
       <%= render 'friend_view' %>
@@ -150,26 +120,21 @@
       <h3><%%= username %></h3>
     </script>
 
+    <script type="text/template" id="friend-button-template">
+      <button type="button" class="btn btn-danger show-friends">Show Friends</button>
+    </script>
+
+  <!-- Challenges -->
     <script type="text/template" id="no-challenges-screen">
       <%= render 'no_challenges' %>
     </script>
-
 
     <script type="text/template" id="make-challenge-template">
       <%= render 'make_challenge' %>
     </script>
 
-    <script type="text/template" id="friend-nav-template">
-      <%= render 'friend_nav' %>
-    </script>
-
-
     <script type="text/template" id="challenge-nav-template">
       <%= render 'challenge_nav' %>
-    </script>
-
-    <script type="text/template" id="friend-button-template">
-      <button type="button" class="btn btn-danger show-friends">Show Friends</button>
     </script>
 
     <script type="text/template" id="challenge-form-template">
@@ -200,6 +165,24 @@
     <script type="text/template" id="accept-challenge-form-template">
       <%= render 'accept_challenge_form' %>
     </script>
+
+    <!-- Resources Page -->
+      <script type="text/template" id="resource-page-template">
+        <%= render 'resource_page' %>
+      </script>
+
+      <script type="text/template" id="resource-form-template">
+        <%= render 'resource_form' %>
+      </script>
+
+      <script id="resource-view-template" type="text/template">
+        <%= render 'resource_view' %>
+      </script>
+
+      <script type="text/template" id="edit-resource-template">
+        <%= render 'edit_resource' %>
+      </script>
+
 
 </head>
 
