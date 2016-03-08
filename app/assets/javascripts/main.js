@@ -32,9 +32,9 @@
 //= require views/prompts/writingPromptListView
 
 //= require models/critique
-//= require views/critiques/critiqueView
+//= require views/posts/critiques/critiqueView
 //= require collections/critiqueCollection
-//= require views/critiques/critiqueListView
+//= require views/posts/critiques/critiqueListView
 
 //= require models/post
 //= require views/posts/postView

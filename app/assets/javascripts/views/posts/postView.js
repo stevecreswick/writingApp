@@ -5,55 +5,28 @@ app.PostView = Backbone.View.extend({
   tagName: 'div',
   className: 'post',
   template: _.template( $('#post-template').html() ),
-  normalHeight: '25em',
-  openHeight: '40em',
-  critiquePage: 0,
-  iconFiction: 'http://i.imgur.com/BI8PegK.png',
-  iconFantasy: 'http://i.imgur.com/ffCviDQ.png',
-  iconHorror: 'http://i.imgur.com/iJvfYS1.png',
-  iconThriller: 'http://i.imgur.com/ojVa8BI.png',
-  iconHistorical: 'http://i.imgur.com/lHyRvye.png',
-  iconCrime: 'http://i.imgur.com/8w44WhP.png',
-  iconRomance: 'http://i.imgur.com/zz5QHWN.png',
-  iconSciFi: 'http://i.imgur.com/K1kGfUE.png',
-  iconPoetry: 'http://i.imgur.com/F71bhWM.png',
-  iconHumor: 'http://i.imgur.com/Iw9CxT2.png',
-  iconNonFiction: 'http://i.imgur.com/tH5XICv.png',
 
-    initialize: function(){
-      this.listenTo( this.model, 'change', this.renderWithUserName );
-      // var urlModel = "/api/posts/" + this.model.get('id') + "/critiques"
-      // this.innerCollection = new app.CritiquesCollection();
-      // this.innerCollection.url = urlModel;
-      // this.innerCollection.fetch();
-    },
+  initialize: function(){
+    this.listenTo( this.model, 'change', this.renderWithUserName );
+  },
 
-    render: function(){
-      this.$el.empty();
-      var html = this.template( this.model.toJSON() );
-      var $html = $( html );
-      this.$el.append( $html );
+  render: function(){
+    this.$el.empty();
+    var html = this.template( this.model.toJSON() );
+    var $html = $( html );
+    this.$el.append( $html );
+    var poster = this.model.get('username'),
+        currentUser = $('#current_user').val(),
+        $deleteButton = $("<a>").addClass("remove-post btn btn-raised btn-fab btn-danger").html("<i class='fa fa-trash'></i>"),
+        $makeCritique = $("<button>").addClass("make-critique btn btn-info").html("Review"),
+        $showCritique = $("<span>").addClass("render-critiques").html("Show Critiques");
 
-      var poster = this.model.get('username');
-      var currentUser = $('#current_user').val()
+    this.$el.find(".show-critiques-box").append( $showCritique );
 
-
-      var $deleteButton = $("<a>").addClass("remove-post btn btn-raised btn-fab btn-danger").html("<i class='fa fa-trash'></i>");
-      var $makeCritique = $("<button>").addClass("make-critique btn btn-info").html("Review");
-      var $showCritique = $("<span>").addClass("render-critiques").html("Show Critiques");
-
-      this.$el.find(".show-critiques-box").append( $showCritique );
-
-        // this.colorRating();
-
-
-
-
-
-      // Add delete button for current user critique for other
-      if (currentUser === poster) {
-        this.$el.find(".remove-post-box").append( $deleteButton, "delete post" );
-      } else {
+    // Add delete button for current user critique for other
+    if (currentUser === poster) {
+      this.$el.find(".remove-post-box").append( $deleteButton, "delete post" );
+    } else {
 
         // If not the user... load the ratings
         // var urlModel = "/api/posts/" + this.model.get("id") + "/ratings"
@@ -72,50 +45,12 @@ app.PostView = Backbone.View.extend({
 
       }
 
-
-
     },
 
     addIcon: function(genre){
-      switch (genre) {
-
-      case "Fiction":
-      this.$el.find('img.genre-icon-img').attr("src", this.iconFiction);
-      break;
-      case "Fantasy":
-      this.$el.find('img.genre-icon-img').attr("src", this.iconFantasy);
-      break;
-      case "Thriller":
-      this.$el.find('img.genre-icon-img').attr("src", this.iconThriller);
-      break;
-      case "Romance":
-      this.$el.find('img.genre-icon-img').attr("src", this.iconRomance);
-      break;
-      case "Horror":
-      this.$el.find('img.genre-icon-img').attr("src", this.iconHorror);
-      break;
-      case "Science-Fiction":
-      this.$el.find('img.genre-icon-img').attr("src", this.iconSciFi);
-      break;
-      case "Historical-Fiction":
-      this.$el.find('img.genre-icon-img').attr("src", this.iconHistorical);
-      break;
-      case "Poetry":
-      this.$el.find('img.genre-icon-img').attr("src", this.iconPoetry);
-      break;
-      case "Humor":
-      this.$el.find('img.genre-icon-img').attr("src", this.iconHumor);
-      break;
-      case "Non-Fiction":
-      this.$el.find('img.genre-icon-img').attr("src", this.iconNonFiction);
-      break;
-      case "Crime":
-      this.$el.find('img.genre-icon-img').attr("src", this.iconCrime);
-      break;
-      }
+      var postIcon = new app.GenreIcon( genre );
+      this.$el.find( 'img.genre-icon-img' ).attr( 'src', postIcon.url() );
     },
-
-
 
 // Post Events
   events:{
@@ -135,48 +70,6 @@ app.PostView = Backbone.View.extend({
     'click span.add-friend': 'addFriend',
     'click .new-rating': 'newRating'
 
-
-
-    // Add font size for readability later
-    // 'click li.increase-font': 'increaseFont',
-    // 'click li.decrease-font': 'decreaseFont'
-  },
-
-  showRating: function(){
-
-    var rating = this.model.get('avg_rating');
-
-    if(rating){
-      this.$el.find('#post-avg-rating').html("<div class='tiny-text'>Avg. Rating: " + rating + "/10 (" + this.model.get('total_ratings') + ")</div>");
-    } else {
-      this.$el.find('#post-avg-rating').html("<div class='tiny-text'>Be the First to Rate this Post.</div>");
-    }
-  },
-
-  newRating: function(e){
-
-    $(e.currentTarget).eq(0).addClass('rated-star');
-    var rating = $(e.currentTarget).eq(0).data('value');
-
-    // this.colorStars(rating);
-
-    var post = $(e.currentTarget).eq(0);
-    var postId = post.data('post');
-    var ratingSkill = post.data('skill');
-    var value = post.data('value');
-
-
-    var urlModel = '/api/posts/' + postId + '/ratings';
-
-    this.ratings = new app.RatingsCollection({url: urlModel});
-    this.ratings.url = urlModel;
-
-    this.ratings.create({
-      value: value,
-      skill: ratingSkill,
-      });
-
-    this.applyRating(value, ratingSkill);
   },
 
     // Remove Post
@@ -265,7 +158,6 @@ app.PostView = Backbone.View.extend({
 
       this.renderFeebackButton();
 
-
       var authorLink = "/users/profile/" + this.model.get('user_id');
       var $postAuthor = $('<a>').attr('href', authorLink ).addClass("post-author text-center prompt-label");
 
@@ -286,54 +178,6 @@ app.PostView = Backbone.View.extend({
       // this.renderEditor();
 
     },
-
-    getSkillRatings: function(){
-
-      var skills = {
-        overall: this.model.get("skill_overall"),
-        characters: this.model.get("skill_characters"),
-        plot: this.model.get("skill_plot"),
-        theme: this.model.get("skill_theme"),
-        style: this.model.get("skill_style"),
-        grammar: this.model.get("skill_grammar"),
-        setting: this.model.get("skill_setting"),
-        dialogue: this.model.get("skill_dialogue"),
-        structure: this.model.get("skill_structure")
-      }
-
-        return skills;
-
-    },
-
-    applySkills: function(skills){
-
-        for (var skill in skills) {
-          if (skills.hasOwnProperty(skill)) {
-
-            if (skills[skill] > 0) {
-              this.applyRating(skills[skill], skill);
-            }
-
-          }
-        }
-    },
-
-    applyRating: function(rating, skill){
-
-      for (var i = 0; i <= rating; i++) {
-        var divId = "#rating-" + skill + "-" + i;
-        this.$el.find(divId).find("i").addClass("fa-heart rated");
-        this.$el.find(divId).find("i").removeClass( "fa-heart-o" );
-      }
-
-      // Add a rated tag to every heart
-      for (var i = 0; i <= 5; i++) {
-        var divId = "#rating-" + skill + "-" + i;
-        this.$el.find(divId).find("i").addClass("rated");
-      }
-
-    },
-
 
     showFeedback: function(){
       this.$el.empty();
@@ -394,38 +238,6 @@ app.PostView = Backbone.View.extend({
     },
 
 
-    getTimeCompleted: function(){
-      var totalSeconds = this.model.get('time_completed');
-      var hours = Math.floor(totalSeconds / 3600);
-      // totalSeconds %= 3600;
-      var minutes = Math.floor(totalSeconds / 60);
-      var seconds = totalSeconds % 60;
-
-      // Create Views to Handle :00, :01, etc.
-      var minutesView = minutes + ":";
-      var hoursView = hours + ":";
-      var secondsView = seconds;
-
-
-      if (minutes < 10){
-        minutesView = "0" + minutes + ":";;
-      }
-
-      if (seconds < 10){
-        secondsView = "0" + seconds;;
-      }
-
-      if (hours == 0){
-        hoursView = ""
-      } else if (hours < 10) {
-        hoursView = "0" + hours + ":";
-      }
-
-      var $html = hoursView + minutesView + secondsView;
-
-      return $html;
-    },
-
     getPromptInstruction: function(options){
       if (options.type === "Use One Word") {
         return "Write at least " + options.wordCount + " words, using the word <div class='prompt-strong'>" + options.prompt + "</div>";
@@ -438,201 +250,7 @@ app.PostView = Backbone.View.extend({
       }
     },
 
-    // Manipulate Post CSS
-    resizePostDiv: function(height){
-      this.$el.css({'height': height});
-    },
-
-    closeCritiqueForm: function(){
-      this.$el.empty();
-      this.renderWithUserName();
-      this.resizePostDiv( this.normalHeight );
-    },
-
-    saveCritique: function(e){
-      e.preventDefault();
-      console.log('saving');
-      // var newMessage = this.$el.find('textarea#critique-editor').val();
-      var newMessage = this.$el.find('.ql-editor').html();
-
-      // In case you need to store the raw text later
-      var justWords = this.$el.find('.ql-editor').text();
-
-      var urlModel = '/api/posts/' + this.model.get('id') + '/critiques';
-      var critiques = new app.CritiquesCollection();
-      critiques.url = urlModel;
-      critiques.fetch();
-
-      if (justWords.length > 0){
-        console.log(newMessage);
-        critiques.create({message: newMessage});
-        this.showFeedback();
-      }
-
-      this.showFeedback();
-    },
-
-
-    // Rating
-    saveRating: function(e){
-
-      $(e.currentTarget).eq(0).addClass('rated-star');
-      var rating = $(e.currentTarget).eq(0).data('value');
-
-      this.colorStars(rating);
-
-      var post = $(e.currentTarget).eq(0);
-      var postId = post.data('post');
-      var currentUser = $('#current_id').val();
-
-      var urlModel = '/api/posts/' + postId + '/ratings';
-
-      var newRating = new app.Rating({url: urlModel});
-      newRating.url = urlModel;
-      newRating.set('value', rating);
-
-      newRating.save();
-
-    },
-
-    hoverHearts: function(){
-      var scope = this;
-      this.$el.find( ".new-rating i" ).hover(
-        function() {
-          var parent = $(this).parent();
-
-          var value = parent.data("value");
-          var skill = parent.data("skill");
-
-          if ( $(this).hasClass('rated') ) {
-          } else {
-            scope.colorHearts(value, skill);
-          }
-
-        }, function() {
-          var parent = $(this).parent();
-
-          var value = parent.data("value");
-          var skill = parent.data("skill");
-
-          if ( $(this).hasClass('rated') ) {
-          } else {
-            scope.removeColor(value, skill);
-          }
-
-
-        });
-
-
-    },
-
-    colorHearts: function(rating, skill){
-
-      for (var i = 0; i <= rating; i++) {
-        var divId = "#rating-" + skill + "-" + i;
-
-          this.$el.find(divId).find("i").addClass("fa-heart");
-          this.$el.find(divId).find("i").removeClass( "fa-heart-o" );
-
-      }
-    },
-
-    removeColor: function(rating, skill){
-
-      for (var i = 0; i <= rating; i++) {
-        var divId = "#rating-" + skill + "-" + i;
-
-        this.$el.find(divId).find("i").removeClass("fa-heart");
-        this.$el.find(divId).find("i").addClass( "fa-heart-o" );
-
-
-      }
-    },
-
-
-    colorRating: function(){
-
-      if ( this.model.get('is_rated') ){
-
-        var score = this.model.get('rating');
-        // this.colorStars(score);
-
-      } else {
-
-      }
-
-    },
-  // Critique Controller
-    fetchCritiques: function(){
-
-      this.innerCollection = new app.CritiquesCollection();
-      var urlModel = "/api/posts/" + this.model.get('id') + "/critiques/page/" + this.critiquePage;
-      this.innerCollection.url = urlModel;
-      this.model.critiques = this.innerCollection;
-
-      this.innerCollection.fetch();
-
-      },
-    renderCritiques: function(){
-      this.fetchCritiques();
-      this.innerListView = new app.CritiqueListView({
-        collection: this.innerCollection,
-      });
-
-      this.innerListView.postId = this.model.get('id');
-
-
-      var critiqueList = this.$el.find('.critiques-list');
-      var button = $(this.el).find("span.render-critiques");
-
-      button.removeClass('render-critiques').addClass('close-critiques').html('Hide');
-
-      critiqueList.hide();
-      critiqueList.append(this.innerListView.$el);
-      critiqueList.show("normal");
-
-
-      // this.renderCritiqueFormContainer();
-      this.renderCritiqueEditor();
-    },
-
-    renderCritiqueForm: function(){
-      this.$el.empty();
-      this.renderWithUserName();
-
-      // this.renderCritiqueFormContainer();
-      this.fetchCritiques();
-
-      this.renderCritiques();
-    },
-
-    renderCritiqueFormContainer: function(){
-      var formContainer = $('<div>').addClass('critique-form-container');
-
-      formContainer.html( _.template( $('#critique-form-template').html()) );
-
-      this.$el.find('.make-critique-box').append( formContainer );
-
-    },
-
-    // bindCritiqueForm: function(modelId){
-    //   var scope= this;
-    //   console.log('huh');
-    //
-    //   $('form#create-critique').on('submit', function(e){
-    //     e.preventDefault();
-    //     console.log('submitting');
-    //     // Grab Message from div created by Quill Editor
-    //     var newMessage = scope.$('#critique-editor').first().eq(0).children().eq(0).children().eq(0).html();
-    //     console.log(newMessage);
-    //     app.posts.get(modelId).critiques.create({message: newMessage});
-    //
-    //     scope.renderWithUserName();
-    //     scope.renderCritiques();
-    //     scope.$el.find('#critique-editor').empty();
-    //   });
-    // },
-
+    // Seperate into a friend button that accepts a user id
     addFriend: function(){
 
       this.addedFriend = new app.FriendCollection();
@@ -647,35 +265,40 @@ app.PostView = Backbone.View.extend({
 
     },
 
-    renderCritiqueEditor: function(){
-      // var toolbarClass = '#full-toolbar' + this.model.get('id');
-      // var editorClass = '#critique-editor' + this.model.get('id');
+    // Create a Timer View
+        getTimeCompleted: function(){
+          var totalSeconds = this.model.get('time_completed');
+          var hours = Math.floor(totalSeconds / 3600);
+          // totalSeconds %= 3600;
+          var minutes = Math.floor(totalSeconds / 60);
+          var seconds = totalSeconds % 60;
 
-      var toolbarPost = this.$el.find('#full-toolbar').eq(0);
-      var editorPost = this.$el.find('#critique-editor');
-
-      var editorId = 'critique-editor-' + this.model.get("id");
-      var $editor = $("<div>").attr("id", editorId).addClass('critique-editor').hide();
-      var editorGrabber = "#" + editorId;
-
-      var toolbarId = 'toolbar-' + this.model.get('id');
-      this.$el.find('#full-toolbar').addClass( toolbarId );
-      var toolbarGrabber = "." + toolbarId;
-
-      this.$el.find('#critique-editor-holder').append( $editor );
+          // Create Views to Handle :00, :01, etc.
+          var minutesView = minutes + ":";
+          var hoursView = hours + ":";
+          var secondsView = seconds;
 
 
-      var fullEditor = new Quill(editorGrabber, {
-        modules: {
-            'toolbar': { container: toolbarGrabber },
-            'link-tooltip': true
+          if (minutes < 10){
+            minutesView = "0" + minutes + ":";;
+          }
+
+          if (seconds < 10){
+            secondsView = "0" + seconds;;
+          }
+
+          if (hours == 0){
+            hoursView = ""
+          } else if (hours < 10) {
+            hoursView = "0" + hours + ":";
+          }
+
+          var $html = hoursView + minutesView + secondsView;
+
+          return $html;
         },
-        theme: 'snow'
-      });
 
-      $editor.show('normal');
 
-    }
 
 
 });
