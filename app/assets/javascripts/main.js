@@ -26,10 +26,10 @@
 //= require quill.min
 
 //= require models/writingPrompt
-//= require views/writing/writingPromptView
-//= require views/writing/submittedPromptView
+//= require views/prompts/writingPromptView
+//= require views/prompts/submittedPromptView
 //= require collections/writingPromptCollection
-//= require views/writing/writingPromptListView
+//= require views/prompts/writingPromptListView
 
 //= require models/critique
 //= require views/critiques/critiqueView
