@@ -1,0 +1,61 @@
+<div class="row">
+  <div class="col-xs-2">
+    <h3 class="user-name-header"><img src="<%%= image_url %>" class="img-circle profile-picture"</>&nbsp; <%%= username %></h3>
+  </div>
+  <div class="col-xs-2 text-center">
+    <span class="writing-page-text"><%%= writer_score || 0 %></span><br>
+    Writing Score
+  </div>
+  <div class="col-xs-2 text-center">
+    <span class="writing-page-text"><%%= posts || 0 %></span><br>
+    Posts
+  </div>
+  <div class="col-xs-2 text-center">
+    <span class="writing-page-text"><%%= reviewer_score || 0%></span><br>
+    Reviewer Score
+  </div>
+  <div class="col-xs-2 text-center">
+    <span class="writing-page-text"><%%= reviews || 0 %></span><br>
+    Feedback Given
+  </div>
+  <div class="col-xs-2">
+      <span class="btn btn-success btn-fab add-friend"><i class="fa fa-user-plus"></i></span>
+  </div>
+</div>
+
+    <!-- <div class="row text-center">
+      <div class="col-xs-12 col-sm-2">
+        Writing Score <br>
+        <%%= writer_score || 0 %>
+      </div>
+    </div>
+
+    <div class="row text-center">
+      <div class="col-xs-12 col-sm-2">
+        Posts <br>
+        <%%= posts || 0 %>
+      </div>
+    </div>
+
+  </div>
+  <div class="col-xs-3">
+    <div class="row text-center">
+      <div class="col-xs-12 col-sm-2">
+        Reviewer Score <br>
+        <%%= reviewer_score || 0%>
+      </div>
+    </div>
+
+    <div class="row text-center">
+      <div class="col-xs-12 col-sm-2">
+        Feedback Given <br>
+        <%%= reviews || 0 %>
+      </div>
+    </div>
+
+  </div> -->
+
+
+
+  <input type="hidden" name="friendship[friend_id]" value="<%%= id %>" class="friend-id-holder">
+  <input type="hidden" name="friendship[user_id]" value="<%= @user.id %>" class="user-id-holder">

@@ -1,0 +1,100 @@
+<div class="row">
+  <div class="col-xs-2 text-left">
+    <div class="user-pic-box"></div>
+  </div>
+  <div class="col-xs-4 text-left prompt-label">
+    <div data-no-turbolink>
+      <h3><%%= username %></h3>
+    </div>
+  </div>
+
+  <div class="col-xs-2 col-xs-offset-2 col-sm-2 col-sm-offset-4 text-center" id="friend-button-holder">
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-2 col-xs-offset-2 text-center">
+    <span class="writing-page-text"><%%= writer_score || 0 %></span><br>
+    Writing Score
+  </div>
+  <div class="col-xs-2 text-center">
+    <span class="writing-page-text"><%%= posts || 0 %></span><br>
+    Posts
+  </div>
+  <div class="col-xs-2 text-center">
+    <span class="writing-page-text"><%%= reviewer_score || 0%></span><br>
+    Reviewer Score
+  </div>
+  <div class="col-xs-2 text-center">
+    <span class="writing-page-text"><%%= reviews || 0 %></span><br>
+    Feedback Given
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12 text-center">
+    <br>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col-xs-12 text-center">
+    <a class="about-the-author-show about-the-author btn btn-raised btn-fab btn-info"><i class="fa fa-info"></i></a>about the author
+  </div>
+</div>
+
+<div id="author-info">
+
+
+
+  <div class="row">
+    <div class="col-xs-5 col-xs-offset-1 text-center">
+      <h4>Reading</h4>
+        <%%= currently_reading || "nothing" %>
+      <br>
+      <h4>Writing Goal</h4>
+      <%%= writing_goal || "nothing" %>
+    </div>
+    <div class="col-xs-5 text-center">
+      <h4>Favorite Authors</h4>
+      <%%= favorite_author || "nothing" %>
+      <h4>Favorite Books</h4>
+      <%%= favorite_book || "nothing" %>
+      <h4>Favorite Genres</h4>
+      <%%= favorite_genre || "nothing" %>
+      <br>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12 text-center">
+      <h4>From</h4>
+      <%%= from || "nothing" %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12 text-center">
+      <h4>About</h4>
+      <%%= about || "nothing" %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-1 col-xs-offset-11">
+      <div class="user-posts-container"></div>
+    </div>
+  </div>
+
+  <div class="row">
+    <!-- <button type="button" class="btn btn-info make-challenge">Issue Challenge</button> -->
+    <!-- <button type="button" class="btn btn-info show-challenges">Show Challenges</button> -->
+  </div>
+  <div id="challenge-list">
+
+  </div>
+
+  <input type="hidden" name="friendship[friend_id]" value="<%%= id %>" class="friend-id-holder">
+  <input type="hidden" name="friendship[user_id]" value="<%= @user.id %>" class="user-id-holder">
+</div>

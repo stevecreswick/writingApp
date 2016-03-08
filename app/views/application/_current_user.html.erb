@@ -1,0 +1,70 @@
+<div class="friend-view">
+<div class="row">
+  <div class="col-xs-2 text-left">
+    <div class="user-pic-box"></div>
+    <br>
+
+    <br>
+    <span class="prompt-label">Writer Score: <%%= writer_score %></span>
+    <br>
+    <span class="prompt-label">Reviewer Score: <%%= reviewer_score %></span>
+  </div>
+  <div class="col-xs-4 text-left prompt-label">
+    <div data-no-turbolink>
+      <h3><%%= username %></h3>
+    </div>
+  </div>
+
+  <div class="col-xs-2 col-xs-offset-2 text-right">
+    <div data-no-turbolink>
+      <a href="/users/edit">Edit</a>
+    </div>
+    <%= link_to 'Log Out', '/sessions', method: :delete  %>
+  </div>
+
+</div>
+
+
+<div class="row">
+  <div class="col-xs-12 text-right">
+  </div>
+</div>
+
+  <div class="row">
+    <div class="col-xs-12 text-center">
+      <h4>About the Author</h4>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-6 text-center">
+      <span class="prompt-label">Reading<br> <%%= currently_reading || "nothing" %></span>
+      <br>
+      <span class="prompt-label">Writing Goal<br> <%%= writing_goal || "nothing" %></span>
+    </div>
+    <div class="col-xs-6 text-center">
+      <span class="prompt-label">Favorite Authors<br> <%%= favorite_author || "nothing" %></span>
+      <br>
+      <span class="prompt-label">Favorite Books<br> <%%= favorite_book || "nothing" %></span>
+      <br>
+      <span class="prompt-label">Favorite Genres<br> <%%= favorite_genre || "nothing" %></span>
+      <br>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12"><div class="vertical-space"></div></div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-3 text-center">
+      <span class="prompt-label">From<br> <%%= from || "nothing" %></span>
+    </div>
+    <div class="col-xs-9 text-center">
+      <span class="prompt-label">About<br><%%= about || "nothing" %></span>
+    </div>
+
+  <div class="row">
+    <div class="col-xs-12"><div class="user-posts-container"></div></div>
+  </div>
+</div>

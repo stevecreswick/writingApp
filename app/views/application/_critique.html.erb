@@ -1,0 +1,100 @@
+<div class="row">
+  <div class="col-xs-12 ">
+
+<div class="row">
+  <div class="col-xs-1 col-xs-offset-10">
+
+  </div>
+  <div class="col-xs-1">
+
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-4">
+    <br>
+  </div>
+</div>
+
+
+<div class="row">
+
+  <div class="col-xs-12">
+
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-2">
+
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-1 text-center">
+    <i class="fa fa-caret-up fa-5x up-vote vote"></i>
+    <br>
+    <%%= total_votes %>
+    <br>
+    <i class="fa fa-caret-down fa-5x down-vote vote"></i>
+  </div>
+  <div class="col-xs-7 text-left">
+    <p class="critique-message">
+        <%%= message %>
+    </p>
+  </div>
+  <div class="col-xs-4 text-right">
+    <img src="<%%= image_url %>" class="critique-profile-picture img-circle"></img>
+    <%%= username %>
+    <div class="tiny-text">written <%%= created_at %> ago</div>
+    <div class="edit-critique-box"></div>
+    <div class="remove-critique-box"></div>
+  </div>
+
+</div>
+
+<div class="row">
+  <div class="col-xs-2">
+
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-4 col-xs-offset-8 text-right">
+
+  </div>
+</div>
+
+<!-- Close outer row & column -->
+</div>
+</div>
+
+<!-- <br>
+<div class="row">
+  <div class="col-xs-1">
+
+  </div>
+
+
+</div> -->
+
+
+
+<!-- Confirm Critique Delete Modal -->
+<div class="modal" id="deleteCritique" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Confirm Delete</h4>
+      </div>
+      <div class="modal-body">
+        Do you wish to delete your critique?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+        <button type="button" class="btn btn-primary delete-critique">Yes</button>
+      </div>
+    </div>
+  </div>
+</div>
