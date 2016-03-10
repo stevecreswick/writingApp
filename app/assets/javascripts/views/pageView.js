@@ -646,7 +646,7 @@ app.PageView = Backbone.View.extend({
 
   // Render Main Side Nav
     renderGenreLinks: function(){
-      var $postListHeader = _.template( $('#post-list-menu').html() )
+      var $postListHeader = _.template( $('#post-feed-menu-template').html() )
       this.$el.find('#left-pane').append($postListHeader);
     },
 
@@ -741,54 +741,29 @@ showGenres: function(){
 
 
 // Rendering Posts
+  // createPostList: function(){
+    // var $container = $('<div>').attr('id', 'post-list');
+    // this.$el.find('#center-pane').append( $container );
 
-
-// Update Post List
-  updateList: function(e){
-    var scope = this;
-    this.$el.find('#post-list').remove();
-
-    this.currentGenre = $(e.currentTarget).eq(0).data('url');
-    console.log(this.currentGenre);
-    this.currentPage = 0;
-    // $("#center-pane").hide("fast");
-    this.updateHeader( this.currentGenre );
-
-    // setTimeout(function(){
-      this.renderPosts( this.currentGenre, this.currentPage );
-    // }, 100);
-    // $("#center-pane").show("fast");
-
-  },
-
-  createPostList: function(){
-    var $container = $('<div>').attr('id', 'post-list');
-    this.$el.find('#center-pane').append( $container );
-
-  },
+  // },
 
 // Show Posts by 'all' or their genre
   renderPosts: function(options){
-    // this.emptyCenter();
 
-    this.createPostList();
     app.posts = new app.PostCollection();
     app.posts.genre = this.currentGenre;
     app.posts.page = this.currentPage;
 
     app.postPainter = new app.PostListView({
       collection: app.posts,
-      el: $('#post-list')
+      el: $( '#post-list ')
     });
-
 
     app.posts.fetch({url: app.posts.url()}).done(function(){
 
       app.postPainter.render();
 
     });
-
-
   },
 
 
