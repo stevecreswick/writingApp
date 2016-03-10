@@ -39,6 +39,7 @@
 //= require models/post
 //= require views/posts/postView
 //= require collections/postCollection
+//= require views/posts/components/post-preview
 //= require views/posts/postListView
 
 //= require models/friend
