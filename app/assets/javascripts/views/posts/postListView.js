@@ -3,7 +3,7 @@ var app = app || {};
 
 app.PostListView = Backbone.View.extend({
   initialize: function(){
-    this.listenTo(this.collection, 'add', this.render);
+    this.listenTo(this.collection, 'reset', this.render);
   },
   template: _.template( $('#post-feed-template').html() ),
 
@@ -51,7 +51,6 @@ app.PostListView = Backbone.View.extend({
       } else {
       }
     },
-
     renderButtons: function(length){
       var $row = $('<div>').addClass("row");
       var $col1 = $('<div>').addClass("col-xs-4 text-left previous");
