@@ -35,23 +35,23 @@ newRating: function(e){
   this.applyRating(value, ratingSkill);
 },
 
-getSkillRatings: function(){
-
-  var skills = {
-    overall: this.model.get("skill_overall"),
-    characters: this.model.get("skill_characters"),
-    plot: this.model.get("skill_plot"),
-    theme: this.model.get("skill_theme"),
-    style: this.model.get("skill_style"),
-    grammar: this.model.get("skill_grammar"),
-    setting: this.model.get("skill_setting"),
-    dialogue: this.model.get("skill_dialogue"),
-    structure: this.model.get("skill_structure")
-  }
-
-    return skills;
-
-},
+// getSkillRatings: function(){
+//
+//   var skills = {
+//     overall: this.model.get("skill_overall"),
+//     characters: this.model.get("skill_characters"),
+//     plot: this.model.get("skill_plot"),
+//     theme: this.model.get("skill_theme"),
+//     style: this.model.get("skill_style"),
+//     grammar: this.model.get("skill_grammar"),
+//     setting: this.model.get("skill_setting"),
+//     dialogue: this.model.get("skill_dialogue"),
+//     structure: this.model.get("skill_structure")
+//   }
+//
+//     return skills;
+//
+// },
 
 applySkills: function(skills){
 
