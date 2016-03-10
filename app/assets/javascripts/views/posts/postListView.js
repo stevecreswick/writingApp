@@ -5,6 +5,7 @@ app.PostListView = Backbone.View.extend({
   initialize: function(){
     this.listenTo(this.collection, 'add', this.render);
   },
+  template: _.template( $('#post-feed-template').html() ),
 
   events: {
     'click .view-more': 'viewMore',
@@ -16,17 +17,12 @@ app.PostListView = Backbone.View.extend({
       var posts = this.collection.models;
       var view;
         for (var i = 0; i < posts.length; i++) {
-          view = new app.PostView({model: posts[i]});
-          //Appends the Username to each Div
-          view.renderWithUserName();
-
-          // Append the View to the Post List
+          view = new app.PostPreview( {model: posts[ i ]} );
+          view.render();
           this.$el.append( view.$el );
         }
 
-        this.renderButtons(posts.length)
-
-
+        this.renderButtons(posts.length);
     },
 
     renderMore: function(){
@@ -34,28 +30,22 @@ app.PostListView = Backbone.View.extend({
       this.collection.fetch();
 
       var posts = this.collection.models;
-      for (var i = (app.pagePainter.currentPage * 5); i < posts.length; i++) {
-        view = new app.PostView({model: posts[i]});
-        //Appends the Username to each Div
-        view.renderWithUserName();
 
-        // Append the View to the Post List
+      for (var i = (app.pagePainter.currentPage * 5); i < posts.length; i++) {
+        view = new app.PostView( {model: posts[ i ]} );
+        view.render();
         this.$el.append( view.$el );
       }
-      this.renderButtons(posts.length)
-      // var $more = $('<span>').addClass('view-more').text('View More');
-      // this.$el.append( $more );
-
+      this.renderButtons( posts.length );
     },
 
     viewMore: function(){
       app.pagePainter.currentPage = app.pagePainter.currentPage + 1;
       this.renderMore();
-
     },
 
     viewPrevious: function(){
-      if (app.pagePainter.currentPage > 0) {
+      if ( app.pagePainter.currentPage > 0 ) {
         app.pagePainter.currentPage = app.pagePainter.currentPage - 1;
         this.renderMore();
       } else {
@@ -68,15 +58,12 @@ app.PostListView = Backbone.View.extend({
       var $colCenter = $('<div>').addClass("col-xs-4 text-center");
       var $col2 = $('<div>').addClass("col-xs-4 text-right");
 
-
       if (length >= 10){
         var $more = $('<a>').addClass('view-more btn btn-raised btn-fab btn-info withripple').html("<i class='fa fa-angle-right'><div class='tiny-text'>Next</div></i>").attr("href", "javascript:void(0)");
         $col2.empty();
         $col2.append( $more );
       }
 
-      // If it is not the first page,
-      // add the previous button and page number
       if (app.pagePainter.currentPage > 0) {
         var $previous = $('<a>').addClass('view-previous btn btn-raised btn-fab btn-danger withripple').html("<i class='fa fa-angle-left'><div class='tiny-text'>Prev</div></i>").attr("href", "javascript:void(0)");
         $col1.empty();
@@ -84,13 +71,28 @@ app.PostListView = Backbone.View.extend({
       }
 
       $colCenter.html( "Page: " + (app.pagePainter.currentPage + 1) );
-
       $row.append( $col1, $colCenter, $col2 );
-
       this.$el.append( $row );
 
-    }
+    },
 
+    // Update Post List
+      updateList: function(e){
+        var scope = this;
+        this.$el.find('#post-list').remove();
+
+        this.currentGenre = $(e.currentTarget).eq(0).data('url');
+        console.log(this.currentGenre);
+        this.currentPage = 0;
+        // $("#center-pane").hide("fast");
+        this.updateHeader( this.currentGenre );
+
+        // setTimeout(function(){
+          this.renderPosts( this.currentGenre, this.currentPage );
+        // }, 100);
+        // $("#center-pane").show("fast");
+
+      }
 
 
 });
