@@ -7,6 +7,6 @@ app.PostCollection = Backbone.Collection.extend({
   page: 1,
   genre: 'all',
   url: function(){
-    return "/api/posts/paginated/" + this.genre + "/" + this.page
+    return "/api/posts/query/" + this.genre + "/" + this.page
   }
 });
