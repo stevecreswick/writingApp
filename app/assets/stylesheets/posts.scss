@@ -1,0 +1,40 @@
+@font-face {
+  font-family: 'Brand';
+  src: font-url( asset-path('gabriele-br.TTF') );
+  font-weight: normal;
+  font-style: normal;
+}
+
+$font-main:    'Open Sans Condensed', sans-serif;
+$font-brand:    Brand, sans-serif;
+
+.post-feed {
+  text-align: center;
+  width: 100%;
+  margin: 2em 0 1em 0;
+}
+
+.post-preview-container {
+  height: 20em;
+  width: 100%;
+  margin: 1em 0 1em 0;
+  padding: 1em 1em 1em 1em;
+  background-color: ghostwhite;
+  overflow-x: scroll;
+  overflow-y: auto;
+  text-align: left;
+
+  .post-preview-title {
+    color: black;
+    font-family: $font-brand;
+  }
+
+  .post-preview-author-genre {
+
+  }
+
+  .post-preview-snippet {
+    padding: 4px;
+    font-size: 12px;
+  }
+}
