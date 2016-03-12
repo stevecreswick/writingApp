@@ -15,13 +15,8 @@ respond_to :html, :json
 
   def show
     # current_api_user!
-    aRpost = Post.find(params[:id])
-    data = aRpost.as_json
-    data['username'] = aRpost.user.username
-    data['image_url'] = aRpost.user.image_url
-    data['created_at'] = Date.strptime(aRpost.created_at.to_s)
-    data['avg_rating'] = aRpost.average_rating
-    render json: data
+    @json_post = apply_post_data( Post.find(params[:id]) )
+    render json: @json_post
   end
 
 

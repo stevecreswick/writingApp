@@ -18,48 +18,29 @@ module Api::PostsHelper
 
 
   def friend_posts
-    # Still worker
     friend_posts = []
-
     current_user.friends.each do |friend|
-
       friend.posts.each do |post|
       friend_posts.push( post )
       end
-
     end
-
     return friend_posts
-
   end
 
   def main_feed
-
     ids = current_user.friend_ids
     ids.push( current_user.id )
-
     @main_feed = Post.where({user_id: ids}).order('created_at DESC')
-
     return @main_feed
-
   end
 
   def get_posts_by_genre( page, genre )
-    # def initialize(page, &genre)
-    #   @page, @genre = page, genre
-    # end
-
-    puts page
-    puts genre
-
     if genre == "all"
       @posts = Post.paginate(:page => page).order('created_at DESC')
-
     elsif genre == 'user'
       @posts = current_user.posts.paginate(:page => page).order('created_at DESC')
     elsif genre == 'main'
       @posts = main_feed.paginate( :page => page )
-
     else
       @posts = Post.where({genre: genre}).paginate(:page => page)
     end
@@ -67,21 +48,27 @@ module Api::PostsHelper
 
   def get_posts( page, genre )
     get_posts_by_genre( page, genre )
+
     @json_posts = @posts.map do |post|
-      data = post.as_json
-      if post.ratings.where({user_id: current_user}).exists?
-        data['is_rated'] = true
-        data['rating'] = Rating.where({post_id: post.id, user_id: current_user})[0].value
-      else
-        data['is_rated'] = false
-      end
-      check_friendship( data, post )
-      apply_skills( data, post )
-      apply_post_info( data, post )
-      apply_author_info( data, post )
-      data
+      apply_post_data( post )
     end
+
     return @json_posts
+  end
+
+  def apply_post_data( post )
+    data = post.as_json
+    if post.ratings.where({user_id: current_user}).exists?
+      data['is_rated'] = true
+      data['rating'] = Rating.where({post_id: post.id, user_id: current_user})[0].value
+    else
+      data['is_rated'] = false
+    end
+    check_friendship( data, post )
+    apply_skills( data, post )
+    apply_post_info( data, post )
+    apply_author_info( data, post )
+    return data
   end
 
   def apply_skills( data, post )
@@ -109,7 +96,6 @@ module Api::PostsHelper
 
   def apply_post_info( data, post )
     time = time_ago_in_words( post.created_at )
-    puts time
     data['created_at_in_words'] = time
     data['avg_rating'] = post.average_rating
     data['total_ratings'] = post.ratings.where({skill: "overall"}).length
