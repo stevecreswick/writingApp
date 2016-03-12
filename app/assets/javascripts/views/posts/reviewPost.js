@@ -4,7 +4,7 @@ var app = app || {};
 app.PostReview = Backbone.View.extend({
   tagName: 'div',
   className: 'post',
-  template: _.template( $('#post-template').html() ),
+  template: _.template( $('#review-post-template').html() ),
 
   initialize: function(){
     this.listenTo( this.model, 'change', this.renderWithUserName );
@@ -13,38 +13,14 @@ app.PostReview = Backbone.View.extend({
   render: function(){
     this.$el.empty();
     var html = this.template( this.model.toJSON() );
-    console.log(this.model);
     var $html = $( html );
     this.$el.append( $html );
-    // var poster = this.model.get('username'),
-    //     currentUser = $('#current_user').val(),
-    //     $deleteButton = $("<a>").addClass("remove-post btn btn-raised btn-fab btn-danger").html("<i class='fa fa-trash'></i>"),
-    //     $makeCritique = $("<button>").addClass("make-critique btn btn-info").html("Review"),
-    //     $showCritique = $("<span>").addClass("render-critiques").html("Show Critiques");
 
-    // this.$el.find(".show-critiques-box").append( $showCritique );
-
-    // Add delete button for current user critique for other
-    // if (currentUser === poster) {
-    //   this.$el.find(".remove-post-box").append( $deleteButton, "delete post" );
-    // } else {
-
-        // If not the user... load the ratings
-        // var urlModel = "/api/posts/" + this.model.get("id") + "/ratings"
-        //
-        // this.ratings = new app.RatingsCollection()
-        // this.ratings.url = urlModel;
-        // this.ratings.fetch({async: false});
-        //
-        // if (this.ratings.models.length > 0) {
-        //   for (var i = 0; i < this.ratings.models.length; i++) {
-        //     var skill = this.ratings.models[i].get("skill");
-        //     var value = this.ratings.models[i].get("value");
-        //     this.applyRating(value, skill)
-        //   }
-        // }
-
-      // }
+    app.fullPost = new app.IndividualPost({
+      model: this.model,
+      el: $( "#post-display" )
+    });
+    app.fullPost.render();
 
     },
 
