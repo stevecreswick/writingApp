@@ -18,7 +18,7 @@ app.PostListView = Backbone.View.extend({
       var posts = this.collection.models;
       var view;
         for (var i = 0; i < posts.length; i++) {
-          view = new app.PostPreview( {model: posts[ i ]} ) :
+          view = new app.PostPreview( {model: posts[ i ]} );
 
           view.render();
 
