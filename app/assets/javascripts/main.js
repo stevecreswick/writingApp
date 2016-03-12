@@ -37,10 +37,10 @@
 //= require views/posts/critiques/critiqueListView
 
 //= require models/post
-//= require views/posts/postView
+//= require views/posts/reviewPost
 //= require collections/postCollection
 //= require views/posts/components/post-preview
-//= require views/posts/post-feed
+//= require views/posts/components/post-feed
 //= require views/posts/postPage
 
 

@@ -1,7 +1,7 @@
 
 var app = app || {};
 
-app.PostView = Backbone.View.extend({
+app.PostReview = Backbone.View.extend({
   tagName: 'div',
   className: 'post',
   template: _.template( $('#post-template').html() ),

@@ -14,22 +14,28 @@ app.PostListView = Backbone.View.extend({
   },
   render: function(){
     this.$el.empty();
-
-      var posts = this.collection.models;
-      var view;
-        for (var i = 0; i < posts.length; i++) {
-          view = new app.PostPreview( {model: posts[ i ]} );
-
-          view.render();
-
-          this.$el.append( view.$el );
-        }
-
-        this.renderButtons(posts.length);
+    var posts = this.collection.models;
+    var view;
+      for (var i = 0; i < posts.length; i++) {
+        view = new app.PostPreview( {model: posts[ i ]} );
+        view.render();
+        this.$el.append( view.$el );
+      }
+    this.renderButtons(posts.length);
     },
 
-    renderFullPost: function() {
-      console.log('post page...rendering...');
+    renderFullPost: function(e) {
+      this.$el.empty();
+      var postId = $( e.currentTarget ).find("#post-preview-id" ).val();
+      app.post = new app.Post()
+      app.post.id = postId;
+      app.post.fetch().then(function(){
+        app.postReview = new app.PostReview({
+          model: app.Post
+        });
+      });
+      console.log(app.post);
+
     },
 
     renderMore: function(){
