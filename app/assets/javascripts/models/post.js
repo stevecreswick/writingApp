@@ -9,5 +9,8 @@ app.Post = Backbone.Model.extend({
     } else {
         return data;
     }
+},
+url: function() {
+  return "/api/posts/" + this.id;
 }
 });

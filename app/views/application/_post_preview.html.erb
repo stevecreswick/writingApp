@@ -22,4 +22,6 @@
       <%%= message ? message.substring(0,250) + "<br><br> Read more..." : "Click for more..." %>
     </p>
   </div>
+
+  <input type="hidden" name="post[id]" id="post-preview-id" value="<%%= id ? id : 0 %>">
 </div>
