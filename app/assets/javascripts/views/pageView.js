@@ -1,3 +1,5 @@
+// Requires Posts
+
 var app = app || {};
 
 app.PageView = Backbone.View.extend({
@@ -114,8 +116,8 @@ app.PageView = Backbone.View.extend({
 
     this.$el.append( $html );
 
-    this.renderSideNav();
-    this.updateHeader('main');
+    // this.renderSideNav();
+    // this.updateHeader('main');
   },
 
   currentUser: function() {
@@ -138,6 +140,17 @@ app.PageView = Backbone.View.extend({
 
     app.WritingPageController.render();
 
+  },
+
+  renderPostsPage: function() {
+    this.currentPage = 0;
+    this.$el.find("#center-pane").empty();
+
+    app.PostPageController = new app.PostPage({
+      el: $( '#center-pane' )
+    });
+
+    app.PostPageController.render();
   },
 
   // To Refactor
@@ -457,8 +470,6 @@ app.PageView = Backbone.View.extend({
         // });
 
       break;
-
-          // font-family: ;
       default:
       this.$el.find('h1.home-page').css({'font-family': this.fontDefault });
     }
@@ -476,9 +487,8 @@ app.PageView = Backbone.View.extend({
     if(this.promptFormPainter){
       this.promptFormPainter.clearTime();
     }
-    this.renderPosts( this.currentGenre, this.currentPage );
+    // this.renderPosts( this.currentGenre, this.currentPage );
   },
-
 
   promptsPage: function(){
     this.currentPage = 0;
@@ -746,26 +756,6 @@ showGenres: function(){
     // this.$el.find('#center-pane').append( $container );
 
   // },
-
-// Show Posts by 'all' or their genre
-  renderPosts: function(options){
-
-    app.posts = new app.PostCollection();
-    app.posts.genre = this.currentGenre;
-    app.posts.page = this.currentPage;
-
-    app.postPainter = new app.PostListView({
-      collection: app.posts,
-      el: $( '#post-list ')
-    });
-
-    app.posts.fetch({url: app.posts.url()}).done(function(){
-
-      app.postPainter.render();
-
-    });
-  },
-
 
 // Rendering Friends
 
