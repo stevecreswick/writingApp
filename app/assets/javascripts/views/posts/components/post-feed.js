@@ -12,6 +12,7 @@ app.PostListView = Backbone.View.extend({
     'click .view-previous': 'viewPrevious',
     'click .post-preview-container': 'renderFullPost'
   },
+
   render: function(){
     this.$el.empty();
     var posts = this.collection.models;
@@ -27,15 +28,18 @@ app.PostListView = Backbone.View.extend({
     renderFullPost: function(e) {
       this.$el.empty();
       var postId = $( e.currentTarget ).find("#post-preview-id" ).val();
+
+      console.log('rendering');
       app.post = new app.Post()
       app.post.id = postId;
       app.post.fetch().then(function(){
-        app.postReview = new app.PostReview({
-          model: app.Post
+        app.postReviewer = new app.PostReview({
+          model: app.post,
+          el: $( "#post-list" )
         });
-      });
-      console.log(app.post);
 
+        app.postReviewer.render();
+      });
     },
 
     renderMore: function(){
