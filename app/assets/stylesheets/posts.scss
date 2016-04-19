@@ -8,33 +8,177 @@
 $font-main:    'Open Sans Condensed', sans-serif;
 $font-brand:    Brand, sans-serif;
 
+html {
+  box-sizing: border-box;
+}
 .post-feed {
   text-align: center;
-  width: 100%;
-  margin: 2em 0 1em 0;
+
+  .post-preview-container {
+    height: 20em;
+    width: 100%;
+    margin: 1em 0 2em 0;
+    padding: 1em 1em 1em 1em;
+    background-color: ghostwhite;
+    overflow-x: scroll;
+    overflow-y: auto;
+    text-align: left;
+
+    .post-preview-title {
+      color: black;
+      font-family: $font-brand;
+    }
+
+    .post-preview-author-genre {
+
+    }
+
+    .post-preview-snippet {
+      padding: 4px;
+      font-size: 12px;
+    }
+  }
+
+  .post-open {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    height: calc( 100% + 40px );
+    width: calc( 100% + 40px );
+    margin: -20px;
+    padding: 0em 5em 1em 3em;
+    float: left;
+    background: #fff;
+  }
 }
 
-.post-preview-container {
-  height: 20em;
+
+
+.overlay {
+  background: rgba(0, 0, 0, 0.3);
   width: 100%;
-  margin: 1em 0 1em 0;
-  padding: 1em 1em 1em 1em;
-  background-color: ghostwhite;
-  overflow-x: scroll;
-  overflow-y: auto;
-  text-align: left;
+  position: fixed;
+  z-index: 9999;
+  height: 100%;
+  padding: 1em;
+  overflow: hidden;
+}
 
-  .post-preview-title {
-    color: black;
-    font-family: $font-brand;
+#show-this-post {
+  height: 90%;
+  .post-container {
+    // width: 80%;
+    // height: 80%;
+    overflow: hidden;
+  }
+  .post-modal-body {
+
+    #review-post {
+      height: 100%;
+
+      #post-display {
+        display: inline-block;
+        width: 45%;
+        height: 100%;
+        margin-left: 5%;
+        padding: 2em;
+        background: ghostwhite;
+
+        .individual-post {
+          // height: 70%;
+          width: 100%;
+          padding: 1em;
+          background: white;
+          text-align: left;
+          display: inline-block;
+          overflow-y: scroll;
+          background: white;
+        }
+      }
+
+      #review-display {
+        display: inline-block;
+        vertical-align: top;
+        // background: green;
+        width: 45%;
+        height: 70%;
+
+        #review-header {
+          height: 10%;
+          // background: pink;
+          .review-navigation {
+            width: 100%;
+            display: flex;
+            display: -webkit-flex;
+            -webkit-flex-direction: row;
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: center;
+            margin-top: 1%;
+
+            .review-link {
+              display: inline-block;
+              list-style: none;
+            }
+          }
+        }
+
+        .review-feedback {
+          // background: blue;
+          height: 100%;
+          width: 100%;
+
+          .overall-rating {
+            width: 100%;
+            height: 15%;
+            background: white;
+            display: block;
+          }
+
+          .recommend-to-friend {
+
+          }
+          .make-comment {
+
+          }
+          .rate-post {
+
+          }
+          .view-feedback {
+
+          }
+
+          .hidden {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  #post-display {
+    display: inline-block;
+    width: 100%;
+    margin-left: 0%;
+
+    .individual-post {
+      height: 60%;
+      width: 100%;
+      background: white;
+      text-align: left;
+      display: inline-block;
+      overflow-y: scroll;
+    }
   }
 
-  .post-preview-author-genre {
-
-  }
-
-  .post-preview-snippet {
-    padding: 4px;
-    font-size: 12px;
+  #review-display {
+    background: blue;
+    width: 100%;
+    height: 40%;
   }
 }
