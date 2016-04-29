@@ -240,112 +240,12 @@ html {
   overflow: hidden;
 }
 
-// #show-this-post {
-//   height: 90%;
-//   .post-container {
-//     // width: 80%;
-//     // height: 80%;
-//     overflow: hidden;
-//   }
-//   .post-modal-body {
-//
-//     #review-post {
-//       height: 100%;
-//
-//       #post-display {
-//         display: inline-block;
-//         width: 45%;
-//         height: 100%;
-//         margin-left: 5%;
-//         padding: 2em;
-//         background: ghostwhite;
-//
-//         .individual-post {
-//           // height: 70%;
-//           width: 100%;
-//           padding: 1em;
-//           background: white;
-//           text-align: left;
-//           display: inline-block;
-//           overflow-y: scroll;
-//           background: white;
-//         }
-//       }
-//
-//       #review-display {
-//         display: inline-block;
-//         vertical-align: top;
-//         // background: green;
-//         width: 45%;
-//         height: 70%;
-//
-//         #review-header {
-//           height: 10%;
-//           // background: pink;
-//           .review-navigation {
-//             width: 100%;
-//             display: flex;
-//             display: -webkit-flex;
-//             -webkit-flex-direction: row;
-//             flex-direction: row;
-//             justify-content: space-around;
-//             align-items: center;
-//             margin-top: 1%;
-//
-//             .review-link {
-//               display: inline-block;
-//               list-style: none;
-//             }
-//           }
-//         }
-//
-//         .review-feedback {
-//           height: 100%;
-//           width: 100%;
-//
-//           .overall-rating {
-//             width: 100%;
-//             height: 15%;
-//             background: white;
-//             display: block;
-//           }
-//
-//           .recommend-to-friend {
-//
-//           }
-//           .make-comment {
-//
-//           }
-//           .rate-post {
-//
-//           }
-//           .view-feedback {
-//
-//           }
-//
-//           .hidden {
-//             display: none;
-//           }
-//         }
-//       }
-//     }
-//   }
-// }
-
 @media (max-width: 600px) {
   #post-display {
     display: inline-block;
     width: 100%;
     margin-left: 0%;
 
-    .individual-post {
-      height: 60%;
-      width: 100%;
-      background: white;
-      text-align: left;
-      display: inline-block;
-      overflow-y: scroll;
-    }
   }
 
   #review-display {
