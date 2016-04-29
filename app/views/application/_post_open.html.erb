@@ -1,0 +1,72 @@
+<div class="post-container post-open" id="<%%= 'post-' + ( post.id || "" ) %>">
+  <div id="full-post">
+    <!-- Renamed from review-post -->
+    <div class="post-header">
+      <h2 class="brand">
+        writeaway.
+      </h2>
+      <div class="close-full-post">
+        X
+      </div>
+    </div>
+
+    <div class="post-info-bar">
+      <div class="genre">
+        <%%= post.genre || "" %>
+      </div>
+      <div class="prompt">
+        <%%= post.prompt || "undefined" %>
+      </div>
+      <div class="average-rating">
+        <%%= post.avg_rating || "0" %>
+      </div>
+    </div>
+
+    <div class="post-review">
+
+      <article id="post-display" class="post-display">
+        <h3 class="post-title">
+        <%%= post.title || "" %>
+          <span class="post-read-time">
+          <%%= ( post.time_completed || "" ) + " seconds" %>
+          </span>
+        </h3>
+        <div class="author">
+          <div class="author-image">
+            <img src="<%%= post.image_url || "" %>" alt="" />
+          </div>
+          <div class="author-name">
+            <%%= post.username %>
+          </div>
+        </div>
+        <p>
+          <div class="post-message">
+            <%%= post.message %>
+          </div>
+        </p>
+      </article>
+
+      <article id="review-display" class="review-display">
+        <ul class="review-navigation">
+          <li class="review-link rate-post">Rate</li>
+          <li class="review-link give-feedback">Feedback</li>
+        </ul>
+        <div id="feedback-feed" class="feedback-feed">
+
+        </div>
+        <div class="ratings-view hidden">
+
+        </div>
+        <div class="comment-editor">
+          <div class="comment-header">
+            Give Feedback
+          </div>
+          <textarea id="critique-text"></textarea>
+          <div class="comment-footer">
+            <button type="submit" id="create-critique">Submit</button>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</div>
