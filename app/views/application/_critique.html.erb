@@ -1,52 +1,46 @@
-<div class="row">
-  <div class="col-xs-12 ">
-
-<div class="row">
-  <div class="col-xs-1 col-xs-offset-10">
-
+<div class="vote-container">
+  <div class="up-vote">
+    <i class="fa fa-caret-up fa-2x up-vote vote"></i>
   </div>
-  <div class="col-xs-1">
+  <div class="total-votes-container">
+    <%%= total_votes ? total_votes : 0 %>
+  </div>
+  <div class="down-vote">
+    <i class="fa fa-caret-down fa-2x down-vote vote"></i>
+  </div>
+</div>
+<div class="content-container">
+  <div class="message-container">
+    <%%= message ? message : "Loading..." %>
+  </div>
 
+  <div class="author-info">
+    <div class="author-image">
+      <img src="<%%= image_url ? image_url : "" %>" class="critique-profile-picture img-circle"></img>
+    </div>
+    <div class="author-name">
+      <%%= username ? username : "Loading..." %>
+    </div>
   </div>
 </div>
 
-<div class="row">
-  <div class="col-xs-4">
-    <br>
-  </div>
-</div>
 
-
-<div class="row">
-
-  <div class="col-xs-12">
-
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-xs-2">
-
-  </div>
-</div>
-
-<div class="row">
+<!-- <div class="row">
   <div class="col-xs-1 text-center">
     <i class="fa fa-caret-up fa-5x up-vote vote"></i>
     <br>
-    <%%= total_votes %>
     <br>
     <i class="fa fa-caret-down fa-5x down-vote vote"></i>
   </div>
   <div class="col-xs-7 text-left">
     <p class="critique-message">
-        <%%= message %>
+        <%%= message ? message : "Loading..." %>
     </p>
   </div>
   <div class="col-xs-4 text-right">
-    <img src="<%%= image_url %>" class="critique-profile-picture img-circle"></img>
-    <%%= username %>
-    <div class="tiny-text">written <%%= created_at %> ago</div>
+    <img src="<%%= image_url ? image_url : "" %>" class="critique-profile-picture img-circle"></img>
+    <%%= username ? username : "Loading..." %>
+    <div class="tiny-text">written <%%= created_at ? created_at : "Loading..." %> ago</div>
     <div class="edit-critique-box"></div>
     <div class="remove-critique-box"></div>
   </div>
@@ -65,9 +59,8 @@
   </div>
 </div>
 
-<!-- Close outer row & column -->
 </div>
-</div>
+</div> -->
 
 <!-- <br>
 <div class="row">
