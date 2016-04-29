@@ -1,0 +1,16 @@
+@mixin flex-container( $direction, $wrap, $horizontal, $vertical ) {
+  display: flex;
+  display: -webkit-flex;
+
+  flex-direction: $direction;
+  -webkit-flex-direction: $direction;
+
+  flex-wrap: $wrap;
+  -webkit-flex-wrap: $wrap;
+
+  justify-content: $horizontal;
+  -webkit-justify-content: $horizontal;
+
+  align-items: $vertical;
+  -webkit-align-items: $vertical;
+}
