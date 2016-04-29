@@ -37,8 +37,6 @@
 //= require views/posts/critiques/critiqueListView
 
 //= require models/post
-//= require views/posts/reviewPost
-//= require views/posts/components/individual-post
 //= require collections/postCollection
 //= require views/posts/components/post-preview
 //= require views/posts/components/post-feed
