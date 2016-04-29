@@ -105,7 +105,6 @@ app.PageView = Backbone.View.extend({
   currentPage: 0,
 
   initialize: function(){
-
   },
 
   // Page Rendering
@@ -115,22 +114,29 @@ app.PageView = Backbone.View.extend({
     var $html = $( html );
 
     this.$el.append( $html );
+    this.setCurrentUser();
+
 
     // this.renderSideNav();
     // this.updateHeader('main');
   },
 
-  currentUser: function() {
+  setCurrentUser: function() {
     var scope = this;
-    scope.model = app.currentUser = new app.User();
-    app.currentUser.id = $("#current_id").val();
-    app.currentUser.url();
-    app.currentUser.fetch({wait: true});
+    scope.model = new app.User();
+    scope.model.id = $("#current_id").val();
+    scope.model.url();
+    scope.model.fetch({wait: true})
+      .then(
+        function(data){
+          app.currentUser = data;
+        }
+      );
   },
 
   // Refactored Functions
 
-  renderWritingPage: function(){
+  renderWritingPage: function() {
     this.currentPage = 0;
     this.emptyCurrentView();
 
