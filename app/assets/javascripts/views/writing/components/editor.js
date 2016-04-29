@@ -25,6 +25,7 @@ app.WritingPageEditor = Backbone.View.extend({
   },
 
 
+// Seperate Timer into its own view in the shared section
   startClock: function() {
     if (app.timer){
       this.clearTime();
@@ -96,7 +97,6 @@ app.WritingPageEditor = Backbone.View.extend({
         app.seconds = 0;
         app.minutes = 0;
         app.hours = 0;
-        console.log('stopped seconds: ' +  app.seconds);
       },
 
       publishPost: function(){
@@ -113,7 +113,7 @@ app.WritingPageEditor = Backbone.View.extend({
           {
 
             var $stopwatch = $('#stopwatch');
-
+            console.log('thype' + app.promptType);
             app.posts.create({
 
               title: postTitle,
@@ -122,11 +122,10 @@ app.WritingPageEditor = Backbone.View.extend({
               word_count: messageLength,
               time_completed: app.totalTime,
 
-              prompt: this.prompt,
+              prompt: app.currentPrompt,
               prompt_word_count: app.requiredWords,
-              prompt_type: this.type,
+              prompt_type: app.promptType,
               // model_url: this.newPrompt.url,
-
               },
 
               {
@@ -135,7 +134,7 @@ app.WritingPageEditor = Backbone.View.extend({
               async: false
             });
 
-            app.pagePainter.renderMain();
+            app.pagePainter.render();
             // this.render();
             this.$el.css({'height': 'auto'});
 
