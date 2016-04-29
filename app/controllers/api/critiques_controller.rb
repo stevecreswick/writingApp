@@ -45,7 +45,7 @@ class Api::CritiquesController < ApplicationController
   end
 
 
-  def page
+  def query
 
   # Account for Page Starting at 0
   page = params[:page].to_i + 1
