@@ -201,26 +201,23 @@ app.PageView = Backbone.View.extend({
 
   },
 
-  showPrompts: function(){
-    console.log("showing prompts");
-
+  showPrompts: function() {
     app.prompts = new app.WritingPromptCollection();
     app.writingPromptPainter = new app.WritingPromptListView({
       collection: app.prompts,
       el: $("#prompts-list")
     });
+
     var promptUrl = '/api/writing_prompts/writeaway/page/' + app.pagePainter.currentPage;
-    console.log(promptUrl);
-    // ADD URL TO PROMPTS
-    app.prompts.fetch({url: promptUrl}).done(function(){
-      console.log(app.prompts);
-      $("#prompts-list").show();
-      app.writingPromptPainter.render();
-    });
-
-
+    app.prompts
+    .fetch( { url: promptUrl } )
+      .done(
+        function(){
+          $("#prompts-list").show();
+          app.writingPromptPainter.render();
+        }
+      );
   },
-
 
   friendsPage: function(){
     this.currentPage = 0;
@@ -233,7 +230,12 @@ app.PageView = Backbone.View.extend({
     this.showUsers();
   },
 
-  challengesPage: function(){
+  friendsNav: function(){
+    var $header = _.template( $('#friend-nav-template').html() );
+    this.$el.find('#center-pane').append( $header );
+  },
+
+  challengesPage: function() {
     this.currentPage = 0;
     this.$el.find('#center-pane').empty();
 
