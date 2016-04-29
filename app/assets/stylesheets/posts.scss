@@ -1,3 +1,5 @@
+@import "mixins/flex_container";
+
 @font-face {
   font-family: 'Brand';
   src: font-url( asset-path('gabriele-br.TTF') );
@@ -11,8 +13,8 @@ $font-brand:    Brand, sans-serif;
 html {
   box-sizing: border-box;
 }
+
 .post-feed {
-  text-align: center;
 
   .post-preview-container {
     height: 20em;
@@ -48,11 +50,182 @@ html {
     z-index: 10;
     height: calc( 100% + 40px );
     width: calc( 100% + 40px );
-    margin: -20px;
     padding: 0em 5em 1em 3em;
     float: left;
     background: #fff;
+
+    #full-post {
+      width: 90%;
+      height: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      overflow: scroll;
+
+      .post-header {
+        @include flex-container( row, nowrap, space-between, center );
+
+        width: 100%;
+        height: 3em;
+
+        .brand {
+          font-size: 24px;
+          text-align: left;
+          width: 75%;
+          float: left;
+          display: inline-block;
+        }
+
+        .close-full-post {
+          width: 20px;
+          height: 20px;
+          float: right;
+          display: inline-block;
+
+          &:hover {
+            background: ghostwhite;
+            cursor: pointer;
+          }
+        }
+      }
+
+      .post-info-bar {
+        width: 100%;
+        height: 3em;
+        @include flex-container( row, nowrap, space-between, center );
+        .average-rating {
+          width: 15%;
+          display: inline-block;
+          text-align: center;
+        }
+
+        .prompt {
+          width: 70%;
+          display: inline-block;
+          text-align: center;
+        }
+
+        .genre {
+          width: 15%;
+          display: inline-block;
+          text-align: center;
+        }
+      }
+
+      .post-review {
+        display: flex;
+
+        .post-display {
+          width: 50%;
+          height: calc(100% - 11em);
+          display: inline-block;
+
+          .post-title {
+            width: 100%;
+            text-align: left;
+            padding-left: 2%;
+            padding-right: 2%;
+
+            .post-read-time {
+              font-size: 12px;
+            }
+          }
+
+          .author {
+            @include flex-container( row, nowrap, flex-start, center );
+            text-align: left;
+            margin-left: 5%;
+            margin-top: -5px;
+
+            .author-image {
+              @include flex-container( column, nowrap, center, center );
+              border: 1px solid #D7DBDD;
+              width: 20px;
+              height: 20px;
+              border-radius: 100%;
+              display: inline-block;
+              overflow: hidden;
+
+              img {
+                width: 100%;
+                height: auto;
+              }
+            }
+            .author-name {
+              display: inline-block;
+              margin-left: 5px;
+              font-size: 12px;
+            }
+          }
+
+          .post-message {
+            text-align: left;
+            line-height: 1.6em;
+            padding: 1em;
+          }
+        }
+
+        .review-display {
+          width: 50%;
+          height: calc(100% - 11em);
+          background: aquamarine;
+          display: inline-block;
+
+          .review-navigation {
+            width: 100%;
+            @include flex-container( row, nowrap, space-around, center );
+            margin-top: 1%;
+
+            .review-link {
+              display: inline-block;
+              list-style: none;
+            }
+          }
+
+          .feedback-feed {
+            height: 65%;
+            overflow-y: scroll;
+
+
+          }
+
+          .ratings-view {
+            height: 65%;
+            background: purple;
+          }
+
+          .comment-editor {
+            height: 35%;
+            background: lightgreen;
+
+            .comment-header {
+              @include flex-container( column, nowrap, space-around, flex-start );
+              width: 100%;
+              height: 2em;
+              padding-left: 10px;
+              background: blue;
+              text-align: left;
+            }
+
+            textarea {
+              width: 100%;
+              height: 60%;
+            }
+
+            .comment-footer {
+              @include flex-container( row, nowrap, space-around, center );
+              float: right;
+              height: 25%;
+              margin-right: 10px;
+            }
+          }
+        }
+      }
+    }
   }
+}
+
+.hidden {
+  display: none !important;
 }
 
 
@@ -67,98 +240,97 @@ html {
   overflow: hidden;
 }
 
-#show-this-post {
-  height: 90%;
-  .post-container {
-    // width: 80%;
-    // height: 80%;
-    overflow: hidden;
-  }
-  .post-modal-body {
-
-    #review-post {
-      height: 100%;
-
-      #post-display {
-        display: inline-block;
-        width: 45%;
-        height: 100%;
-        margin-left: 5%;
-        padding: 2em;
-        background: ghostwhite;
-
-        .individual-post {
-          // height: 70%;
-          width: 100%;
-          padding: 1em;
-          background: white;
-          text-align: left;
-          display: inline-block;
-          overflow-y: scroll;
-          background: white;
-        }
-      }
-
-      #review-display {
-        display: inline-block;
-        vertical-align: top;
-        // background: green;
-        width: 45%;
-        height: 70%;
-
-        #review-header {
-          height: 10%;
-          // background: pink;
-          .review-navigation {
-            width: 100%;
-            display: flex;
-            display: -webkit-flex;
-            -webkit-flex-direction: row;
-            flex-direction: row;
-            justify-content: space-around;
-            align-items: center;
-            margin-top: 1%;
-
-            .review-link {
-              display: inline-block;
-              list-style: none;
-            }
-          }
-        }
-
-        .review-feedback {
-          // background: blue;
-          height: 100%;
-          width: 100%;
-
-          .overall-rating {
-            width: 100%;
-            height: 15%;
-            background: white;
-            display: block;
-          }
-
-          .recommend-to-friend {
-
-          }
-          .make-comment {
-
-          }
-          .rate-post {
-
-          }
-          .view-feedback {
-
-          }
-
-          .hidden {
-            display: none;
-          }
-        }
-      }
-    }
-  }
-}
+// #show-this-post {
+//   height: 90%;
+//   .post-container {
+//     // width: 80%;
+//     // height: 80%;
+//     overflow: hidden;
+//   }
+//   .post-modal-body {
+//
+//     #review-post {
+//       height: 100%;
+//
+//       #post-display {
+//         display: inline-block;
+//         width: 45%;
+//         height: 100%;
+//         margin-left: 5%;
+//         padding: 2em;
+//         background: ghostwhite;
+//
+//         .individual-post {
+//           // height: 70%;
+//           width: 100%;
+//           padding: 1em;
+//           background: white;
+//           text-align: left;
+//           display: inline-block;
+//           overflow-y: scroll;
+//           background: white;
+//         }
+//       }
+//
+//       #review-display {
+//         display: inline-block;
+//         vertical-align: top;
+//         // background: green;
+//         width: 45%;
+//         height: 70%;
+//
+//         #review-header {
+//           height: 10%;
+//           // background: pink;
+//           .review-navigation {
+//             width: 100%;
+//             display: flex;
+//             display: -webkit-flex;
+//             -webkit-flex-direction: row;
+//             flex-direction: row;
+//             justify-content: space-around;
+//             align-items: center;
+//             margin-top: 1%;
+//
+//             .review-link {
+//               display: inline-block;
+//               list-style: none;
+//             }
+//           }
+//         }
+//
+//         .review-feedback {
+//           height: 100%;
+//           width: 100%;
+//
+//           .overall-rating {
+//             width: 100%;
+//             height: 15%;
+//             background: white;
+//             display: block;
+//           }
+//
+//           .recommend-to-friend {
+//
+//           }
+//           .make-comment {
+//
+//           }
+//           .rate-post {
+//
+//           }
+//           .view-feedback {
+//
+//           }
+//
+//           .hidden {
+//             display: none;
+//           }
+//         }
+//       }
+//     }
+//   }
+// }
 
 @media (max-width: 600px) {
   #post-display {
