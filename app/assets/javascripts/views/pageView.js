@@ -358,91 +358,50 @@ app.PageView = Backbone.View.extend({
     this.$el.empty();
   },
 
-
-
-  toggleColumns: function() {
-    if ( this.centerWidth === 11 ){
-      var $left = this.$el.find('#left-columns');
-      var $center = this.$el.find('#center-columns');
-
-      $left.removeClass( this.oneLeft );
-      $center.removeClass( this.elevenCenter );
-
-      $left.addClass( this.fiveLeft );
-      $center.addClass( this.sevenCenter );
-
-
-    } else if ( this.centerWidth === 7 ){
-      var $left = this.$el.find('#left-columns');
-      var $center = this.$el.find('#center-columns');
-
-      $left.removeClass( this.fiveLeft );
-      $center.removeClass( this.sevenCenter );
-
-      $left.addClass( this.oneLeft );
-      $center.addClass( this.elevenCenter );
-
-    }
-  },
-
   promptFormPainter: null,
 
   // Event Handling
 
-  events:{
+  events: {
 
+    // Navigation
     'click .write-nav': 'renderWritingPage',
+    'click a.read-nav': 'renderPosts',
+    'click span.show-genres': 'showGenres',
+    'click div.sort': 'updateList',
 
-
+    // Page Rendering
     'click div.cancel-post': 'renderMain',
-    'click li.show-resources': 'showResources',
+    'click li.show-friends': 'friendsPage',
+    'click li.show-challenges': 'challengesPage',
+    'click li.render-friends': 'renderFriendsPage',
+    'click .render-main-page': 'renderMain',
+    'click .show-current-user': 'showCurrentProfile',
+    // 'click li.show-resources': 'showResources',
 
+    // Challenges
     'click .received-challenges': 'receivedChallenges',
     'click .completed-challenges': 'completedChallenges',
     'click .send-challenge': 'sendChallenge',
     'click .awaiting-challenges': 'awaitingChallenges',
-
     // 'click .sent-challenges': 'sentChallenges',
 
+
+    // Prompts
     'click .see-all-prompts': 'promptsPage',
-    'click a.read-nav': 'renderPosts',
-    'click div.sort': 'updateList',
+    'click .add-prompt': 'addPrompt',
 
-    'click li.show-friends': 'friendsPage',
-
+    // Authors Page
     'click .show-users': 'showUsers',
     'click .show-following': 'showFollowing',
     'click .show-followers': 'showFollowers',
     'click .show-top-reviewers': 'showReviewers',
-
-    'click #search-users': 'searchUsers',
-
-    'click .add-prompt': 'addPrompt',
-    'click li.show-challenges': 'challengesPage',
-
-
-    'click li.render-friends': 'renderFriendsPage',
-    'click li.render-friends': 'renderFriendsPage',
-    'click .render-main-page': 'renderMain',
-    'click .show-current-user': 'showCurrentProfile',
-    'click span.show-genres': 'showGenres',
-
-
+    'click #search-users': 'searchUsers'
   },
 
 showGenres: function(){
   $('.genres').show();
 },
-
-
-// Rendering Posts
-  // createPostList: function(){
-    // var $container = $('<div>').attr('id', 'post-list');
-    // this.$el.find('#center-pane').append( $container );
-
-  // },
-
-// Rendering Friends
 
   showFollowing: function(){
 
@@ -450,40 +409,36 @@ showGenres: function(){
 
     var $center = this.$el.find('#center-pane');
     this.$el.find('#friend-page').remove();
-    var $friendPage = $("<div>").attr('id', 'friend-page');
+
     var $none = _.template( $('#no-friends-screen').html() );
 
-
-    $center.append( $friendPage )
+    var $friendPage = $("<div>").attr('id', 'friend-page');
+    var $authorsTable = _.template( $( '#authors-table-template' ).html() );
+    $friendPage.append( $authorsTable );
+    $center.append( $friendPage );
 
     app.friends = new app.FriendCollection();
-    app.friendPainter = new app.FriendListView({
+    app.friendPainter = new app.UserListView({
       collection: app.friends,
-      el: $('#friend-page')
-    });
+      el: $( '#authors-list' )
+    } );
 
-    app.friends.fetch({url: '/users/friends/' + this.currentPage  });
+    app.friends
+      .fetch( { url: '/users/friends/' + this.currentPage } )
+        .then( function() {
+          // Add error handling
+        } );
 
-    if (app.friends.models.length === 0){
-    this.$el.find('#friend-page').append( $none );
+    if ( app.friends.models.length === 0 ) {
+    this.$el.find( '#friend-page' ).append( $none );
     }
 
-  },
-
-
-
-  friendsNav: function(){
-
-    var $header = _.template( $('#friend-nav-template').html() );
-
-    this.$el.find('#center-pane').append( $header );
   },
 
   searchUsers: function(){
     var search = this.$el.find("#user-search-form").val();
 
     this.searchTerm = search;
-    console.log( search );
 
     if (search === ""){
       this.showUsers();
@@ -499,10 +454,8 @@ showGenres: function(){
       app.currentSearch.fetch({url: urlModel});
 
     }
-
-
-
   },
+
   showFollowers: function(){
     this.clearFriendsPage();
 
@@ -510,13 +463,14 @@ showGenres: function(){
     this.$el.find('#friend-page').remove();
 
     var $friendPage = $("<div>").attr('id', 'friend-page');
-
-    $center.append( $friendPage )
+    var $authorsTable = _.template( $( '#authors-table-template' ).html() );
+    $friendPage.append( $authorsTable );
+    $center.append( $friendPage );
 
     app.followers = new app.FollowerCollection();
-    app.followerPainter = new app.FollowerListView({
+    app.followerPainter = new app.UserListView({
       collection: app.followers,
-      el: $('#friend-page')
+      el: $('#authors-list')
     });
 
     app.followers.fetch({url: '/users/followers/' + this.currentPage  });
@@ -536,22 +490,28 @@ showGenres: function(){
     this.$el.find('.author-header').remove();
 
     var $friendPage = $("<div>").attr('id', 'friend-page');
+    var $authorsTable = _.template( $( '#authors-table-template' ).html() );
+    $friendPage.append( $authorsTable );
+    $center.append( $friendPage );
+
     var header = $("<h1>").addClass('author-header').html("Top Authors");
-
     $center.append(header);
-    $center.append( $friendPage )
-
 
     app.users = new app.UserCollection();
     app.userPainter = new app.UserListView({
       collection: app.users,
-      el: $('#friend-page')
+      el: $('#authors-list')
     });
 
-    app.users.fetch({url: '/users/leaderboard/' + this.currentPage  });
+    app.users
+      .fetch( { url: '/users/leaderboard/' + this.currentPage } )
+        .then( function() {
+          $friendPage.append( $authorsTable );
+          app.userPainter.render();
+        } );
   },
 
-  showReviewers: function(){
+  showReviewers: function() {
     this.clearFriendsPage();
 
     var $center = this.$el.find('#center-pane');
@@ -559,20 +519,25 @@ showGenres: function(){
     this.$el.find('.author-header').remove();
 
     var $friendPage = $("<div>").attr('id', 'friend-page');
+    var $authorsTable = _.template( $( '#authors-table-template' ).html() );
+    $friendPage.append( $authorsTable );
+    $center.append( $friendPage );
+
     var header = $("<h1>").addClass('author-header').html("Top Reviewers");
-
     $center.append(header);
-    $center.append( $friendPage )
-
-
 
     app.users = new app.UserCollection();
-    app.userPainter = new app.UserListView({
+    app.userPainter = new app.UserListView( {
       collection: app.users,
-      el: $('#friend-page')
-    });
+      el: $('#authors-list')
+    } );
 
-    app.users.fetch({url: '/users/top_readers/' + this.currentPage  });
+    app.users.fetch({url: '/users/top_readers/' + this.currentPage  })
+      .done(
+        function() {
+
+        }
+      );
   },
 
   clearFriendsPage: function(){

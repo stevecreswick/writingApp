@@ -1,9 +1,9 @@
 var app = app || {};
 
 app.UserView = Backbone.View.extend({
-  tagName: 'div',
-  className: 'user-view',
-  template: _.template( $('#user-view-template').html() ),
+  tagName: 'tr',
+  className: 'user-row',
+  template: _.template( $('#author-cell-template').html() ),
   initialize: function(){
 
   },

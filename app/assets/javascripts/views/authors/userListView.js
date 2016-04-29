@@ -28,8 +28,6 @@ app.UserListView = Backbone.View.extend({
         }
 
         this.renderButtons(users.length)
-
-
     },
 
     renderMore: function(){

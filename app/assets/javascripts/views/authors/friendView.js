@@ -39,6 +39,7 @@ app.FriendView = Backbone.View.extend({
   },
 
   events: {
+    
     'click .remove-friend': 'removeFriend',
     'click .add-friend': 'addFriend',
     'click .make-challenge': 'makeChallenge',
