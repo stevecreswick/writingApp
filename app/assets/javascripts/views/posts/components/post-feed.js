@@ -8,9 +8,9 @@ app.PostListView = Backbone.View.extend({
   template: _.template( $('#post-feed-template').html() ),
 
   events: {
+    // 'click .close-view': 'closeCurrentPost',
     'click .view-more': 'viewMore',
     'click .view-previous': 'viewPrevious',
-    'click .post-preview-container': 'renderFullPost'
   },
 
   render: function(){
@@ -18,7 +18,7 @@ app.PostListView = Backbone.View.extend({
     var posts = this.collection.models;
     var view;
       for (var i = 0; i < posts.length; i++) {
-        view = new app.PostPreview( {model: posts[ i ]} );
+        view = new app.PostView( { model: posts[ i ] } );
         view.render();
         this.$el.append( view.$el );
       }
@@ -26,20 +26,12 @@ app.PostListView = Backbone.View.extend({
     },
 
     renderFullPost: function(e) {
-      this.$el.empty();
-      var postId = $( e.currentTarget ).find("#post-preview-id" ).val();
+      this.$el.find( '.post-preview' ).addClass( 'post-open' );
+    },
 
-      console.log('rendering');
-      app.post = new app.Post()
-      app.post.id = postId;
-      app.post.fetch().then(function(){
-        app.postReviewer = new app.PostReview({
-          model: app.post,
-          el: $( "#post-list" )
-        });
-
-        app.postReviewer.render();
-      });
+    closeCurrentPost: function(e) {
+      console.log(e.currentTarget);
+      console.log('close');
     },
 
     renderMore: function(){
