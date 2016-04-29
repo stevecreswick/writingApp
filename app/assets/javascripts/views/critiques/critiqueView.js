@@ -9,6 +9,7 @@ app.CritiqueView = Backbone.View.extend({
   initialize: function(){
     this.listenTo( this.model, 'change', this.render );
   },
+  
   render: function(){
     this.$el.empty();
     var html = this.template( this.model.toJSON() );

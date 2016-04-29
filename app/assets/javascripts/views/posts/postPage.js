@@ -1,3 +1,6 @@
+// $el = the Center Pane
+// controls rendering of post-list or post-review
+
 var app = app || {};
 app.currentGenre = "main";
 app.currentPage = "0";

@@ -8,8 +8,6 @@ app.PageView = Backbone.View.extend({
   template: _.template( $('#main-page-template').html() ),
   tenCenter: "col-xs-12 col-sm-10 col-md-10 col-lg-10",
   oneLeft: "col-sm-1 col-md-1 col-lg-1 hidden-xs",
-  // sevenCenter: "col-xs-7 col-sm-8 col-md-7 col-lg-7",
-  // fiveLeft: "col-xs-5 col-sm-4 col-md-5 col-lg-5",
   defaultLeft: "col-md-2 col-lg-2 hidden-xs",
   defaultCenter: "col-md-10 col-lg-10",
   centerWidth: 11,

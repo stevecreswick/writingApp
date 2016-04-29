@@ -16,19 +16,14 @@ app.CritiqueListView = Backbone.View.extend({
   render: function(){
     this.$el.empty();
       var feedback = this.collection.models;
-
       var view;
-        for (var i = 0; i < feedback.length; i++) {
+      for ( var i = 0; i < feedback.length; i++ ) {
+        view = new app.CritiqueView( { model: feedback[ i ] } );
+        view.render();
+        this.$el.append( view.$el );
+      }
 
-          view = new app.CritiqueView({model: feedback[i]});
-          view.render();
-
-          this.$el.append( view.$el );
-
-        }
-
-        this.renderButtons(feedback.length)
-
+      this.renderButtons( feedback.length );
     },
 
     renderMore: function(){

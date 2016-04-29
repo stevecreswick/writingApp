@@ -20,9 +20,7 @@ app.WritingPage = Backbone.View.extend({
   components: {},
 
   initialize: function(){
-
     this.Post = new app.Post();
-
   },
 
   render: function(){
@@ -32,7 +30,6 @@ app.WritingPage = Backbone.View.extend({
     this.initializeComponents();
 
     // this.components.promptForm.render();
-
   },
 
   initializeComponents: function() {
