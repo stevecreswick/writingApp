@@ -33,8 +33,9 @@ app.PostView = Backbone.View.extend({
     'click  .close-full-post'   :   'togglePost',
     'click  .review-link'       :   'toggleFeedbackType',
 
-    'click  #create-critique'   :   'createCritique'
-
+    'click  #create-critique'   :   'createCritique',
+    'mouseover i.rating-heart'  :   'ratingsHover',
+    'mouseout  i.rating-heart'  :   'ratingsHover'
   },
 
   togglePost: function() {
@@ -58,6 +59,27 @@ app.PostView = Backbone.View.extend({
       this.$el.find( '.ratings-view' ).toggleClass( 'hidden' );
   },
 
+  ratingsHover: function( e ){
+    var parent     =     $( e.currentTarget ).parent(),
+        value      =     parent.data( 'value' ),
+        skill      =     parent.data( 'skill' ),
+        divId;
+
+    if ( e.type === 'mouseover' ) {
+      for (var i = 0; i <= value; i++) {
+        divId = '#rating-' + skill + '-' + i;
+        this.$el.find(divId).find("i").addClass("fa-heart");
+        this.$el.find(divId).find("i").removeClass( "fa-heart-o" );
+      }
+    }
+    else if ( e.type === 'mouseout' ) {
+      for (var i = 0; i <= value; i++) {
+        divId = '#rating-' + skill + '-' + i;
+        this.$el.find(divId).find("i").removeClass("fa-heart");
+        this.$el.find(divId).find("i").addClass( "fa-heart-o" );
+      }
+    }
+  },
 
 // Critiques
   renderCritiques: function() {

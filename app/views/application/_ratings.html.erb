@@ -1,0 +1,57 @@
+<div class="ratings">
+  <div class="rating-container">
+    <h5 class="rating-header">Overall</h5>
+    <% (1..10).each do | i | %>
+      <div class="new-rating"
+           data-value="<%= i %>"
+           data-post="<%%= post.id %>"
+           data-skill="overall"
+           id="rating-overall-<%= i %>">
+
+          <i class="fa fa-heart-o rating-heart"></i>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="rating-container">
+    <h5 class="rating-header">Plot</h5>
+    <% (1..5).each do | i | %>
+      <div class="new-rating"
+           data-value="<%= i %>"
+           data-post="<%%= post.id %>"
+           data-skill="plot"
+           id="rating-plot-<%= i %>">
+
+          <i class="fa fa-heart-o rating-heart"></i>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="rating-container">
+    <h5 class="rating-header">Characters</h5>
+    <% (1..5).each do | i | %>
+      <div class="new-rating"
+           data-value="<%= i %>"
+           data-post="<%%= post.id %>"
+           data-skill="characters"
+           id="rating-characters-<%= i %>">
+
+          <i class="fa fa-heart-o rating-heart"></i>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="rating-container">
+    <h5 class="rating-header">Setting</h5>
+    <% (1..5).each do | i | %>
+      <div class="new-rating"
+           data-value="<%= i %>"
+           data-post="<%%= post.id %>"
+           data-skill="setting"
+           id="rating-setting-<%= i %>">
+
+          <i class="fa fa-heart-o rating-heart"></i>
+      </div>
+    <% end %>
+  </div>
+</div>
