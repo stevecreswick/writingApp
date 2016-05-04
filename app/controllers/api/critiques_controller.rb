@@ -23,12 +23,16 @@ class Api::CritiquesController < ApplicationController
 
     ar_critique.votes.map do |vote|
       @total_votes = @total_votes + vote.value
+
+
+
     end
     time = time_ago_in_words(ar_critique.created_at)
 
     data = ar_critique.as_json
     author = User.find( ar_critique.user_id )
     data['username'] = author.username
+    data['user_id'] = author.id
     data['image_url'] = author.image_url
     data['created_at'] = time
 
@@ -37,6 +41,7 @@ class Api::CritiquesController < ApplicationController
     else
     data['total_votes'] = 0
     end
+
 
     data
   end
@@ -58,10 +63,6 @@ class Api::CritiquesController < ApplicationController
 
     @total_votes = 0
 
-    ar_critique.votes.map do |vote|
-      @total_votes = @total_votes + vote.value
-    end
-
     data = ar_critique.as_json
     author = User.find( ar_critique.user_id )
     data['username'] = author.username
@@ -69,6 +70,14 @@ class Api::CritiquesController < ApplicationController
 
     time = time_ago_in_words(ar_critique.created_at)
     data['created_at'] = time
+
+    ar_critique.votes.map do |vote|
+      @total_votes = @total_votes + vote.value
+      if vote.user_id = current_user.id
+        data['user_voted'] = true
+        data['user_vote'] = vote.value
+      end
+    end
 
     if @total_votes > 0
     data['total_votes'] = @total_votes
@@ -88,14 +97,18 @@ class Api::CritiquesController < ApplicationController
 
       @total_votes = 0
 
-      ar_critique.votes.map do |vote|
-        @total_votes = @total_votes + vote.value
-      end
-
       data = ar_critique.as_json
       author = User.find( ar_critique.user_id )
       data['username'] = author.username
       data['image_url'] = author.image_url
+
+      ar_critique.votes.map do |vote|
+        @total_votes = @total_votes + vote.value
+        if vote.user_id = current_user.id
+          data['user_voted'] = true
+          data['user_vote'] = vote.value
+        end
+      end
 
       if ( @total_votes > 0 )
       data['total_votes'] = @total_votes

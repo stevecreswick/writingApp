@@ -84,9 +84,6 @@ app.PostView = Backbone.View.extend({
       var urlModel = '/api/posts/' + this.model.get('id') + '/critiques'
         this.model.critiques.create(
           { message: newMessage },
-          { url: urlModel, wait:true, async: false }
-        ).then(function(){
-          // scope.critiquesFeed.render();
-        });
+          { url: urlModel, wait:true, async: false } )
   }
 });

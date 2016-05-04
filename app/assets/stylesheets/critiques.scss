@@ -24,6 +24,18 @@
               .total-votes-container {
                 font-size: 12px;
               }
+
+              .vote {
+                color: black;
+
+                &:hover {
+                  color: orange;
+                }
+              }
+
+              .current-vote {
+                color: green;
+              }
             }
 
             .content-container {
@@ -46,6 +58,21 @@
                 padding-bottom: 5px;
                 @include flex-container( row, nowrap, flex-end, center );
 
+                .current-user-controls {
+                  .edit-critique {
+                    display: inline-block;
+
+                    &:hover {
+                      font-weight: bold;
+                      cursor: pointer;
+                    }
+                  }
+                  .remove-critique {
+                    display: inline-block;
+                    margin: 0 10px 0 10px;
+                  }
+                }
+
                 .author-image {
                   display: inline-block;
                   margin-right: 5px;
@@ -61,6 +88,59 @@
 
                 }
               }
+            }
+
+            .edit-critique-container {
+              height: 80%;
+              width: 100%;
+              display: inline-block;
+
+              .editing-critique {
+                width: 100%;
+                resize: none;
+                border: none;
+                padding: 5px 5px 5px 5px;
+              }
+
+              .edit-controls {
+                width: 100%;
+                .cancel-editing {
+                  color: red;
+                  display: inline-block;
+                }
+                .save-edit {
+                  display: inline-block;
+                  color: blue;
+                }
+              }
+
+            }
+
+            .delete-critique-container {
+              height: 80%;
+              width: 100%;
+              display: inline-block;
+
+              .confirmation-message {
+                text-align: center;
+                margin-bottom: 10px;
+
+                span {
+                  display: block;
+                }
+              }
+
+              .delete-controls {
+                @include flex-container( row, nowrap, space-around, center );
+
+                .cancel-delete {
+
+                }
+                .delete-critique {
+
+                }
+              }
+
             }
           }
         }

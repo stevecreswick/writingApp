@@ -17,6 +17,8 @@ Rails.application.routes.draw do
     get '/posts' => 'posts#index'
     get '/posts/query/:genre/:page' => 'posts#query'
     get '/posts/:post_id/critiques/query/:page' => 'critiques#query'
+    put '/posts/:post_id/critiques/:id' => 'critiques#update'
+    get '/posts/:post_id/critiques/:id' => 'critiques#show'
 
 
     get '/posts/sorted/:genre' => 'posts#genre'
@@ -37,7 +39,6 @@ Rails.application.routes.draw do
     get '/posts/:post_id/critiques/:id' => 'critiques#show'
     post '/posts/:post_id/critiques' => 'critiques#create'
     delete '/posts/:post_id/critiques/:id' => 'critiques#destroy'
-    put '/posts/:post_id/critiques/:id' => 'critiques#update'
 
     # Critique Votes
     post '/posts/:post_id/critiques/:id/votes' => 'votes#create'
