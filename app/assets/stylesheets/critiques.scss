@@ -1,4 +1,5 @@
 @import "mixins/flex_container";
+@import "mixins/text_hover";
 
 .post-feed {
   .post-open {
@@ -62,14 +63,13 @@
                   .edit-critique {
                     display: inline-block;
 
-                    &:hover {
-                      font-weight: bold;
-                      cursor: pointer;
-                    }
+                    @include text-hover( 'black' );
                   }
                   .remove-critique {
                     display: inline-block;
                     margin: 0 10px 0 10px;
+
+                    @include text-hover( 'black' );
                   }
                 }
 
@@ -104,13 +104,18 @@
 
               .edit-controls {
                 width: 100%;
+                @include flex-container( row, nowrap, flex-end, center );
+
                 .cancel-editing {
-                  color: red;
                   display: inline-block;
+
+                  @include text-hover( 'black' );
                 }
                 .save-edit {
+                  margin: 0 20px 0 50px;
                   display: inline-block;
-                  color: blue;
+
+                  @include text-hover( 'black' );
                 }
               }
 
@@ -134,10 +139,11 @@
                 @include flex-container( row, nowrap, space-around, center );
 
                 .cancel-delete {
-
+                  @include text-hover( 'black' );
                 }
-                .delete-critique {
 
+                .delete-critique {
+                  @include text-hover( 'black' );
                 }
               }
 
