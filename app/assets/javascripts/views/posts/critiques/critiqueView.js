@@ -2,29 +2,36 @@
 var app = app || {};
 
 app.CritiqueView = Backbone.View.extend({
+  // DOM Element
   tagName: 'div',
   className: 'critique-view',
+
+  // Templates
   template: null,
-  defaultTemplate: _.template( $('#critique-template').html() ),
-  editingTemplate: _.template( $('#edit-critique-template').html() ),
-  deletingTemplate: _.template( $('#delete-critique-template').html() ),
-
   templateData: {},
+  defaultTemplate: _.template( $( '#critique-template' ).html() ),
+  editingTemplate: _.template( $( '#edit-critique-template' ).html() ),
+  deletingTemplate: _.template( $( '#delete-critique-template' ).html() ),
 
+  // State
+  // reading, editing, deleting
   state: 'reading',
-  // states: reading, editing, deleting
 
-  currentVote: 0,
-
-  url: function() {
-    return '/api/posts/' + this.postId + '/critiques/' + this.crtiqueId;
-  },
+  // ---------------------------------------------------------------------------
+  // Initialize
 
   initialize: function(){
     this.listenTo( this.model, 'change', this.render );
     this.postId = this.model.get('post_id');
     this.crtiqueId = this.model.get('id');
   },
+
+  url: function() {
+    return '/api/posts/' + this.postId + '/critiques/' + this.crtiqueId;
+  },
+
+  // ---------------------------------------------------------------------------
+  // Rendering
 
   render: function(){
     this.$el.empty();
@@ -35,13 +42,12 @@ app.CritiqueView = Backbone.View.extend({
       user: app.currentUser
     }
 
-    var html = this.template( this.templateData );
-    var $html = $( html );
-    this.$el.append( $html );
+    this.$el.append(
+      $( this.template( this.templateData ) )
+    );
   },
 
   getTemplate: function() {
-
     if ( this.state === 'editing' ) {
       this.template = this.editingTemplate;
     } else if ( this.state === 'deleting' ) {
@@ -51,7 +57,9 @@ app.CritiqueView = Backbone.View.extend({
     }
   },
 
-// Critique Events
+  // ---------------------------------------------------------------------------
+  // Event Handling
+
   events: {
     // Editing
     'click div.edit-critique'        :   'toggleEditingState',
@@ -69,7 +77,7 @@ app.CritiqueView = Backbone.View.extend({
   },
 
   // ---------------------------------------------------------------------------
-  // View State
+  // Control View State
 
   // Toggle State
   toggleEditingState: function() {
@@ -88,7 +96,7 @@ app.CritiqueView = Backbone.View.extend({
     this.render();
   },
 
-  // Update View
+  // Update Model
   fetchModel: function() {
     var scope = this;
     this.model.url = this.url();
@@ -103,16 +111,18 @@ app.CritiqueView = Backbone.View.extend({
   // ---------------------------------------------------------------------------
   // Editing
   saveEditedCritique: function(){
-    var scope = this;
-    var postId = parseInt( this.model.get('post_id') );
-    var newMessage = $('#edited-message').val();
-    var urlModel = '/api/posts/' + postId + '/critiques/' + this.model.get('id');
+    var scope         =    this,
+        postId        =    parseInt( this.model.get('post_id') ),
+        newMessage    =    $('#edited-message').val(),
+        urlModel      =    '/api/posts/' + postId + '/critiques/' + this.model.get('id');
+
     this.model.set('message', newMessage)
     this.model.url = urlModel;
+
     this.model.save().
       then(
         function() {
-          scope.toggleState();
+          scope.toggleEditingState();
         }
       );
   },
@@ -130,8 +140,8 @@ app.CritiqueView = Backbone.View.extend({
   // ---------------------------------------------------------------------------
   // Voting
   submitVote: function( e ){
-    var rating          =   $( e.currentTarget ).attr( 'data-rating' ),
-        urlModel        =   this.url() + '/votes';
+    var rating       =   $( e.currentTarget ).attr( 'data-rating' ),
+        urlModel     =   this.url() + '/votes';
 
     var newVote = new app.CritiqueVote( { url: urlModel } );
     newVote.url = urlModel;
