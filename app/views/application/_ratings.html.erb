@@ -1,57 +1,18 @@
-<div class="ratings">
-  <div class="rating-container">
-    <h5 class="rating-header">Overall</h5>
-    <% (1..10).each do | i | %>
-      <div class="new-rating"
-           data-value="<%= i %>"
-           data-post="<%%= post.id %>"
-           data-skill="overall"
-           id="rating-overall-<%= i %>">
+  <%% for ( key in rating ) { %>
+    <div class="ratings">
+    <%% if ( rating.hasOwnProperty( key ) ) { %>
+      <div class="rating-container" id="rating-container-<%%= key %>">
+      <h5 class="rating-header"><%%= key.toUpperCase()  %></h5>
+        <%% for ( var i = 1; i < rating[ key ].max_value + 1; i++ ) { %>
+          <div class="rating new-rating"
+               data-value="<%%= i %>"
+               data-skill="<%%= key %>"
+               id="rating-<%%= key %>-<%%= i %>">
 
-          <i class="fa fa-heart-o rating-heart"></i>
+            <i class="fa fa-heart-o rating-heart"></i>
+          </div>
+        <%% } %>
       </div>
-    <% end %>
+    <%% } %>
   </div>
-
-  <div class="rating-container">
-    <h5 class="rating-header">Plot</h5>
-    <% (1..5).each do | i | %>
-      <div class="new-rating"
-           data-value="<%= i %>"
-           data-post="<%%= post.id %>"
-           data-skill="plot"
-           id="rating-plot-<%= i %>">
-
-          <i class="fa fa-heart-o rating-heart"></i>
-      </div>
-    <% end %>
-  </div>
-
-  <div class="rating-container">
-    <h5 class="rating-header">Characters</h5>
-    <% (1..5).each do | i | %>
-      <div class="new-rating"
-           data-value="<%= i %>"
-           data-post="<%%= post.id %>"
-           data-skill="characters"
-           id="rating-characters-<%= i %>">
-
-          <i class="fa fa-heart-o rating-heart"></i>
-      </div>
-    <% end %>
-  </div>
-
-  <div class="rating-container">
-    <h5 class="rating-header">Setting</h5>
-    <% (1..5).each do | i | %>
-      <div class="new-rating"
-           data-value="<%= i %>"
-           data-post="<%%= post.id %>"
-           data-skill="setting"
-           id="rating-setting-<%= i %>">
-
-          <i class="fa fa-heart-o rating-heart"></i>
-      </div>
-    <% end %>
-  </div>
-</div>
+  <%% } %>
