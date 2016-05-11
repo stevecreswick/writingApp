@@ -38,6 +38,8 @@
 
 //= require models/post
 //= require collections/postCollection
+//= require views/posts/components/ratingView
+//= require views/posts/ratingsListView
 //= require views/posts/components/post-preview
 //= require views/posts/components/post-feed
 //= require views/posts/postPage
