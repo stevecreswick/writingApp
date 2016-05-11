@@ -17,7 +17,6 @@ class Post < ActiveRecord::Base
       self.ratings.each do |rating|
 
         if rating.skill == "overall"
-          puts "#{rating.skill} *******"
           @value = @value + rating.value
           @total += 1
         end
