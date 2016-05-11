@@ -8,10 +8,38 @@ app.PostView = Backbone.View.extend({
   reviewing: false,
   templateData: null,
 
+  ratings: null,
+
   getTemplate: function() {
     this.reviewing ?
       this.template = _.template( $( '#post-open-template' ).html() ) :
       this.template = _.template( $( '#post-preview-template' ).html() );
+  },
+
+  getRatings: function() {
+    this.model.ratings = new app.Rating();
+    this.model.ratings.postId = this.model.get( 'id' );
+
+    this.ratingsList = new app.RatingView({
+      model: this.model.ratings,
+      el: $( '#post-ratings' )
+    });
+
+    var scope = this;
+    this.model.ratings.fetch({url: this.model.ratings.url()})
+      .done(
+        function(data){
+          // console.log(data);
+          for (var key in data) {
+            if (data.hasOwnProperty(key)) {
+              // console.log(key + " -> ");
+              // console.log( data[key] );
+            }
+          }
+          scope.ratingsList.render();
+        }
+      );
+
   },
 
   render: function(){
@@ -22,10 +50,16 @@ app.PostView = Backbone.View.extend({
       post: this.model.toJSON(),
       user: app.currentUser
     }
+    console.log('td');
+    console.log(this.templateData);
 
+    console.log('model');
+    console.log(this.model);
     this.$el.append( $( this.template( this.templateData ) ) );
 
     this.renderCritiques();
+    this.getRatings();
+
   },
 
   events: {
@@ -33,9 +67,7 @@ app.PostView = Backbone.View.extend({
     'click  .close-full-post'   :   'togglePost',
     'click  .review-link'       :   'toggleFeedbackType',
 
-    'click  #create-critique'   :   'createCritique',
-    'mouseover i.rating-heart'  :   'ratingsHover',
-    'mouseout  i.rating-heart'  :   'ratingsHover'
+    'click  #create-critique'   :   'createCritique'
   },
 
   togglePost: function() {
@@ -57,28 +89,6 @@ app.PostView = Backbone.View.extend({
   toggleFeedbackType: function() {
       this.$el.find( '.feedback-feed' ).toggleClass( 'hidden' );
       this.$el.find( '.ratings-view' ).toggleClass( 'hidden' );
-  },
-
-  ratingsHover: function( e ){
-    var parent     =     $( e.currentTarget ).parent(),
-        value      =     parent.data( 'value' ),
-        skill      =     parent.data( 'skill' ),
-        divId;
-
-    if ( e.type === 'mouseover' ) {
-      for (var i = 0; i <= value; i++) {
-        divId = '#rating-' + skill + '-' + i;
-        this.$el.find(divId).find("i").addClass("fa-heart");
-        this.$el.find(divId).find("i").removeClass( "fa-heart-o" );
-      }
-    }
-    else if ( e.type === 'mouseout' ) {
-      for (var i = 0; i <= value; i++) {
-        divId = '#rating-' + skill + '-' + i;
-        this.$el.find(divId).find("i").removeClass("fa-heart");
-        this.$el.find(divId).find("i").addClass( "fa-heart-o" );
-      }
-    }
   },
 
 // Critiques
