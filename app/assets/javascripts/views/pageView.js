@@ -579,7 +579,7 @@ showGenres: function(){
     currentUser.url = "/users/show/" + $('#current_id').val();
     currentUser.fetch({wait:true});
     this.currentGenre = "user";
-    this.renderPosts();
+    // this.renderPosts();
     // app.friends = new app.FriendCollection();
     // app.friendPainter = new app.FriendListView({
     //   collection: app.friends,
