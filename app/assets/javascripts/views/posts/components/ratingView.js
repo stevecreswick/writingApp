@@ -82,7 +82,7 @@ app.RatingView = Backbone.View.extend({
   saveRating: function( e ){
     var ratingValue    =    parseInt( $( e.currentTarget ).attr( 'data-value' ) ),
         skill          =    $( e.currentTarget ).attr( 'data-skill' ),
-        postId         =    this.model.get('id');
+        postId         =    parsetInt( this.model.get('id') );
         totalRatings   =    this.$el.find( '#rating-container-' + skill ).
                                      find( 'i' ).length;
 
