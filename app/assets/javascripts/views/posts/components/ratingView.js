@@ -35,16 +35,7 @@ app.RatingView = Backbone.View.extend({
 
     this.$el.append( $( this.template( this.templateData ) ) );
 
-    var ratings = ['overall', 'plot', 'characters', 'settings'];
-
-    // Apply ratings to DOM
-    for (rating in ratings) {
-      var skill = this.model.get( ratings[rating] );
-      var ratingValue = this.model.get( ratings[rating] ).user_vote;
-
-      this.setCurrentRating( skill, ratingValue );
-      this.applyRatingColor( skill, ratingValue );
-    }
+    this.initializeRatingsColors();
   },
 
   url: function() {
@@ -57,6 +48,18 @@ app.RatingView = Backbone.View.extend({
 
     'click     .new-rating'     :   'saveRating'
 
+  },
+
+  initializeRatingsColors: function() {
+    var ratings = ['overall', 'plot', 'characters', 'settings'];
+
+    for (rating in ratings) {
+      var skill = this.model.get( 'skill' );
+      var ratingValue = this.model.get('user_vote');
+
+      this.setCurrentRating( skill, ratingValue );
+      this.applyRatingColor( skill, ratingValue );
+    }
   },
 
   ratingsHover: function( e ){
@@ -82,7 +85,7 @@ app.RatingView = Backbone.View.extend({
   saveRating: function( e ){
     var ratingValue    =    parseInt( $( e.currentTarget ).attr( 'data-value' ) ),
         skill          =    $( e.currentTarget ).attr( 'data-skill' ),
-        postId         =    parsetInt( this.model.get('id') );
+        postId         =    this.model.get('id'),
         totalRatings   =    this.$el.find( '#rating-container-' + skill ).
                                      find( 'i' ).length;
 
@@ -90,13 +93,12 @@ app.RatingView = Backbone.View.extend({
     this.applyRatingColor( skill, ratingValue );
 
     var newRating = new app.Rating();
-    newRating.postId = this.model.postId;
-    newRating.url = this.url();
+    newRating.postId = parseInt( this.model.get('post_id') );
+    newRating.url = newRating.url();
     newRating.set( 'value', ratingValue );
     newRating.set( 'skill', skill );
     newRating.set( 'max_value', totalRatings );
     newRating.save();
-
   },
 
   applyRatingColor: function( skill, skillValue ) {
