@@ -35,11 +35,11 @@ Rails.application.routes.draw do
       scope '/:post_id' do
         namespace :critiques do
           get     '/query/:page'   =>    'critiques#query'
+          post    '/'              =>    'critiques#create'
 
           scope '/:id' do
             put     '/'     =>    'critiques#update'
             get     '/'     =>    'critiques#show'
-            post    '/'     =>    'critiques#create'
             delete  '/'     =>    'critiques#destroy'
 
             namespace :votes do
