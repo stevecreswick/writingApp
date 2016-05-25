@@ -16,30 +16,27 @@ app.PostView = Backbone.View.extend({
       this.template = _.template( $( '#post-preview-template' ).html() );
   },
 
-  getRatings: function() {
-    this.model.ratings = new app.Rating();
-    this.model.ratings.postId = this.model.get( 'id' );
 
-    this.ratingsList = new app.RatingView({
-      model: this.model.ratings,
+  getRatings: function( skill ) {
+
+    this.model.ratings = new app.RatingsCollection();
+    this.model.ratings.postId = parseInt( this.model.get( 'id' ) );
+    this.model.ratings.ratingId = 5;
+    this.model.ratings.skill = skill;
+
+    this.ratingsList = new app.RatingsListView({
+      collection: this.model.ratings,
       el: $( '#post-ratings' )
     });
 
     var scope = this;
-    this.model.ratings.fetch({url: this.model.ratings.url()})
-      .done(
-        function(data){
-          // console.log(data);
-          for (var key in data) {
-            if (data.hasOwnProperty(key)) {
-              // console.log(key + " -> ");
-              // console.log( data[key] );
-            }
+    this.model.ratings
+      .fetch( { url: this.model.ratings.url() } )
+        .done(
+          function(){
+            scope.ratingsList.render();
           }
-          scope.ratingsList.render();
-        }
-      );
-
+        );
   },
 
   render: function(){
@@ -50,16 +47,10 @@ app.PostView = Backbone.View.extend({
       post: this.model.toJSON(),
       user: app.currentUser
     }
-    console.log('td');
-    console.log(this.templateData);
 
-    console.log('model');
-    console.log(this.model);
     this.$el.append( $( this.template( this.templateData ) ) );
 
     this.renderCritiques();
-    this.getRatings();
-
   },
 
   events: {
@@ -84,6 +75,7 @@ app.PostView = Backbone.View.extend({
     this.reviewing = !this.reviewing;
     $post.toggleClass( 'post-open' );
     this.render();
+    this.getRatings( 'overall' );
   },
 
   toggleFeedbackType: function() {
