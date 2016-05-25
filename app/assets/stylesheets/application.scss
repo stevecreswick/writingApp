@@ -173,18 +173,17 @@ $scifi-pattern: url('stardust.png');
         height: 100%;
       }
 
-      .header-bar {
-        // background: white;
-        padding-top: 1em;
-        padding-bottom: -1em;
-        max-height: 100px;
-        // margin-bottom: -1em;
+      // Refactored
 
-        .headline{
-          max-height: 100px;
-        }
+      .header-bar {
+        max-height: 60px;
+        overflow: hidden;
+        z-index: 9;
+        position: fixed;
+        width: 100%;
       }
 
+      // ------
       #friend-page{
         margin-top: 2em;
 
@@ -213,15 +212,6 @@ $scifi-pattern: url('stardust.png');
           // -webkit-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
           // box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
           // -moz-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-        }
-
-        // Posts
-        #post-list{
-          width:100%;
-          overflow: auto;
-          padding: 5em 1em 3em 1em;
-          /*border-left: 9px solid #545454;*/
-
         }
 
         #critique-editor-holder{
@@ -452,19 +442,6 @@ ul.dropdown-menu{
 
 div.nav-item:hover{
   cursor: pointer;
-}
-
-.genre-links{
-  padding: 1em 0 1em 0;
-  left: 0;
-  right: 0;
-  font-size: 1.1em;
-  width:100%;
-}
-
-.genre-links * {
-  display: inline-block;
-  color: black;
 }
 
 div.genres{
