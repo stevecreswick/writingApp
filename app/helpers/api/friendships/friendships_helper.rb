@@ -1,4 +1,4 @@
-module Api::FriendshipsHelper
+module Api::Friendships::FriendshipsHelper
 
 def request_friend(user, friend)
   test = check_if_friends(user, friend)
