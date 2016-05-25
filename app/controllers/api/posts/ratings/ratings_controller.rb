@@ -1,45 +1,25 @@
 class Api::Posts::Ratings::RatingsController < ApplicationController
 
   include SessionsHelper
-  include UsersHelper
+  include Api::Posts::Ratings::RatingsHelper
 
   respond_to :html, :json
 
-
     def create
-      @post = Post.find(params[:id])
-
-      # If a rating for that skill exists
+      @post = Post.find( params[ :id ] )
 
       if current_user.id == @post.user_id
-        puts '**************** Users Post ******************'
 
-        render :nothing => true, :status => 500
+        render :nothing => true, :status => 311
+      elsif already_rated( @post, rating_params[ :skill ] )
+
+        update_rating
       else
-          @rating = Rating.create( rating_params )
-          @rating.update( {
-            post_id: @post.id,
-            user_id: current_user.id
-          } );
 
-          if @rating.save
-            render json: @post
-          end
+        new_rating
       end
-    end
 
-    def update
-        @post = Post.find( params[ :id ] )
-        if current_user.id == @post.id
-          redirect_to post( @post ), :alert => "You cannot rate for your own post"
-        else
-          @rating = current_user.ratings.post( @post.id )
-        if @rating.update_attributes( rating_params )
-          respond_to do | format |
-            format.html { redirect_to post( @post ), :notice => "Your rating has been updated" }
-          end
-        end
-      end
+      render :nothing => true, :status => 200
     end
 
     def query
@@ -105,7 +85,16 @@ class Api::Posts::Ratings::RatingsController < ApplicationController
     private
 
     def rating_params
-      params.permit(:user_id, :post_id, :value, :skill)
+      params
+      .require( :rating )
+      .permit(
+        :id,
+        :user_id,
+        :post_id,
+        :value,
+        :skill,
+        :max_value
+      )
     end
 
 end
