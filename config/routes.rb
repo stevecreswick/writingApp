@@ -10,19 +10,22 @@ Rails.application.routes.draw do
   # Landing Page for Logged Out Users
   get '/welcome' => 'welcome#welcome', as: :welcome
 
-# API Routes
   namespace :api do
 
     namespace :posts do
-
       get '/main/:page' => 'main_feed_posts#query'
       get '/genre/:genre/:page' => 'genre_posts#query'
       get '/newest/:page' => 'newest_posts#query'
       get '/top_rated/:page' => 'top_rated_posts#query'
       get '/friends' => 'friends_posts#query'
       get '/users/:user_id' => 'user_posts#query'
+      post '/' => 'posts#create'
 
       scope '/:id' do
+        put       '/'     =>    'posts#update'
+        delete    '/'     =>    'posts#destroy'
+        get       '/'     =>    'posts#show'
+
         namespace :ratings do
           get     '/'     =>    'ratings#query'
           post    '/'     =>    'ratings#create'
@@ -31,12 +34,13 @@ Rails.application.routes.draw do
 
       scope '/:post_id' do
         namespace :critiques do
-          get     '/query/:page'   =>      'critiques#query'
+          get     '/query/:page'   =>    'critiques#query'
 
           scope '/:id' do
-            put     '/'            =>      'critiques#update'
-            get     '/'            =>      'critiques#show'
-            delete  '/'            =>      'critiques#destroy'
+            put     '/'     =>    'critiques#update'
+            get     '/'     =>    'critiques#show'
+            post    '/'     =>    'critiques#create'
+            delete  '/'     =>    'critiques#destroy'
 
             namespace :votes do
               post    '/'       =>      'votes#create'
@@ -45,27 +49,7 @@ Rails.application.routes.draw do
           end
         end
       end
-
     end
-
-    # Post API
-    get '/posts' => 'posts#index'
-    get '/posts/:id' => 'posts#show'
-    post '/posts' => 'posts#create'
-    put '/posts/:id' => 'posts#update'
-    delete '/posts/:id' => 'posts#destroy'
-
-    # ? -------------
-    get '/posts/sorted/:genre' => 'posts#genre'
-    get '/posts/:id/edit' => 'posts#edit'
-
-    # Critique API
-    get '/posts/:post_id/critiques' => 'critiques#index'
-    get '/posts/:post_id/critiques/page/:page' => 'critiques#page'
-    get '/posts/:post_id/critiques/:id' => 'critiques#show'
-    post '/posts/:post_id/critiques' => 'critiques#create'
-
-
 
     # Writing Prompt API
     get '/writing_prompts' => 'writing_prompts#index'
@@ -78,56 +62,43 @@ Rails.application.routes.draw do
     get '/writing_prompts/reddit' => 'writing_prompts#reddit'
     get '/writing_prompts/writeaway/page/:page' => 'writing_prompts#submitted'
 
-
     # Friendships API
     get'/friendships' => 'friendships#index', as: :friends
     get'/friendships/pending' => 'friendships#pending'
     post'/friendships/:friend_id' => 'friendships#create', as: :new_friend
     delete'/friendships/:friend_id' => 'friendships#destroy', as: :remove_friend
 
-
+    # Challenges
     get '/friendships/:id/challenges' => 'challenges#index'
     get '/friendships/:id/challenges/:challenge_id' => 'challenges#show'
     post '/friendships/:id/challenges' => 'challenges#create'
     delete '/friendships/:id/challenges/:challenge_id' => 'challenges#destroy'
     put '/friendships/:id/challenges/:challenge_id' => 'challenges#update'
-
     post '/friends/:friend_id/challenges' => 'challenges#create_friend'
-
     get '/challenges/received/:page' => 'challenges#received'
     get '/challenges/completed/:page' => 'challenges#completed'
     get '/challenges/sent/:page' => 'challenges#sent'
     get '/challenges/awaiting/:page' => 'challenges#awaiting_response'
-
     put '/friendships/:id/challenges/:challenge_id' => 'challenges#update'
-
-    # Tip Votes
-    post '/writing_tips/:id/tip_votes' => 'tip_votes#create'
-    # get '/posts/:post_id/critiques/:id/tip_votes' => 'tip_votes#user_vote'
 
     # Prompt Votes
     post '/writing_prompts/:id/prompt_votes' => 'prompt_votes#create'
 
 
     # Writing Tips
+      # get '/writing_tips' => 'writing_tips#index'
+      # get '/writing_tips/sorted/:type/:page' => 'writing_tips#sorted'
+      # get '/writing_tips/:id' => 'writing_tips#show'
+      # get '/writing_tips/edit' => 'writing_tips#edit'
+      # put '/writing_tips/:id' => 'writing_tips#update'
+      # get '/writing_tips/new' => 'writing_tips#new'
+      # post '/writing_tips' => 'writing_tips#create'
+      # delete '/writing_tips/:id' => 'writing_tips#delete'
+      # get '/writing_tips/page/:page' => 'writing_tips#page'
 
-      get '/writing_tips' => 'writing_tips#index'
-      get '/writing_tips/sorted/:type/:page' => 'writing_tips#sorted'
-
-
-      get '/writing_tips/:id' => 'writing_tips#show'
-
-      get '/writing_tips/edit' => 'writing_tips#edit'
-
-      put '/writing_tips/:id' => 'writing_tips#update'
-
-      get '/writing_tips/new' => 'writing_tips#new'
-
-      post '/writing_tips' => 'writing_tips#create'
-
-      delete '/writing_tips/:id' => 'writing_tips#delete'
-
-      get '/writing_tips/page/:page' => 'writing_tips#page'
+    # Tip Votes
+    # post '/writing_tips/:id/tip_votes' => 'tip_votes#create'
+    # get '/posts/:post_id/critiques/:id/tip_votes' => 'tip_votes#user_vote'
 
   end
 
@@ -144,18 +115,13 @@ get '/users/edit' => 'users#edit', as: :edit
 get '/users/search/:search/:page' => 'users#search'
 
 put '/users/:id' => 'users#update'
-
-
 get '/users/:user_id/posts/:post_id' => 'users#show_post'
-
 get '/users/friends/:page' => 'users#friends'
 get '/users/all_friends' => 'users#all_friends'
 get '/users/add_friends/:page' => 'users#add_friends', as: :add_friends
 get '/users/leaderboard/:page' => 'users#writers_leaderboard', as: :leaderboard
 get '/users/top_readers/:page' => 'users#readers_leaderboard'
-
 get '/users/followers/:page' => 'users#followers'
-
 post '/users/request' => 'users#request'
 
 # Session Routes
