@@ -2,14 +2,19 @@
 // controls rendering of post-list or post-review
 
 var app = app || {};
-app.currentGenre = "main";
-app.currentPage = "0";
+
+// Global Variables
+app.currentEndPoint = 'main';
+app.currentPage = 0;
+
+// Post Page View
 app.PostPage = Backbone.View.extend( {
   tagName: 'div',
   className: 'post',
   template: _.template( $('#post-page-template').html() ),
 
   events: {
+    'click .post-sort'        :   'updateFeed',
   },
 
   render: function() {
@@ -18,20 +23,35 @@ app.PostPage = Backbone.View.extend( {
     this.renderPosts();
   },
 
-  renderPosts: function(options){
+  renderPosts: function( options ){
 
     app.posts = new app.PostCollection();
-    app.posts.genre = app.currentGenre;
+    app.posts.endPoint = app.currentEndPoint;
     app.posts.page = app.currentPage;
 
-    app.postPainter = new app.PostListView({
+    app.postPainter = new app.PostListView( {
       collection: app.posts,
-      el: $( '#post-list ')
-    });
+      el: $( '#post-list' )
+    } );
 
-    app.posts.fetch({url: app.posts.url()}).done(function(){
-      app.postPainter.render();
-    });
+    app.posts.
+      fetch(
+        {
+          url: app.posts.url()
+        }
+      ).
+      done(
+        function(){
+          app.postPainter.render();
+        }
+      );
   },
+
+  updateFeed: function( e ) {
+    app.currentEndPoint = $( e.currentTarget ).attr( 'data-endpoint' );
+    app.currentPage = 0;
+
+    this.renderPosts();
+  }
 
 } );
