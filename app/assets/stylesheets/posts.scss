@@ -14,12 +14,48 @@ html {
   box-sizing: border-box;
 }
 
+.post-menu {
+  height: 100%;
+  width: 200px;
+  position: fixed;
+  left: 0;
+  background: orange;
+  padding: 100px 40px 0 5px;
+  @include flex-container(column, nowrap, flex-start, flex-start);
+
+  ul {
+    width: 100%;
+
+    li {
+      width: 100%;
+      margin-bottom: 14px;
+      text-decoration: none;
+      text-align: left;
+      list-style: none;
+
+      a {
+        color: black;
+        font-size: 14px;
+      }
+    }
+  }
+}
+
 .post-feed {
+  @include flex-container(row, wrap, flex-end, flex-start);
+  width: 100%;
+  background: #2e2e2e;
+  padding: 5em 0 0 0;
+
+  .post-preview {
+    width: 40%;
+  }
 
   .post-preview-container {
-    height: 20em;
-    width: 100%;
-    margin: 1em 0 2em 0;
+    display: inline-block;
+    height: 30em;
+    width: 80%;
+    margin: 1em 2em 2em 2em;
     padding: 1em 1em 1em 1em;
     background-color: ghostwhite;
     overflow-x: scroll;
@@ -47,7 +83,7 @@ html {
     bottom: 0;
     left: 0;
     right: 0;
-    z-index: 10;
+    z-index: 1000;
     height: calc( 100% + 40px );
     width: calc( 100% + 40px );
     padding: 0em 5em 1em 3em;
@@ -174,11 +210,15 @@ html {
                 font-size: 16px;
               }
 
-              i {
-                margin-right: 5px;
-                color: pink;
+              .rating {
+                display: inline-block;
 
-                // Fill Heart Hover Behavior in Post View.js
+                i {
+                  margin-right: 5px;
+                  color: pink;
+
+                  // Heart Hover Behavior in Post View.js
+                }
               }
             }
           }
