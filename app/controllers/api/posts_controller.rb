@@ -2,7 +2,7 @@ class Api::PostsController < ApplicationController
 
 include SessionsHelper
 include UsersHelper
-include Api::PostsHelper
+include Api::Posts::PostsHelper
 include ActionView::Helpers::DateHelper
 
 respond_to :html, :json

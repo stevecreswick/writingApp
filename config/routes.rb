@@ -13,36 +13,68 @@ Rails.application.routes.draw do
 # API Routes
   namespace :api do
 
+    namespace :posts do
+
+      # Main Feed
+      get '/main/:page' => 'main_feed_posts#query'
+
+      # Genre
+      get '/genre/:genre/:page' => 'genre_posts#query'
+
+      # Newest
+      get '/newest/:page' => 'newest_posts#query'
+
+      # Top Rated
+      get '/top_rated/:page' => 'top_rated_posts#query'
+
+      # Friends Posts
+      get '/friends' => 'friends_posts#query'
+
+      # User Posts
+      get '/users/:user_id' => 'user_posts#query'
+
+      # Ratings
+      scope '/:id' do
+        namespace :ratings do
+          get     '/'     =>    'ratings#query'
+          post    '/'     =>    'ratings#create'
+        end
+      end
+
+      # Critiques
+      scope '/:post_id' do
+        namespace :critiques do
+          get     '/query/:page'   =>      'critiques#query'
+          put     '/:id'           =>      'critiques#update'
+          get     '/:id'           =>      'critiques#show'
+          delete  '/:id'           =>      'critiques#destroy'
+
+          # Critique Votes
+          post  '/:id/votes'       =>       'votes#create'
+          get   '/:id/votes'       =>       'votes#user_vote'
+        end
+      end
+
+    end
+
     # Post API
     get '/posts' => 'posts#index'
-    get '/posts/query/:genre/:page' => 'posts#query'
-    get '/posts/:post_id/critiques/query/:page' => 'critiques#query'
-    put '/posts/:post_id/critiques/:id' => 'critiques#update'
-    get '/posts/:post_id/critiques/:id' => 'critiques#show'
-
-
-    get '/posts/sorted/:genre' => 'posts#genre'
     get '/posts/:id' => 'posts#show'
-    get '/posts/users/:user_id' => 'posts#user_posts'
     post '/posts' => 'posts#create'
-    delete '/posts/:id' => 'posts#destroy'
-    get '/posts/:id/edit' => 'posts#edit'
     put '/posts/:id' => 'posts#update'
+    delete '/posts/:id' => 'posts#destroy'
 
-    # Post Ratings
-    post '/posts/:id/ratings' => 'ratings#create'
-    get '/posts/:id/ratings' => 'ratings#user_rating'
+    # ? -------------
+    get '/posts/sorted/:genre' => 'posts#genre'
+    get '/posts/:id/edit' => 'posts#edit'
 
     # Critique API
     get '/posts/:post_id/critiques' => 'critiques#index'
     get '/posts/:post_id/critiques/page/:page' => 'critiques#page'
     get '/posts/:post_id/critiques/:id' => 'critiques#show'
     post '/posts/:post_id/critiques' => 'critiques#create'
-    delete '/posts/:post_id/critiques/:id' => 'critiques#destroy'
 
-    # Critique Votes
-    post '/posts/:post_id/critiques/:id/votes' => 'votes#create'
-    get '/posts/:post_id/critiques/:id/votes' => 'votes#user_vote'
+
 
     # Writing Prompt API
     get '/writing_prompts' => 'writing_prompts#index'
@@ -75,9 +107,6 @@ Rails.application.routes.draw do
     get '/challenges/completed/:page' => 'challenges#completed'
     get '/challenges/sent/:page' => 'challenges#sent'
     get '/challenges/awaiting/:page' => 'challenges#awaiting_response'
-
-
-
 
     put '/friendships/:id/challenges/:challenge_id' => 'challenges#update'
 

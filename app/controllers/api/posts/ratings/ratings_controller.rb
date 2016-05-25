@@ -1,4 +1,4 @@
-class Api::RatingsController < ApplicationController
+class Api::Posts::Ratings::RatingsController < ApplicationController
 
   include SessionsHelper
   include UsersHelper
@@ -45,15 +45,13 @@ class Api::RatingsController < ApplicationController
     def query
       @post = Post.find( params[ :id ] )
       skill = params[ :skill ]
-
-      if @post.ratings.where( { skill: skill, user_id: current_user.id } ).last
-        skills = ['overall', 'plot', 'characters', 'settings']
-        ratings = []
-
-        skills.each do | skill |
+      skills = ['overall', 'plot', 'characters', 'settings']
+      ratings = []
+      skills.each do | skill |
+        # if @post.ratings.where( { skill: skill, user_id: current_user.id } ).last
           rating = @post.ratings.where( { skill: skill, user_id: current_user.id } ).last
-          puts rating
           data = rating.as_json
+
           if data
             data['vote_count'] = 0
             Rating.where(:skill => skill).find_each do |rating|
@@ -69,18 +67,22 @@ class Api::RatingsController < ApplicationController
             else
               data['max_value'] = 5
             end
-            ratings.push( data )
 
+            data['post_author_id'] = @post.user_id
+
+            ratings.push( data )
           else
-            data = {}.as_json
+            data = {}
+
             data['skill'] = skill
             data['is_rated'] = false
             data['user_vote'] = 0
             data['value'] = 0
             data['total_votes'] = @post.ratings.where( { skill: skill } ).length
             data['post_id'] = @post.id
-            data['user_id'] = current_user.id
+            data['post_author_id'] = @post.user_id
             data['vote_count'] = 0
+
             Rating.where(:skill => skill).find_each do |rating|
               data['vote_count'] += rating.value.to_i
             end
@@ -90,15 +92,14 @@ class Api::RatingsController < ApplicationController
             else
               data['max_value'] = 5
             end
+            data = data.as_json
 
             ratings.push( data )
           end
         end
-        render json: ratings
-      else
-        render :nothing, :status => 300
-      end
-    end
+      render json: ratings
+    else
+  end
 
 
     private

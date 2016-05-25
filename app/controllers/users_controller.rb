@@ -45,7 +45,6 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     @user.update(user_params)
-    binding.pry
     if @user.save
       # respond_to do |format|
       redirect_to main_path

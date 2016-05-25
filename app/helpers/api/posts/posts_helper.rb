@@ -1,4 +1,4 @@
-module Api::PostsHelper
+module Api::Posts::PostsHelper
 
   def current_api_user!
     if token = params[:token] || env['HTTP_TOKEN']
@@ -17,6 +17,39 @@ module Api::PostsHelper
   end
 
 
+# Fetch Posts
+  def get_posts( end_point, genres, page )
+
+    # Toggle between New and Top Rated
+    # Toggle Between Length
+    # Toggle between Genres
+
+    # Newest (All sorts by New)
+    # Top Rated (Top Rated)
+    # Friends
+    # User Posts
+
+    # Hottest?  New and Top Rated?
+
+
+    if end_point == "all"
+      @posts = Post.paginate(:page => page).order('created_at DESC')
+    elsif end_point == 'user'
+      @posts = current_user.posts.paginate(:page => page).order('created_at DESC')
+    elsif end_point == 'main'
+      @posts = main_feed( genres ).paginate( :page => page )
+    else
+      @posts = Post.where({genre: genre}).paginate(:page => page)
+    end
+
+    @json_posts = @posts.map do |post|
+      apply_post_data( post )
+    end
+
+    return @json_posts
+  end
+
+# Friends Posts
   def friend_posts
     friend_posts = []
     current_user.friends.each do |friend|
@@ -27,33 +60,21 @@ module Api::PostsHelper
     return friend_posts
   end
 
-  def main_feed
+# Main Feed
+  def main_feed( genres )
     ids = current_user.friend_ids
     ids.push( current_user.id )
-    @main_feed = Post.where({user_id: ids}).order('created_at DESC')
-    return @main_feed
-  end
 
-  def get_posts_by_genre( page, genre )
-    if genre == "all"
-      @posts = Post.paginate(:page => page).order('created_at DESC')
-    elsif genre == 'user'
-      @posts = current_user.posts.paginate(:page => page).order('created_at DESC')
-    elsif genre == 'main'
-      @posts = main_feed.paginate( :page => page )
+    if genres
+      @main_feed = Post.where( { user_id: ids } ).
+                        where( { genre: genres } ).
+                        order('created_at ASC')
     else
-      @posts = Post.where({genre: genre}).paginate(:page => page)
-    end
-  end
-
-  def get_posts( page, genre )
-    get_posts_by_genre( page, genre )
-
-    @json_posts = @posts.map do |post|
-      apply_post_data( post )
+      @main_feed = Post.where( { user_id: ids } ).
+                        order('created_at ASC')
     end
 
-    return @json_posts
+    return @main_feed
   end
 
   def apply_post_data( post )

@@ -1,4 +1,4 @@
-class Api::VotesController < ApplicationController
+class Api::Posts::Critiques::VotesController < ApplicationController
 
   include SessionsHelper
   include UsersHelper
