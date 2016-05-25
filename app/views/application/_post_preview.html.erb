@@ -1,6 +1,9 @@
 <div class="post-preview-container read-full-post">
   <h3 class="post-preview-title">
     <%%= post.title ? post.title : "Untitled" %>
+    <span class="post-rating">
+      <%%= post.avg_rating ? parseFloat( post.avg_rating ).toFixed( 2 )  : "Not Rated" %>
+    </span>
   </h3>
   <div class="post-created-at">
     <%%= post.created_at_in_words ? post.created_at_in_words + " ago" : "" %>
