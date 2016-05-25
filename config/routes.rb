@@ -15,25 +15,13 @@ Rails.application.routes.draw do
 
     namespace :posts do
 
-      # Main Feed
       get '/main/:page' => 'main_feed_posts#query'
-
-      # Genre
       get '/genre/:genre/:page' => 'genre_posts#query'
-
-      # Newest
       get '/newest/:page' => 'newest_posts#query'
-
-      # Top Rated
       get '/top_rated/:page' => 'top_rated_posts#query'
-
-      # Friends Posts
       get '/friends' => 'friends_posts#query'
-
-      # User Posts
       get '/users/:user_id' => 'user_posts#query'
 
-      # Ratings
       scope '/:id' do
         namespace :ratings do
           get     '/'     =>    'ratings#query'
@@ -41,17 +29,20 @@ Rails.application.routes.draw do
         end
       end
 
-      # Critiques
       scope '/:post_id' do
         namespace :critiques do
           get     '/query/:page'   =>      'critiques#query'
-          put     '/:id'           =>      'critiques#update'
-          get     '/:id'           =>      'critiques#show'
-          delete  '/:id'           =>      'critiques#destroy'
 
-          # Critique Votes
-          post  '/:id/votes'       =>       'votes#create'
-          get   '/:id/votes'       =>       'votes#user_vote'
+          scope '/:id' do
+            put     '/'            =>      'critiques#update'
+            get     '/'            =>      'critiques#show'
+            delete  '/'            =>      'critiques#destroy'
+
+            namespace :votes do
+              post    '/'       =>      'votes#create'
+              get     '/'       =>      'votes#user_vote'
+            end
+          end
         end
       end
 
