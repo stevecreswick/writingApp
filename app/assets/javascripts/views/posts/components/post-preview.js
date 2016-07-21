@@ -20,7 +20,7 @@ app.PostView = Backbone.View.extend({
   getRatings: function( skill ) {
 
     this.model.ratings = new app.RatingsCollection();
-    this.model.ratings.postId = parseInt( this.model.get( 'id' ) );
+    this.model.ratings.postId = parseInt( this.model.get( 'data' )[ 'id' ] );
     this.model.ratings.ratingId = 5;
     this.model.ratings.skill = skill;
 
@@ -47,16 +47,18 @@ app.PostView = Backbone.View.extend({
       post: this.model.toJSON(),
       user: app.currentUser
     }
-
+    console.log(this.model.get('avg_rating'));
     this.$el.append( $( this.template( this.templateData ) ) );
 
-    this.renderCritiques();
   },
 
   events: {
     'click  .read-full-post'    :   'togglePost',
     'click  .close-full-post'   :   'togglePost',
     'click  .review-link'       :   'toggleFeedbackType',
+
+    'click  .delete-post'       :   'confirmDelete',
+    'click  .destroy-post'       :  'deletePost',
 
     'click  #create-critique'   :   'createCritique'
   },
@@ -73,7 +75,13 @@ app.PostView = Backbone.View.extend({
       $( '#main-page' ).css( { 'overflow' : 'hidden' } );
 
     this.reviewing = !this.reviewing;
+
     $post.toggleClass( 'post-open' );
+
+    if ($post.hasClass( 'post-open' )) {
+      this.renderCritiques();
+    }
+
     this.render();
     this.getRatings( 'overall' );
   },
@@ -83,20 +91,38 @@ app.PostView = Backbone.View.extend({
       this.$el.find( '.ratings-view' ).toggleClass( 'hidden' );
   },
 
+  confirmDelete: function() {
+    this.$el.find( '.confirm-delete-post' ).toggleClass( 'hidden' );
+  },
+
+  deletePost: function() {
+    // var scope = this;
+    console.log('deleting');
+    this.model.id = this.model.get( 'data' )[ 'id' ];
+    this.model.destroy();
+      // .done(
+      //   function() {
+      //     scope.$el.remove();
+      //   }
+      // );
+    this.$el.remove();
+  },
+
 // Critiques
   renderCritiques: function() {
-    this.model.critiques = new app.CritiqueCollection();
-    this.model.critiques.postId = this.model.get( 'id' );
-
-    this.critiquesFeed = new app.CritiqueListView({
-      collection: this.model.critiques,
-      el: $('#feedback-feed')
-    });
+    this.critiques = new app.CritiqueCollection();
+    this.critiques.postId = this.model.get( 'data' )[ 'id' ];
 
     var scope = this;
-    this.model.critiques.fetch({url: this.model.critiques.url()})
+
+    this.critiques.fetch( { url: this.critiques.url() } )
       .done(
-        function(){
+        function() {
+          scope.critiquesFeed = new app.CritiqueListView( {
+            collection: scope.critiques,
+            el: $('#feedback-feed')
+          } );
+
           scope.critiquesFeed.render();
         }
       );
@@ -105,8 +131,8 @@ app.PostView = Backbone.View.extend({
   createCritique: function() {
     var scope = this;
     var newMessage = $( '#critique-text' ).val();
-    var urlModel = '/api/posts/' + this.model.get('id') + '/critiques'
-    this.model.critiques.create(
+    var urlModel = '/api/posts/' + this.model.get( 'data' )[ 'id' ] + '/critiques'
+    this.critiques.create(
       {
         message: newMessage,
         username: app.currentUser.username,

@@ -45,6 +45,9 @@ app.PostPage = Backbone.View.extend( {
           app.postPainter.render();
         }
       );
+
+      app.currentPage += 1;
+
   },
 
   updateFeed: function( e ) {

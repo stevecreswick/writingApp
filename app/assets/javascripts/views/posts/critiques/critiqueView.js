@@ -14,14 +14,14 @@ app.CritiqueView = Backbone.View.extend({
   deletingTemplate: _.template( $( '#delete-critique-template' ).html() ),
 
   // State
-  // reading, editing, deleting
+  // [reading, editing, deleting]
   state: 'reading',
 
   // ---------------------------------------------------------------------------
   // Initialize
 
   initialize: function(){
-    this.listenTo( this.model, 'change', this.render );
+    // this.listenTo( this.model, 'change', this.render );
     this.postId = this.model.get('post_id');
     this.crtiqueId = this.model.get('id');
   },

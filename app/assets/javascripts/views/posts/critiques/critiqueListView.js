@@ -5,7 +5,7 @@ app.CritiqueListView = Backbone.View.extend({
   currentPage: 0,
 
   initialize: function() {
-    this.listenTo(this.collection, 'add', this.render);
+    this.listenTo( this.collection, 'add', this.render );
   },
 
   events: {
@@ -17,13 +17,16 @@ app.CritiqueListView = Backbone.View.extend({
     this.$el.empty();
       var feedback = this.collection.models;
       var view;
+      // console.log(feedback);
       for ( var i = 0; i < feedback.length; i++ ) {
         view = new app.CritiqueView( { model: feedback[ i ] } );
         view.render();
+        // console.log(view.$el);
         this.$el.append( view.$el );
+        console.log(this.$el.length);
       }
 
-      this.renderButtons( feedback.length );
+      // this.renderButtons( feedback.length );
     },
 
     renderMore: function(){

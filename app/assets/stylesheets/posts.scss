@@ -19,7 +19,7 @@ html {
   width: 200px;
   position: fixed;
   left: 0;
-  background: orange;
+  background: white;
   padding: 100px 40px 0 5px;
   @include flex-container(column, nowrap, flex-start, flex-start);
 
@@ -44,7 +44,8 @@ html {
 .post-feed {
   @include flex-container(row, wrap, flex-end, flex-start);
   width: 100%;
-  background: #2e2e2e;
+  height: 100%;
+  // background: #2e2e2e;
   padding: 5em 0 0 0;
 
   .post-preview {
@@ -159,6 +160,7 @@ html {
           width: 50%;
           height: calc(100% - 11em);
           display: inline-block;
+          overflow: scroll;
 
           .post-title {
             width: 100%;
@@ -227,6 +229,20 @@ html {
               }
             }
           }
+
+          .user-controls {
+            .delete-post {
+              color: red;
+            }
+
+            .confirm-delete-post {
+
+            }
+
+            .edit-post {
+              color: blue;
+            }
+          }
         }
 
         .review-display {
@@ -282,6 +298,20 @@ html {
           }
         }
       }
+    }
+  }
+
+  .button-container {
+    width: 100%;
+    height: 50px;
+    @include flex-container( row, nowrap, center, center );
+
+    .more-button {
+      width: 400px;
+      height: 50px;
+      background: blue;
+      // position: absolute;
+      // bottom: 0;
     }
   }
 }

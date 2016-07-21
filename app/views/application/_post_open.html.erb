@@ -1,4 +1,4 @@
-<div class="post-container post-open" id="<%%= 'post-' + ( post.id || "" ) %>">
+<div class="post-container post-open" id="<%%= 'post-' + ( post.data.id || "" ) %>">
   <div id="full-post">
     <!-- Renamed from review-post -->
     <div class="post-header">
@@ -12,13 +12,13 @@
 
     <div class="post-info-bar">
       <div class="genre">
-        <%%= post.genre || "" %>
+        <%%= post.data.genre || "" %>
       </div>
       <div class="prompt">
-        <%%= post.prompt || "undefined" %>
+        <%%= post.data.prompt || "undefined" %>
       </div>
       <div class="average-rating">
-        <%%= post.avg_rating || "0" %>
+        <%%= post.feedback.avg_rating || "0" %>
       </div>
     </div>
 
@@ -26,27 +26,47 @@
 
       <article id="post-display" class="post-display">
         <h3 class="post-title">
-        <%%= post.title || "" %>
+        <%%= post.data.title || "" %>
           <span class="post-read-time">
-          <%%= ( post.time_completed || "" ) + " seconds" %>
+          <%%= ( post.data.time_completed || "" ) + " seconds" %>
           </span>
         </h3>
         <div class="author">
           <div class="author-image">
-            <img src="<%%= post.image_url || "" %>" alt="" />
+            <img src="<%%= post.author.image_url || "" %>" alt="" />
           </div>
           <div class="author-name">
-            <%%= post.username %>
+            <%%= post.author.username %>
           </div>
         </div>
         <p>
           <div class="post-message">
-            <%%= post.message %>
+            <%%= post.data.message %>
           </div>
         </p>
 
         <div id="post-ratings">
           <!-- Controlled by Ratings.js -->
+        </div>
+
+        <div class="user-controls">
+          <a class="delete-post">
+            Delete
+          </a>
+          <a class="edit-post">
+            Edit
+          </a>
+          <div class="confirm-delete-post hidden">
+            Are You Sure you want to Delete this post? <br>
+            This cannot be undone.
+
+            <a href="#" class="destroy-post">
+              Delete Post
+            </a>
+            <a href="#" class="delete-post">
+              Cancel
+            </a>
+          </div>
         </div>
       </article>
 

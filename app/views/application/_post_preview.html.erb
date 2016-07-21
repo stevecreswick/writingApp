@@ -1,18 +1,18 @@
 <div class="post-preview-container read-full-post">
   <h3 class="post-preview-title">
-    <%%= post.title ? post.title : "Untitled" %>
+    <%%= post.data.title ? post.data.title : "Untitled" %>
     <span class="post-rating">
-      <%%= post.avg_rating ? parseFloat( post.avg_rating ).toFixed( 2 )  : "Not Rated" %>
+      <%%= post.feedback.avg_rating ? parseFloat( post.feedback.avg_rating ).toFixed( 2 )  : "Not Rated" %>
     </span>
   </h3>
   <div class="post-created-at">
-    <%%= post.created_at_in_words ? post.created_at_in_words + " ago" : "" %>
+    <%%= post.data.created_at_in_words ? post.data.created_at_in_words + " ago" : "" %>
   </div>
   <div class="post-preview-author-genre">
-    <%%= post.genre ? post.genre.toLowerCase() : "Fiction"  %> by <%%= post.username ? post.username : "anonymous" %>
+    <%%= post.data.genre ? post.data.genre.toLowerCase() : "Fiction"  %> by <%%= post.author.username ? post.author.username : "anonymous" %>
   </div>
   <p class="post-preview-snippet">
-    <%%= post.message ? post.message.substring(0,250) + "<br><br> Read more..." : "Click for more..." %>
+    <%%= post.data.message ? post.data.message.substring(0,250) + "<br><br> Read more..." : "Click for more..." %>
   </p>
-  <input type="hidden" name="post[id]" id="post-preview-id" value="<%%= post.id ? post.id : 0 %>">
+  <input type="hidden" name="post[id]" id="post-preview-id" value="<%%= post.data.id ? post.data.id : 0 %>">
 </div>

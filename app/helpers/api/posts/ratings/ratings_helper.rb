@@ -1,8 +1,6 @@
 module Api::Posts::Ratings::RatingsHelper
 
-
   def already_rated( post, skill )
-
     rating = post.ratings.where( { skill: skill, user_id: current_user.id } ).last
 
     if rating
@@ -20,11 +18,14 @@ module Api::Posts::Ratings::RatingsHelper
                   skill: 'overall',
                   user_id: current_user.id
                 } ).last
+
     rating.update( {
       value: rating_params[ :value ]
     } );
 
-    rating.save
+    if rating.save
+      @post.update_avg_rating
+    end
   end
 
   def new_rating
@@ -34,5 +35,4 @@ module Api::Posts::Ratings::RatingsHelper
       user_id: current_user.id
     } );
   end
-
 end

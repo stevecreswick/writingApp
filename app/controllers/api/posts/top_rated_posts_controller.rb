@@ -9,7 +9,7 @@ respond_to :html, :json
 
   def query
     page = params[:page].to_i + 1
-    get_posts( page, params[ :genre ] )
+    get_posts( 'top_rated', page, params[ :genre ] )
     render json: @json_posts
   end
 

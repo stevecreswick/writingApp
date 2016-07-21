@@ -10,7 +10,6 @@ class Api::Posts::Critiques::CritiquesController < ApplicationController
   # before_action :current_api_user!
 
   def query
-
   # Account for Page Starting at 0
   page = params[:page].to_i + 1
 
@@ -76,6 +75,18 @@ class Api::Posts::Critiques::CritiquesController < ApplicationController
       end
 
     render json: data
+  end
+
+  def create
+    @critique = Critique.new(critique_params)
+
+    if @critique.save
+      puts  "Saved successful-like"
+      render json: @critique
+    else
+      puts "Failed to save-or"
+      render json: @critique
+    end
   end
 
   def update

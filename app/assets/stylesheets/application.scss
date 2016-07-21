@@ -140,15 +140,20 @@ $scifi-pattern: url('stardust.png');
 
  html,
  body {
-   height: 100%;
+  //  height: 100%;
+   margin: 0px;
+   font: 100% $font-main;
+   background: white;
 
    #current-view {
-     height: 100%;
-   }
+    //  height: 100%;
 
-    // Universal
-    margin: 0px;
-    font: 100% $font-main;
+     #main-display {
+       #center-pane {
+        //  height: 100%;
+       }
+     }
+   }
 
     #main-page{
       // background: $main-pattern;
