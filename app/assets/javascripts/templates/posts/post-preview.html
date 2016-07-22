@@ -1,0 +1,16 @@
+<div class="post-preview">
+  <h3 class="post-preview-title">
+    {{ post.data.title ? post.data.title : "Untitled" }}
+    <span class="post-rating">
+      {{ post.feedback.avg_rating ? parseFloat( post.feedback.avg_rating ).toFixed( 2 )  : "Not Rated" }}
+    </span>
+  </h3>
+  <div class="post-created-at">
+    {{ post.data.created_at_in_words ? post.data.created_at_in_words + " ago" : "" }}
+  </div>
+  <div class="post-preview-author-genre">
+    {{ post.data.genre ? post.data.genre.toLowerCase() : "Fiction"  }} by {{ post.author.username ? post.author.username : "anonymous" }}
+  </div>
+  <p class="post-preview-snippet" ng-bind-html="convertMessage()"></p>
+  <input type="hidden" name="post[id]" id="post-preview-id" value="{{ post.data.id ? post.data.id : 0 }}">
+</div>
