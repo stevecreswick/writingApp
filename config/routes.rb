@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   namespace :api do
 
     namespace :posts do
+      get '/:page' => 'posts#query'
       get '/main/:page' => 'main_feed_posts#query'
       get '/genre/:genre/:page' => 'genre_posts#query'
       get '/newest/:page' => 'newest_posts#query'
