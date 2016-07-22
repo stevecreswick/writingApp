@@ -1,0 +1,8 @@
+<div post ng-cloak>
+  <div ng-if="!postOpen">
+    <div ng-include src="'assets/templates/posts/post-preview.html'"></div>
+  </div>
+  <div ng-cloak ng-if="postOpen">
+    <div ng-include src="'assets/templates/posts/post-open.html'"></div>
+  </div>
+</div>
