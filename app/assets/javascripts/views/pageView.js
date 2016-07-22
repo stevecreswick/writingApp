@@ -690,6 +690,8 @@ app.PageView = Backbone.View.extend({
   events:{
 
     'click .write-nav': 'renderWritingPage',
+
+
     'click div.cancel-post': 'renderMain',
     'click li.show-resources': 'showResources',
 
@@ -719,7 +721,7 @@ app.PageView = Backbone.View.extend({
 
     'click li.render-friends': 'renderFriendsPage',
     'click li.render-friends': 'renderFriendsPage',
-    'click .home-page': 'renderMain',
+    // 'click .home-page': 'renderMain',
     'click .show-current-user': 'showCurrentProfile',
     'click span.show-genres': 'showGenres',
 

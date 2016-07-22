@@ -106,8 +106,9 @@
 
 //= require app
 //= require_self
-
-
+var writeAwayInfo = {
+  version: "1.0.0"
+};
 
 
 console.log('main manifest');

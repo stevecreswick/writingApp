@@ -49,29 +49,17 @@ $font-brand:    Brand, sans-serif;
       }
     }
 
-    .post-error {
-      display: none;
-      color: #f68657;
-      border: solid 1px #f68657;
-      background-color: #ffeee4;
-      margin-top: 2em;
-      padding: 0.5em;
-      text-align: left;
-      vertical-align: middle;
-      font-family: 'Open Sans Condensed', sans-serif;
-      font-size: 18px;
-      text-decoration: bold;
-
-      -webkit-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-      box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-      -moz-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-
-    }
-
     #prompt-instruction{
       margin-top: 1em;
       font-family: 'Open Sans Condensed', sans-serif;
       display: inline-block;
+    }
+
+    #prompt {
+      font-size: 1.5em;
+      color: black;
+      font-family: $font-brand;
+
     }
   }
 
@@ -80,47 +68,96 @@ $font-brand:    Brand, sans-serif;
     #prompt-form {
 
       .prompt-description{
-        margin: 0.5em 0 0 0.5em;
+        margin: 0.5em 0 1em 0.5em;
         font-size: 20px;
+        width: 100%;
+        height: 50px;
       }
 
       .prompt-container {
         padding-left: 3%;
+        height: 120px;
       }
 
       .start-writing {
         font: $font-brand;
       }
 
-      a.start{
+      .render-prompt {
+        width: 100%;
+        padding: 1em 0 1em 0;
+        text-align: center;
+      }
+
+      .start{
         display: none;
         width: 100%;
+        padding: 1em 0 1em 0;
       }
     }
 
 
+    #new-post-container {
 
-    #post-toolbar {
-      background-color: white;
 
-      .title-container {
-        width:33%;
-        display: inline-block;
-      }
+        #post-toolbar {
+          background-color: white;
+          margin-bottom: -1em;
 
-      .genre-container {
-        padding-left: 3%;
-        width: 33%;
-        display: inline-block;
-      }
-    }
+          #post-error-container {
 
-    #post-editor{
-      height: 350px;
-      -webkit-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-      box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-      -moz-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            .post-error {
+              display: none;
+              color: #f68657;
+              border: solid 1px #f68657;
+              background-color: #ffeee4;
+              padding: 0.5em;
+              text-align: left;
+              vertical-align: middle;
+              font-family: 'Open Sans Condensed', sans-serif;
+              font-size: 18px;
+              text-decoration: bold;
 
+            }
+          }
+
+          .toolbar-inner-container {
+            padding-left: 3%;
+            width: 30%;
+            display: inline-block;
+          }
+
+        }
+
+        #post-editor{
+          height: 60%;
+          background-color: white;
+          padding: 2em 4em 1em 4em;
+
+        }
+
+        #post-info {
+          font-size: 16px;
+
+          .writing-page-text {
+            color: #0fb2fc;
+          }
+
+          .new-post-label {
+            display: block;
+            font-size: 12px;
+          }
+
+          .publish {
+            margin-top: 2em;
+            background-color: #999999;
+            width: 100%;
+          }
+
+          .publish-enabled {
+            background-color: #03a9f4;
+          }
+        }
     }
   }
 }

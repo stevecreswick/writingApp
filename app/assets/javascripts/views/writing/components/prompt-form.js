@@ -92,9 +92,10 @@ app.WritingPagePromptForm = Backbone.View.extend({
     scope.storePrompt();
     scope.getPrompt();
 
-    this.$el.find( '#prompt-container' ).html( scope.prompt );
+    this.$el.find( '#prompt-container' ).html( app.currentPrompt );
+
     this.$el.find( '#prompt-container' ).show();
-    this.$('.start').show();
+    this.$('.start' ).css({'display': 'inline-block'});
 
   },
 
@@ -123,6 +124,8 @@ app.WritingPagePromptForm = Backbone.View.extend({
     }
 
     app.currentPrompt = this.currentPrompt.models[0].get('prompt');
+
+    console.log(app.currentPrompt);
 
     app.WritingPageController.components.navbar.getPromptInstruction({
       "type": app.promptType,

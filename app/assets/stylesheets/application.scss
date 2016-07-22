@@ -289,16 +289,6 @@ $scifi-pattern: url('stardust.png');
   padding-left: 5%;
 }
 
-.writing-page-text{
-  font-size: 4em;
-  color: #0fb2fc;
-}
-
-
-.save-critique{
-
-}
-
 .new-post {
   height: 10em;
   width: 50%;
@@ -326,10 +316,6 @@ $scifi-pattern: url('stardust.png');
   overflow: auto;
 }
 
-.post-button-container{
-
-}
-
 #new-prompt{
   width: 100%;
 }
@@ -346,7 +332,6 @@ $scifi-pattern: url('stardust.png');
   right:0;
   width: 50%;*/
 }
-
 
 .post-header{
   font-family: 'Poiret One', cursive;
@@ -378,12 +363,12 @@ p.character-count {
   background-color: red;
 }
 
-
-#slider-word-count-display{
-  text-align: center;
-  margin-top: 1em;
-  margin-bottom: -1em;
-}
+//
+// #slider-word-count-display{
+//   text-align: center;
+//   margin-top: 1em;
+//   margin-bottom: -1em;
+// }
 
 
 
@@ -396,22 +381,10 @@ form{
 
 }
 
-#slider-word-count{
-  margin-top: 2em;
-  margin-bottom: 1em;
-}
-
-
-
-
-/*.critique{
-  background: floralwhite;
-  height: 15em;
-  border: solid black 1px;
-  border-radius: 5px;
-  padding: 1%;
-  margin-bottom: 2em;
-}*/
+// #slider-word-count{
+//   margin-top: 2em;
+//   margin-bottom: 1em;
+// }
 
 .individual-post{
   height: 20em;
@@ -445,7 +418,6 @@ form{
   max-width: 50px;
   min-width: 50px;
 
-  /*display: table;*/
   border: 1px lightgrey solid;
   border-radius: 50px;
   margin: 0 auto;
@@ -453,31 +425,21 @@ form{
   text-align: center;
   background-color: ghostwhite;
   padding-top: 0.7em;
-  /*margin-bottom: 0.4em;
-
-  -webkit-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  -moz-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);*/
-
 
 }
 
 
 .genre-icon-img{
-  /*height: 25px;*/
   width: 25px;
   max-height: 25px;
   max-width: 25px;
-  /*display: table-cell;*/
 
   margin: 0 auto;
   vertical-align: middle;
   text-align: center;
-  /*display: table-cell;*/
 }
 
 .icon-holder{
-  /*width: 100%;*/
   vertical-align: middle;
   margin: 0 auto;
   display:center;
@@ -546,15 +508,6 @@ div.nav-item:hover{
 .genre-links * {
   display: inline-block;
   color: black;
-  /*margin-right: 5%;*/
-}
-
-div.write-nav{
-
-}
-
-.write-nav:hover{
-  cursor: pointer;
 }
 
 div.genres{
@@ -636,10 +589,6 @@ img.sort-image{
 .non-fiction{
   background-color: brown;
 }
-
-
-
-
 
 /*Footer*/
 
@@ -941,10 +890,6 @@ form#create-post {
   background-color: rgb(220,220,220);
 }
 
-#publish {
-  margin-top: 1.5em;
-  font-size: 3em;
-}
 
 .circle-button{
   width: 75px;

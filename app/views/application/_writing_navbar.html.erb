@@ -1,7 +1,9 @@
 <div id="writing-navbar">
+  <%= render 'cancel_post_modal' %>
+
   <div class="row">
     <div class="col-xs-3 nav-columm">
-      <h1 class="home-page">
+      <h1 class="home-page" data-toggle="modal" data-target="#cancel-this-post">
         writeaway.
       </h1>
     </div>
@@ -18,22 +20,12 @@
       </div>
     </div>
     <div class="col-xs-2">
-      <a class="cancel-post">
+      <a class="cancel-post" data-toggle="modal" data-target="#cancel-this-post">
         X
         <!-- <span class="esc-cancel">esc</span> -->
       </a>
     </div>
   </div>
 
-  <div class="row" id="post-error-container">
-    <div class="col-xs-10 col-xs-offset-1">
-      <div class="post-error">
-        This is a test error message.
-      </div>
-    </div>
-
-  </div>
-
-  <%= render 'cancel_post_modal' %>
 
 </div>
