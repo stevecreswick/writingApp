@@ -13,63 +13,55 @@ app.WritingPageEditor = Backbone.View.extend({
 
     this.$el.empty();
     this.$el.append( $( this.template() ) );
-    this.promptInstruction;
 
-    $('#prompt-instruction').html(this.promptInstruction);
     $("#prompt").html( app.currentPrompt );
 
     this.renderEditor();
     this.listenToForm();
-
-    $('.ql-editor').children().last().html( app.currentPrompt.charAt(0).toUpperCase() + app.currentPrompt.slice(1) + " ");
-
-
-    // Start the Timer
     this.startClock();
 
-    // Put in the starting word count
     $('#current-word-count').eq(0).html( app.wordCount + "/" + app.requiredWords );
 
   },
 
 
-      startClock: function(){
+// Seperate Timer into its own view in the shared section
+  startClock: function() {
+    if (app.timer){
+      this.clearTime();
+    }
 
-        if (app.timer){
-          this.clearTime();
-        }
+    var $stopwatch = this.$el.find('#stopwatch');
 
-        var $stopwatch = this.$el.find('#stopwatch');
+    app.totalTime = 0;
+    app.seconds = 0;
+    app.minutes = 0;
+    app.hours = 0;
 
-        app.totalTime = 0;
-        app.seconds = 0;
-        app.minutes = 0;
-        app.hours = 0;
+    app.timer = setInterval(this.renderTime, 1000);
+    $('#stopwatch').show();
 
-        app.timer = setInterval(this.renderTime, 1000);
-        $('#stopwatch').show();
+  },
 
-      },
+  wordsPerMinute: function(){
+    var minutes = app.totalTime / 60;
 
-      wordsPerMinute: function(){
-        var minutes = app.totalTime / 60;
+    var wpm = Math.floor( app.wordCount / minutes );
 
-        var wpm = Math.floor( app.wordCount / minutes );
+    $("#current-wpm-count").html(wpm)
+  },
 
-        $("#current-wpm-count").html(wpm)
-      },
-
-      renderTime: function(){
-        app.totalTime++;
-        app.hours = Math.floor(app.totalTime / 3600);
-        // totalSeconds %= 3600;
-        app.minutes = Math.floor(app.totalTime / 60);
-        app.seconds = app.totalTime % 60;
+  renderTime: function(){
+    app.totalTime++;
+    app.hours = Math.floor(app.totalTime / 3600);
+    // totalSeconds %= 3600;
+    app.minutes = Math.floor(app.totalTime / 60);
+    app.seconds = app.totalTime % 60;
 
   // WPM
-        var minutes = app.totalTime / 60;
+    var minutes = app.totalTime / 60;
 
-        var wpm = Math.floor( parseInt(app.wordCount) / minutes );
+    var wpm = Math.floor( parseInt(app.wordCount) / minutes );
 
         $("#current-wpm-count").html(wpm)
 
@@ -98,8 +90,6 @@ app.WritingPageEditor = Backbone.View.extend({
 
       },
 
-
-
       clearTime: function(){
         clearInterval(app.timer);
         app.timer = null;
@@ -107,43 +97,35 @@ app.WritingPageEditor = Backbone.View.extend({
         app.seconds = 0;
         app.minutes = 0;
         app.hours = 0;
-        console.log('stopped seconds: ' +  app.seconds);
       },
 
       publishPost: function(){
 
-        console.log('publishing');
-          var newMessage = $('#post-editor').first().eq(0).children().eq(0).html();
-          var newTitle = $('#post-title').val();
-          var genre = $('#choose-genre').val();
-          var prompt = $('#prompt').text();
+        var newMessage = $('#post-editor').first().eq(0).children().eq(0).html(),
+            postTitle = $('#post-title').val(),
+            genre = $('#choose-genre').val(),
+            prompt = $('#prompt').text(),
+            rawText = $('#post-editor').find('.ql-editor').text(),
+            messageLength = rawText.match(/\S+/g).length;
 
-          // Find Word Count
-          var messageText = $('#post-editor').find('.ql-editor').text();
-          var messageLength = messageText.match(/\S+/g).length;
-
-          // Check Title / Word Count
-          if (newTitle === ""){
-            $('.post-error').html('Error: A title is required.');
-
-          } else if (messageLength >= app.requiredWords) {
+        if ( postTitle.length > 0
+            && messageLength >= app.requiredWords )
+          {
 
             var $stopwatch = $('#stopwatch');
-            console.log(this.newPrompt);
-            // Create a Post
+            console.log('thype' + app.promptType);
             app.posts.create({
 
-              title: newTitle,
+              title: postTitle,
               genre: genre,
               message: newMessage,
               word_count: messageLength,
               time_completed: app.totalTime,
 
-              prompt: this.prompt,
+              prompt: app.currentPrompt,
               prompt_word_count: app.requiredWords,
-              prompt_type: this.type,
+              prompt_type: app.promptType,
               // model_url: this.newPrompt.url,
-
               },
 
               {
@@ -152,41 +134,61 @@ app.WritingPageEditor = Backbone.View.extend({
               async: false
             });
 
-            app.pagePainter.renderMain();
+            app.pagePainter.render();
             // this.render();
             this.$el.css({'height': 'auto'});
 
-          } else {
-            this.$('.post-error').text('Error: Post does not meet required word count.');
           }
 
+        // No Title
+        else if ( postTitle.length === 0 )
+        {
+          $('.post-error').html('Error: A title is required.');
+          $('.post-error').show();
+        }
+
+        // Not Long Enough
+        else {
+          $('.post-error').text('Error: Post does not meet required word count.');
+          $('.post-error').show();
+        }
+
       },
 
-      updateWordCountStatus: function(wordCount){
+      updateSubmitStatus: function(wordCount){
 
-          var progress = Math.floor( (wordCount / app.requiredWords) * 100 ) + "%";
-          console.log(progress);
-          this.$el.find('.progress-bar').css({"width": progress});
+          this.progress = Math.floor(
+            (wordCount / app.requiredWords) * 100
+          );
+
+          this.$el.find('.progress-bar')
+            .css({"width": ( this.progress + "%" )});
+
+          this.progress >= 100 ?
+            this.$el.find('.publish').eq(0)
+              .addClass('publish-enabled') :
+            this.$el.find('.publish').eq(0)
+              .removeClass('publish-enabled');
       },
+
 
       listenToForm: function(){
         app.wordCount = 0;
         var scope = this;
 
-        $('#post-editor').on('keyup', function(e){
+        $( '#post-editor' ).on('keyup', function(e){
 
-          var text = scope.$el.find('#post-editor').find('.ql-editor').text();
+          var text = scope.$el.find( '#post-editor' ).find( '.ql-editor' ).text();
           app.wordCount = text.match(/\S+/g).length;
           $('#current-word-count').eq(0).html( app.wordCount + "/" + app.requiredWords );
 
-          scope.updateWordCountStatus(app.wordCount);
+          scope.updateSubmitStatus( app.wordCount );
 
           if (app.promptType === "Start My Sentences"){
             scope.addWord(e);
           }
 
         });
-
 
       },
 
@@ -197,7 +199,6 @@ app.WritingPageEditor = Backbone.View.extend({
         app.currentKey = e.keyCode;
 
         if ( app.currentKey === spaceKey && app.lastKey === periodKey )   {
-          console.log("period then space");
 
           var currentPost = $('#post-editor').find('.ql-editor').html();
 
@@ -208,36 +209,14 @@ app.WritingPageEditor = Backbone.View.extend({
           var nextWord = this.nextWord.models[0].get('prompt');
 
           var startWith = nextWord.charAt(0).toUpperCase() + nextWord.slice(1);
-          var newWord = $('.ql-editor').children().last();
 
-          $(newWord).append(startWith + " ");
-
-          this.setCaret();
-
+          $("#prompt").empty();
+          $("#prompt").append( startWith );
         }
 
         app.lastKey = e.keyCode;
 
-
       },
-
-      setCaret: function() {
-      var el = $('#post-editor').find('.ql-editor');
-      var range = document.createRange();
-      console.log(range);
-      var sel = window.getSelection();
-      console.log(sel);
-      var node = el.children().last();
-
-      console.log(node[0]);
-      console.log($(node).length);
-
-      range.setStart(node[0], $(node).length + 1 );
-      range.collapse(true);
-      sel.removeAllRanges();
-      sel.addRange(range);
-      el.focus();
-    },
 
       renderEditor: function(){
         var fullEditor = new Quill('#post-editor', {
@@ -247,6 +226,46 @@ app.WritingPageEditor = Backbone.View.extend({
           },
           theme: 'snow'
         });
+
+        // var editor = new MediumEditor('.editable', {
+        //   placeholder: {
+        //     text: 'Type your text',
+        //     hideOnClick: true
+        //   },
+        //
+        //   keyboardCommands: {
+        //       /* This example includes the default options for keyboardCommands,
+        //          if nothing is passed this is what it used */
+        //       commands: [
+        //           {
+        //               command: 'bold',
+        //               key: 'b',
+        //               meta: true,
+        //               shift: false
+        //           },
+        //           {
+        //               command: 'italic',
+        //               key: 'i',
+        //               meta: true,
+        //               shift: false
+        //           },
+        //           {
+        //               command: 'underline',
+        //               key: 'u',
+        //               meta: true,
+        //               shift: false
+        //           }
+        //       ],
+        //   },
+        //
+        //   paste: {
+        //    cleanPastedHTML: true,
+        //    cleanAttrs: ['style', 'dir'],
+        //    cleanTags: ['label', 'meta']
+        //   }
+        //
+        // });
+
       }
 
 });

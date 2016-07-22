@@ -1,0 +1,156 @@
+@import "mixins/flex_container";
+@import "mixins/text_hover";
+
+.post-feed {
+  .post-open {
+    .post-review {
+      .review-display {
+        .feedback-feed {
+          .critique-view {
+            background: floralwhite;
+            border-bottom: black 2px solid;
+            color: black;
+            height: 100px;
+            max-height: 220px;
+            overflow: scroll;
+            @include flex-container( row, nowrap, flex-start, center );
+
+            .vote-container {
+              height: 100%;
+              width: 40px;
+              text-align: center;
+              vertical-align: middle;
+              @include flex-container( column, nowrap, center, center );
+
+              .total-votes-container {
+                font-size: 12px;
+              }
+
+              .vote {
+                color: black;
+
+                &:hover {
+                  color: orange;
+                }
+              }
+
+              .current-vote {
+                color: green;
+              }
+            }
+
+            .content-container {
+              height: 100%;
+              width: 90%;
+
+              .message-container {
+                height: 80%;
+                width: 100%;
+                display: inline-block;
+                padding: 15px 10px 5px 20px;
+
+              }
+
+              .author-info {
+                height: 20%;
+                width: 100%;
+                text-align: right;
+                padding-right: 10px;
+                padding-bottom: 5px;
+                @include flex-container( row, nowrap, flex-end, center );
+
+                .current-user-controls {
+                  .edit-critique {
+                    display: inline-block;
+
+                    @include text-hover( 'black' );
+                  }
+                  .remove-critique {
+                    display: inline-block;
+                    margin: 0 10px 0 10px;
+
+                    @include text-hover( 'black' );
+                  }
+                }
+
+                .author-image {
+                  display: inline-block;
+                  margin-right: 5px;
+
+                  img {
+                    height: 20px;
+                    width: 20px;
+                    border-radius: 50%;
+                  }
+                }
+                .author-name {
+                  display: inline-block;
+
+                }
+              }
+            }
+
+            .edit-critique-container {
+              height: 80%;
+              width: 100%;
+              display: inline-block;
+
+              .editing-critique {
+                width: 100%;
+                resize: none;
+                border: none;
+                padding: 5px 5px 5px 5px;
+              }
+
+              .edit-controls {
+                width: 100%;
+                @include flex-container( row, nowrap, flex-end, center );
+
+                .cancel-editing {
+                  display: inline-block;
+
+                  @include text-hover( 'black' );
+                }
+                .save-edit {
+                  margin: 0 20px 0 50px;
+                  display: inline-block;
+
+                  @include text-hover( 'black' );
+                }
+              }
+
+            }
+
+            .delete-critique-container {
+              height: 80%;
+              width: 100%;
+              display: inline-block;
+
+              .confirmation-message {
+                text-align: center;
+                margin-bottom: 10px;
+
+                span {
+                  display: block;
+                }
+              }
+
+              .delete-controls {
+                @include flex-container( row, nowrap, space-around, center );
+
+                .cancel-delete {
+                  @include text-hover( 'black' );
+                }
+
+                .delete-critique {
+                  @include text-hover( 'black' );
+                }
+              }
+
+            }
+          }
+        }
+      }
+    }
+  }
+}

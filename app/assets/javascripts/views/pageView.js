@@ -1,3 +1,5 @@
+// Requires Posts
+
 var app = app || {};
 
 app.PageView = Backbone.View.extend({
@@ -6,8 +8,6 @@ app.PageView = Backbone.View.extend({
   template: _.template( $('#main-page-template').html() ),
   tenCenter: "col-xs-12 col-sm-10 col-md-10 col-lg-10",
   oneLeft: "col-sm-1 col-md-1 col-lg-1 hidden-xs",
-  // sevenCenter: "col-xs-7 col-sm-8 col-md-7 col-lg-7",
-  // fiveLeft: "col-xs-5 col-sm-4 col-md-5 col-lg-5",
   defaultLeft: "col-md-2 col-lg-2 hidden-xs",
   defaultCenter: "col-md-10 col-lg-10",
   centerWidth: 11,
@@ -103,7 +103,6 @@ app.PageView = Backbone.View.extend({
   currentPage: 0,
 
   initialize: function(){
-
   },
 
   // Page Rendering
@@ -113,15 +112,29 @@ app.PageView = Backbone.View.extend({
     var $html = $( html );
 
     this.$el.append( $html );
+    this.setCurrentUser();
 
-    this.renderSideNav();
-    this.updateHeader('main');
+
+    // this.renderSideNav();
+    // this.updateHeader('main');
   },
 
+  setCurrentUser: function() {
+    var scope = this;
+    scope.model = new app.User();
+    scope.model.id = $("#current_id").val();
+    scope.model.url();
+    scope.model.fetch({wait: true})
+      .then(
+        function(data){
+          app.currentUser = data;
+        }
+      );
+  },
 
   // Refactored Functions
 
-  renderWritingPage: function(){
+  renderWritingPage: function() {
     this.currentPage = 0;
     this.emptyCurrentView();
 
@@ -133,331 +146,18 @@ app.PageView = Backbone.View.extend({
 
   },
 
-  // To Refactor
-
-  updateHeader: function(genre){
-
-    switch (genre) {
-
-      case "main":
-        var scope = this;
-        // Background and Center
-        // $("#main-page").fadeOut("slow", function () {
-          // $('#main-display').css({'background': 'url(' + scope.backgroundDefault + ')'});
-          // $('#center-pane').css({'background': scope.centerDefault});
-
-          // navBar
-          $('nav.navbar').css({'background': scope.headerDefault});
-
-          // Nav Text
-          $('.header-bar a').css({'color': scope.headerTextDefault});
-          $('.headline').css({'font-family': scope.fontDefault});
-          $('.sub-headline').css({'font-family': scope.brandFont, 'color': scope.headerTextDefault});
-          scope.$el.find('.sub-headline').html("");
-          scope.$el.find('.sub-headline').show();
-          // $(this).fadeIn("slow");
-
-        // });
-
-      break;
-
-      case "all":
-        var scope = this;
-        // Background and Center
-        // $("#main-page").fadeOut("slow", function () {
-          // $('#main-display').css({'background': 'url(' + scope.backgroundDefault + ')'});
-          // $('#center-pane').css({'background': scope.centerDefault});
-
-          // navBar
-          $('nav.navbar').css({'background': scope.headerDefault});
-
-          // Nav Text
-          $('.header-bar a').css({'color': scope.headerTextDefault});
-          $('.headline').css({'font-family': scope.fontDefault});
-          $('.sub-headline').css({'font-family': scope.brandFont, 'color': scope.headerTextDefault});
-          scope.$el.find('.sub-headline').html("");
-          scope.$el.find('.sub-headline').show();
-          // $(this).fadeIn("slow");
-
-        // });
-
-      break;
-
-      case "Fiction":
-        var scope = this;
-        // Background and Center
-        // $("#main-page").fadeOut("slow", function () {
-          // $('#main-display').css({'background': 'url(' + scope.backgroundFiction + ')'});
-          // $('#center-pane').css({'background': scope.centerFiction});
-
-          // navBar
-          $('nav.navbar').css({'background': scope.headerFiction});
-
-          // Nav Text
-          $('.header-bar a').css({'color': scope.headerTextFiction});
-          $('.headline').css({'font-family': scope.fontFiction});
-          $('.sub-headline').css({'font-family': scope.brandFont, 'color': scope.headerTextFiction});
-          scope.$el.find('.sub-headline').html("Fiction");
-          scope.$el.find('.sub-headline').show();
-          // $(this).fadeIn("slow");
-
-        // });
-
-      break;
-
-      case "Fantasy":
-      var scope = this;
-      // Background and Center
-      // $("#main-page").fadeOut("slow", function () {
-        // $('#main-display').css({'background-image': 'url(' + scope.backgroundFantasy + ')'});
-        // $('#center-pane').css({'background': scope.centerFantasy});
-
-        // navBar
-        $('nav.navbar').css({'background': scope.headerFantasy});
-
-        // Nav Text
-        $('.header-bar a').css({'color': scope.headerTextFantasy});
-        $('.headline').css({'font-family': scope.fontFantasy});
-        $('.sub-headline').css({'font-family': scope.brandFont, 'color': scope.headerTextFantasy});
-        scope.$el.find('.sub-headline').html("Fantasy");
-        scope.$el.find('.sub-headline').show();
-        // $('.start-writing').css({'font-family': scope.fontFantasy});
-
-        // $(this).fadeIn("slow");
-
-      // });
-
-      break;
-
-      case "Thriller":
-      var scope = this;
-      // Background and Center
-      // $("#main-page").fadeOut("slow", function () {
-        // $('#main-display').css({'background': 'url(' + scope.backgroundThriller + ')'});
-        // $('#center-pane').css({'background': scope.centerThriller});
-
-        // navBar
-        $('nav.navbar').css({'background': scope.headerThriller});
-
-        // Nav Text
-        $('.header-bar a').css({'color': scope.headerTextThriller});
-        $('.headline').css({'font-family': scope.fontThriller});
-        $('.sub-headline').css({'font-family': scope.brandFont, 'color': scope.headerTextThriller});
-        scope.$el.find('.sub-headline').html("Thriller");
-        scope.$el.find('.sub-headline').show();
-        // $('.start-writing').css({'font-family': scope.fontThriller});
-
-        // $(this).fadeIn("slow");
-
-      // });
-
-      break;
-
-      case "Romance":
-      var scope = this;
-      // Background and Center
-      // $("#main-page").fadeOut("slow", function () {
-        // $('#main-display').css({'background': 'url(' + scope.backgroundRomance + ')'});
-        // $('#center-pane').css({'background': scope.centerRomance});
-
-        // navBar
-        $('nav.navbar').css({'background': scope.headerRomance});
-
-        // Nav Text
-        $('.header-bar a').css({'color': scope.headerTextRomance});
-        $('.headline').css({'font-family': scope.fontRomance});
-        $('.sub-headline').css({'font-family': scope.brandFont, 'color': scope.headerTextRomance});
-        scope.$el.find('.sub-headline').html("Romance");
-        scope.$el.find('.sub-headline').show();
-        // $('.start-writing').css({'font-family': scope.fontRomance});
-
-        // $(this).fadeIn("slow");
-
-      // });
-
-      break;
-
-      case "Horror":
-      var scope = this;
-      // Background and Center
-      // $("#main-page").fadeOut("slow", function () {
-        // $('#main-display').css({'background': 'url(' + scope.backgroundHorror + ')'});
-        // $('#center-pane').css({'background': scope.centerHorror});
-
-        // navBar
-        // $('nav.navbar').css({'background': 'url(' + scope.headerHorror + ')'});
-
-        // Nav Text
-        // $('.header-bar a').css({'color': scope.headerTextHorror});
-        $('.headline').css({'font-family': scope.fontHorror});
-        $('.sub-headline').css({'font-family': scope.brandFont, 'color': scope.headerTextHorror});
-        scope.$el.find('.sub-headline').html("Horror");
-        scope.$el.find('.sub-headline').show();
-        // $('.start-writing').css({'font-family': scope.fontHorror});
-
-        // $(this).fadeIn("slow");
-
-      // });
-      break;
-
-      case "Science-Fiction":
-
-        var scope = this;
-
-        // Background and Center
-        // $("#main-page").fadeOut("slow", function () {
-          // $('#main-display').css({'background': 'url(' + scope.backgroundSciFi + ')'});
-          // $('#center-pane').css({'background': scope.centerSciFi});
-
-          // navBar
-          $('nav.navbar').css({'background': scope.headerSciFi});
-
-          // Nav Text
-          $('.header-bar a').css({'color': scope.headerTextSciFi});
-          $('.headline').css({'font-family': scope.fontSciFi});
-          $('.sub-headline').css({'font-family': scope.brandFont});
-          $('.sub-headline').css({'color': scope.headerTextSciFi});
-          // $('.start-writing').css({'font-family': scope.fontSciFi});
-
-
-          scope.$el.find('.sub-headline').html("Science Fiction");
-          scope.$el.find('.sub-headline').show();
-
-          // $('.start-writing').css({'font-family': scope.fontSciFi});
-
-          // $(this).fadeIn("slow");
-
-        // });
-
-      break;
-
-      case "Historical-Fiction":
-        var scope = this;
-        // Background and Center
-        // $("#main-page").fadeOut("slow", function () {
-          // $('#main-display').css({'background': 'url(' + scope.backgroundHistorical + ')'});
-          // $('#center-pane').css({'background': scope.centerHistorical});
-
-          // navBar
-          // $('nav.navbar').css({'background': 'url(' + scope.backgroundHistorical + ')'});
-
-          // Nav Text
-          $('.header-bar a').css({'color': scope.headerTextHistorical});
-          $('.headline').css({'font-family': scope.fontHistorical});
-          $('.sub-headline').css({'font-family': scope.brandFont, 'color': scope.headerTextHistorical});
-          scope.$el.find('.sub-headline').html("Historical Fiction");
-          scope.$el.find('.sub-headline').show();
-          // $('.start-writing').css({'font-family': scope.fontHistorical});
-
-          // $(this).fadeIn("slow");
-
-      // });
-
-      break;
-
-      case "Poetry":
-        var scope = this;
-        // Background and Center
-        // $("#main-page").fadeOut("slow", function () {
-          // $('#main-display').css({'background': 'url(' + scope.backgroundPoetry + ')'});
-          // $('#center-pane').css({'background': scope.centerPoetry});
-
-          // navBar
-          $('nav.navbar').css({'background': scope.headerPoetry});
-
-          // Nav Text
-          $('.header-bar a').css({'color': scope.headerTextPoetry});
-          $('.headline').css({'font-family': scope.fontPoetry});
-          $('.sub-headline').css({'font-family': scope.brandFont, 'color': scope.headerTextPoetry});
-          scope.$el.find('.sub-headline').html("Poetry");
-          scope.$el.find('.sub-headline').show();
-          // $('.start-writing').css({'font-family': scope.fontPoetry});
-
-          // $(this).fadeIn("slow");
-
-        // });
-
-      break;
-
-      case "Humor":
-        var scope = this;
-        // Background and Center
-        // $("#main-page").fadeOut("slow", function () {
-          // $('#main-display').css({'background': 'url(' + scope.backgroundHumor + ')'});
-          // $('#center-pane').css({'background': scope.centerHumor});
-
-          // navBar
-          $('nav.navbar').css({'background': scope.headerHumor});
-
-          // Nav Text
-          $('.header-bar a').css({'color': scope.headerTextHumor});
-          $('.headline').css({'font-family': scope.fontHumor});
-          $('.sub-headline').css({'font-family': scope.brandFont, 'color': scope.headerTextHumor});
-          scope.$el.find('.sub-headline').html("Humor");
-          scope.$el.find('.sub-headline').show();
-          // $('.start-writing').css({'font-family': scope.fontHumor});
-
-          // $(this).fadeIn("slow");
-
-        // });
-
-      break;
-
-      case "Non-Fiction":
-        var scope = this;
-        // Background and Center
-        // $("#main-page").fadeOut("slow", function () {
-          // $('#main-display').css({'background': 'url(' + scope.backgroundNonFiction + ')'});
-          // $('#center-pane').css({'background': scope.centerNonFiction});
-
-          // navBar
-          $('nav.navbar').css({'background': scope.headerNonFiction});
-
-          // Nav Text
-          $('.header-bar a').css({'color': scope.headerTextNonFiction});
-          $('.headline').css({'font-family': scope.fontNonFiction});
-          $('.sub-headline').css({'font-family': scope.brandFont, 'color': scope.headerTextNonFiction});
-          scope.$el.find('.sub-headline').html("Non Fiction");
-          scope.$el.find('.sub-headline').show();
-          // $('.start-writing').css({'font-family': scope.fontNonFiction});
-
-          // $(this).fadeIn("slow");
-
-      // });
-
-      break;
-
-      case "Crime":
-        var scope = this;
-        // Background and Center
-        // $("#main-page").fadeOut("slow", function () {
-          // $('#main-display').css({'background': 'url(' + scope.backgroundCrime + ')'});
-          // $('#center-pane').css({'background': scope.centerCrime});
-
-          // navBar
-          $('nav.navbar').css({'background': scope.headerCrime});
-
-          // Nav Text
-          $('.header-bar a').css({'color': scope.headerTextCrime});
-          $('.headline').css({'font-family': scope.fontCrime});
-          $('.sub-headline').css({'font-family': scope.brandFont, 'color': scope.headerTextCrime});
-          scope.$el.find('.sub-headline').html("Crime");
-          scope.$el.find('.sub-headline').show();
-          // $('.start-writing').css({'font-family': scope.fontCrime});
-
-          // $(this).fadeIn("slow");
-
-        // });
-
-      break;
-
-          // font-family: ;
-      default:
-      this.$el.find('h1.home-page').css({'font-family': this.fontDefault });
-    }
-
+  renderPostsPage: function() {
+    this.currentPage = 0;
+    this.$el.find("#center-pane").empty();
+
+    app.PostPageController = new app.PostPage({
+      el: $( '#center-pane' )
+    });
+
+    app.PostPageController.render();
   },
 
+  // To Refactor
   renderMain: function(){
     this.currentPage = 0;
 
@@ -469,9 +169,9 @@ app.PageView = Backbone.View.extend({
     if(this.promptFormPainter){
       this.promptFormPainter.clearTime();
     }
-    this.renderPosts( this.currentGenre, this.currentPage );
-  },
 
+    // this.renderPosts( this.currentGenre, this.currentPage );
+  },
 
   promptsPage: function(){
     this.currentPage = 0;
@@ -499,26 +199,23 @@ app.PageView = Backbone.View.extend({
 
   },
 
-  showPrompts: function(){
-    console.log("showing prompts");
-
+  showPrompts: function() {
     app.prompts = new app.WritingPromptCollection();
     app.writingPromptPainter = new app.WritingPromptListView({
       collection: app.prompts,
       el: $("#prompts-list")
     });
+
     var promptUrl = '/api/writing_prompts/writeaway/page/' + app.pagePainter.currentPage;
-    console.log(promptUrl);
-    // ADD URL TO PROMPTS
-    app.prompts.fetch({url: promptUrl}).done(function(){
-      console.log(app.prompts);
-      $("#prompts-list").show();
-      app.writingPromptPainter.render();
-    });
-
-
+    app.prompts
+    .fetch( { url: promptUrl } )
+      .done(
+        function(){
+          $("#prompts-list").show();
+          app.writingPromptPainter.render();
+        }
+      );
   },
-
 
   friendsPage: function(){
     this.currentPage = 0;
@@ -531,7 +228,12 @@ app.PageView = Backbone.View.extend({
     this.showUsers();
   },
 
-  challengesPage: function(){
+  friendsNav: function(){
+    var $header = _.template( $('#friend-nav-template').html() );
+    this.$el.find('#center-pane').append( $header );
+  },
+
+  challengesPage: function() {
     this.currentPage = 0;
     this.$el.find('#center-pane').empty();
 
@@ -639,7 +341,7 @@ app.PageView = Backbone.View.extend({
 
   // Render Main Side Nav
     renderGenreLinks: function(){
-      var $postListHeader = _.template( $('#post-list-menu').html() )
+      var $postListHeader = _.template( $('#post-feed-menu-template').html() )
       this.$el.find('#left-pane').append($postListHeader);
     },
 
@@ -656,134 +358,50 @@ app.PageView = Backbone.View.extend({
     this.$el.empty();
   },
 
-
-
-  toggleColumns: function() {
-    if ( this.centerWidth === 11 ){
-      var $left = this.$el.find('#left-columns');
-      var $center = this.$el.find('#center-columns');
-
-      $left.removeClass( this.oneLeft );
-      $center.removeClass( this.elevenCenter );
-
-      $left.addClass( this.fiveLeft );
-      $center.addClass( this.sevenCenter );
-
-
-    } else if ( this.centerWidth === 7 ){
-      var $left = this.$el.find('#left-columns');
-      var $center = this.$el.find('#center-columns');
-
-      $left.removeClass( this.fiveLeft );
-      $center.removeClass( this.sevenCenter );
-
-      $left.addClass( this.oneLeft );
-      $center.addClass( this.elevenCenter );
-
-    }
-  },
-
   promptFormPainter: null,
 
   // Event Handling
 
-  events:{
+  events: {
 
+    // Navigation
     'click .write-nav': 'renderWritingPage',
-    'click div.cancel-post': 'renderMain',
-    'click li.show-resources': 'showResources',
+    'click a.read-nav': 'renderPosts',
+    'click span.show-genres': 'showGenres',
+    'click div.sort': 'updateList',
 
+    // Page Rendering
+    'click div.cancel-post': 'renderMain',
+    'click li.show-friends': 'friendsPage',
+    'click li.show-challenges': 'challengesPage',
+    'click li.render-friends': 'renderFriendsPage',
+    'click .render-main-page': 'renderMain',
+    'click .show-current-user': 'showCurrentProfile',
+    // 'click li.show-resources': 'showResources',
+
+    // Challenges
     'click .received-challenges': 'receivedChallenges',
     'click .completed-challenges': 'completedChallenges',
     'click .send-challenge': 'sendChallenge',
     'click .awaiting-challenges': 'awaitingChallenges',
-
     // 'click .sent-challenges': 'sentChallenges',
 
+
+    // Prompts
     'click .see-all-prompts': 'promptsPage',
-    'click a.read-nav': 'renderPosts',
-    'click div.sort': 'updateList',
+    'click .add-prompt': 'addPrompt',
 
-    'click li.show-friends': 'friendsPage',
-
+    // Authors Page
     'click .show-users': 'showUsers',
     'click .show-following': 'showFollowing',
     'click .show-followers': 'showFollowers',
     'click .show-top-reviewers': 'showReviewers',
-
-    'click #search-users': 'searchUsers',
-
-    'click .add-prompt': 'addPrompt',
-    'click li.show-challenges': 'challengesPage',
-
-
-    'click li.render-friends': 'renderFriendsPage',
-    'click li.render-friends': 'renderFriendsPage',
-    'click .home-page': 'renderMain',
-    'click .show-current-user': 'showCurrentProfile',
-    'click span.show-genres': 'showGenres',
-
-
+    'click #search-users': 'searchUsers'
   },
 
 showGenres: function(){
   $('.genres').show();
 },
-
-
-// Rendering Posts
-
-
-// Update Post List
-  updateList: function(e){
-    var scope = this;
-    this.$el.find('#post-list').remove();
-
-    this.currentGenre = $(e.currentTarget).eq(0).data('url');
-    console.log(this.currentGenre);
-    this.currentPage = 0;
-    // $("#center-pane").hide("fast");
-    this.updateHeader( this.currentGenre );
-
-    // setTimeout(function(){
-      this.renderPosts( this.currentGenre, this.currentPage );
-    // }, 100);
-    // $("#center-pane").show("fast");
-
-  },
-
-  createPostList: function(){
-    var $container = $('<div>').attr('id', 'post-list');
-    this.$el.find('#center-pane').append( $container );
-
-  },
-
-// Show Posts by 'all' or their genre
-  renderPosts: function(options){
-    // this.emptyCenter();
-
-    this.createPostList();
-    app.posts = new app.PostCollection();
-    app.posts.genre = this.currentGenre;
-    app.posts.page = this.currentPage;
-
-    app.postPainter = new app.PostListView({
-      collection: app.posts,
-      el: $('#post-list')
-    });
-
-
-    app.posts.fetch({url: app.posts.url()}).done(function(){
-
-      app.postPainter.render();
-
-    });
-
-
-  },
-
-
-// Rendering Friends
 
   showFollowing: function(){
 
@@ -791,40 +409,36 @@ showGenres: function(){
 
     var $center = this.$el.find('#center-pane');
     this.$el.find('#friend-page').remove();
-    var $friendPage = $("<div>").attr('id', 'friend-page');
+
     var $none = _.template( $('#no-friends-screen').html() );
 
-
-    $center.append( $friendPage )
+    var $friendPage = $("<div>").attr('id', 'friend-page');
+    var $authorsTable = _.template( $( '#authors-table-template' ).html() );
+    $friendPage.append( $authorsTable );
+    $center.append( $friendPage );
 
     app.friends = new app.FriendCollection();
-    app.friendPainter = new app.FriendListView({
+    app.friendPainter = new app.UserListView({
       collection: app.friends,
-      el: $('#friend-page')
-    });
+      el: $( '#authors-list' )
+    } );
 
-    app.friends.fetch({url: '/users/friends/' + this.currentPage  });
+    app.friends
+      .fetch( { url: '/users/friends/' + this.currentPage } )
+        .then( function() {
+          // Add error handling
+        } );
 
-    if (app.friends.models.length === 0){
-    this.$el.find('#friend-page').append( $none );
+    if ( app.friends.models.length === 0 ) {
+    this.$el.find( '#friend-page' ).append( $none );
     }
 
-  },
-
-
-
-  friendsNav: function(){
-
-    var $header = _.template( $('#friend-nav-template').html() );
-
-    this.$el.find('#center-pane').append( $header );
   },
 
   searchUsers: function(){
     var search = this.$el.find("#user-search-form").val();
 
     this.searchTerm = search;
-    console.log( search );
 
     if (search === ""){
       this.showUsers();
@@ -840,10 +454,8 @@ showGenres: function(){
       app.currentSearch.fetch({url: urlModel});
 
     }
-
-
-
   },
+
   showFollowers: function(){
     this.clearFriendsPage();
 
@@ -851,13 +463,14 @@ showGenres: function(){
     this.$el.find('#friend-page').remove();
 
     var $friendPage = $("<div>").attr('id', 'friend-page');
-
-    $center.append( $friendPage )
+    var $authorsTable = _.template( $( '#authors-table-template' ).html() );
+    $friendPage.append( $authorsTable );
+    $center.append( $friendPage );
 
     app.followers = new app.FollowerCollection();
-    app.followerPainter = new app.FollowerListView({
+    app.followerPainter = new app.UserListView({
       collection: app.followers,
-      el: $('#friend-page')
+      el: $('#authors-list')
     });
 
     app.followers.fetch({url: '/users/followers/' + this.currentPage  });
@@ -877,22 +490,28 @@ showGenres: function(){
     this.$el.find('.author-header').remove();
 
     var $friendPage = $("<div>").attr('id', 'friend-page');
+    var $authorsTable = _.template( $( '#authors-table-template' ).html() );
+    $friendPage.append( $authorsTable );
+    $center.append( $friendPage );
+
     var header = $("<h1>").addClass('author-header').html("Top Authors");
-
     $center.append(header);
-    $center.append( $friendPage )
-
 
     app.users = new app.UserCollection();
     app.userPainter = new app.UserListView({
       collection: app.users,
-      el: $('#friend-page')
+      el: $('#authors-list')
     });
 
-    app.users.fetch({url: '/users/leaderboard/' + this.currentPage  });
+    app.users
+      .fetch( { url: '/users/leaderboard/' + this.currentPage } )
+        .then( function() {
+          $friendPage.append( $authorsTable );
+          app.userPainter.render();
+        } );
   },
 
-  showReviewers: function(){
+  showReviewers: function() {
     this.clearFriendsPage();
 
     var $center = this.$el.find('#center-pane');
@@ -900,20 +519,25 @@ showGenres: function(){
     this.$el.find('.author-header').remove();
 
     var $friendPage = $("<div>").attr('id', 'friend-page');
+    var $authorsTable = _.template( $( '#authors-table-template' ).html() );
+    $friendPage.append( $authorsTable );
+    $center.append( $friendPage );
+
     var header = $("<h1>").addClass('author-header').html("Top Reviewers");
-
     $center.append(header);
-    $center.append( $friendPage )
-
-
 
     app.users = new app.UserCollection();
-    app.userPainter = new app.UserListView({
+    app.userPainter = new app.UserListView( {
       collection: app.users,
-      el: $('#friend-page')
-    });
+      el: $('#authors-list')
+    } );
 
-    app.users.fetch({url: '/users/top_readers/' + this.currentPage  });
+    app.users.fetch({url: '/users/top_readers/' + this.currentPage  })
+      .done(
+        function() {
+
+        }
+      );
   },
 
   clearFriendsPage: function(){
@@ -955,7 +579,7 @@ showGenres: function(){
     currentUser.url = "/users/show/" + $('#current_id').val();
     currentUser.fetch({wait:true});
     this.currentGenre = "user";
-    this.renderPosts();
+    // this.renderPosts();
     // app.friends = new app.FriendCollection();
     // app.friendPainter = new app.FriendListView({
     //   collection: app.friends,

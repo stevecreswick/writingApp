@@ -1,5 +1,3 @@
-console.log('post loaded');
-
 var app = app || {};
 
 app.Post = Backbone.Model.extend({
@@ -9,5 +7,8 @@ app.Post = Backbone.Model.extend({
     } else {
         return data;
     }
+},
+url: function() {
+  return "/api/posts/" + this.get( 'data' )[ 'id' ];
 }
 });

@@ -1,46 +1,53 @@
-<div class="row">
-  <div class="col-xs-12">
-    <div class="form-group">
+<div id="new-post-container">
 
-      <div id="post-toolbar">
-        <%= render 'post_editor_toolbar' %>
-      </div>
-
-      <div class="row">
-        <div class="col-xs-12">
-          <div id="post-editor" class="post-body"></div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-xs-12">
-          <div class="progress">
-            <div class="progress-bar progress-bar-info"></div>
-          </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="form-group">
+        <div id="post-toolbar">
+          <%= render 'post_editor_toolbar' %>
         </div>
       </div>
     </div>
   </div>
-</div>
 
-
-<div class="row" id="post-info">
-  <div class="col-xs-2  col-xs-offset-3 text-center">
-    <h5>Word Count</h5>
-    <div id="current-word-count" class="writing-page-text">0</div>
+  <div class="row">
+    <div class="col-xs-12">
+      <!-- <div contenteditable=true class="editable"></div> -->
+      <div id="post-editor" class="post-body"></div>
+    </div>
   </div>
 
-  <div class="col-xs-2 text-center">
-    <h5>Time Elapsed</h5>
-    <div id="stopwatch" class="writing-page-text">00:00</div>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="progress">
+        <div class="progress-bar progress-bar-info"></div>
+      </div>
+    </div>
   </div>
 
-  <div class="col-xs-2 text-center">
-    <h5>WPM</h5>
-    <div id="current-wpm-count" class="writing-page-text">0</div>
+  <div id="post-info">
+    <div class="row">
+      <div class="col-xs-2  col-xs-offset-3 text-center">
+        <div id="current-word-count" class="writing-page-text">0</div>
+        <span class="new-post-label">Word Count</span>
+      </div>
+
+      <div class="col-xs-2 text-center">
+        <div id="stopwatch" class="writing-page-text">00:00</div>
+        <span class="new-post-label">Time Elapsed</span>
+      </div>
+
+      <div class="col-xs-2 text-center">
+        <div id="current-wpm-count" class="writing-page-text">0</div>
+        <span class="new-post-label">wpm</span>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-6 col-xs-offset-3 text-center">
+        <a class="publish btn btn-raised btn-info">Publish</a>
+      </div>
+    </div>
   </div>
 
-  <div class="col-xs-2 text-right">
-    <a class="publish btn btn-raised btn-info">Publish</a>
-  </div>
 </div>
