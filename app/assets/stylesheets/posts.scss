@@ -53,33 +53,35 @@ html {
   }
 
   .post-preview-container {
-    display: inline-block;
-    height: 30em;
-    width: 80%;
-    margin: 1em 2em 2em 2em;
-    padding: 1em 1em 1em 1em;
-    background-color: ghostwhite;
-    overflow-x: scroll;
-    overflow-y: auto;
-    text-align: left;
+    .post-preview {
+      display: inline-block;
+      height: 30em;
+      width: 40%;
+      margin: 1em 2em 2em 2em;
+      padding: 1em 1em 1em 1em;
+      background-color: ghostwhite;
+      overflow-x: scroll;
+      overflow-y: auto;
+      text-align: left;
 
-    .post-preview-title {
-      color: black;
-      font-family: $font-brand;
-    }
+      .post-preview-title {
+        color: black;
+        font-family: $font-brand;
+      }
 
-    .post-rating {
-      font-size: 14px;
-      color: grey;
-    }
+      .post-rating {
+        font-size: 14px;
+        color: grey;
+      }
 
-    .post-preview-author-genre {
+      .post-preview-author-genre {
 
-    }
+      }
 
-    .post-preview-snippet {
-      padding: 4px;
-      font-size: 12px;
+      .post-preview-snippet {
+        padding: 4px;
+        font-size: 12px;
+      }
     }
   }
 
