@@ -4,11 +4,17 @@ angular.module('writeAway')
     '$scope', 'Post', '$sce',
     function( $scope, Post, $sce ){
 
-      $scope.snippet = $scope.$parent.post.data.message;
+      $scope.postMessage = $scope.$parent.post.data.message;
 
       $scope.convertMessage = function() {
-        return $sce.trustAsHtml( $scope.snippet );
+        return $sce.trustAsHtml( $scope.postMessage );
       };
+
+      $scope.postOpen = false;
+
+      $scope.togglePostOpen = function () {
+        $scope.postOpen = !$scope.postOpen;
+      }
 
     }
   ]
