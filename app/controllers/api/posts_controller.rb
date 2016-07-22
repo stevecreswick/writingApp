@@ -8,8 +8,8 @@ include ActionView::Helpers::DateHelper
 respond_to :html, :json
 
   def query
-    page = params[:page].to_i + 1
-    get_posts( page, params[ :genre ] )
+    page = params[:page].to_i + 1 || 1
+    get_posts( 'all', page, params[ :genre ] )
     render json: @json_posts
   end
 
