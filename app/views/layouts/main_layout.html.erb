@@ -1,5 +1,6 @@
-<html>
+<html ng-app="writeAway">
 <head>
+  <base href="/">
   <title>Write Away</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
@@ -216,9 +217,15 @@
 </head>
 
 
-<body id="main-page">
-
+<body id="main-page" ng-controller="ApplicationController">
+  <div ng-view>
     <%= yield %>
+
+  </div>
+
+  <input type="hidden" id="current_user" value="<%= @user.username %>">
+  <input type="hidden" id="current_id" value="<%= @user.id %>">
+  <input type="hidden" id="api-token" value="<%= @user.token %>" name="token">
 
   <%= javascript_include_tag 'main', 'data-turbolinks-track' => true %>
 </body>
