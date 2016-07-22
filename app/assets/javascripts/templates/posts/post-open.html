@@ -1,0 +1,91 @@
+  <div class="post-container post-open" id="{{ 'post-' + ( post.data.id || "" ) }}">
+    <div id="full-post">
+      <!-- Renamed from review-post -->
+      <div class="post-header">
+        <h2 class="brand">
+          writeaway.
+        </h2>
+        <div class="close-full-post" ng-click="togglePostOpen()">
+          X
+        </div>
+      </div>
+
+      <div class="post-info-bar">
+        <div class="genre">
+          {{ post.data.genre || "" }}
+        </div>
+        <div class="prompt">
+          {{ post.data.prompt || "undefined" }}
+        </div>
+        <div class="average-rating">
+          {{ post.feedback.avg_rating || "0" }}
+        </div>
+      </div>
+
+      <div class="post-review">
+
+        <article id="post-display" class="post-display">
+          <h3 class="post-title">
+          {{ post.data.title || "" }}
+            <span class="post-read-time">
+            {{ post.data.time_completed + " seconds" }}
+            </span>
+          </h3>
+          <div class="author">
+            <div class="author-image">
+              <img src="{{ post.author.image_url || "" }}" alt="" />
+            </div>
+            <div class="author-name">
+              {{ post.author.username }}
+            </div>
+          </div>
+            <div class="post-message" ng-bind-html="convertMessage()"></div>
+          <div id="post-ratings">
+            <!-- Controlled by Ratings.js -->
+          </div>
+
+          <div class="user-controls">
+            <a class="delete-post">
+              Delete
+            </a>
+            <a class="edit-post">
+              Edit
+            </a>
+            <div class="confirm-delete-post hidden">
+              Are You Sure you want to Delete this post? <br>
+              This cannot be undone.
+
+              <a href="#" class="destroy-post">
+                Delete Post
+              </a>
+              <a href="#" class="delete-post">
+                Cancel
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <article id="review-display" class="review-display">
+          <ul class="review-navigation">
+            <li class="review-link rate-post">Rate</li>
+            <li class="review-link give-feedback">Feedback</li>
+          </ul>
+          <div id="feedback-feed" class="feedback-feed">
+
+          </div>
+          <div class="ratings-view hidden">
+
+          </div>
+          <div class="comment-editor">
+            <div class="comment-header">
+              Give Feedback
+            </div>
+            <textarea id="critique-text"></textarea>
+            <div class="comment-footer">
+              <button type="submit" id="create-critique">Submit</button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
