@@ -25,88 +25,13 @@
 
 //= require quill.min
 
-//= require models/writingPrompt
-//= require views/prompts/writingPromptView
-//= require views/prompts/submittedPromptView
-//= require collections/writingPromptCollection
-//= require views/prompts/writingPromptListView
+//= require angular.min
+//= require angular-route.min
 
-//= require models/critique
-//= require views/posts/critiques/critiqueView
-//= require collections/critiqueCollection
-//= require views/posts/critiques/critiqueListView
-
-//= require models/post
-//= require collections/postCollection
-//= require views/posts/components/ratingView
-//= require views/posts/ratingsListView
-//= require views/posts/components/post-preview
-//= require views/posts/components/post-feed
-//= require views/posts/postPage
-
-
-//= require models/friend
-//= require views/authors/friendView
-//= require collections/friendCollection
-//= require collections/pendingFriendCollection
-//= require views/authors/friendListView
-//= require views/authors/searchedUserListView
-
-
-//= require models/user
-//= require views/authors/userView
-//= require collections/userCollection
-//= require views/authors/userListView
-//= require views/currentUserView
-
-
-//= require views/authors/followerView
-//= require collections/followerCollection
-//= require views/authors/followerListView
-
-//= require models/challenge
-//= require views/challenges/challengeView
-//= require views/challenges/acceptedChallengeView
-//= require collections/challengeCollection
-//= require collections/receivedChallengeCollection
-//= require collections/completedChallengeCollection
-//= require collections/sentChallengeCollection
-
-
-//= require views/challenges/challengeListView
-//= require views/challenges/completedChallengeView
-//= require views/challenges/completedChallengeListView
-//= require views/challenges/receivedChallengeView
-//= require views/challenges/receivedChallengeListView
-//= require views/challenges/sentChallengeListView
-
-
-//= require models/rating
-//= require models/vote
-//= require models/tipVote
-//= require models/promptVote
-//= require collections/ratingsCollection
-
-
-
-//= require models/resource
-//= require collections/resourcesCollection
-//= require views/resources/resourceView
-//= require views/resources/resourceListView
-
-
-//= require views/writing/components/writing-navbar
-//= require views/writing/components/prompt-form
-//= require views/writing/components/editor
-//= require views/writing/writingPage
-
-
-
-//= require views/challenges/challengeFormView
-//= require views/challenges/acceptChallengeFormView
-
-//= require views/resources/resourcePageView
-//= require views/pageView
+//= require writeaway.js
+//= require_tree ./providers
+//= require_tree ./directives
+//= require_tree ./controllers
 
 //= require app
 //= require_self
