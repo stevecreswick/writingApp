@@ -1,0 +1,24 @@
+<div class="new-post-box">
+
+  <div id="challenge-container">
+  </div>
+      <label for="choose-type">Choose Type</label>
+      <select class="form-control input-lg" id="choose-type">
+          <option data-id="1">One Word</option>
+          <option data-id="2">What If</option>
+          <option data-id="3">3</option>
+          <option data-id="4">4</option>
+          <option data-id="5">5</option>
+      </select>
+      <button class="render-challenge btn btn-primary btn-lg btn-block">Render Challenge</button>
+      <form id="create-challenge">
+        Word Count: <p id="word-count"></p>
+          <input id="challenge-word-count" type="hidden" name=challenge[word_count] value="25"/>
+          <div id="slider-challenge-word-count"></div>
+
+  <!-- <button class="btn btn-danger send-challenge">Send Challenge</button> -->
+  <input type="submit" value="Send Challenge" class="btn btn-danger send-challenge">
+      </form>
+
+
+</div>

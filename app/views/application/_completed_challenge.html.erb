@@ -1,0 +1,71 @@
+<div class="row">
+  <div class="col-xs-8 col-xs-offset-2">
+
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <div class="row">
+      <div class="col-xs-12 col-sm-3">
+        <img src="<%%= sender_image_url || "undefined" %>" class="critique-profile-picture img-circle"/>
+        <%%= sender || "unknown" %>
+        <div class="tiny-text">sent <%%= created_at %> ago</div>
+      </div>
+      <div class="col-xs-12 col-sm-7">
+        <h4 class="panel-header">Write <%%= word_count %> words, using the prompt: <%%= prompt %></h4>
+      </div>
+    </div>
+  </div>
+  <div class="panel-body">
+
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="vertical-space"></div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12">
+        <h4 class="text-center">ANSWER</h4>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12 col-sm-3 col-sm-offset-1">
+        <img src="<%%= receiver_image_url || "undefined" %>" class="critique-profile-picture img-circle"/>
+        <%%= receiver || "unknown" %>
+      </div>
+      <div class="col-xs-12 col-sm-7">
+        <div class="completed-challenge-message">
+            <%%= message %>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="vertical-space"></div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12">
+      </div>
+    </div>
+
+
+
+    <div class="row">
+      <div class="col-xs-12">
+        <div id="response-holder">
+          <!-- Place Responses in HERE -->
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+</div>
+</div>
+<!-- Closes Row and Column -->

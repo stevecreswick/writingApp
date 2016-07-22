@@ -1,0 +1,80 @@
+<div class="row">
+  <div class="col-xs-12 col-sm-8 col-sm-offset-2">
+      <div class="user-search-container">
+        <div class="row">
+          <div class="col-xs-12 text-center">
+            <h3>Send a Writing Challenge to a Friend</h3>
+          </div>
+        </div>
+
+        <div class="row">
+
+        </div>
+        <div class="row">
+          <div class="col-xs-12 col-sm-8">
+            <label for="friend-name">Enter Writing Challenge</label>
+            <input type="text" class="form-control" id="challenge-prompt" placeholder="i.e. use the letter z in every sentence."></input>
+          </div>
+          <div class="col-xs-12 col-sm-2">
+            <label for="challenge-word-count">Min. Word Count?</label>
+            <input type="number" value="25" min ="25" max="1000" step="25" class="form-control" id="challenge-word-count"></input>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-12 col-sm-4">
+            <label for="friend-name">Choose Friend</label>
+              <div id="choose-friend-container">
+
+              <!-- Friend Options Rendered Here -->
+
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-sm-offset-2 text-center">
+              <a class="issue-challenge btn btn-raised btn-success">SEND CHALLENGE <i class="fa fa-paper-plane"></i></a>
+            </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-12">
+            <div id="challenge-alert-box"></span>
+
+          </div>
+        </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+<div class="row">
+  <div class="col-xs-12 text-center ">
+    <h4 class="text-left">Challenges Issued</h4>
+    <div id="challenge-list">
+
+
+    </div>
+    </div>
+  </div>
+
+
+
+</script>
+
+<script type="text/template" id="no-friends-screen">
+
+<div class="no-page">
+
+<div class="row">
+  <div class="col-xs-12 text-center">
+    Find other authors.
+  </div>
+</div>
+
+</div>
+
+</div>

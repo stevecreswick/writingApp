@@ -1,0 +1,333 @@
+@import "mixins/flex_container";
+
+@font-face {
+  font-family: 'Brand';
+  src: font-url( asset-path('gabriele-br.TTF') );
+  font-weight: normal;
+  font-style: normal;
+}
+
+$font-main:    'Open Sans Condensed', sans-serif;
+$font-brand:    Brand, sans-serif;
+
+html {
+  box-sizing: border-box;
+}
+
+.post-menu {
+  height: 100%;
+  width: 200px;
+  position: fixed;
+  left: 0;
+  background: white;
+  padding: 100px 40px 0 5px;
+  @include flex-container(column, nowrap, flex-start, flex-start);
+
+  ul {
+    width: 100%;
+
+    li {
+      width: 100%;
+      margin-bottom: 14px;
+      text-decoration: none;
+      text-align: left;
+      list-style: none;
+
+      a {
+        color: black;
+        font-size: 14px;
+      }
+    }
+  }
+}
+
+.post-feed {
+  @include flex-container(row, wrap, flex-end, flex-start);
+  width: 100%;
+  height: 100%;
+  // background: #2e2e2e;
+  padding: 5em 0 0 0;
+
+  .post-preview {
+    width: 40%;
+  }
+
+  .post-preview-container {
+    .post-preview {
+      display: inline-block;
+      height: 30em;
+      width: 40%;
+      margin: 1em 2em 2em 2em;
+      padding: 1em 1em 1em 1em;
+      background-color: ghostwhite;
+      overflow-x: scroll;
+      overflow-y: auto;
+      text-align: left;
+
+      .post-preview-title {
+        color: black;
+        font-family: $font-brand;
+      }
+
+      .post-rating {
+        font-size: 14px;
+        color: grey;
+      }
+
+      .post-preview-author-genre {
+
+      }
+
+      .post-preview-snippet {
+        padding: 4px;
+        font-size: 12px;
+      }
+    }
+  }
+
+  .post-open {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    height: calc( 100% + 40px );
+    width: calc( 100% + 40px );
+    padding: 0em 5em 1em 3em;
+    float: left;
+    background: #fff;
+
+    #full-post {
+      width: 90%;
+      height: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      overflow: scroll;
+
+      .post-header {
+        @include flex-container( row, nowrap, space-between, center );
+
+        width: 100%;
+        height: 3em;
+
+        .brand {
+          font-size: 24px;
+          text-align: left;
+          width: 75%;
+          float: left;
+          display: inline-block;
+        }
+
+        .close-full-post {
+          width: 20px;
+          height: 20px;
+          float: right;
+          display: inline-block;
+
+          &:hover {
+            background: ghostwhite;
+            cursor: pointer;
+          }
+        }
+      }
+
+      .post-info-bar {
+        width: 100%;
+        height: 3em;
+        @include flex-container( row, nowrap, space-between, center );
+        .average-rating {
+          width: 15%;
+          display: inline-block;
+          text-align: center;
+        }
+
+        .prompt {
+          width: 70%;
+          display: inline-block;
+          text-align: center;
+        }
+
+        .genre {
+          width: 15%;
+          display: inline-block;
+          text-align: center;
+        }
+      }
+
+      .post-review {
+        display: flex;
+
+        .post-display {
+          width: 50%;
+          height: calc(100% - 11em);
+          display: inline-block;
+          overflow: scroll;
+
+          .post-title {
+            width: 100%;
+            text-align: left;
+            padding-left: 2%;
+            padding-right: 2%;
+
+            .post-read-time {
+              font-size: 12px;
+            }
+          }
+
+          .author {
+            @include flex-container( row, nowrap, flex-start, center );
+            text-align: left;
+            margin-left: 5%;
+            margin-top: -5px;
+
+            .author-image {
+              @include flex-container( column, nowrap, center, center );
+              border: 1px solid #D7DBDD;
+              width: 20px;
+              height: 20px;
+              border-radius: 100%;
+              display: inline-block;
+              overflow: hidden;
+
+              img {
+                width: 100%;
+                height: auto;
+              }
+            }
+            .author-name {
+              display: inline-block;
+              margin-left: 5px;
+              font-size: 12px;
+            }
+          }
+
+          .post-message {
+            text-align: left;
+            line-height: 1.6em;
+            padding: 1em;
+          }
+
+          .ratings {
+            .rating-container {
+              padding: 0 1em;
+              width: 100%;
+              text-align: center;
+              margin-bottom: 2em;
+
+              .rating-header {
+                font-size: 16px;
+              }
+
+              .rating {
+                display: inline-block;
+
+                i {
+                  margin-right: 5px;
+                  color: pink;
+
+                  // Heart Hover Behavior in Post View.js
+                }
+              }
+            }
+          }
+
+          .user-controls {
+            .delete-post {
+              color: red;
+            }
+
+            .confirm-delete-post {
+
+            }
+
+            .edit-post {
+              color: blue;
+            }
+          }
+        }
+
+        .review-display {
+          width: 50%;
+          height: calc(100% - 11em);
+          background: floralwhite;
+          display: inline-block;
+
+          .review-navigation {
+            width: 100%;
+            @include flex-container( row, nowrap, space-around, center );
+            margin-top: 1%;
+
+            .review-link {
+              display: inline-block;
+              list-style: none;
+            }
+          }
+
+          .feedback-feed {
+            height: 65%;
+            overflow-y: scroll;
+          }
+
+          .ratings-view {
+            height: 65%;
+            background: purple;
+          }
+
+          .comment-editor {
+            height: 35%;
+
+            .comment-header {
+              @include flex-container( column, nowrap, space-around, flex-start );
+              width: 100%;
+              height: 2em;
+              padding-left: 10px;
+              background: grey;
+              text-align: left;
+            }
+
+            textarea {
+              width: 100%;
+              height: 60%;
+            }
+
+            .comment-footer {
+              @include flex-container( row, nowrap, space-around, center );
+              float: right;
+              height: 25%;
+              margin-right: 10px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .button-container {
+    width: 100%;
+    height: 50px;
+    @include flex-container( row, nowrap, center, center );
+
+    .more-button {
+      width: 400px;
+      height: 50px;
+      background: blue;
+      // position: absolute;
+      // bottom: 0;
+    }
+  }
+}
+
+.hidden {
+  display: none !important;
+}
+
+.overlay {
+  background: rgba(0, 0, 0, 0.3);
+  width: 100%;
+  position: fixed;
+  z-index: 9999;
+  height: 100%;
+  padding: 1em;
+  overflow: hidden;
+}

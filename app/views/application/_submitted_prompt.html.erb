@@ -1,0 +1,21 @@
+<h4 class="prompt-text submitted-by">
+    submitted by: <%%= submitted_by || "unknown" %>
+</h4>
+
+<div class="row">
+  <div class="col-xs-1 text-center">
+    <i class="fa fa-caret-up fa-2x up-vote-prompt vote-prompt"></i>
+    <br>
+    <%%= total_votes || "0" %>
+    <br>
+    <i class="fa fa-caret-down fa-2x down-vote-prompt vote-prompt"></i>
+  </div>
+  <div class="col-xs-7 text-center">
+        <%%= prompt || "waiting..." %>
+  </div>
+  <div class="col-xs-4 text-right">
+    <a class="accept-prompt">Accept</a>
+    <a class="reject-prompt">Reject</a>
+  </div>
+
+</div>

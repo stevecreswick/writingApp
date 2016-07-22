@@ -2,7 +2,7 @@ class Api::WritingPromptsController < ApplicationController
 
   include SessionsHelper
   include UsersHelper
-  include Api::PostsHelper
+  include Api::Posts::PostsHelper
   include ActionView::Helpers::DateHelper
 
   def new

@@ -25,84 +25,15 @@
 
 //= require quill.min
 
-//= require models/writingPrompt
-//= require views/writingPromptView
-//= require views/submittedPromptView
-//= require collections/writingPromptCollection
-//= require views/writingPromptListView
-
-//= require models/critique
-//= require views/critiqueView
-//= require collections/critiqueCollection
-//= require views/critiqueListView
-
-//= require models/post
-//= require views/postView
-//= require collections/postCollection
-//= require views/postListView
-
-//= require models/friend
-//= require views/friendView
-//= require collections/friendCollection
-//= require collections/pendingFriendCollection
-//= require views/friendListView
-//= require views/searchedUserListView
+//= require angular.min
+//= require angular-route.min
+//= require angular-sanitize.min
 
 
-//= require models/user
-//= require views/userView
-//= require collections/userCollection
-//= require views/userListView
-//= require views/currentUserView
-
-
-//= require views/followerView
-//= require collections/followerCollection
-//= require views/followerListView
-
-//= require models/challenge
-//= require views/challengeView
-//= require views/acceptedChallengeView
-//= require collections/challengeCollection
-//= require collections/receivedChallengeCollection
-//= require collections/completedChallengeCollection
-//= require collections/sentChallengeCollection
-
-
-//= require views/challengeListView
-//= require views/completedChallengeView
-//= require views/completedChallengeListView
-//= require views/receivedChallengeView
-//= require views/receivedChallengeListView
-//= require views/sentChallengeListView
-
-
-//= require models/rating
-//= require models/vote
-//= require models/tipVote
-//= require models/promptVote
-//= require collections/ratingsCollection
-
-
-
-//= require models/resource
-//= require collections/resourcesCollection
-//= require views/resourceView
-//= require views/resourceListView
-
-
-//= require views/writing/components/writing-navbar
-//= require views/writing/components/prompt-form
-//= require views/writing/components/editor
-
-//= require views/writing/writingPage
-
-
-
-//= require views/challengeFormView
-//= require views/acceptChallengeFormView
-//= require views/resourcePageView
-//= require views/pageView
+//= require writeaway.js
+//= require_tree ./providers
+//= require_tree ./directives
+//= require_tree ./controllers
 
 //= require app
 //= require_self

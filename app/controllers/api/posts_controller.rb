@@ -2,114 +2,21 @@ class Api::PostsController < ApplicationController
 
 include SessionsHelper
 include UsersHelper
-include Api::PostsHelper
+include Api::Posts::PostsHelper
 include ActionView::Helpers::DateHelper
 
 respond_to :html, :json
 
-
-  def index
-    # current_api_user!
-    # aRposts = @current_user.posts
-    aRposts = Post.order(created_at: :desc)
-    posts = aRposts.map do |aRpost|
-      data = aRpost.as_json
-
-
-      data['username'] = aRpost.user.username
-      data['image_url'] = aRpost.user.image_url
-      data['created_at'] = Date.strptime(aRpost.user.created_at.to_s)
-      data['avg_rating'] = aRpost.average_rating
-      data
-    end
-    render json: posts
+  def query
+    page = params[:page].to_i + 1 || 1
+    get_posts( 'all', page, params[ :genre ] )
+    render json: @json_posts
   end
-
-
-  def paginated
-
-    # Account for Page Starting at 0
-    page = params[:page].to_i + 1
-
-    if params[:genre] == "all"
-      @posts = Post.paginate(:page => page).order('created_at DESC')
-
-    elsif params[:genre] == 'user'
-
-      @posts = current_user.posts.paginate(:page => page).order('created_at DESC')
-
-    elsif params[:genre] == 'main'
-
-      @posts = main_feed.paginate(:page => page)
-
-    else
-      @posts = Post.where({genre: params[:genre]}).paginate :page => page
-    end
-
-        posts = @posts.map do |aRpost|
-
-          data = aRpost.as_json
-
-          if aRpost.ratings.where({user_id: current_user}).exists?
-            data['is_rated'] = true
-            data['rating'] = Rating.where({post_id: aRpost.id, user_id: current_user})[0].value
-          else
-            data['is_rated'] = false
-
-          end
-
-          friends = current_user.friend_ids
-
-           if friends.include? aRpost.user.id
-             data['is_friend'] = true
-           else
-             data['is_friend'] = false
-           end
-           puts "*************** TIME *********************"
-           time = time_ago_in_words(aRpost.created_at)
-           puts time
-
-          data['username'] = aRpost.user.username
-          data['image_url'] = aRpost.user.image_url
-          # data['created_at'] = Date.strptime(aRpost.user.created_at.to_s)
-          data['created_at'] = time
-          data['avg_rating'] = aRpost.average_rating
-
-          data['user_writer_score'] = aRpost.user.writer_score
-          data['user_reviewer_score'] = aRpost.user.reviewer_score
-
-          data['total_ratings'] = aRpost.ratings.where({skill: "overall"}).length
-          data['feedback_num'] = aRpost.critiques.length
-
-          # Get Skill Levels
-          data['skill_characters'] = aRpost.skill_rating("characters")
-          data['skill_setting'] = aRpost.skill_rating("setting")
-          data['skill_plot'] = aRpost.skill_rating("plot")
-          data['skill_structure'] = aRpost.skill_rating("structure")
-          data['skill_dialogue'] = aRpost.skill_rating("dialogue")
-          data['skill_style'] = aRpost.skill_rating("style")
-          data['skill_grammar'] = aRpost.skill_rating("grammar")
-          data['skill_theme'] = aRpost.skill_rating("theme")
-          data['skill_overall'] = aRpost.skill_rating("overall")
-
-          data
-        end
-
-          render json: posts
-  end
-
 
   def show
     # current_api_user!
-    # aRposts = @current_user.posts
-    aRpost = Post.find(params[:id])
-      data = aRpost.as_json
-      data['username'] = aRpost.user.username
-      data['image_url'] = aRpost.user.image_url
-      data['created_at'] = Date.strptime(aRpost.created_at.to_s)
-      data['avg_rating'] = aRpost.average_rating
-
-    render json: data
+    @json_post = apply_post_data( Post.find(params[:id]) )
+    render json: @json_post
   end
 
 
@@ -208,7 +115,8 @@ respond_to :html, :json
   private
 
   def post_params
-    params.require(:post).permit(:title, :message, :prompt, :prompt_word_count, :prompt_type, :word_count, :model_url, :genre, :votes, :time_completed)
+    params.require(:post).permit(:title, :message, :prompt, :prompt_word_count, :prompt_type,
+                                 :word_count, :model_url, :genre, :votes, :time_completed )
   end
 
 

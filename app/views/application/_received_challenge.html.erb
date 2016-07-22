@@ -1,0 +1,47 @@
+<div class="challenge-message">
+
+  <div class="row">
+    <div class="col-xs-12 col-sm-3">
+      <img src="<%%= image_url || "undefined" %>" class="critique-profile-picture img-circle"/>
+      <%%= username || "unknown" %>
+      <div class="tiny-text">sent <%%= created_at %> ago</div>
+    </div>
+    <div class="col-xs-12 col-sm-7">
+      Write <%%= word_count %> words, using the prompt: <%%= prompt %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12 text-center">
+      <div class="vertical-space"></div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <div id="challenge-required-word-count">Word Count: 0</div>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col-xs-12">
+    <div id="challenge-form-holder"></div>
+      <!-- <textarea id="challenge-answer" class="form-control"></textarea> -->
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-6">
+    <span class='accept-challenge btn btn-info'>Submit Answer</span>
+  </div>
+  <div class="col-xs-6">
+    <span class='remove-challenge btn btn-danger'>Refuse Challenge </span>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <div id="received-challenge-error"></div>
+  </div>
+</div>

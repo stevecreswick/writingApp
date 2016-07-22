@@ -1,0 +1,26 @@
+<%% if ( !( user.id == rating.post_author_id ) ) { %>
+
+<div class="ratings">
+  <div class="rating-container" id="rating-container-<%%= rating ? rating.skill : 'error' %>">
+  <h5 class="rating-header">
+    <%%= rating ? rating.skill.toUpperCase() : 'error'  %>
+  </h5>
+    <%% for ( var i = 1; i < ( rating ? rating.max_value : 5) + 1; i++ ) { %>
+      <div class="rating new-rating"
+           data-value="<%%= i %>"
+           data-skill="<%%= rating ? rating.skill : 'error' %>"
+           id="rating-<%%= rating ? rating.skill : 'error' %>-<%%= i %>">
+
+        <i class="fa fa-heart-o rating-heart"></i>
+      </div>
+    <%% } %>
+  </div>
+</div>
+<%% } else { %>
+  <h5 class="rating-header">
+    <%%= rating ? rating.skill.toUpperCase() : 'error'  %>
+  </h5>
+  <div class="rating-text">
+    <%%= rating ? rating.vote_count : 'error'  %>
+  </div>
+<%% } %>

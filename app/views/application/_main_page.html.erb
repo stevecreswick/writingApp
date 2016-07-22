@@ -1,0 +1,18 @@
+<div id="current-view" >
+
+<input type="hidden" id="current_user" value="<%= @user.username %>">
+<input type="hidden" id="current_id" value="<%= @user.id %>">
+
+<div id="header">
+  <%= render 'navbar' %>
+</div>
+
+<div class="container-fluid" id="main-display">
+    <div id="center-pane">
+      <%= render 'post_page' %>
+    </div>
+
+  <!-- render 'footer'  -->
+</div>
+<!-- Close Container -->
+</div>

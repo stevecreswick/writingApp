@@ -1,0 +1,67 @@
+<!-- Resources Form -->
+<div class="add-resource-form">
+  <div class="row">
+    <div class="col-xs-10">
+      <h4 class="text-left">Add a New Writing Resource</h4>
+    </div>
+    <div class="col-xs-2">
+      <a class="remove-form btn btn-danger btn-raised">Cancel</a>
+    </div>
+
+  </div>
+
+  <div class="row">
+    <div class="col-xs-6 col-xs-offset-3 col-sm-offset-1 col-sm-4">
+      <!-- <div class="form-group label-floating">
+        <label class="control-label" for="focusedInput2">Focus to show the help-block</label>
+        <input class="form-control" id="focusedInput2" type="text">
+        <p class="help-block">You should really write something here</p>
+      </div> -->
+
+      <div class="form-group label-floating">
+      <label for="resource-name" class="label-control">Name</label>
+      <input class="form-control" id="resource-name" type="text" placeholder="Google"></input>
+      </div>
+    </div>
+    <div class="form-group label-floating">
+      <div class="col-xs-6 col-sm-6">
+        <label for="resource-description" class="label-control">Description</label>
+        <input class="form-control" id="resource-description" type="text" placeholder="an awesome search engine"></input>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-6 col-xs-offset-3 col-sm-offset-1 col-sm-5">
+      <div class="form-group label-floating">
+        <label for="resource-link" class="label-control">URL </label>
+        <input class="form-control" id="resource-link" type="text" placeholder="http://www.google.com"></input>
+      </div>
+    </div>
+    <div class="col-xs-6 col-sm-5">
+      <div class="form-group label-floating">
+        <label for="resource-tags" class="label-control">Tags (seperate with comma)</label>
+        <input class="form-control" id="resource-tags" type="text" placeholder="reference, search engine"></input>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-6 col-xs-offset-3 col-sm-offset-1 col-sm-5">
+      <div class="form-group label-floating">
+
+        <label for="choose-resource-type" class="label-control">Resource Type</label>
+        <select class="form-control" id="choose-resource-type">
+            <option>Article</option>
+            <option>Website</option>
+            <option>Book</option>
+            <option>Video</option>
+            <option>Other</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-xs-3 col-sm-4 text-right">
+      <a id="resource-submit" class="btn btn-raised btn-success">Submit Resource</a>
+    </div>
+  </div>
+</div>

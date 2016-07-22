@@ -61,10 +61,15 @@ $font-brand:    Brand, sans-serif;
       font-family: $font-brand;
 
     }
+
+    .render-main-page {
+      color: black;
+      font-family: $font-brand;
+      text-decoration: none;
+    }
   }
 
   #writing-page-main {
-
     #prompt-form {
 
       .prompt-description{
@@ -98,7 +103,6 @@ $font-brand:    Brand, sans-serif;
 
 
     #new-post-container {
-
 
         #post-toolbar {
           background-color: white;

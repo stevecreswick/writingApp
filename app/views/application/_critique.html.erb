@@ -1,0 +1,87 @@
+<div class="vote-container">
+  <div  class="up-vote">
+
+    <%% if (  user.id !== critique.user_id ) { %>
+      <i data-rating="1"
+      class="fa fa-caret-up fa-2x vote
+          <%% if ( critique.user_voted && critique.user_vote === 1 ) { %>
+            current-vote
+          <%% } else if ( critique.user_voted && critique.user_vote === -1 ) { %>
+            change-to-vote
+          <%% } else { %>
+            submit-vote
+          <%% } %>">
+      </i>
+    <%% } %>
+
+  </div>
+  <div class="total-votes-container">
+    <%%= critique.total_votes ? critique.total_votes : 0 %>
+
+  </div>
+  <div class="down-vote">
+    <%% if (  user.id !== critique.user_id ) { %>
+      <i data-rating="-1"
+        class="fa fa-caret-down fa-2x vote
+          <%% if ( critique.user_voted && critique.user_vote === -1 ) { %>
+            current-vote
+          <%% } else if ( critique.user_voted && critique.user_vote === 1 ) { %>
+            change-to-vote
+          <%% } else { %>
+            submit-vote
+          <%% } %>">
+      </i>
+    <%% } %>
+  </div>
+</div>
+
+<div class="content-container">
+  <div class="message-container">
+    <%%= critique.message ? critique.message : "Loading..." %>
+  </div>
+
+  <div class="author-info">
+
+    <!-- Add Edit and Delete if written by user -->
+
+
+    <%% if ( user.id === critique.user_id) { %>
+    <div class="current-user-controls">
+      <div class="edit-critique">
+        Edit
+      </div>
+      <div class="remove-critique">
+        Delete
+      </div>
+    </div>
+    <%% } %>
+
+    <div class="author-image">
+      <img src="<%%= critique.image_url ? critique.image_url : "" %>" class="critique-profile-picture img-circle"></img>
+    </div>
+
+    <div class="author-name">
+      <%%= critique.username ? critique.username : "Loading..." %>
+    </div>
+  </div>
+</div>
+
+
+<!-- Confirm Critique Delete Modal -->
+<div class="modal" id="deleteCritique" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Confirm Delete</h4>
+      </div>
+      <div class="modal-body">
+        Do you wish to delete your critique?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+        <button type="button" class="btn btn-primary delete-critique">Yes</button>
+      </div>
+    </div>
+  </div>
+</div>
