@@ -27,6 +27,8 @@
 
 //= require angular.min
 //= require angular-route.min
+//= require angular-sanitize.min
+
 
 //= require writeaway.js
 //= require_tree ./providers
