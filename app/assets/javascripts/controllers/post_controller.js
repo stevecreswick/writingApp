@@ -5,6 +5,7 @@ angular.module('writeAway')
     function( $scope, Post, $sce ){
 
       $scope.postData = $scope.$parent.post.data;
+      // $scope.apiPage is inherited from the ApplicationController
 
       $scope.convertMessage = function() {
         return $sce.trustAsHtml( $scope.postData.message );
@@ -26,6 +27,12 @@ angular.module('writeAway')
                 }
             );
         }
+      }
+
+      $scope.submitEditedPost = function(){
+        Post.updatePost( $scope.postData ).then(function(){
+          $scope.$broadcast( 'postUpdated' );
+        });
       }
     }
   ]

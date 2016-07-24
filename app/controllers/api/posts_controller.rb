@@ -80,21 +80,18 @@ respond_to :html, :json
     end
 
     def update
+      post = current_user.posts.find( params[:post][:id] )
+      post.update( post_params )
 
-      post = current_user.posts.find( params[:id] )
-      posts.update( params[ post_params ] )
-      respond_to do |format|
-
-        format.json { render json: post }
-        format.html { redirect_to '/' }
-
+      if post.save
+        render nothing: true
       end
     end
 
   def destroy
 
     current_api_user!
-    @deleted_post = Post.find(params[:id])
+    @deleted_post = Post.find(params[:post][:id])
 
     if (@deleted_post.user_id = current_user.id)
     @deleted_post.destroy

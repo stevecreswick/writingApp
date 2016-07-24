@@ -20,7 +20,8 @@ angular.module('writeAway')
         };
 
         postFactory.updatePost = function ( post ) {
-            return $http.put(urlBase + '/' + post.ID, post)
+          console.log(post);
+            return $http.put(urlBase + '/' + post.id, post)
         };
 
         postFactory.deletePost = function ( id ) {

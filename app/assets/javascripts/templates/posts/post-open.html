@@ -33,25 +33,40 @@
           </h3>
           <div class="author">
             <div class="author-image">
-              <img src="{{ post.author.image_url || "" }}" alt="" />
+              <img src="{{ post.author.image_url }}" alt="" />
             </div>
             <div class="author-name">
               {{ post.author.username }}
             </div>
           </div>
-            <div class="post-message" ng-bind-html="convertMessage()"></div>
+            <div ng-if="!editing" class="post-message" ng-bind-html="convertMessage()"></div>
+            <div ng-if="editing">
+              <textarea class="editing-post-container" name="post[message]" ng-model="post.data.message"></textarea>
+              <a class="submit-post" ng-click="submitEditedPost()">Submit</a>
+            </div>
           <div id="post-ratings">
             <!-- Controlled by Ratings.js -->
           </div>
 
-          <div class="user-controls">
-            <a class="delete-post">
-              Delete
+          <div class="user-controls" ng-if="currentUser.id == post.author.user_id">
+            <a class="delete-post" ng-click="toggleDelete()">
+              <span ng-if="deleting">
+                Cancel
+              </span>
+              <span ng-if="!deleting">
+                Delete
+              </span>
             </a>
-            <a class="edit-post">
-              Edit
+            <a class="edit-post" ng-click="toggleEdit()">
+              <span ng-if="editing">
+                Cancel
+              </span>
+              <span ng-if="!editing">
+                Edit
+              </span>
             </a>
-            <div class="confirm-delete-post hidden">
+
+            <div ng-if="deleting" class="confirm-delete-post hidden">
               Are You Sure you want to Delete this post? <br>
               This cannot be undone.
 
