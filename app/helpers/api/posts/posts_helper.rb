@@ -20,7 +20,7 @@ module Api::Posts::PostsHelper
   def get_posts( end_point, genres, page )
 
     if end_point == 'all'
-      @posts = Post.paginate(  :page => page  ).order( 'created_at DESC' )
+      @posts = Post.paginate(  :page => page  ).order( 'created_at ASC' )
     elsif end_point == 'user'
       @posts = current_user.posts.paginate( :page => page ).order( 'created_at DESC' )
     elsif end_point == 'main'
