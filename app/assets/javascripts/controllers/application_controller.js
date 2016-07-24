@@ -6,6 +6,8 @@ angular.module('writeAway')
     '$scope',
     function( $scope ){
 
+      $scope.apiPage = 0;
+      $scope.currentPage = $scope.apiPage + 1;
 
-      console.log('loaded the application controller controllerrrr');
+
   }]);
