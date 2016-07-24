@@ -1,5 +1,3 @@
-console.log('loaded home');
-
 angular.module('writeAway')
   .factory(
     'Post', [
@@ -17,20 +15,20 @@ angular.module('writeAway')
             return $http.get(urlBase + '/' + id);
         };
 
-        postFactory.insertPost = function (cust) {
+        postFactory.insertPost = function ( post ) {
             return $http.post(urlBase, cust);
         };
 
-        postFactory.updatePost = function (cust) {
-            return $http.put(urlBase + '/' + cust.ID, cust)
+        postFactory.updatePost = function ( post ) {
+            return $http.put(urlBase + '/' + post.ID, post)
         };
 
-        postFactory.deletePost = function (id) {
+        postFactory.deletePost = function ( id ) {
             return $http.delete(urlBase + '/' + id);
         };
 
-        postFactory.getCritiques = function (id) {
-            return $http.get(urlBase + '/' + id + '/critiques');
+        postFactory.getCritiques = function ( id, page ) {
+            return $http.get(urlBase + '/' + id + '/critiques/query/' + page);
         };
 
         return postFactory;
