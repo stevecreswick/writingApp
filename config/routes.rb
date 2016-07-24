@@ -12,6 +12,9 @@ Rails.application.routes.draw do
 
   namespace :api do
 
+    get '/users/show/:id' => 'users#show', as: :show
+
+
     namespace :posts do
       get '/:page' => 'posts#query'
       get '/main/:page' => 'main_feed_posts#query'
@@ -110,7 +113,6 @@ get '/users/register' => 'users#register', as: :register
 post '/users' => 'users#create'
 get '/users/login' => 'users#login', as: :log_in
 get '/users/profile/:id' => 'users#profile', as: :profile
-get '/users/show/:id' => 'users#show', as: :show
 get '/users/main' => 'users#main', as: :main
 get '/users/edit' => 'users#edit', as: :edit
 get '/users/search/:search/:page' => 'users#search'
