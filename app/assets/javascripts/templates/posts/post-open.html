@@ -70,10 +70,11 @@
             <li class="review-link rate-post">Rate</li>
             <li class="review-link give-feedback">Feedback</li>
           </ul>
-          <div id="feedback-feed" class="feedback-feed">
-
-          </div>
-          <div class="ratings-view hidden">
+          <div id="feedback-feed" class="feedback-feed" ng-controller="CritiqueFeedController">
+            <div ng-repeat="critique in critiques">
+              <div ng-include src="'assets/templates/critiques/critique.html'"
+                   ng-controller="CritiqueController"></div>
+            </div>
 
           </div>
           <div class="comment-editor">
@@ -85,6 +86,10 @@
               <button type="submit" id="create-critique">Submit</button>
             </div>
           </div>
+          <div class="ratings-view hidden">
+
+          </div>
+
         </article>
       </div>
     </div>
