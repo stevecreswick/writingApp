@@ -2,7 +2,7 @@
   <div class="vote-container">
     <div  class="up-vote">
 
-      <div ng-if="user.id !== critique.user_id">
+      <div ng-if="currentUser.id !== critique.user_id">
         <i data-rating="1"
             class="fa fa-caret-up fa-2x vote"
             ng-class="{'current-vote' : critique.user_voted && critique.user_vote === 1}">
@@ -16,8 +16,8 @@
 
     </div>
     <div class="down-vote">
-      <div ng-if="user.id !== critique.user_id">
-        <i data-rating="1"
+      <div ng-if="currentUser.id !== critique.user_id">
+        <i data-rating="-1"
             class="fa fa-caret-down fa-2x vote"
             ng-class="{'current-vote' : critique.user_voted && critique.user_vote === -1}">
         </i>
@@ -35,7 +35,7 @@
       <!-- Add Edit and Delete if written by user -->
 
 
-      <div ng-if="user.id === critique.user_id">
+      <div ng-if="currentUser.id === critique.user_id">
         <div class="current-user-controls">
           <div class="edit-critique">
             Edit
