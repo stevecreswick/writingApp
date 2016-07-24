@@ -53,6 +53,7 @@ module Api::Posts::PostsHelper
     #   author: {
     #     Author Stats
           json_post[ 'author' ][ 'username' ] = post.user.username
+          json_post[ 'author' ][ 'user_id' ] = post.user.id
           json_post[ 'author' ][ 'image_url' ] = post.user.image_url
           json_post[ 'author' ][ 'user_writer_score' ] = post.user.writer_score
           json_post[ 'author' ][ 'user_reviewer_score' ] = post.user.reviewer_score
