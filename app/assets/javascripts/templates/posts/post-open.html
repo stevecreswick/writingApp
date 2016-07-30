@@ -100,15 +100,14 @@
               <div ng-include src="'assets/templates/critiques/critique.html'"
                    ng-controller="CritiqueController"></div>
             </div>
-
-          </div>
-          <div class="comment-editor">
-            <div class="comment-header">
-              Give Feedback
-            </div>
-            <textarea id="critique-text"></textarea>
-            <div class="comment-footer">
-              <button type="submit" id="create-critique">Submit</button>
+            <div class="comment-editor">
+              <div class="comment-header">
+                Give Feedback
+              </div>
+              <textarea id="critique-text" ng-model="newCritique.message"></textarea>
+              <div class="comment-footer">
+                <a id="create-critique" ng-click="createCritique()">Submit</a>
+              </div>
             </div>
           </div>
           <div class="ratings-view hidden">
