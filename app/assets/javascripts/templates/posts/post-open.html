@@ -49,32 +49,42 @@
           </div>
 
           <div class="user-controls" ng-if="currentUser.id == post.author.user_id">
-            <a class="delete-post" ng-click="toggleDelete()">
-              <span ng-if="deleting">
-                Cancel
-              </span>
+            <a class="delete-post" ng-if="!editing" ng-click="toggleDelete()">
               <span ng-if="!deleting">
-                Delete
+                Delete Post
+              </span>
+              <span ng-if="deleting">
+                Cancel Delete
               </span>
             </a>
-            <a class="edit-post" ng-click="toggleEdit()">
+            <a class="edit-post" ng-if="!deleting" ng-click="toggleEdit()">
               <span ng-if="editing">
-                Cancel
+                Cancel Editing
               </span>
               <span ng-if="!editing">
                 Edit
               </span>
             </a>
+          </div>
 
-            <div ng-if="deleting" class="confirm-delete-post hidden">
+          <div class="alert-container">
+            <div ng-if="deleting" class="confirm-delete-post">
               Are You Sure you want to Delete this post? <br>
               This cannot be undone.
 
-              <a href="#" class="destroy-post">
+              <a class="delete-post">
                 Delete Post
               </a>
-              <a href="#" class="delete-post">
-                Cancel
+            </div>
+            <div ng-if="cancelingEdit">
+              Are You Sure you want to cancel editing this post? <br>
+              Your changes will not be saved.
+
+              <a ng-click="cancelEdit()">
+                Cancel Editing
+              </a>
+              <a ng-click="confirmCancel()">
+                Continue Editing
               </a>
             </div>
           </div>

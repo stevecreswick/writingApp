@@ -4,6 +4,7 @@ angular.module('writeAway')
     '$scope', 'Post', '$sce',
     function( $scope, Post, $sce ){
 
+      $scope.originalPost = angular.copy( $scope.$parent.post );
       $scope.postData = $scope.$parent.post.data;
       // $scope.apiPage is inherited from the ApplicationController
 
@@ -30,10 +31,21 @@ angular.module('writeAway')
       }
 
       $scope.submitEditedPost = function(){
-        Post.updatePost( $scope.postData ).then(function(){
-          $scope.$broadcast( 'postUpdated' );
-        });
+        Post.updatePost( $scope.postData ).then(
+          function(){
+            $scope.$broadcast( 'postUpdated' );
+          }
+        );
       }
+
+      $scope.$on(
+        'editCanceled',
+        function ( event, args ) {
+          if ( $scope.postData.message !== $scope.originalPost.data.message ) {
+            $scope.postData.message = $scope.originalPost.data.message;
+          }
+        }
+      );
     }
   ]
 );

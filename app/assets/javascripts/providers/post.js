@@ -8,28 +8,28 @@ angular.module('writeAway')
         var postFactory = {};
 
         postFactory.getPosts = function (page) {
-            return $http.get(urlBase + '/' + 0);
+          return $http.get(urlBase + '/' + 0);
         };
 
         postFactory.getPost = function (id) {
-            return $http.get(urlBase + '/' + id);
+          return $http.get(urlBase + '/' + id);
         };
 
         postFactory.insertPost = function ( post ) {
-            return $http.post(urlBase, cust);
+          return $http.post(urlBase, cust);
         };
 
         postFactory.updatePost = function ( post ) {
           console.log(post);
-            return $http.put(urlBase + '/' + post.id, post)
+          return $http.put(urlBase + '/' + post.id, post)
         };
 
         postFactory.deletePost = function ( id ) {
-            return $http.delete(urlBase + '/' + id);
+          return $http.delete(urlBase + '/' + id);
         };
 
         postFactory.getCritiques = function ( id, page ) {
-            return $http.get(urlBase + '/' + id + '/critiques/query/' + page);
+          return $http.get(urlBase + '/' + id + '/critiques/query/' + page);
         };
 
         return postFactory;
