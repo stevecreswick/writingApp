@@ -21,7 +21,6 @@ angular.module('writeAway')
         then(
           function ( user ) {
             $scope.currentUser = user.data;
-            console.log($scope.currentUser);
           },
           function ( error ) {
               $scope.status = 'Unable to load user: ' + error.message;

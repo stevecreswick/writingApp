@@ -1,6 +1,6 @@
 <div critique class="critique">
   <div class="vote-container">
-    <div  class="up-vote">
+    <div  class="up-vote" ng-click="submitVote( 1 )">
 
       <div ng-if="currentUser.id !== critique.user_id">
         <i data-rating="1"
@@ -15,7 +15,7 @@
       {{ critique.total_votes }}
 
     </div>
-    <div class="down-vote">
+    <div class="down-vote" ng-click="submitVote( -1 )">
       <div ng-if="currentUser.id !== critique.user_id">
         <i data-rating="-1"
             class="fa fa-caret-down fa-2x vote"

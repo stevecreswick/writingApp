@@ -48,6 +48,7 @@ Rails.application.routes.draw do
 
             namespace :votes do
               post    '/'       =>      'votes#create'
+              put    '/'        =>      'votes#update'
               get     '/'       =>      'votes#user_vote'
             end
           end

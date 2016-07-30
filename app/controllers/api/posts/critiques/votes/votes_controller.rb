@@ -5,6 +5,36 @@ class Api::Posts::Critiques::Votes::VotesController < ApplicationController
 
   respond_to :html, :json
 
+    def create
+      post = Post.find( params[ :post_id ] )
+      critique = post.critiques.find( params[ :id ] )
+
+      critique.votes.new( vote_params )
+      critique_vote = Vote.new( vote_params )
+
+      critique_vote.critique_id = critique.id
+      critique_vote.user_id = current_user.id
+
+      if critique_vote.save
+        render json: critique
+      end
+
+    end
+
+    def update
+      post = Post.find( params[ :post_id ] )
+      critique = post.critiques.find( params[ :id ] )
+
+      vote = Vote.where( { user_id: current_user.id, critique_id: critique.id } ).first
+
+      new_value = vote_params[ 'value' ].to_i
+
+      vote.update( { value: new_value } )
+      if vote.save
+        render json: critique
+      end
+    end
+
 
     def create
             @post = Post.find(params[:post_id])

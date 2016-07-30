@@ -3,6 +3,8 @@ class Api::Posts::Critiques::CritiquesController < ApplicationController
   include SessionsHelper
   include UsersHelper
   include Api::Posts::PostsHelper
+  include Api::Critiques::CritiquesHelper
+
   include ActionView::Helpers::DateHelper
 
   respond_to :html, :json
@@ -50,31 +52,10 @@ class Api::Posts::Critiques::CritiquesController < ApplicationController
   end
 
   def show
-    post = Post.find( params[:post_id] )
-    ar_critique = post.critiques.find( params[:id] )
-
-      @total_votes = 0
-
-      data = ar_critique.as_json
-      author = User.find( ar_critique.user_id )
-      data['username'] = author.username
-      data['image_url'] = author.image_url
-
-      ar_critique.votes.map do |vote|
-        @total_votes = @total_votes + vote.value
-        if vote.user_id = current_user.id
-          data['user_voted'] = true
-          data['user_vote'] = vote.value
-        end
-      end
-
-      if ( @total_votes > 0 )
-      data['total_votes'] = @total_votes
-      else
-      data['total_votes'] = 0
-      end
-
-    render json: data
+    post = Post.find( params[ :post_id ] )
+    critique = post.critiques.find( params[ :id ] )
+    json_critique = convert_critique( critique )
+    render json: json_critique
   end
 
   def create
