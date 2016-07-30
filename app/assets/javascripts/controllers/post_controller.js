@@ -6,6 +6,10 @@ angular.module('writeAway')
 
       $scope.originalPost = angular.copy( $scope.$parent.post );
       $scope.postData = $scope.$parent.post.data;
+      $scope.critiques = [];
+
+      // $scope.postData = $scope.$parent.post.data;
+
       // $scope.apiPage is inherited from the ApplicationController
 
       $scope.convertMessage = function() {
@@ -18,16 +22,20 @@ angular.module('writeAway')
         $scope.postOpen = !$scope.postOpen;
 
         if ( $scope.postOpen ) {
-          Post.getCritiques( $scope.postData.id, $scope.apiPage ).
-            then(
-              function ( critiques ) {
-                $scope.critiques = critiques.data;
-              },
-              function ( error ) {
-                  $scope.status = 'Unable to load critiques: ' + error.message;
-                }
-            );
+          $scope.fetchCritiques();
         }
+      }
+
+      $scope.fetchCritiques = function() {
+        Post.getCritiques( $scope.postData.id, $scope.apiPage ).
+          then(
+            function ( critiques ) {
+              $scope.critiques = critiques.data;
+            },
+            function ( error ) {
+                $scope.status = 'Unable to load critiques: ' + error.message;
+              }
+          );
       }
 
       $scope.submitEditedPost = function(){
