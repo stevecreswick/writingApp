@@ -8,6 +8,11 @@ angular.module('writeAway').directive(
         restrict: 'EA',
         link: function( scope, element, attrs ) {
 
+
+          scope.toggleCritiqueDelete = function() {
+            console.log('toggling delete');
+            scope.deletingCritique = !scope.deletingCritique;
+          };
         }
       }
     }

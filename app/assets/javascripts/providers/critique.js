@@ -33,9 +33,9 @@ angular.module('writeAway')
         //   return $http.put(urlBase + '/' + cust.ID, cust);
         // };
         //
-        // Critique.deletePost = function (id) {
-        //   return $http.delete(urlBase + '/' + id);
-        // };
+        Critique.deleteCritique = function ( critique ) {
+          return $http.delete( urlBase( critique ) );
+        };
 
         return Critique;
     }

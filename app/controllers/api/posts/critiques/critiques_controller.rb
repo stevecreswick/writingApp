@@ -87,10 +87,7 @@ class Api::Posts::Critiques::CritiquesController < ApplicationController
     deleted_critique = post.critiques.find( params[ :id ] )
     deleted_critique.destroy
 
-    respond_to do |format|
-      format.json { render json: post.critiques }
-      format.html { redirect_to '/users/main' }
-    end
+    render json: post.critiques
   end
 
 

@@ -1,60 +1,76 @@
 <div critique class="critique">
-  <div class="vote-container" ng-controller="VoteController">
-    <div  class="up-vote" ng-click="submitVote( 1 )">
 
-      <div ng-if="currentUser.id !== critique.user_id">
-        <i data-rating="1"
-            class="fa fa-caret-up fa-2x vote"
-            ng-class="{'current-vote' : critique.user_voted && critique.user_vote === 1}">
-        </i>
+  <div ng-if="!deletingCritique" class="critique-inner-container">
+    <div class="vote-container" ng-controller="VoteController">
+      <div  class="up-vote" ng-click="submitVote( 1 )">
+
+        <div ng-if="currentUser.id !== critique.user_id">
+          <i data-rating="1"
+              class="fa fa-caret-up fa-2x vote"
+              ng-class="{'current-vote' : critique.user_voted && critique.user_vote === 1}">
+          </i>
+        </div>
+
+
+      </div>
+      <div class="total-votes-container">
+        {{ critique.total_votes }}
+
+      </div>
+      <div class="down-vote" ng-click="submitVote( -1 )">
+        <div ng-if="currentUser.id !== critique.user_id">
+          <i data-rating="-1"
+              class="fa fa-caret-down fa-2x vote"
+              ng-class="{'current-vote' : critique.user_voted && critique.user_vote === -1}">
+          </i>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-container">
+      <div class="message-container">
+        {{ critique.message }}
       </div>
 
+      <div class="author-info">
 
-    </div>
-    <div class="total-votes-container">
-      {{ critique.total_votes }}
+        <!-- Add Edit and Delete if written by user -->
 
-    </div>
-    <div class="down-vote" ng-click="submitVote( -1 )">
-      <div ng-if="currentUser.id !== critique.user_id">
-        <i data-rating="-1"
-            class="fa fa-caret-down fa-2x vote"
-            ng-class="{'current-vote' : critique.user_voted && critique.user_vote === -1}">
-        </i>
+
+        <div ng-if="currentUser.id === critique.user_id">
+          <div class="current-user-controls">
+            <div class="edit-critique">
+              Edit
+            </div>
+            <div class="remove-critique"ng-click="toggleCritiqueDelete()">
+              Delete
+            </div>
+          </div>
+        </div>
+
+
+        <div class="author-image">
+          <img src="{{ critique.image_url }}" class="critique-profile-picture img-circle"></img>
+        </div>
+
+        <div class="author-name">
+          {{ critique.username }}
+        </div>
       </div>
     </div>
   </div>
 
-  <div class="content-container">
-    <div class="message-container">
-      {{ critique.message }}
-    </div>
 
-    <div class="author-info">
+  <div ng-if="deletingCritique" class="critique-inner-container">
+    Are You Sure you want to Delete this feedback? <br>
+    This cannot be undone.
 
-      <!-- Add Edit and Delete if written by user -->
-
-
-      <div ng-if="currentUser.id === critique.user_id">
-        <div class="current-user-controls">
-          <div class="edit-critique">
-            Edit
-          </div>
-          <div class="remove-critique" ng-click="confirmCritiqueDelete()">
-            Delete
-          </div>
-        </div>
-      </div>
-
-
-      <div class="author-image">
-        <img src="{{ critique.image_url }}" class="critique-profile-picture img-circle"></img>
-      </div>
-
-      <div class="author-name">
-        {{ critique.username }}
-      </div>
-    </div>
+    <a ng-click="deleteFeedback()">
+      Delete Feedback
+    </a>
+    <a ng-click="toggleCritiqueDelete()">
+      Cancel
+    </a>
   </div>
 
 
