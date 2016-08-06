@@ -8,11 +8,31 @@ angular.module('writeAway').directive(
         restrict: 'EA',
         link: function( scope, element, attrs ) {
 
+          scope.cancelCritiqueEdit = function() {
+            scope.cancelingCritiqueEdit = !scope.cancelingCritiqueEdit;
+            scope.editingCritique = !scope.editingCritique;
+
+            scope.$emit( 'critiqueEditCanceled' );
+          };
+
+          scope.toggleCritiqueEdit = function() {
+            scope.editingCritique = !scope.editingCritique;
+          };
 
           scope.toggleCritiqueDelete = function() {
-            console.log('toggling delete');
             scope.deletingCritique = !scope.deletingCritique;
           };
+
+          scope.confirmCritiqueEditCancel = function() {
+            scope.cancelingCritiqueEdit = !scope.cancelingCritiqueEdit;
+          };
+
+          scope.$on(
+            'critiqueUpdated',
+            function ( event, args ) {
+              scope.toggleCritiqueEdit();
+            }
+          );
         }
       }
     }

@@ -26,6 +26,10 @@ angular.module('writeAway')
               $scope.status = 'Unable to load user: ' + error.message;
             }
         );
+
+        $scope.removeModel = function( array, index ) {
+          array.splice( index, 1 );
+        }
       }
     ]
   );

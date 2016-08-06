@@ -71,15 +71,14 @@ class Api::Posts::Critiques::CritiquesController < ApplicationController
   end
 
   def update
-    critique = Post.find( params[ :post_id ] ).
-                    critiques.
-                    find( params[ :id ] )
+    critique = Post.find( params[ :post_id ] ).critiques.find( params[ :id ] )
 
-    critique.update( {
-      message: params[ :message ]
-    } );
+    critique.update( critique_params );
 
-    render json: critique
+    if critique.save
+      render json: critique
+    end
+
   end
 
   def destroy

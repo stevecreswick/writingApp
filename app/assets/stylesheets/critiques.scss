@@ -10,34 +10,39 @@
             background: floralwhite;
             border-bottom: black 2px solid;
             color: black;
-            height: 100px;
-            max-height: 220px;
+            height: 200px;
             overflow: scroll;
             @include flex-container( row, nowrap, flex-start, center );
 
-            .vote-container {
-              height: 100%;
-              width: 40px;
-              text-align: center;
-              vertical-align: middle;
-              @include flex-container( column, nowrap, center, center );
+            .critique-inner-container {
+              display: inline-flex;
 
-              .total-votes-container {
-                font-size: 12px;
-              }
+              .vote-container {
+                height: 100%;
+                width: 40px;
+                text-align: center;
+                vertical-align: middle;
+                @include flex-container( column, nowrap, center, center );
 
-              .vote {
-                color: black;
+                .total-votes-container {
+                  font-size: 12px;
+                }
 
-                &:hover {
-                  color: orange;
+                .vote {
+                  color: black;
+
+                  &:hover {
+                    color: orange;
+                  }
+                }
+
+                .current-vote {
+                  color: green;
                 }
               }
-
-              .current-vote {
-                color: green;
-              }
             }
+
+
 
             .content-container {
               height: 100%;

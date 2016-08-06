@@ -3,6 +3,7 @@ angular.module('writeAway')
     'CritiqueController', [
     '$scope', 'Critique', '$sce', 'Vote',
     function( $scope, Critique, $sce ){
+      $scope.originalCritique = angular.copy( $scope.$parent.critique );
       $scope.critiqueData = $scope.$parent.critique;
 
       $scope.updateCritique = function() {
@@ -13,7 +14,7 @@ angular.module('writeAway')
 
         Critique.getCritique( urlOptions ).then(
           function( success ){
-            $scope.critiqueData = $scope.$parent.critique = success.data
+            $scope.critiqueData = $scope.$parent.critique = success.data;
           },
           function( error ){
             console.log( error );
@@ -21,9 +22,36 @@ angular.module('writeAway')
         );
       }
 
-      $scope.confirmCritiqueDelete = function() {
-        console.log('confirming');
+      $scope.deleteFeedback = function( index ) {
+        Critique.deleteCritique( $scope.critiqueData ).then(
+          function( success ){
+            $scope.removeModel( $scope.critiques, index );
+          },
+          function( error ){
+            console.log( error );
+          }
+        );
       }
+
+      $scope.submitEditedCritique = function(){
+        Critique.updateCritique( $scope.critiqueData ).then(
+          function( success ){
+            $scope.$broadcast( 'critiqueUpdated' );
+          },
+          function( error ) {
+            console.log( error );
+          }
+        );
+      }
+
+      $scope.$on(
+        'critiqueEditCanceled',
+        function ( event, args ) {
+          if ( $scope.critiqueData.message !== $scope.originalCritique.message ) {
+            $scope.critiqueData.message = $scope.originalCritique.message;
+          }
+        }
+      );
     }
   ]
 );

@@ -1,6 +1,8 @@
 <div critique class="critique">
 
   <div ng-if="!deletingCritique" class="critique-inner-container">
+
+    <!-- Voting -->
     <div class="vote-container" ng-controller="VoteController">
       <div  class="up-vote" ng-click="submitVote( 1 )">
 
@@ -28,21 +30,49 @@
     </div>
 
     <div class="content-container">
-      <div class="message-container">
+
+      <!-- Message -->
+      <div class="message-container" ng-if="!editingCritique && !cancelingCritiqueEdit">
         {{ critique.message }}
       </div>
 
+      <textarea class="editing-critique-container"
+                name="critique[message]"
+                ng-model="critique.message"
+                ng-if="editingCritique && !cancelingCritiqueEdit">
+      </textarea>
+
+      <div class="message-container" ng-if="editingCritique && cancelingCritiqueEdit">
+        Are You Sure you want to cancel editing this critique? <br>
+        Your changes will not be saved.
+
+        <a ng-click="cancelCritiqueEdit();">
+          Cancel Editing
+        </a>
+        <a ng-click="confirmCritiqueEditCancel()">
+          Continue Editing
+        </a>
+      </div>
+
+      <!-- User Controls -->
       <div class="author-info">
-
-        <!-- Add Edit and Delete if written by user -->
-
-
         <div ng-if="currentUser.id === critique.user_id">
           <div class="current-user-controls">
             <div class="edit-critique">
-              Edit
+              <span ng-if="editingCritique && !cancelingCritiqueEdit"
+                    ng-click="confirmCritiqueEditCancel()">
+                Cancel Editing
+              </span>
+              <span ng-if="editingCritique && !cancelingCritiqueEdit"
+                    ng-click="submitEditedCritique()">
+                Submit
+              </span>
+
+              <span ng-if="!editingCritique" ng-click="toggleCritiqueEdit()">
+                Edit
+              </span>
             </div>
-            <div class="remove-critique"ng-click="toggleCritiqueDelete()">
+            <div ng-if="!editingCritique" class="remove-critique"ng-click="toggleCritiqueDelete()">
               Delete
             </div>
           </div>
@@ -61,36 +91,22 @@
   </div>
 
 
-  <div ng-if="deletingCritique" class="critique-inner-container">
-    Are You Sure you want to Delete this feedback? <br>
-    This cannot be undone.
-
-    <a ng-click="deleteFeedback()">
-      Delete Feedback
-    </a>
-    <a ng-click="toggleCritiqueDelete()">
-      Cancel
-    </a>
-  </div>
 
 
-  <!-- Confirm Critique Delete Modal -->
-  <!-- <div class="modal" id="deleteCritique" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" id="myModalLabel">Confirm Delete</h4>
-        </div>
-        <div class="modal-body">
-          Do you wish to delete your critique?
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-          <button type="button" class="btn btn-primary delete-critique">Yes</button>
-        </div>
-      </div>
+  <div class="alert-container" ng-if="deletingCritique || editingCritique">
+    <!-- deleting -->
+    <div ng-if="deletingCritique" class="critique-inner-container">
+      Are You Sure you want to Delete this feedback? <br>
+      This cannot be undone.
+
+      <a ng-click="deleteFeedback( $index )">
+        Delete Feedback
+      </a>
+      <a ng-click="toggleCritiqueDelete()">
+        Cancel
+      </a>
     </div>
-  </div> -->
 
+
+  </div>
 </div>

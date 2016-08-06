@@ -21,18 +21,18 @@ angular.module('writeAway')
           return $http.get( urlBase + '/' + 0 );
         };
 
-        Critique.getCritique = function ( options ) {
-          return $http.get( urlBase( options ) );
+        Critique.getCritique = function ( critique ) {
+          return $http.get( urlBase( critique ) );
         };
 
         Critique.insertCritique = function ( critique ) {
           return $http.post( urlBase( critique ), critique );
         };
 
-        // Critique.updatePost = function (cust) {
-        //   return $http.put(urlBase + '/' + cust.ID, cust);
-        // };
-        //
+        Critique.updateCritique = function ( critique ) {
+          return $http.put( urlBase( critique ), critique);
+        };
+
         Critique.deleteCritique = function ( critique ) {
           return $http.delete( urlBase( critique ) );
         };
