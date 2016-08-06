@@ -23,8 +23,8 @@ angular.module('writeAway')
           return $http.put(urlBase + '/' + post.id, post)
         };
 
-        postFactory.deletePost = function ( id ) {
-          return $http.delete(urlBase + '/' + id);
+        postFactory.deletePost = function ( post ) {
+          return $http.delete(urlBase + '/' + post.id );
         };
 
         postFactory.getCritiques = function ( id, page ) {

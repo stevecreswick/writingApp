@@ -72,7 +72,7 @@
               Are You Sure you want to Delete this post? <br>
               This cannot be undone.
 
-              <a class="delete-post">
+              <a class="delete-post" ng-click="deletePost( $index )">
                 Delete Post
               </a>
             </div>
@@ -98,7 +98,8 @@
           <div id="feedback-feed" class="feedback-feed" ng-controller="CritiqueFeedController">
             <div ng-repeat="critique in critiques">
               <div ng-include src="'assets/templates/critiques/critique.html'"
-                   ng-controller="CritiqueController"></div>
+                   ng-controller="CritiqueController">
+              </div>
             </div>
             <div class="comment-editor">
               <div class="comment-header">

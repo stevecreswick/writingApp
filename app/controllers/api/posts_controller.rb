@@ -91,7 +91,7 @@ respond_to :html, :json
   def destroy
 
     current_api_user!
-    @deleted_post = Post.find(params[:post][:id])
+    @deleted_post = Post.find( params[:id] )
 
     if (@deleted_post.user_id = current_user.id)
     @deleted_post.destroy
@@ -99,15 +99,8 @@ respond_to :html, :json
     puts 'Not this users post'
     end
 
-     respond_to do |format|
-
-       format.json { render json: current_user.posts }
-       format.html { redirect_to '/users/main' }
-     end
-
+    render json: current_user.posts
   end
-
-
 
   private
 
