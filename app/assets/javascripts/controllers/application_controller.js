@@ -4,11 +4,10 @@ angular.module('writeAway')
   .controller(
     'ApplicationController',
     [
-      '$scope', 'User',
-      function( $scope, User ){
+      '$scope', 'User', '$rootScope',
+      function( $scope, User, $rootScope ){
 
-        $scope.apiPage = 0;
-        $scope.currentPage = $scope.apiPage + 1;
+        $scope.currentPage = 1;
 
         User.getUser(
           parseInt(
@@ -27,7 +26,7 @@ angular.module('writeAway')
             }
         );
 
-        $scope.removeModel = function( array, index ) {
+        $rootScope.removeModel = function( array, index ) {
           array.splice( index, 1 );
         }
       }

@@ -49,7 +49,8 @@ angular.module('writeAway')
       $scope.deletePost = function( index ) {
         Post.deletePost( $scope.postData ).then(
           function( success ){
-            $scope.removeModel( $scope.posts, index );
+            $scope.togglePostOpen();
+            $rootScope.removeModel( $scope.posts, index );
           },
           function( error ){
             console.log( error );

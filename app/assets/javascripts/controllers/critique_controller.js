@@ -1,8 +1,8 @@
 angular.module('writeAway')
   .controller(
     'CritiqueController', [
-    '$scope', 'Critique', '$sce', 'Vote',
-    function( $scope, Critique, $sce ){
+    '$scope', 'Critique', '$sce', 'Vote', '$rootScope',
+    function( $scope, Critique, $sce, $rootScope ){
       $scope.originalCritique = angular.copy( $scope.$parent.critique );
       $scope.critiqueData = $scope.$parent.critique;
 
@@ -25,7 +25,7 @@ angular.module('writeAway')
       $scope.deleteFeedback = function( index ) {
         Critique.deleteCritique( $scope.critiqueData ).then(
           function( success ){
-            $scope.removeModel( $scope.critiques, index );
+            $rootScope.removeModel( $scope.critiques, index );
           },
           function( error ){
             console.log( error );
