@@ -8,8 +8,8 @@ include ActionView::Helpers::DateHelper
 respond_to :html, :json
 
   def query
-    page = params[:page].to_i + 1 || 1
-    get_posts( 'all', page, params[ :genre ] )
+    page = params[ :page ].to_i || 1
+    get_posts( 'all', params[ :genre ], page )
     render json: @json_posts
   end
 
@@ -24,9 +24,9 @@ respond_to :html, :json
   active_record_posts = Post.where({genre: params[:genre]})
   posts = active_record_posts.map do |aRpost|
     data = aRpost.as_json
-    data['username'] = aRpost.user.username
-    data['image_url'] = aRpost.user.image_url
-    data['avg_rating'] = aRpost.average_rating
+    data[ 'username' ] = aRpost.user.username
+    data[ 'image_url' ] = aRpost.user.image_url
+    data[ 'avg_rating' ] = aRpost.average_rating
     data
   end
   render json: posts
