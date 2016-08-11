@@ -217,7 +217,7 @@
 </head>
 
 
-<body id="main-page" ng-controller="ApplicationController">
+<body id="main-page" ng-controller="ApplicationController" ng-class="{ 'no-scroll' : overlayOpen }">
   <div ng-view>
     <%= yield %>
 

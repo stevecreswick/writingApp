@@ -18,6 +18,7 @@ angular.module('writeAway')
 
       $scope.togglePostOpen = function () {
         $scope.postOpen = !$scope.postOpen;
+        $rootScope.overlayOpen = !$rootScope.overlayOpen;
 
         if ( $scope.postOpen ) {
           $scope.fetchCritiques();

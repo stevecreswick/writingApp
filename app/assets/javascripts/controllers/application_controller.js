@@ -9,6 +9,8 @@ angular.module('writeAway')
 
         $scope.currentPage = 1;
 
+        $rootScope.overlayOpen = false;
+
         User.getUser(
           parseInt(
             document.

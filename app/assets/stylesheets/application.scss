@@ -152,6 +152,10 @@ $scifi-pattern: url('stardust.png');
    font: 150% $font-main;
  }
 
+ .no-scroll {
+   overflow: hidden;
+ }
+
  html,
  body {
    height: 100%;
