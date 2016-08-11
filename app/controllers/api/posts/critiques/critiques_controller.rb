@@ -13,11 +13,11 @@ class Api::Posts::Critiques::CritiquesController < ApplicationController
 
   def query
   # Account for Page Starting at 0
-  page = params[:page].to_i + 1
+  page = params[ :page ].to_i
 
-  post = Post.find( params[:post_id] )
+  post = Post.find( params[ :post_id ] )
 
-  ar_critiques = post.critiques.paginate(:page => page).order('created_at DESC')
+  ar_critiques = post.critiques.paginate( :page => page ).order( 'created_at DESC' )
 
   critiques = ar_critiques.map do |ar_critique|
 
