@@ -1,18 +1,16 @@
 angular.module('writeAway')
   .controller(
     'PostController', [
-    '$scope', 'Post', '$sce',
-    function( $scope, Post, $sce ){
+    '$scope', 'Post', '$sce', '$rootScope',
+    function( $scope, Post, $sce, $rootScope ){
 
-      $scope.originalPost = angular.copy( $scope.$parent.post );
-      $scope.postData = $scope.$parent.post.data;
+      $scope.originalPost = angular.copy( $scope.post );
+      $scope.postData = $scope.post.data;
       $scope.critiques = [];
 
-      // $scope.postData = $scope.$parent.post.data;
+      // $scope.currentPage is inherited from the ApplicationController
 
-      // $scope.apiPage is inherited from the ApplicationController
-
-      $scope.convertMessage = function() {
+      $scope.convertMessage = function( post ) {
         return $sce.trustAsHtml( $scope.postData.message );
       };
 
@@ -27,7 +25,7 @@ angular.module('writeAway')
       }
 
       $scope.fetchCritiques = function() {
-        Post.getCritiques( $scope.postData.id, $scope.apiPage ).
+        Post.getCritiques( $scope.postData.id, $scope.currentPage ).
           then(
             function ( critiques ) {
               $scope.critiques = critiques.data;

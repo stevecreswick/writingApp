@@ -7,8 +7,8 @@ angular.module('writeAway')
 
         var postFactory = {};
 
-        postFactory.getPosts = function (page) {
-          return $http.get(urlBase + '/' + 0);
+        postFactory.getPosts = function ( page ) {
+          return $http.get( urlBase + '/' + page );
         };
 
         postFactory.getPost = function (id) {

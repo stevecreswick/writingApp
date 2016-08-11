@@ -3,12 +3,16 @@
 </div>
 
 <div class="main-container container-fluid">
-  <h1>Post Feed</h1>
   <div class="post-feed" ng-controller="PostFeedController">
     <div class="post-container"
          ng-repeat="post in posts"
          ng-include src="'assets/templates/posts/post.html'"
          ng-controller="PostController">
+    </div>
+    <div class="post-feed-buttons">
+      <a ng-if="morePostsAvailable" ng-click="seeMorePosts()">
+        SEE MORE POSTS
+      </a>
     </div>
   </div>
 </div>
