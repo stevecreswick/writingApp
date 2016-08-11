@@ -8,12 +8,12 @@ angular.module('writeAway')
         // $scope.currentUser
 
       // From Post Controller
-        // $scope.postData
+        // $scope.post.data
         // $scope.critiques
         // $scope.fetchCritiques()
 
       $scope.newCritique = {
-        'post_id': $scope.postData.id,
+        'post_id': $scope.post.data.id,
         'user_id': $scope.currentUser.id,
         'message': ''
       };

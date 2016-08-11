@@ -5,13 +5,12 @@ angular.module('writeAway')
     function( $scope, Post, $sce, $rootScope ){
 
       $scope.originalPost = angular.copy( $scope.post );
-      $scope.postData = $scope.post.data;
       $scope.critiques = [];
 
       // $scope.currentPage is inherited from the ApplicationController
 
       $scope.convertMessage = function( post ) {
-        return $sce.trustAsHtml( $scope.postData.message );
+        return $sce.trustAsHtml( $scope.post.data.message );
       };
 
       $scope.postOpen = false;
@@ -26,7 +25,7 @@ angular.module('writeAway')
       }
 
       $scope.fetchCritiques = function() {
-        Post.getCritiques( $scope.postData.id, $scope.currentPage ).
+        Post.getCritiques( $scope.post.data.id, $scope.currentPage ).
           then(
             function ( critiques ) {
               $scope.critiques = critiques.data;
@@ -38,7 +37,7 @@ angular.module('writeAway')
       }
 
       $scope.submitEditedPost = function(){
-        Post.updatePost( $scope.postData ).then(
+        Post.updatePost( $scope.post.data ).then(
           function(){
             $scope.$broadcast( 'postUpdated' );
           }
@@ -46,7 +45,7 @@ angular.module('writeAway')
       }
 
       $scope.deletePost = function( index ) {
-        Post.deletePost( $scope.postData ).then(
+        Post.deletePost( $scope.post.data ).then(
           function( success ){
             $scope.togglePostOpen();
             $rootScope.removeModel( $scope.posts, index );
@@ -60,8 +59,8 @@ angular.module('writeAway')
       $scope.$on(
         'editCanceled',
         function ( event, args ) {
-          if ( $scope.postData.message !== $scope.originalPost.data.message ) {
-            $scope.postData.message = $scope.originalPost.data.message;
+          if ( $scope.post.data.message !== $scope.originalPost.data.message ) {
+            $scope.post.data.message = $scope.originalPost.data.message;
           }
         }
       );
