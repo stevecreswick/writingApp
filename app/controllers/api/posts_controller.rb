@@ -89,17 +89,13 @@ respond_to :html, :json
     end
 
   def destroy
+    deleted_post = Post.find( params[:id] )
 
-    current_api_user!
-    @deleted_post = Post.find( params[:id] )
-
-    if (@deleted_post.user_id = current_user.id)
-    @deleted_post.destroy
-    else
-    puts 'Not this users post'
+    if ( deleted_post.user_id == current_user.id )
+      deleted_post.destroy
     end
 
-    render json: current_user.posts
+    render nothing: true
   end
 
   private
