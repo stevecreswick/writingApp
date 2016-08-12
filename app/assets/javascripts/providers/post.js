@@ -16,7 +16,7 @@ angular.module('writeAway')
         };
 
         postFactory.insertPost = function ( post ) {
-          return $http.post(urlBase, cust);
+          return $http.post( urlBase, post );
         };
 
         postFactory.updatePost = function ( post ) {
