@@ -218,6 +218,12 @@
 
 
 <body id="main-page" ng-controller="ApplicationController" ng-class="{ 'no-scroll' : overlayOpen }">
+
+  <div class="navbar-container"
+       ng-include src="'assets/templates/navbar.html'"
+       ng-controller="NavigationController">
+  </div>
+
   <div ng-view>
     <%= yield %>
 
