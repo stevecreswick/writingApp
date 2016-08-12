@@ -1,5 +1,3 @@
-console.log('angular module loaded');
-
 angular.module(
   'writeAway',
   [ 'ngRoute',
@@ -11,16 +9,23 @@ config(
     '$routeProvider',
     '$locationProvider',
     function( $routeProvider, $locationProvider ) {
-    $routeProvider
-      .when('/',
-      {
-        templateUrl:'assets/templates/index.html',
-        controller: 'HomeController'
-      } )
-      .otherwise({
-        templateUrl:'assets/templates/index.html',
-        controller: 'HomeController'
-      });
+    $routeProvider.
+      when('/',
+        {
+          templateUrl:'assets/templates/index.html',
+          controller: 'HomeController'
+        } ).
+        when('/write',
+          {
+            templateUrl:'assets/templates/writing/writing-page.html',
+            controller: 'WritingPageController'
+          } ).
+      otherwise(
+        {
+          templateUrl:'assets/templates/index.html',
+          controller: 'HomeController'
+        }
+      );
     }
   ]
 );
