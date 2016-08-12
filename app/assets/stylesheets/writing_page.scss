@@ -8,9 +8,9 @@
 $font-main:    'Open Sans Condensed', sans-serif;
 $font-brand:    Brand, sans-serif;
 
-#writing-page {
+.writing-page {
 
-  #writing-navbar {
+  .writing-navbar {
 
     .home-page{
       color: black;
@@ -21,7 +21,7 @@ $font-brand:    Brand, sans-serif;
       font-family: $font-brand;
     }
 
-    .cancel-post {
+    .cancel {
       font-family: $font-main;
       font-size: 2em;
       color: black;
@@ -49,13 +49,13 @@ $font-brand:    Brand, sans-serif;
       }
     }
 
-    #prompt-instruction{
+    .prompt-instruction{
       margin-top: 1em;
       font-family: 'Open Sans Condensed', sans-serif;
       display: inline-block;
     }
 
-    #prompt {
+    .prompt {
       font-size: 1.5em;
       color: black;
       font-family: $font-brand;
@@ -69,7 +69,7 @@ $font-brand:    Brand, sans-serif;
     }
   }
 
-  #writing-page-main {
+  .writing-page-container {
     #prompt-form {
 
       .prompt-description{
