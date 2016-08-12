@@ -57,7 +57,7 @@ Rails.application.routes.draw do
     end
 
     # Writing Prompt API
-    get '/writing_prompts' => 'writing_prompts#index'
+    get '/prompts' => 'writing_prompts#index'
     get '/writing_prompts/show/:id' => 'writing_prompts#show'
     post '/writing_prompts' => 'writing_prompts#create'
     delete '/writing_prompts/:id' => 'writing_prompts#destroy'
