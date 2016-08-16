@@ -1,9 +1,10 @@
 class Post < ActiveRecord::Base
 
   belongs_to :user
+  belongs_to :writing_prompt
   has_many :critiques
-
   has_many :ratings
+
   # has_many :raters, :through => :ratings, :foreign_key => :user_id
 
   # Feed Length
