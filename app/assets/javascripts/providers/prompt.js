@@ -16,7 +16,7 @@ angular.module('writeAway')
         };
 
         promptFactory.randomPrompt = function () {
-          return $http.get( urlBase );
+          return $http.get( urlBase + '/random' );
         };
 
         promptFactory.insertPrompt = function ( prompt ) {
