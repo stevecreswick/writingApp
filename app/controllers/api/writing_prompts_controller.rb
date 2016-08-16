@@ -14,7 +14,20 @@ class Api::WritingPromptsController < ApplicationController
     render json: prompt
   end
 
-  def index
+  def query
+    page = params[ :page ].to_i || 1
+    prompts = WritingPrompt.paginate(  :page => page  ).order( 'created_at ASC' )
+
+    render json: prompts
+
+    prompts = WritingPrompt.all
+    randomId = Random.rand( prompts.length )
+    prompt = WritingPrompt.find( randomId )
+
+    render json: prompt
+  end
+
+  def random
     prompts = WritingPrompt.all
     randomId = Random.rand( prompts.length )
     prompt = WritingPrompt.find( randomId )
