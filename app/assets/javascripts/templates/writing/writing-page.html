@@ -1,48 +1,65 @@
-<div class="writing-page" id="prompt-form" ng-controller="WritingPromptController">
-  <div class="see-all-prompts sort-text">Add a Prompt</div>
+<div class="writing-page" id="prompt-form">
+  <div ng-if="!writingPost">
+    <div class="see-all-prompts sort-text">Add a Prompt</div>
 
-      <h3 class="text-center start-writing">You are 100 words away from being a better writer. </h3>
+        <h3 class="text-center start-writing">You are 100 words away from being a better writer. </h3>
 
-      <select class="form-control" id="choose-type">
-        <option>Start My Sentences</option>
-        <option>Answer What If</option>
-        <option>Classic First Sentence</option>
-        <option>reddit</option>
-      </select>
-      <label for="choose-type">Choose your prompt</label>
+        <ul class="list-nav">
+          <li ng-click="togglePromptSelection()">Random</li>
+          <li ng-click="togglePromptSelection()">List</li>
+        </ul>
 
-      <select class="form-control" id="post-word-count">
-        <option data-value="100">100 words</option>
-        <option data-value="250">250 words</option>
-        <option data-value="500">500 words</option>
-        <option data-value="750">750 words</option>
-        <option data-value="1000">1000 words</option>
-      </select>
-      <label for="post-word-count">minimum word count</label>
+        <ul class="list-nav" ng-if="promptList">
+          <li>Top Rated</li>
+          <li>Most Popular</li>
+          <li>Newest</li>
+          <li>Easiest</li>
+          <li>Hardest</li>
+        </ul>
 
-      <div class="col-xs-12 col-sm-8 text-left">
-        <div id="prompt-description" class="prompt-description">
-          <!-- Starts on One Word -->
-          Write a story using a random word to start each sentence.  Typing a period and space will generate a new word.
-        </div>
-        <div id="prompt-container" class="prompt-container">
+      <div class="row">
+        <div class="col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3">
+          <select ng-model="currentPromptType" ng-options="promptType.value for promptType in promptTypes" class="form-control" id="choose-type">
+          </select>
+          <label for="choose-type">Choose your prompt</label>
 
-          <!-- Prompt Rendered Here -->
+          <select class="form-control" id="post-word-count">
+            <option data-value="100">100 words</option>
+            <option data-value="250">250 words</option>
+            <option data-value="500">500 words</option>
+            <option data-value="750">750 words</option>
+            <option data-value="1000">1000 words</option>
+          </select>
+          <label for="post-word-count">minimum word count</label>
 
         </div>
       </div>
 
-  <div class="row">
-    <div class="col-xs-6 col-sm-4 col-sm-offset-2 text-center">
-      <a class="render-prompt btn btn-danger btn-raised" ng-click="getPrompt()">
-        Get a Prompt
-      </a>
+    <div class="row">
+      <div class="col-xs-6 col-sm-4 col-sm-offset-2 text-center">
+        <a class="render-prompt btn btn-danger btn-raised" ng-click="getPrompt()">
+          Get a Prompt
+        </a>
+      </div>
+      <div class="col-xs-6 col-sm-4 text-center">
+        <a class="start btn btn-info btn-raised" ng-if="writingPrompt" ng-click="startWriting()">
+          Write
+          <i class="fa fa-pencil fa-fw"></i>
+        </a>
+      </div>
     </div>
-    <div class="col-xs-6 col-sm-4 text-center">
-      <a class="start btn btn-info btn-raised">
-        Write
-        <i class="fa fa-pencil fa-fw"></i>
-      </a>
+
+    <div class="row">
+      <div class="col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3 text-left">
+        <div id="prompt-description" class="prompt-description">
+            {{ promptDescription[ currentPromptType.name ] }}
+        </div>
+        <div id="prompt-container" class="prompt-container">
+          {{ writingPrompt.prompt }}
+        </div>
+      </div>
     </div>
   </div>
+
+  <div ng-if="writingPrompt && writingPost" ng-include src="'assets/templates/writing/new-post.html'"></div>
 </div>
