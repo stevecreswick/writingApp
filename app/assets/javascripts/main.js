@@ -23,20 +23,15 @@
 //= require material.min
 //= require ripples.min
 
-//= require quill.min
-
 //= require angular.min
 //= require angular-route.min
 //= require angular-sanitize.min
 
-
-//= require writeaway.js
+//= require writeaway
 //= require_tree ./providers
 //= require_tree ./directives
 //= require_tree ./controllers
+//= require bundle
 
 //= require app
 //= require_self
-var writeAwayInfo = {
-  version: "1.0.0"
-};

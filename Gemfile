@@ -36,6 +36,8 @@ gem 'will_paginate'
 
 gem 'httparty'
 
+gem "browserify-rails"
+
 
 group :production do
 
@@ -61,7 +63,7 @@ group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
 
-  gem 'guard-livereload', '~> 2.5', require: false
+  # gem 'guard-livereload', '~> 2.5', require: false
 
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
