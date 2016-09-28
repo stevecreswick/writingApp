@@ -9,6 +9,9 @@ angular.module('writeAway')
       $scope.timeElapsed = Stopwatch;
       $scope.timeElapsed.start();
 
+      $scope.$on( '$locationChangeSuccess' , function() {
+        $scope.timeElapsed.clearTime();
+      });
     }
   ]
 );
