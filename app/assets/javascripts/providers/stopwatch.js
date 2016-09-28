@@ -14,18 +14,24 @@ angular.module( 'writeAway' )
 
       Stopwatch.start = function() {
         if ( Stopwatch.timer ) {
-          clearTime();
+          Stopwatch.clearTime();
         }
 
         Stopwatch.timer = $interval( calculateTime, 1000 );
       };
 
-      var clearTime = function(){
+      Stopwatch.clearTime = function(){
         $interval.cancel( Stopwatch.timer );
         Stopwatch.totalTime = 0;
         Stopwatch.seconds = 0;
         Stopwatch.minutes = 0;
         Stopwatch.hours = 0;
+        Stopwatch.converted = '00:00';
+      };
+
+      Stopwatch.calculateWPM = function( wordCount ) {
+        var minutes = Stopwatch.totalTime / 60;
+        return Math.floor( wordCount / minutes );
       };
 
       var convertTime = function() {
