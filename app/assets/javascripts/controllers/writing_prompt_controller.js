@@ -28,7 +28,6 @@ angular.module('writeAway')
           randomPrompt().
           then(
             function ( prompt ) {
-              console.log(prompt);
               $scope.writingPrompt = prompt.data;
             },
             function ( error ) {
@@ -51,9 +50,7 @@ angular.module('writeAway')
       };
 
       $scope.startWriting = function() {
-        console.log('start writing');
         $scope.writingPost = !$scope.writingPost;
-        // $rootScope.navigate( '/new-post' );
       };
     }
   ]
